@@ -1,6 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< Updated upstream
+=======
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.ProjectWindowCallback;
+>>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Stats")]
     public float moveSpeed = 3f;
     public float rotationSpeed = 25f;
+    public float jumpVelocity = 5f;
+    public float jumpCooldown = 2f;
+    private bool jumpPressed = false;
+    private float timeSinceLastJump = 2f;
 
     [Header("Camera Distances From Player")]
     public float camUpDistance = 10f;
@@ -38,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
-        
+        jumpPressed = Input.GetKeyDown(KeyCode.Space);
     }
 
     void FixedUpdate()
@@ -46,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + inputDir * moveSpeed * Time.fixedDeltaTime);
         FaceMouse();
         CamFollowPlayer();
+        TryJump();
     }
 
     void FaceMouse()
@@ -67,6 +78,17 @@ public class PlayerMovement : MonoBehaviour
                     rotationSpeed * Time.deltaTime
                 );
             }
+        }
+    }
+    void TryJump()
+    {
+        timeSinceLastJump += Time.fixedDeltaTime;
+        if (timeSinceLastJump < jumpCooldown) return;
+        if (jumpPressed)
+        {
+            // do the jump logic here!
+            Debug.Log("Congratulations on the jump!");
+            timeSinceLastJump = 0f;
         }
     }
     void CamFollowPlayer()
