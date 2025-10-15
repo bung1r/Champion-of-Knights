@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
-using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;

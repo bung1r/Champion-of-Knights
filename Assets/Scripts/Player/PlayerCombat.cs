@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerCombat : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject weaponPrefab;
-    public InputAction scrollInput;
     private Weapon weapon;
     // public Animator animator;
 
