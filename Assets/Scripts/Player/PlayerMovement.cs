@@ -1,15 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< Updated upstream
-=======
-using TMPro;
-using Unity.VisualScripting;
 using UnityEditor.ProjectWindowCallback;
->>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.UIElements;
-
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,7 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 25f;
     public float jumpVelocity = 5f;
     public float jumpCooldown = 2f;
+    public float checkForGroundDistance = 0.2f;
+    public Transform feetTransform;
     private bool jumpPressed = false;
+    private bool isGrounded = true;
     private float timeSinceLastJump = 2f;
 
     [Header("Camera Distances From Player")]
