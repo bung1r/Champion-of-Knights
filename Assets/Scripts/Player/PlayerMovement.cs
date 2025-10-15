@@ -17,9 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 3f;
     public float rotationSpeed = 25f;
     public float jumpVelocity = 5f;
-    public float jumpCooldown = 2f;
-    public float checkForGroundDistance = 0.2f;
+    public float jumpCooldown = 2.0f;
+    public float groundRadius = 0.2f;
     public Transform feetTransform;
+    public LayerMask groundLayer;
     private bool jumpPressed = false;
     private bool isGrounded = true;
     private float timeSinceLastJump = 2f;
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     {
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        isGrounded = Physics.CheckSphere(feetTransform.position, groundRadius, groundLayer);
+        TryJump();
     }
 
     void FixedUpdate()
@@ -53,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + inputDir * moveSpeed * Time.fixedDeltaTime);
         FaceMouse();
         CamFollowPlayer();
-        TryJump();
     }
 
     void FaceMouse()
@@ -80,11 +82,13 @@ public class PlayerMovement : MonoBehaviour
     void TryJump()
     {
         timeSinceLastJump += Time.fixedDeltaTime;
+        // Debug.Log($"JUMP LOGIC!!! {timeSinceLastJump}, {isGrounded}, {jumpPressed}");
+        if (!isGrounded) return;
         if (timeSinceLastJump < jumpCooldown) return;
         if (jumpPressed)
         {
-            // do the jump logic here!
-            Debug.Log("Congratulations on the jump!");
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // reset Y
+            rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
             timeSinceLastJump = 0f;
         }
     }
