@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427128af17d019b469e06de3a2535c60, type: 3}
+  m_Name: Frantic Bite
+  m_EditorClassIdentifier: 
+  actionName: Attack
+  animationTrigger: Attack
+  cooldown: 0.5
+  damage: 10
+  range: 1
+  hitDelay: 0.05
+  radius: 0.6
+  critRate: 70
+  critDamageMultiplier: 3
+  variation: 0.5
+  basePriority: 0
+  minPriority: 0
+  maxPriority: 100
+  healthScript: {fileID: 0}
+  enemyAIScript: {fileID: 0}
+  HPPS:
+    minHP: 0
+    maxHP: 50
+    quadraticType: 0
+    a: 0
+    b: -0.1
+    c: 10
+    vertex: {x: 0, y: 0}
+    xint1: 0
+    xint2: 0
+    leaveOffAtVertex: 0
+    leaveOffDirection: 0
+    useAbsoluteValue: 0

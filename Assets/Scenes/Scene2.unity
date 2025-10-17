@@ -501,6 +501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  attackActions:
+  - {fileID: 11400000, guid: 39c5495c8b15d7a40b50075efc64671c, type: 2}
+  - {fileID: 11400000, guid: 926c0603e6af80549b2804b68b1935f9, type: 2}
   moveSpeed: 2
   rotationSpeed: 20
   searchRadius: 100

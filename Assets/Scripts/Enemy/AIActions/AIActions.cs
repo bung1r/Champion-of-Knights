@@ -23,3 +23,9 @@ public class AIMeleeAction : MeleeAction
         return basePriority;
     }
 }
+
+
+public enum Direction
+{
+    Right, Left, Up, Down
+}

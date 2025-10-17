@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable {
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] public float maxHealth = 100f;
+    [SerializeField] public float currentHealth;
 
     void Awake() {
         currentHealth = maxHealth;

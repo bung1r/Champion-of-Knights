@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public GameObject target;
-    public AttackPattern attackPattern;
+    public List<WeaponAction> attackActions;
     public float moveSpeed = 2f;
     public float rotationSpeed = 20f;
     public float searchRadius = 100f;
