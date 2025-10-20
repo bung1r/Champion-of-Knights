@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.WebSockets;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,7 +10,7 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
 
-    
+
     private Camera cam;
     private Rigidbody rb;
     private Vector3 inputDir;
@@ -32,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
     public bool useScrollValue = true;
     private float camScrollScale = 0.25f;
     public bool reverseCameraScrollDirection = false;
+    [Header("Important Stats")]
+    public float currentEnergy = 100f;
+    public float maxEnergy = 100f;
+    public float energyRegen = 5f;
+    public float strength = 20f;
+    private InteractableComponent lastComponentInteracted;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,15 +48,19 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         rb.drag = 0; // remove slowdown drag
         cam = Camera.main;
+        currentEnergy = maxEnergy;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (maxEnergy != currentEnergy) currentEnergy = Mathf.Clamp(currentEnergy + (energyRegen * Time.deltaTime), 0f, 100f);
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
         isGrounded = Physics.CheckSphere(feetTransform.position, groundRadius, groundLayer);
         TryJump();
+        TryInteract();
     }
 
     void FixedUpdate()
@@ -92,6 +104,46 @@ public class PlayerMovement : MonoBehaviour
             timeSinceLastJump = 0f;
         }
     }
+   
+    void TryInteract()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 1.7f);
+            foreach (var c in hits)
+            {
+                if (c.gameObject.transform == transform) continue;
+                if (c.TryGetComponent<InteractableComponent>(out var component))
+                {
+                    if (!component.canInteract) continue;
+                    lastComponentInteracted = component;
+                    component.MoveComponent(strength, gameObject);
+                    return;
+                }
+            }
+        } else if (Input.GetKey(KeyCode.F))
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 0.8f);
+            foreach (var c in hits)
+            {
+                if (c.gameObject.transform == transform) continue;
+                if (c.TryGetComponent<InteractableComponent>(out var component))
+                {
+                    lastComponentInteracted = component;
+                    component.MoveComponent(-strength, gameObject);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            if (lastComponentInteracted != null)
+            {
+                lastComponentInteracted.DisengageComponent(gameObject);
+                lastComponentInteracted = null;
+            }
+        }
+    }
     void CamFollowPlayer()
     {
         if (useScrollValue)
@@ -101,11 +153,14 @@ public class PlayerMovement : MonoBehaviour
             float scrollDelta = Input.mouseScrollDelta.y * a;
             camScrollValue += scrollDelta * camScrollScale;
             Math.Clamp(camScrollValue, 0.5f, 1.5f);
-      
+
             cam.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y + camUpDistance * camScrollValue, rb.transform.position.z - camBackDistance * camScrollValue);
-        } else
+        }
+        else
         {
             cam.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y + camUpDistance, rb.transform.position.z - camBackDistance);
         }
     }
+
+
 }

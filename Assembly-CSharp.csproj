@@ -52,18 +52,23 @@
     <Compile Include="Assets\Scripts\Weapon\MeleeAction.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyCombat.cs" />
     <Compile Include="Assets\Scripts\Components\SlidingDoor.cs" />
+    <Compile Include="Assets\Scripts\Components\BatterySO.cs" />
     <Compile Include="Assets\Scripts\Components\Gear.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\Components\GearSystem.cs" />
+    <Compile Include="Assets\Scripts\Components\BasicLever.cs" />
     <Compile Include="Assets\Scripts\Stats\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Components\Component.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
     <Compile Include="Assets\Scripts\Stats\DamageData.cs" />
     <Compile Include="Assets\Scripts\Weapon\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Components\Battery.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponAction.cs" />
+    <Compile Include="Assets\Scripts\Components\Engine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

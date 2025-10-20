@@ -40,7 +40,7 @@ public class SlidingDoor : InteractableComponent
         if (drivenGear.rotationAmount == 0) return;
     }
 
-    public override void MoveComponent(float distance)
+    public override void MoveComponent(float distance, GameObject owner = null)
     {
         //Calculates the predicted pos and the clamped pos
         //So it doesn't go beyond its constraints.
@@ -57,8 +57,14 @@ public class SlidingDoor : InteractableComponent
 
         if (clampedX || clampedY || clampedZ) constraintReached = true;
         else constraintReached = false;
-
         transform.position = clampedPos;
-        
+
+
+
+    }
+
+    public override void DisengageComponent(GameObject owner)
+    {
+        // throw new System.NotImplementedException();
     }
 }
