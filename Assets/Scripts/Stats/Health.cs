@@ -12,7 +12,7 @@ public class Health : MonoBehaviour, IDamageable {
         float finalDamage = damage.baseDamage;
 
         // Example: apply modifiers by type
-        if (damage.type == DamageType.Holy) finalDamage *= 0.8f;
+        if (damage.type == DamageType.Ethereal) finalDamage *= 0.8f;
 
         currentHealth -= finalDamage;
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage.");

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
@@ -9,23 +11,23 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-
+    public PlayerStatManager statManager;
+    private PlayerStats stats;
     private Camera cam;
     private Rigidbody rb;
     private Vector3 inputDir;
 
     [Header("Movement Stats")]
-    public float moveSpeed = 3f;
-    public float rotationSpeed = 25f;
     public float jumpVelocity = 5f;
     public float jumpCooldown = 2.0f;
     public float groundRadius = 0.2f;
     public Transform feetTransform;
     public LayerMask groundLayer;
     private bool jumpPressed = false;
+    private bool holdShift = false;
     private bool isGrounded = true;
     private float timeSinceLastJump = 2f;
+    private float speed = 0f;
 
     [Header("Camera Distances From Player")]
     public float camUpDistance = 10f;
@@ -36,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
     public bool reverseCameraScrollDirection = false;
     [Header("Important Stats")]
     public float currentEnergy = 100f;
-    public float maxEnergy = 100f;
-    public float energyRegen = 5f;
     public float strength = 20f;
     private InteractableComponent lastComponentInteracted;
     // Start is called before the first frame update
@@ -48,16 +48,15 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         rb.drag = 0; // remove slowdown drag
         cam = Camera.main;
-        currentEnergy = maxEnergy;
-
+        stats = statManager.stats;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (maxEnergy != currentEnergy) currentEnergy = Mathf.Clamp(currentEnergy + (energyRegen * Time.deltaTime), 0f, 100f);
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        holdShift = Input.GetKey(KeyCode.LeftShift);
         isGrounded = Physics.CheckSphere(feetTransform.position, groundRadius, groundLayer);
         TryJump();
         TryInteract();
@@ -65,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + inputDir * moveSpeed * Time.fixedDeltaTime);
+        Move();
         FaceMouse();
         CamFollowPlayer();
     }
@@ -86,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
-                    rotationSpeed * Time.deltaTime
+                    stats.rotationSpeed * Time.deltaTime
                 );
             }
         }
@@ -121,28 +120,26 @@ public class PlayerMovement : MonoBehaviour
                     return;
                 }
             }
-        } else if (Input.GetKey(KeyCode.F))
-        {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 0.8f);
-            foreach (var c in hits)
-            {
-                if (c.gameObject.transform == transform) continue;
-                if (c.TryGetComponent<InteractableComponent>(out var component))
-                {
-                    lastComponentInteracted = component;
-                    component.MoveComponent(-strength, gameObject);
-                    return;
-                }
-            }
-        }
+        } 
         else
         {
-            if (lastComponentInteracted != null)
-            {
-                lastComponentInteracted.DisengageComponent(gameObject);
-                lastComponentInteracted = null;
-            }
+
         }
+    }
+    void Move()
+    {
+        // don't do anything if there isn't any movement
+        if (inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) return;
+        // the sprint logic
+        if (holdShift && statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
+        {
+            statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
+            speed = stats.sprintSpeed;
+        } else
+        {
+            speed = stats.walkSpeed;
+        }
+        rb.MovePosition(rb.position + inputDir * speed * Time.fixedDeltaTime);
     }
     void CamFollowPlayer()
     {
@@ -162,5 +159,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+   
 }

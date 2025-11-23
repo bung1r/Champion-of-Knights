@@ -1,48 +1,51 @@
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+
+[RequireComponent(typeof(PlayerMovement), typeof(InputHandler))]
 public class PlayerCombat : MonoBehaviour
-{
-    // Start is called before the first frame update
-    public GameObject weaponPrefab;
-    private Weapon weapon;
-    // public Animator animator;
+{  
+    public StatManager statManager;
+    public InputHandler input;
+    // below 3 are the base skills, assigned in inspector
+    public AbilityBase primaryAbility;
+    public AbilityBase secondaryAbility;
+    public AbilityBase[] usableAbilities;
+    // below are the 3 runtime skills, can and should be edited
+    private AbilityRuntime RTPrimaryAbility;
+    private AbilityRuntime RTSecondaryAbility;
+    private AbilityRuntime[] RTUsableAbilities;
 
-    void Start()
+    void Awake() {
+        if (primaryAbility is MeleeAbility)
+        {
+            RTPrimaryAbility = primaryAbility.CreateRuntimeInstance(primaryAbility, statManager);
+        }
+        
+    }
+    
+    void OnEnable()
     {
-        GameObject w = Instantiate(weaponPrefab, transform);
-        weapon = w.GetComponent<Weapon>();
+        input.OnPrimaryDown += HandlePrimaryDown;
+        input.OnPrimaryUp += HandlePrimaryUp;
     }
 
-    void Update()
+    void OnDisable()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (weapon != null) weapon.TryPrimary(gameObject);
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (weapon != null) weapon.TrySecondary(gameObject);
-        }
+        input.OnPrimaryDown -= HandlePrimaryDown;
+        input.OnPrimaryUp -= HandlePrimaryUp;
     }
 
-    public void EquipWeapon(GameObject weaponPrefab)
+    void HandlePrimaryDown()
     {
-        // destroy old visual, instantiate new prefab as child, and get Weapon component
-        foreach (Transform t in transform) // naive cleanup if child used; better manage in dedicated holder
-        {
-            if (t.name == "EquippedWeapon") Destroy(t.gameObject);
-        }
-        if (weaponPrefab != null)
-        {
-            GameObject w = Instantiate(weaponPrefab, transform);
-            w.name = "EquippedWeapon";
-            weapon = w.GetComponent<Weapon>();
-            // link animator: prefer weapon's animator, fallback to player animator
-            // if (weapon != null && weapon.animator == null)
-            //     weapon.animator = animator;
-        }
+        RTPrimaryAbility.Use();
     }
+
+    void HandlePrimaryUp()
+    {
+        
+    }
+
 }

@@ -1,0 +1,95 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+[CreateAssetMenu(menuName = "Abilities/Melee")]
+[Serializable]
+public class MeleeAbility : AbilityBase
+{
+
+    public MeleeHitboxData hitboxData = new MeleeHitboxData();
+    public GameObject owner;
+
+    public MeleeRuntime CreateRuntimeInstance(MeleeAbility other, StatManager manager)
+    {
+        return new MeleeRuntime(other, manager);
+    }
+
+}
+
+public class MeleeRuntime : AbilityRuntime
+{
+    public MeleeHitboxData hitboxData = new MeleeHitboxData();
+    public GameObject owner;
+    public void ConstructMelee(MeleeAbility other, StatManager manager)
+    {
+        hitboxData = new MeleeHitboxData(other.hitboxData);
+        owner = manager.gameObject;
+    }
+    public MeleeRuntime() {}
+    public MeleeRuntime(MeleeAbility other, StatManager manager)
+    {
+        ConstructBase(other, manager);
+        ConstructMelee(other, manager);
+    }
+
+    public override void Perform()
+    {
+        Collider[] HitboxHits = hitboxData.GetHits(owner);
+        float realDamage = damageData.baseDamage * UnityEngine.Random.Range(1f - variation, 1f + variation);
+        foreach (Collider hit in HitboxHits)
+        {
+            if (hit.gameObject == owner) continue;
+            if (hit.TryGetComponent<IDamageable>(out var damageable))
+            {
+                DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner};
+                damageable.TakeDamage(data);
+            }
+        }
+    }
+}
+
+[Serializable]
+public class MeleeHitboxData
+{
+    public PhysicsHitboxShapes shape = PhysicsHitboxShapes.Sphere;
+    public float radius = 10f;
+    public Vector3 boxRadius = new Vector3(5f,5f,5f);
+    // make sure the hitboxOffset has 0.5f for y for chest offset
+    // unless you don't want that?
+    public Vector3 hitboxOffset = new Vector3(0f,0.5f,1f);
+    public Collider[] GetHits(GameObject owner)
+    {
+        Vector3 origin = owner.transform.position;
+        Vector3 forward = owner.transform.forward;
+        Vector3 up = owner.transform.up;
+        Vector3 side = owner.transform.right;
+        Vector3 center = origin + (forward * hitboxOffset.z) + (up * hitboxOffset.y) + (side * hitboxOffset.x);
+        if (shape == PhysicsHitboxShapes.Sphere)
+        {
+            return Physics.OverlapSphere(center, radius);
+        } else
+        {
+            return Physics.OverlapBox(center, boxRadius);
+        }
+        
+    }
+
+    public MeleeHitboxData() {}
+    public MeleeHitboxData(MeleeHitboxData other)
+    {
+        shape = other.shape;
+        radius = other.radius;
+        boxRadius = new Vector3(other.boxRadius.x, other.boxRadius.y, other.boxRadius.z);
+        hitboxOffset = new Vector3(other.hitboxOffset.x, other.hitboxOffset.y, other.hitboxOffset.z);
+    }
+}
+[Serializable]
+public enum PhysicsHitboxShapes
+{
+    Box, Sphere 
+}

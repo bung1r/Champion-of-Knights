@@ -25,6 +25,9 @@ public class Weapon : MonoBehaviour
         // allow the action to run
         primaryAction.Execute(owner, animator);
         nextPrimaryTime = Time.time + primaryAction.cooldown;
+        PlayerStatManager stats = owner.GetComponent<PlayerStatManager>();
+        stats.UseStamina(30);
+
     }
 
     public void TrySecondary(GameObject owner)
