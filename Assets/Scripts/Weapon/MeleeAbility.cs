@@ -10,14 +10,8 @@ using UnityEngine.Rendering;
 [Serializable]
 public class MeleeAbility : AbilityBase
 {
-
     public MeleeHitboxData hitboxData = new MeleeHitboxData();
     public GameObject owner;
-
-    public MeleeRuntime CreateRuntimeInstance(MeleeAbility other, StatManager manager)
-    {
-        return new MeleeRuntime(other, manager);
-    }
 
 }
 
@@ -56,6 +50,7 @@ public class MeleeRuntime : AbilityRuntime
 [Serializable]
 public class MeleeHitboxData
 {
+    public Material hitboxMaterial;
     public PhysicsHitboxShapes shape = PhysicsHitboxShapes.Sphere;
     public float radius = 10f;
     public Vector3 boxRadius = new Vector3(5f,5f,5f);
@@ -71,9 +66,11 @@ public class MeleeHitboxData
         Vector3 center = origin + (forward * hitboxOffset.z) + (up * hitboxOffset.y) + (side * hitboxOffset.x);
         if (shape == PhysicsHitboxShapes.Sphere)
         {
+            HitboxVisualizer.Instance.DrawSphere(center, radius, 0.3f);
             return Physics.OverlapSphere(center, radius);
         } else
         {
+            HitboxVisualizer.Instance.DrawCube(center, boxRadius, 0.3f);
             return Physics.OverlapBox(center, boxRadius);
         }
         

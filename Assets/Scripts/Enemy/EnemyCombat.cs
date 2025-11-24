@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyCombat : MonoBehaviour
 {
     // Start is called before the first frame update
-    public AttackPattern attackPattern;
     // public Animator animator;
 
     void Start()

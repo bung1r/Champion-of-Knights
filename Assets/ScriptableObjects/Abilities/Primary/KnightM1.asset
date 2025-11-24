@@ -22,8 +22,9 @@ MonoBehaviour:
     source: {fileID: 0}
   statManager: {fileID: 0}
   hitboxData:
-    shape: 1
-    radius: 10
-    boxRadius: {x: 5, y: 5, z: 5}
+    hitboxMaterial: {fileID: 2100000, guid: fe2b80a2347ad60408a081cb3afa26a1, type: 2}
+    shape: 0
+    radius: 1
+    boxRadius: {x: 2, y: 2, z: 2}
     hitboxOffset: {x: 0, y: 0.5, z: 1}
   owner: {fileID: 0}

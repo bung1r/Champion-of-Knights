@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
 {
     public GameObject target;
     public Animator animator;
-    // public List<AIMeleeAction> attackActions;
     public float moveSpeed = 2f;
     public float rotationSpeed = 20f;
     public float searchRadius = 100f;
@@ -20,13 +19,11 @@ public class EnemyAI : MonoBehaviour
     private float timeSinceLastAttack = Mathf.Infinity;
     private Rigidbody rb;
     // Start is called before the first frame update
-    private Health healthScript;
     private EnemyAI thisScript;
     void Start()
     {
         
         rb = GetComponent<Rigidbody>();
-        healthScript = GetComponent<Health>();
         thisScript = GetComponent<EnemyAI>();
 
         // foreach (AIMeleeAction action in attackActions)
@@ -88,9 +85,6 @@ public class EnemyAI : MonoBehaviour
         // AIMeleeAction chosenAction = WeightedRandom.Choose(attackActions, weights);
         // chosenAction.Execute(gameObject, null);
     }
-    
-    
-    
     
     
     GameObject SearchForTarget()

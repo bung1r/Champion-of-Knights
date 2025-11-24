@@ -49,11 +49,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Weapon\Abilities\KnightM1.cs" />
     <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
-    <Compile Include="Assets\Scripts\Stats\Health.cs" />
-    <Compile Include="Assets\Scripts\Enemy\AttackPattern.cs" />
+    <Compile Include="Assets\Scripts\Weapon\ChargedMeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStatManager.cs" />
-    <Compile Include="Assets\Scripts\Weapon\MeleeAction.cs" />
     <Compile Include="Assets\Scripts\Stats\Resistances.cs" />
+    <Compile Include="Assets\Scripts\Utils\HitboxVisualizer.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyCombat.cs" />
     <Compile Include="Assets\Scripts\Components\SlidingDoor.cs" />
     <Compile Include="Assets\Scripts\Components\BatterySO.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
     <Compile Include="Assets\Scripts\Stats\DamageData.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Weapon.cs" />
     <Compile Include="Assets\Scripts\Stats\AllStats.cs" />
     <Compile Include="Assets\Scripts\Components\Battery.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
@@ -76,7 +74,6 @@
     <Compile Include="Assets\Scripts\Stats\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Weapon\WeaponAction.cs" />
     <Compile Include="Assets\Scripts\Components\Engine.cs" />
   </ItemGroup>
   <ItemGroup>

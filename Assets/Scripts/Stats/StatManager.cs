@@ -64,7 +64,7 @@ public class StatManager : MonoBehaviour, IDamageable
     {   
         float temp = 0;
         if (allowOverflow) temp -= _stats.overflowStaminaThreshold;
-        if (_stats.currentStamina - staminaCost >= temp)
+        if (_stats.currentStamina - staminaCost >= temp && _stats.currentStamina>0)
         {
             return true;
         }

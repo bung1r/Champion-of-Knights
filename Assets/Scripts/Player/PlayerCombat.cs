@@ -19,11 +19,7 @@ public class PlayerCombat : MonoBehaviour
     private AbilityRuntime[] RTUsableAbilities;
 
     void Awake() {
-        if (primaryAbility is MeleeAbility)
-        {
-            RTPrimaryAbility = primaryAbility.CreateRuntimeInstance(primaryAbility, statManager);
-        }
-        
+        RTPrimaryAbility = primaryAbility.CreateRuntimeInstance(primaryAbility, statManager);     
     }
     
     void OnEnable()
@@ -41,11 +37,12 @@ public class PlayerCombat : MonoBehaviour
     void HandlePrimaryDown()
     {
         RTPrimaryAbility.Use();
+        RTPrimaryAbility.BeginUse();
     }
 
     void HandlePrimaryUp()
     {
-        
+        RTPrimaryAbility.EndUse();
     }
 
 }
