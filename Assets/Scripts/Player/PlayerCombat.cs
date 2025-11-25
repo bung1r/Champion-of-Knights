@@ -18,6 +18,8 @@ public class PlayerCombat : MonoBehaviour
     private AbilityRuntime RTSecondaryAbility;
     private AbilityRuntime[] RTUsableAbilities;
 
+    private bool primaryDown = false;
+
     void Awake() {
         RTPrimaryAbility = primaryAbility.CreateRuntimeInstance(primaryAbility, statManager);     
     }
@@ -36,13 +38,21 @@ public class PlayerCombat : MonoBehaviour
 
     void HandlePrimaryDown()
     {
+        primaryDown = true;
         RTPrimaryAbility.Use();
         RTPrimaryAbility.BeginUse();
     }
 
     void HandlePrimaryUp()
     {
+        primaryDown = false;
         RTPrimaryAbility.EndUse();
     }
 
+    void Update()
+    {
+        if (primaryDown) {
+            RTPrimaryAbility.WhileUse();
+        }
+    }
 }

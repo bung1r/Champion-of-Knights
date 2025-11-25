@@ -25,6 +25,7 @@ public class Stats
     public float overflowStaminaThreshold = 5f;
     public float rotationSpeed = 200f;
     public Resistances resistances = new Resistances();
+    public List<DamageMultiplier> damageMultipliers = new List<DamageMultiplier>();
     public void Construct(Stats other)
     {
         currentHP = other.currentHP;

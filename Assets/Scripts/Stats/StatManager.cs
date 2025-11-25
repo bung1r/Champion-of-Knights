@@ -4,7 +4,6 @@ using UnityEditor.Search;
 using UnityEngine;
 public class StatManager : MonoBehaviour, IDamageable
 {
-    // Start is called before the first frame update
     private Stats _stats;
     private Stats _baseStats;
     private float lastUsedStamina = 0;
@@ -51,7 +50,16 @@ public class StatManager : MonoBehaviour, IDamageable
 
         lastSavedStamina = _stats.currentStamina;
     }
-
+    // iterates through multipliers and destroys ones that shouldn't be there anymore. 
+    public virtual void CheckMultipliers()
+    {
+        List<DamageMultiplier>multiplierList = GetAllDamageMultipliers();
+        for (int i = multiplierList.Count - 1; i >= 0; i--)
+        {
+            DamageMultiplier value = multiplierList[i];
+            if (Time.time - value.lifeTime > value.lifeTime) multiplierList.RemoveAt(i);
+        }
+    }
     // this will return false you do not have enough stamina to use
     public void UseStamina(float staminaCost)
     {
@@ -70,7 +78,12 @@ public class StatManager : MonoBehaviour, IDamageable
         }
         return false;
     }
-    
+    public List<DamageMultiplier> GetAllDamageMultipliers() => _stats.damageMultipliers;
+    // need to add a multiplier?
+    public void AddMultiplier(DamageMultiplier damageMultiplier)
+    {
+        _stats.damageMultipliers.Add(damageMultiplier);
+    }
     // what happens when we die? Oh no!
     public void Die() {
         Debug.Log($"{gameObject.name} has died!");
@@ -82,6 +95,7 @@ public class StatManager : MonoBehaviour, IDamageable
     protected virtual void CoreUpdate()
     {
         RegenerateStamina();
+        CheckMultipliers();
     }
     protected virtual void PostUpdate() {}
 
