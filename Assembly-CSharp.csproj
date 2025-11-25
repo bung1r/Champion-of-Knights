@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeHelper.cs" />
     <Compile Include="Assets\Scripts\Components\BatterySO.cs" />
+    <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Components\Gear.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Components\GearSystem.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Scripts\Components\Battery.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Stats\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedMeleeRuntime.cs" />

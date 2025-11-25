@@ -349,6 +349,8 @@
 "Assets/Scripts/Stats/EnemyStatManager.cs"
 "Assets/Scripts/Stats/IDamageable.cs"
 "Assets/Scripts/Stats/PlayerStatManager.cs"
+"Assets/Scripts/Stats/PlayerStats.cs"
+"Assets/Scripts/Stats/PlayerStatsSO.cs"
 "Assets/Scripts/Stats/Resistances.cs"
 "Assets/Scripts/Stats/StatManager.cs"
 "Assets/Scripts/Utils/HitboxVisualizer.cs"

@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
-                    stats.rotationSpeed * Time.deltaTime
+                    stats.turnSpeed * Time.deltaTime
                 );
             }
         }

@@ -486,22 +486,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    currentHP: 100
     maxHP: 100
-    walkSpeed: 10
     turnSpeed: 100
+    walkSpeed: 10
     canSprint: 1
     sprintSpeed: 15
     sprintStaminaCost: 8
-    currentStamina: 100
     maxStamina: 100
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
     overflowStaminaThreshold: 5
-    rotationSpeed: 200
+    baseEXP: 100
     resistances:
       entries: []
+    currentHP: 100
+    currentStamina: 100
     cautionRange: 20
     aggroRange: 10
 --- !u!1 &392003532
@@ -730,27 +730,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6a50ea4c73b554d86f69f05eb20d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsSO: {fileID: 11400000, guid: beb53e5e18df8744ca5d11355ca56191, type: 2}
   stats:
-    currentHP: 100
     maxHP: 100
-    walkSpeed: 5
     turnSpeed: 100
+    walkSpeed: 5
     canSprint: 1
     sprintSpeed: 8
     sprintStaminaCost: 8
-    currentStamina: 100
     maxStamina: 100
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
     overflowStaminaThreshold: 5
-    rotationSpeed: 200
+    baseEXP: 100
     resistances:
       entries:
       - type: 0
         resistance: 10
       - type: 6
         resistance: 0.2
+    currentHP: 100
+    currentStamina: 100
     totalEXP: 0
     level: 0
     currentEXP: 0
@@ -1647,24 +1648,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    currentHP: 300
     maxHP: 300
-    walkSpeed: 10
     turnSpeed: 100
+    walkSpeed: 10
     canSprint: 1
     sprintSpeed: 15
     sprintStaminaCost: 8
-    currentStamina: 100
     maxStamina: 100
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
     overflowStaminaThreshold: 5
-    rotationSpeed: 200
+    baseEXP: 123456
     resistances:
       entries:
       - type: 4
         resistance: 10
+    currentHP: 300
+    currentStamina: 100
     cautionRange: 20
     aggroRange: 10
 --- !u!1 &1479912151

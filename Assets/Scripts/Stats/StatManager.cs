@@ -4,6 +4,7 @@ using UnityEditor.Search;
 using UnityEngine;
 public class StatManager : MonoBehaviour, IDamageable
 {
+
     private Stats _stats;
     private Stats _baseStats;
     private float lastUsedStamina = 0;
@@ -28,7 +29,7 @@ public class StatManager : MonoBehaviour, IDamageable
         float finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type);
         _stats.currentHP -= finalDamage;
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
-        if (_stats.currentHP <= 0) Die();
+        if (_stats.currentHP <= 0) Die(damage);
     }
     public virtual void RegenerateStamina()
     {
@@ -84,9 +85,14 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         _stats.damageMultipliers.Add(damageMultiplier);
     }
+ 
     // what happens when we die? Oh no!
-    public void Die() {
-        Debug.Log($"{gameObject.name} has died!");
+    public void Die(DamageData damage) {
+        if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))
+        {
+            Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
+            playerStat.AddEXP(_stats.baseEXP);
+        }
         Destroy(gameObject);
     }
 

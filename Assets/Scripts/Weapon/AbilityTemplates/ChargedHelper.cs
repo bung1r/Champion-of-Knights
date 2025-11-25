@@ -63,7 +63,6 @@ public static class ChargedHelper
         {
             multiplier.amount = 1f;
         }
-        Debug.Log(multiplier.amount);
        
         // add the multiplier
         statManager.AddMultiplier(multiplier);
