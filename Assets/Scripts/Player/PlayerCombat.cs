@@ -38,6 +38,7 @@ public class PlayerCombat : MonoBehaviour
 
     void HandlePrimaryDown()
     {
+        // wow so neat and nice!!! i'm so cool :D
         primaryDown = true;
         RTPrimaryAbility.Use();
         RTPrimaryAbility.BeginUse();

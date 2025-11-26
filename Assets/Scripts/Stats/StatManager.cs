@@ -85,7 +85,75 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         _stats.damageMultipliers.Add(damageMultiplier);
     }
- 
+    
+    public void AddStatModifier(StatModifier modifier)
+    {
+        if (modifier.statModifierType == StatModifierType.TempBuff)
+        {
+            
+            _stats.statModifiers.Add(modifier);
+        } else if (modifier.statModifierType == StatModifierType.NodeBuff)
+        {
+            bool foundIt = false;
+            foreach (StatModifier statModifier in _stats.statModifiers)
+            {
+                if (statModifier.statModifierType == StatModifierType.NodeBuff)
+                {
+                    statModifier.EditModifier(modifier);
+                    foundIt = true;
+                }
+            }
+            if (!foundIt)
+            {
+                _stats.statModifiers.Add(modifier);
+            }
+        }
+        // apply the stat changes
+        ApplyStatModifiers();
+    }
+    // Apply the stat Modifiers
+    public void ApplyStatModifiers()
+    {
+        Dictionary<BaseStatsEnum, float> statDict = new Dictionary<BaseStatsEnum, float>
+        {
+            {BaseStatsEnum.baseEXP, _baseStats.baseEXP},
+            {BaseStatsEnum.maxHP, _baseStats.maxHP},
+            {BaseStatsEnum.sprintSpeed, _baseStats.sprintSpeed},
+            {BaseStatsEnum.staminaRegen, _baseStats.staminaRegen},
+            {BaseStatsEnum.walkSpeed, _baseStats.walkSpeed},
+            {BaseStatsEnum.sprintStaminaCost, _baseStats.sprintStaminaCost},
+            {BaseStatsEnum.maxStamina, _baseStats.maxStamina}
+        };
+
+        // complicated :(
+        foreach (StatModifier entry in _stats.statModifiers)
+        {
+            // if additive, add the stat modifier
+            if (entry.generalModifierType == ModifierTypes.Additive)
+            {
+                foreach (KeyValuePair<BaseStatsEnum, float> kvPair in entry.statDict)
+                {
+                    statDict[kvPair.Key] += kvPair.Value;
+                }
+            } else if (entry.generalModifierType == ModifierTypes.Multiplicative)
+            // if multiplicative, multiply the multiplied values then multiply at the end of calculation
+            {
+                
+            } else
+            {
+                Debug.Log("You should never be setting, lol!");
+            }
+        }
+
+        
+        _stats.baseEXP = statDict[BaseStatsEnum.baseEXP];
+        _stats.maxHP = statDict[BaseStatsEnum.maxHP];
+        _stats.sprintSpeed = statDict[BaseStatsEnum.sprintSpeed];
+        _stats.staminaRegen = statDict[BaseStatsEnum.staminaRegen];
+        _stats.walkSpeed = statDict[BaseStatsEnum.walkSpeed];
+        _stats.sprintStaminaCost = statDict[BaseStatsEnum.sprintStaminaCost];
+        _stats.maxStamina = statDict[BaseStatsEnum.maxStamina];
+    }
     // what happens when we die? Oh no!
     public void Die(DamageData damage) {
         if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))

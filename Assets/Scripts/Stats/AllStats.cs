@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 [Serializable]
 public class Stats : BaseStats
 {
+    public List<StatModifier> statModifiers = new List<StatModifier>();
     public float currentHP = 100f;
     public float currentStamina = 100f;
     // AKA if you use a 50 stamina move with 45 stamina, you are able to. 
@@ -75,3 +76,7 @@ public class EnemyStats : Stats
     }
 }
 
+public enum BaseStatsEnum
+{
+    maxHP,turnSpeed,walkSpeed,canSprint,sprintSpeed,sprintStaminaCost,maxStamina,staminaRegen,startStaminaRegen,startStaminaRegenFromZero,overflowStaminaThreshold,baseEXP 
+}

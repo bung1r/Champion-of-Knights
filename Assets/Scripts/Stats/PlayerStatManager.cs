@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerStatManager : StatManager
 {
     public PlayerStatsSO statsSO;
+    
     public PlayerStats stats;
     public void AddEXP(float exp)
     {
@@ -29,6 +30,7 @@ public class PlayerStatManager : StatManager
         while (LevelToEXP(temp + 1) <= stats.totalEXP)
         {
             temp += 1;
+            stats.skillPoints += 1;
         } 
         return temp;
     }
@@ -44,7 +46,7 @@ public class PlayerStatManager : StatManager
         stats.nextLevelEXP = LevelToEXP(stats.level + 1) - stats.totalEXP;
         stats.currentEXP =  stats.totalEXP - LevelToEXP(stats.level);
     }
-
+    public float GetSkillPoints() => stats.skillPoints;
     protected override void PreStart()
     {
         stats = statsSO.CreateRuntime();

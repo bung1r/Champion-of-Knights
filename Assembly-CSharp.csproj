@@ -47,20 +47,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Weapon\Abilities\KnightM1.cs" />
     <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedAbilityBase.cs" />
-    <Compile Include="Assets\Scripts\Stats\PlayerStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedHelper.cs" />
     <Compile Include="Assets\Scripts\Stats\Resistances.cs" />
     <Compile Include="Assets\Scripts\Utils\HitboxVisualizer.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyCombat.cs" />
     <Compile Include="Assets\Scripts\Components\SlidingDoor.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedAbility.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeHelper.cs" />
     <Compile Include="Assets\Scripts\Components\BatterySO.cs" />
-    <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
-    <Compile Include="Assets\Scripts\Components\Gear.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Components\GearSystem.cs" />
     <Compile Include="Assets\Scripts\Components\BasicLever.cs" />
@@ -68,25 +63,56 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedMeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeRuntime.cs" />
-    <Compile Include="Assets\Scripts\Stats\StatManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\StatModifier.cs" />
     <Compile Include="Assets\Scripts\Components\Component.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedRuntime.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
     <Compile Include="Assets\Scripts\Stats\DamageData.cs" />
-    <Compile Include="Assets\Scripts\Stats\AllStats.cs" />
     <Compile Include="Assets\Scripts\Components\Battery.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedAbility.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Components\Engine.cs" />
+    <Compile Include="Assets\Scripts\Stats\PlayerStatManager.cs" />
+    <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeHelper.cs" />
+    <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Components\Gear.cs" />
+    <Compile Include="Assets\Scripts\Stats\StatManager.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedRuntime.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
+    <Compile Include="Assets\Scripts\Stats\AllStats.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -912,6 +938,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
+    <ProjectReference Include="UnityEditor.UI.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
+    <ProjectReference Include="UnityEngine.UI.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.csproj" />
     <ProjectReference Include="Unity.VSCode.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
