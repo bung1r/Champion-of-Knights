@@ -17,9 +17,11 @@ MonoBehaviour:
   critRate: 100
   critMultiplier: 2
   variation: 0.2
-  useOverflowStamina: 1
+  hitboxTimeDelay: 0
+  attackLength: 0
+  useOverflowStamina: 0
   damageData:
-    baseDamage: 20
+    baseDamage: 5
     type: 0
     source: {fileID: 0}
   statManager: {fileID: 0}

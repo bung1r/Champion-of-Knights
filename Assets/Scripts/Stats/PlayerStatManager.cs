@@ -11,6 +11,12 @@ public class PlayerStatManager : StatManager
     public PlayerStatsSO statsSO;
     
     public PlayerStats stats;
+    void Awake()
+    {
+        stats = statsSO.CreateRuntime();
+        setPlayerStats(stats);
+        AdjustLevels();
+    }
     public void AddEXP(float exp)
     {
         stats.totalEXP += exp;
@@ -47,11 +53,5 @@ public class PlayerStatManager : StatManager
         stats.currentEXP =  stats.totalEXP - LevelToEXP(stats.level);
     }
     public float GetSkillPoints() => stats.skillPoints;
-    protected override void PreStart()
-    {
-        stats = statsSO.CreateRuntime();
-        setPlayerStats(stats);
-        AdjustLevels();
-    }
 }
 

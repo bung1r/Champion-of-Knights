@@ -26,19 +26,12 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         thisScript = GetComponent<EnemyAI>();
 
-        // foreach (AIMeleeAction action in attackActions)
-        // {
-        //     action.healthScript = healthScript;
-        //     action.enemyAIScript = thisScript;
-        // }
     }
 
     // Update is called once per frame
     void Update()
     {
         target = SearchForTarget();
-
-        
     }
     void FixedUpdate()
     {
@@ -51,7 +44,7 @@ public class EnemyAI : MonoBehaviour
         if (target == null) return;
 
         // gets a vector between the enemy and target, then sets y to 0.
-        Vector3 lookdir = target.transform.position - transform.position;
+        Vector3 lookdir = transform.position - target.transform.position;
         lookdir.y = 0;
         // stuff so the rotation happens smoothly, wow!
         Quaternion targetRotation = Quaternion.LookRotation(lookdir, Vector3.up);
@@ -77,13 +70,7 @@ public class EnemyAI : MonoBehaviour
         if (inAttack) return;
         timeSinceLastAttack += Time.fixedDeltaTime;
         if (timeSinceLastAttack < timeBetweenAttacks) return;
-        List<float> weights = new List<float>();
-        // foreach (AIMeleeAction action in attackActions)
-        // {
-        //     weights.Add(action.EvaluatePriority());
-        // }
-        // AIMeleeAction chosenAction = WeightedRandom.Choose(attackActions, weights);
-        // chosenAction.Execute(gameObject, null);
+
     }
     
     

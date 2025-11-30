@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
         holdShift = Input.GetKey(KeyCode.LeftShift);
         isGrounded = Physics.CheckSphere(feetTransform.position, groundRadius, groundLayer);
+        stats = statManager.stats;
         TryJump();
         TryInteract();
     }
@@ -129,15 +130,19 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         // don't do anything if there isn't any movement
-        if (inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) return;
-        // the sprint logic
+        if ((inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) || stats.inAttackAnim) {stats.isWalking = false; stats.isRunning = false; return;}
+        // the sprint logic 
         if (holdShift && statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
         {
             statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-            speed = stats.sprintSpeed;
+            speed = stats.sprintSpeed; 
+            stats.isRunning = true;
+            stats.isWalking = false;
         } else
         {
             speed = stats.walkSpeed;
+            stats.isWalking = true;
+            stats.isRunning = false;
         }
         rb.MovePosition(rb.position + inputDir * speed * Time.fixedDeltaTime);
     }

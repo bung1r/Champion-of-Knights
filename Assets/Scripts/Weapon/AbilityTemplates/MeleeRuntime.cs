@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class MeleeRuntime : AbilityRuntime
     {
         hitboxData = new MeleeHitboxData(other.hitboxData);
         owner = manager.gameObject;
+        hitboxData.transform = owner.transform;
     }
     public MeleeRuntime() {}
     public MeleeRuntime(MeleeAbility other, StatManager manager)
@@ -27,8 +29,9 @@ public class MeleeRuntime : AbilityRuntime
     }
 
     // the actual performing code, pretty important if you ask me. 
-    public override void Perform()
+    async public override void Perform()
     {
+        await Task.Delay((int)(hitboxTimeDelay * 1000));
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
         Collider[] HitboxHits = hitboxData.GetHits(owner);
         float critAmt = 1f;

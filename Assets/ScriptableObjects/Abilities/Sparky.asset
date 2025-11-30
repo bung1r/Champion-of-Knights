@@ -17,10 +17,12 @@ MonoBehaviour:
   critRate: 0
   critMultiplier: 2
   variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 1000000
   useOverflowStamina: 1
   damageData:
     baseDamage: 10
-    type: 0
+    type: 1
     source: {fileID: 0}
   statManager: {fileID: 0}
   chargedStats:

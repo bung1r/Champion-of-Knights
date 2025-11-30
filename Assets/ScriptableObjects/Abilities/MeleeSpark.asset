@@ -19,7 +19,7 @@ MonoBehaviour:
   variation: 0.2
   useOverflowStamina: 1
   damageData:
-    baseDamage: 0
+    baseDamage: 10
     type: 0
     source: {fileID: 0}
   statManager: {fileID: 0}
@@ -31,12 +31,9 @@ MonoBehaviour:
     maxDmgMultiplier: 5
     linearScaling: 1
     fireWhenMaxed: 0
-    percentCharged: 0
-    isCharging: 0
-    startedCharging: -999
   hitboxData:
     shape: 1
-    radius: 10
+    radius: 2
     boxRadius: {x: 5, y: 5, z: 5}
     hitboxOffset: {x: 0, y: 0.5, z: 1}
   owner: {fileID: 0}

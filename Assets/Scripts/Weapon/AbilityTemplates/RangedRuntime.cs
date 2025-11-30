@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
@@ -27,13 +28,13 @@ public class RangedRuntime : AbilityRuntime
     }
 
     // the actual performing code, pretty important if you ask me. 
-    public override void Perform()
+    async public override void Perform()
     {
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
-        Collider[] HitboxHits = hitboxData.GetHits(owner);
+
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {
-            Debug.Log("Oh wow, the crit actually worked?");
+            Debug.Log("the attack crit!");
             critAmt = critMultiplier;
         }
         
@@ -52,8 +53,9 @@ public class RangedRuntime : AbilityRuntime
                 multiplicativeMultiplier *= damageMultiplier.amount;   
             }
         }
-        
         float realDamage = damageData.baseDamage * critAmt * additiveMultiplier * multiplicativeMultiplier * UnityEngine.Random.Range(1f - variation, 1f + variation);
+        await Task.Delay((int)(hitboxTimeDelay * 1000));
+        Collider[] HitboxHits = hitboxData.GetHits(owner);
         foreach (Collider hit in HitboxHits)
         {
             if (hit.gameObject == owner) continue;

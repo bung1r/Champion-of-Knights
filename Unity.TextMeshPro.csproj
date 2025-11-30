@@ -80,8 +80,8 @@
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_ScrollbarEventHandler.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_ObjectPool.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_ColorGradient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_InputField.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_Asset.cs" />
+    <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_InputField.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_MeshInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\ITextPreProcessor.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_SubMesh.cs" />
@@ -96,8 +96,8 @@
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_Sprite.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TextContainer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMPro_Private.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_LineInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMPro_Private.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMPro_EventManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_StyleSheet.cs" />
     <Compile Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Scripts\Runtime\TMP_CoroutineTween.cs" />

@@ -6077,8 +6077,8 @@ namespace TMPro
             }
             else
             {
-                if (!TMP_Settings.warningsDisabled)
-                    Debug.LogWarning("The character used for Underline is not available in font asset [" + fontAsset.name + "].", this);
+                // if (!TMP_Settings.warningsDisabled)
+                    // Debug.LogWarning("The character used for Underline is not available in font asset [" + fontAsset.name + "].", this);
             }
         }
 

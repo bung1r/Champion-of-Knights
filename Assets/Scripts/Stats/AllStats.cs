@@ -12,7 +12,10 @@ public class Stats : BaseStats
     public List<StatModifier> statModifiers = new List<StatModifier>();
     public float currentHP = 100f;
     public float currentStamina = 100f;
-    // AKA if you use a 50 stamina move with 45 stamina, you are able to. 
+    // The boolean variables that shall change. 
+    public bool isRunning = false;
+    public bool isWalking = false;
+    public bool inAttackAnim = false;
     public List<DamageMultiplier> damageMultipliers = new List<DamageMultiplier>();
 
     public Stats() {}
@@ -69,9 +72,15 @@ public class EnemyStats : Stats
 
     public float cautionRange = 20f;
     public float aggroRange = 10f;
+    public void EnemyConstruct(EnemyStats other)
+    {
+        cautionRange = other.cautionRange;
+        aggroRange = other.aggroRange;
+    }
     public EnemyStats() {}
     public EnemyStats(EnemyStats other)
     {
+        EnemyConstruct(other);
         Construct(other);
     }
 }

@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class EnemyStatManager : StatManager
 {
-    public EnemyStats stats = new EnemyStats();
-    protected override void PreStart()
+    public EnemyStatsSO statsSO;
+    
+    public EnemyStats stats;
+    void Awake()
     {
+        stats = statsSO.CreateRuntime();
         setEnemyStats(stats);
     }
+
 }

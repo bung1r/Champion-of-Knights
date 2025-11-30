@@ -22,6 +22,19 @@ public class StatManager : MonoBehaviour, IDamageable
         CoreUpdate();
         PostUpdate();
     }
+    // simple getter
+    public Stats GetStats() => _stats;
+    public bool GetInAttack() => _stats.inAttackAnim;
+    public virtual void BeginAttack()
+    {
+        _stats.inAttackAnim = true;
+        _stats.isRunning = false;
+        _stats.isWalking = false;
+    }
+    public virtual void EndAttack()
+    {
+        _stats.inAttackAnim = false;
+    }
     // the taking damage logic, very cool. 
     public virtual void TakeDamage(DamageData damage)
     {

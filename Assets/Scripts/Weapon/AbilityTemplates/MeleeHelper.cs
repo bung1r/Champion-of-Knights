@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 [Serializable]
 public class MeleeHitboxData
 {
+    public Transform transform;
     public PhysicsHitboxShapes shape = PhysicsHitboxShapes.Sphere;
     public float radius = 10f;
     public Vector3 boxRadius = new Vector3(5f,5f,5f);
@@ -24,11 +25,11 @@ public class MeleeHitboxData
         Vector3 center = origin + (forward * hitboxOffset.z) + (up * hitboxOffset.y) + (side * hitboxOffset.x);
         if (shape == PhysicsHitboxShapes.Sphere)
         {
-            HitboxVisualizer.Instance.DrawSphere(center, radius, 0.3f);
+            HitboxVisualizer.Instance.DrawSphere(transform, center, radius, 0.3f);
             return Physics.OverlapSphere(center, radius);
         } else
         {
-            HitboxVisualizer.Instance.DrawCube(center, boxRadius, 0.3f);
+            HitboxVisualizer.Instance.DrawCube(transform, center, boxRadius, 0.3f);
             return Physics.OverlapBox(center, boxRadius);
         }
         
@@ -37,6 +38,7 @@ public class MeleeHitboxData
     public MeleeHitboxData() {}
     public MeleeHitboxData(MeleeHitboxData other)
     {
+        transform = other.transform;
         shape = other.shape;
         radius = other.radius;
         boxRadius = new Vector3(other.boxRadius.x, other.boxRadius.y, other.boxRadius.z);

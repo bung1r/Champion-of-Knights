@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +12,8 @@ public abstract class AbilityBase : ScriptableObject
     public float critRate = 0f;
     public float critMultiplier = 2f;
     public float variation = 0.2f;
+    public float hitboxTimeDelay = 0.2f;
+    public float attackLength = 1f;
     [NonSerialized]public float lastUsedTime = 0f;
     public bool useOverflowStamina = true;
     public DamageData damageData = new DamageData();
@@ -43,6 +47,8 @@ public class AbilityRuntime : IAbility
     public bool useOverflowStamina = true;
     public float critRate = 0f;
     public float critMultiplier = 2f;
+    public float hitboxTimeDelay = 0.2f;
+    public float attackLength = 1f;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
     public void ConstructBase(AbilityBase other, StatManager manager)
@@ -55,6 +61,8 @@ public class AbilityRuntime : IAbility
         statManager = manager;
         critRate = other.critRate;
         critMultiplier = other.critMultiplier;
+        hitboxTimeDelay = other.hitboxTimeDelay;
+        attackLength = other.attackLength;
     }
     public AbilityRuntime() {}  
     public AbilityRuntime(AbilityBase other, StatManager manager)
@@ -65,7 +73,7 @@ public class AbilityRuntime : IAbility
 
     public virtual bool CanUse()
     {
-        if (Time.time - lastUsedTime > baseCooldown && statManager.CanUseStamina(staminaCost, useOverflowStamina))
+        if (Time.time - lastUsedTime > baseCooldown && statManager.CanUseStamina(staminaCost, useOverflowStamina) && !statManager.GetInAttack())
         {
             return true;
         }
@@ -76,17 +84,23 @@ public class AbilityRuntime : IAbility
         if (!CanUse()) return false;
         lastUsedTime = Time.time;
         statManager.UseStamina(staminaCost);
+        statManager.BeginAttack();
         Perform();
+        BasicEndUse();
         return true;
     }
     public virtual void BeginUse() {} // this is for a charge (hold down)
     public virtual void WhileUse() {} // this is for anything while a charged move is happening
-    public virtual void EndUse() {} // this is for ending a charged move
+    public virtual void EndUse() {} 
     public virtual float GetCooldownRemaining()
     {
         return Mathf.Max(0, baseCooldown - (Time.time - lastUsedTime));
     }
-    
+    async public virtual void BasicEndUse()
+    {
+        await Task.Delay((int)(attackLength * 1000));
+        statManager.EndAttack();
+    }
     public virtual void Perform() {Debug.Log("Does this work? I hope not!");}
 }
 

@@ -14,17 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaCost: 5
   baseCooldown: 1
+  critRate: 50
+  critMultiplier: 2
   variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 0.4
   useOverflowStamina: 1
   damageData:
     baseDamage: 15
-    type: 6
+    type: 0
     source: {fileID: 0}
   statManager: {fileID: 0}
   hitboxData:
-    hitboxMaterial: {fileID: 2100000, guid: fe2b80a2347ad60408a081cb3afa26a1, type: 2}
+    transform: {fileID: 0}
     shape: 0
-    radius: 1
-    boxRadius: {x: 2, y: 2, z: 2}
+    radius: 0.3
+    boxRadius: {x: 0.8, y: 1, z: 0.5}
     hitboxOffset: {x: 0, y: 0.5, z: 1}
   owner: {fileID: 0}
