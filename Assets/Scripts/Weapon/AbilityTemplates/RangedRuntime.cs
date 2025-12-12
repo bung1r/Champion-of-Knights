@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Rendering;
 
 public class RangedRuntime : AbilityRuntime
@@ -37,7 +38,7 @@ public class RangedRuntime : AbilityRuntime
             Debug.Log("the attack crit!");
             critAmt = critMultiplier;
         }
-        
+        //
         // define additive multipliers and multiplicated multipliers.
         float additiveMultiplier = 1f;
         float multiplicativeMultiplier = 1f;
@@ -55,16 +56,27 @@ public class RangedRuntime : AbilityRuntime
         }
         float realDamage = damageData.baseDamage * critAmt * additiveMultiplier * multiplicativeMultiplier * UnityEngine.Random.Range(1f - variation, 1f + variation);
         await Task.Delay((int)(hitboxTimeDelay * 1000));
-        Collider[] HitboxHits = hitboxData.GetHits(owner);
-        foreach (Collider hit in HitboxHits)
+        if (hitboxData.rangedHitboxType == RangedHitboxShapes.Raytrace)
         {
-            if (hit.gameObject == owner) continue;
-            if (hit.TryGetComponent<IDamageable>(out var damageable))
+            // basic calculations for raytracing, relatively easy. 
+            Collider[] HitboxHits = hitboxData.GetHits(owner);
+            foreach (Collider hit in HitboxHits)
             {
-                DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner};
-                damageable.TakeDamage(data);
+                if (hit.transform.root.gameObject == owner) continue;
+                if (hit.transform.root.gameObject.layer == owner.layer) continue;
+                if (hit.transform.root.TryGetComponent<IDamageable>(out var damageable))
+                {
+                    DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner, abilityBase = abilityBase};
+                    damageable.TakeDamage(data);
+                }
             }
+        } else
+        {
+            DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner, abilityBase = abilityBase};
+            BulletData bulletData = new BulletData(hitboxData, data, owner);
+            hitboxData.ShootBullet(owner, bulletData); 
         }
+        
 
     }
 }

@@ -56,7 +56,9 @@
     <Compile Include="Assets\Scripts\Components\SlidingDoor.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedAbility.cs" />
     <Compile Include="Assets\Scripts\Components\BatterySO.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\GuardAbility.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\GuardRuntime.cs" />
     <Compile Include="Assets\Scripts\Components\GearSystem.cs" />
     <Compile Include="Assets\Scripts\Components\BasicLever.cs" />
     <Compile Include="Assets\Scripts\Stats\IDamageable.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
     <Compile Include="Assets\Scripts\Stats\DamageData.cs" />
     <Compile Include="Assets\Scripts\Components\Battery.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedAbility.cs" />
@@ -77,19 +80,27 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Components\Engine.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedBullet.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStatManager.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyAbility.cs" />
     <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\GuardHelper.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\MeleeHelper.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyMeleeRuntime copy.cs" />
     <Compile Include="Assets\Scripts\Components\Gear.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\RangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStatsSO.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
     <Compile Include="Assets\Scripts\Stats\AllStats.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\BulletHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityTemplates\ChargedHelper.cs" />
   </ItemGroup>

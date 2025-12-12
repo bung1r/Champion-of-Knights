@@ -6,7 +6,7 @@ using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[CreateAssetMenu(menuName = "Player/Enemy Stats")]
+[CreateAssetMenu(menuName = "Enemy/Enemy Stats")]
 [Serializable]
 public class EnemyStatsSO : ScriptableObject
 {

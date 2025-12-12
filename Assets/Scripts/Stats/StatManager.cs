@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor.Search;
 using UnityEngine;
 public class StatManager : MonoBehaviour, IDamageable
@@ -38,11 +40,36 @@ public class StatManager : MonoBehaviour, IDamageable
     // the taking damage logic, very cool. 
     public virtual void TakeDamage(DamageData damage)
     {
-
-        float finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type);
+        float finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type)/_stats.resistances.Get(DamageType.All);
         _stats.currentHP -= finalDamage;
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
+        if (damage.abilityBase != null)
+        {
+            if (_stats.stunTime < damage.abilityBase.stunTime) {
+                _stats.stunTime = damage.abilityBase.stunTime;
+                Knockback(damage);
+            }
+        }
         if (_stats.currentHP <= 0) Die(damage);
+    }
+    async public virtual void Knockback(DamageData damage)
+    {
+        if (damage.abilityBase.knockback > 0)
+        {
+            Vector3 vector = transform.position - damage.source.transform.position;
+            vector.y = 0;
+            vector = vector.normalized * damage.abilityBase.knockback;
+            if (TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.AddForce(vector, ForceMode.Impulse);  
+            }
+        }
+        await Task.Delay((int)(damage.abilityBase.stunTime * 1000f / 2f));
+        
+    }
+    public virtual void StunHandler()
+    {
+        _stats.stunTime = Mathf.Max(_stats.stunTime - Time.deltaTime, 0);
     }
     public virtual void RegenerateStamina()
     {
@@ -99,6 +126,7 @@ public class StatManager : MonoBehaviour, IDamageable
         _stats.damageMultipliers.Add(damageMultiplier);
     }
     
+
     public void AddStatModifier(StatModifier modifier)
     {
         if (modifier.statModifierType == StatModifierType.TempBuff)
@@ -181,6 +209,7 @@ public class StatManager : MonoBehaviour, IDamageable
     // will contain everything that happens in this script
     protected virtual void CoreUpdate()
     {
+        StunHandler();
         RegenerateStamina();
         CheckMultipliers();
     }

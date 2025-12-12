@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
@@ -12,6 +13,7 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerStatManager statManager;
+    private PlayerCombat playerCombat;
     private PlayerStats stats;
     private Camera cam;
     private Rigidbody rb;
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Hello World! Although it sounds like bits and bytes! My circuitry is filled with mites...");
         rb = GetComponent<Rigidbody>();
+        playerCombat = GetComponent<PlayerCombat>();
         rb.freezeRotation = true;
         rb.drag = 0; // remove slowdown drag
         cam = Camera.main;
@@ -127,20 +130,33 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+    private float CalcSpeed(float speed)
+    {
+        float divider = 0;
+       if (stats.isGuarding && playerCombat.secondaryAbility is GuardAbility guard)
+       {
+          divider += guard.guardStats.speedReduction;
+       }
+
+
+        if (divider <= 0) divider = 1f;
+    
+        return speed/divider;
+    }
     void Move()
     {
         // don't do anything if there isn't any movement
         if ((inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) || stats.inAttackAnim) {stats.isWalking = false; stats.isRunning = false; return;}
         // the sprint logic 
-        if (holdShift && statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
+        if (holdShift && statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime) && !stats.isGuarding && !stats.inAttackAnim)
         {
             statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-            speed = stats.sprintSpeed; 
+            speed = CalcSpeed(stats.sprintSpeed);
             stats.isRunning = true;
             stats.isWalking = false;
         } else
         {
-            speed = stats.walkSpeed;
+            speed = CalcSpeed(stats.walkSpeed);
             stats.isWalking = true;
             stats.isRunning = false;
         }

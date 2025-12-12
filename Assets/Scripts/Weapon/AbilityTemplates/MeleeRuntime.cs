@@ -31,9 +31,7 @@ public class MeleeRuntime : AbilityRuntime
     // the actual performing code, pretty important if you ask me. 
     async public override void Perform()
     {
-        await Task.Delay((int)(hitboxTimeDelay * 1000));
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
-        Collider[] HitboxHits = hitboxData.GetHits(owner);
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {
             Debug.Log("Oh wow, the crit actually worked?");
@@ -57,12 +55,17 @@ public class MeleeRuntime : AbilityRuntime
         }
         
         float realDamage = damageData.baseDamage * critAmt * additiveMultiplier * multiplicativeMultiplier * UnityEngine.Random.Range(1f - variation, 1f + variation);
+        
+        await Task.Delay((int)(hitboxTimeDelay * 1000));
+
+        Collider[] HitboxHits = hitboxData.GetHits(owner);
         foreach (Collider hit in HitboxHits)
         {
-            if (hit.gameObject == owner) continue;
-            if (hit.TryGetComponent<IDamageable>(out var damageable))
+            if (hit.transform.root.gameObject == owner) continue;
+            if (hit.transform.root.gameObject.layer == owner.layer) continue;
+            if (hit.transform.root.TryGetComponent<IDamageable>(out var damageable))
             {
-                DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner};
+                DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner, abilityBase = abilityBase};
                 damageable.TakeDamage(data);
             }
         }

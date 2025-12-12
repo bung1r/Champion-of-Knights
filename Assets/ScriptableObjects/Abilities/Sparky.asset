@@ -33,4 +33,8 @@ MonoBehaviour:
     maxDmgMultiplier: 100
     linearScaling: 1
     fireWhenMaxed: 1
+  hitboxData:
+    raytraceMaterial: {fileID: 0}
+    rangedHitboxType: 1
+    range: 100
   owner: {fileID: 0}

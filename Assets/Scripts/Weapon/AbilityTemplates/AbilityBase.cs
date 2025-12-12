@@ -14,6 +14,8 @@ public abstract class AbilityBase : ScriptableObject
     public float variation = 0.2f;
     public float hitboxTimeDelay = 0.2f;
     public float attackLength = 1f;
+    public float knockback = 0f;
+    public float stunTime = 0.2f;
     [NonSerialized]public float lastUsedTime = 0f;
     public bool useOverflowStamina = true;
     public DamageData damageData = new DamageData();
@@ -32,8 +34,15 @@ public abstract class AbilityBase : ScriptableObject
         } else if (other is ChargedRangedAbility)
         {
             return new ChargedRangedRuntime((ChargedRangedAbility)other, manager);
+        } else if (other is GuardAbility)
+        {
+            return new GuardRuntime((GuardAbility)other, manager);
+        } else
+        {
+            Debug.Log("You have not implemented the ability correctly!");
+            return new AbilityRuntime(other, manager);
         }
-        return new AbilityRuntime(other, manager);
+        
     }
     
 }
@@ -49,20 +58,26 @@ public class AbilityRuntime : IAbility
     public float critMultiplier = 2f;
     public float hitboxTimeDelay = 0.2f;
     public float attackLength = 1f;
+    public float knockback = 0f;
+    public float stunTime = 0.2f;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
+    public AbilityBase abilityBase;
     public void ConstructBase(AbilityBase other, StatManager manager)
     {
         staminaCost = other.staminaCost;
         baseCooldown = other.baseCooldown;
         variation = other.variation;
         useOverflowStamina = other.useOverflowStamina;
-        damageData = new DamageData(other.damageData);    
+        damageData = new DamageData(other);    
         statManager = manager;
+        abilityBase = other;
         critRate = other.critRate;
         critMultiplier = other.critMultiplier;
         hitboxTimeDelay = other.hitboxTimeDelay;
         attackLength = other.attackLength;
+        knockback = other.knockback;
+        stunTime = other.stunTime;
     }
     public AbilityRuntime() {}  
     public AbilityRuntime(AbilityBase other, StatManager manager)
@@ -102,6 +117,8 @@ public class AbilityRuntime : IAbility
         statManager.EndAttack();
     }
     public virtual void Perform() {Debug.Log("Does this work? I hope not!");}
+
+    // enemy only things. it's inefficient, but the only thing I can think of. 
 }
 
 public interface IAbility 

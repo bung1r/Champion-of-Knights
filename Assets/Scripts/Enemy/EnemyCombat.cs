@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(EnemyAI))]
 public class EnemyCombat : MonoBehaviour
 {
     // Start is called before the first frame update

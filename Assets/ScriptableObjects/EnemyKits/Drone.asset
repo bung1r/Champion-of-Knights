@@ -15,7 +15,7 @@ MonoBehaviour:
   baseStats:
     maxHP: 100
     turnSpeed: 100
-    walkSpeed: 2
+    walkSpeed: 1
     canSprint: 0
     sprintSpeed: 4
     sprintStaminaCost: 8

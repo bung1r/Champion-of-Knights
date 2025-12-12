@@ -19,6 +19,8 @@ public class PlayerStats : Stats
     {
         totalEXP = other.totalEXP;
         skillPoints = other.skillPoints;
+        currentHP = other.maxHP;
+        currentStamina = other.maxStamina;
     }
     public PlayerStats() {}
     public PlayerStats(PlayerStats other)

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e00d045c8f2dcf40b99b8a339b8c936, type: 3}
+  m_Name: KnightGuard
+  m_EditorClassIdentifier: 
+  staminaCost: 0
+  baseCooldown: 0.2
+  critRate: 0
+  critMultiplier: 0
+  variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 1
+  knockback: 0
+  stunTime: 0.2
+  useOverflowStamina: 1
+  damageData:
+    baseDamage: 0
+    type: 0
+    source: {fileID: 0}
+  statManager: {fileID: 0}
+  owner: {fileID: 0}
+  guardStats:
+    parryThreshold: 0.1
+    resistance: 7
+    resistAmount: 2
+    speedReduction: 2
+    parryStart: 0
+    parryEnd: 0.2

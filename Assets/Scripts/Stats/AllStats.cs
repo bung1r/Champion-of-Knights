@@ -16,6 +16,9 @@ public class Stats : BaseStats
     public bool isRunning = false;
     public bool isWalking = false;
     public bool inAttackAnim = false;
+    public bool isGuarding = false;
+    public bool isParrying = false;
+    public float stunTime = 0f; // 0 is not stunned, every x is one more sec of stun 
     public List<DamageMultiplier> damageMultipliers = new List<DamageMultiplier>();
 
     public Stats() {}
@@ -69,13 +72,21 @@ public class BaseStats
 [Serializable]
 public class EnemyStats : Stats
 {
-
-    public float cautionRange = 20f;
-    public float aggroRange = 10f;
+    public float runAwayDist = 2f;
+    public float comfortDist = 3f; // distance away from 'runAway' where you stop moving!
+    public float runTowardsDist = 10f;
+    public float cautionRange = 30f;
+    public float aggroRange = 20f;
+    public float timeBetweenMoves = 0.5f;
     public void EnemyConstruct(EnemyStats other)
     {
+        runAwayDist = other.runAwayDist;
+        runTowardsDist = other.runTowardsDist;
         cautionRange = other.cautionRange;
         aggroRange = other.aggroRange;
+        currentHP = other.maxHP;
+        currentStamina = other.maxStamina;
+        comfortDist = other.comfortDist;
     }
     public EnemyStats() {}
     public EnemyStats(EnemyStats other)
