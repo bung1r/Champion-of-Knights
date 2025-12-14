@@ -19,19 +19,19 @@ MonoBehaviour:
   variation: 0.2
   hitboxTimeDelay: 0
   attackLength: 0.1
-  knockback: 0
+  knockback: 1
   stunTime: 0.2
   useOverflowStamina: 0
   damageData:
     baseDamage: 1
     type: 0
     source: {fileID: 0}
-  statManager: {fileID: 0}
   hitboxData:
     range: 10
     pierce: 1
     rangedHitboxType: 0
-    bulletPrefab: {fileID: 7318768021725528923, guid: 46a9d631d8179224e81b102c70bf72e2,
+    bulletPrefab: {fileID: 5279583567173616410, guid: 3b4a325cf5c00ea4da133bc756f0c6fe,
       type: 3}
     speed: 3
+    bulletPayload: {fileID: 0}
   owner: {fileID: 0}

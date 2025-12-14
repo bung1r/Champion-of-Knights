@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Important Stats")]
     public float currentEnergy = 100f;
     public float strength = 20f;
-    private InteractableComponent lastComponentInteracted;
     // Start is called before the first frame update
     void Start()
     {
@@ -110,25 +109,7 @@ public class PlayerMovement : MonoBehaviour
    
     void TryInteract()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 1.7f);
-            foreach (var c in hits)
-            {
-                if (c.gameObject.transform == transform) continue;
-                if (c.TryGetComponent<InteractableComponent>(out var component))
-                {
-                    if (!component.canInteract) continue;
-                    lastComponentInteracted = component;
-                    component.MoveComponent(strength, gameObject);
-                    return;
-                }
-            }
-        } 
-        else
-        {
-
-        }
+        
     }
     private float CalcSpeed(float speed)
     {

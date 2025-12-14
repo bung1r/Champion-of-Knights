@@ -52,7 +52,7 @@ public class StatManager : MonoBehaviour, IDamageable
         }
         if (_stats.currentHP <= 0) Die(damage);
     }
-    async public virtual void Knockback(DamageData damage)
+    public virtual void Knockback(DamageData damage)
     {
         if (damage.abilityBase.knockback > 0)
         {
@@ -63,9 +63,24 @@ public class StatManager : MonoBehaviour, IDamageable
             {
                 rb.AddForce(vector, ForceMode.Impulse);  
             }
+        }  
+    }
+
+    public virtual void Knockback(Vector3 source, float force)
+    {
+        Vector3 vector = transform.position - source;
+        vector.y = 0;
+        vector = vector.normalized * force;
+        if (TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.AddForce(vector, ForceMode.Impulse);  
         }
-        await Task.Delay((int)(damage.abilityBase.stunTime * 1000f / 2f));
-        
+    }
+    public virtual void BasicStun(float stunTime)
+    {
+        if (_stats.stunTime < stunTime) {
+            _stats.stunTime = stunTime;
+        }
     }
     public virtual void StunHandler()
     {
