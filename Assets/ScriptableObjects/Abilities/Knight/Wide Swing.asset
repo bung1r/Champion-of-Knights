@@ -17,16 +17,16 @@ MonoBehaviour:
   critRate: 35
   critMultiplier: 2
   variation: 0.3
-  hitboxTimeDelay: 0.2
-  attackLength: 0.6
+  hitboxTimeDelay: 0.4
+  attackLength: 0.7
   knockback: 5
   stunTime: 1
+  attackID: 1
   useOverflowStamina: 1
   damageData:
     baseDamage: 60
     type: 0
     source: {fileID: 0}
-  statManager: {fileID: 0}
   hitboxData:
     transform: {fileID: 0}
     shape: 0

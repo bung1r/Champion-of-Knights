@@ -21,12 +21,12 @@ MonoBehaviour:
   attackLength: 0.4
   knockback: 0.3
   stunTime: 0.5
+  attackID: 0
   useOverflowStamina: 1
   damageData:
     baseDamage: 15
     type: 0
     source: {fileID: 0}
-  statManager: {fileID: 0}
   hitboxData:
     transform: {fileID: 0}
     shape: 0

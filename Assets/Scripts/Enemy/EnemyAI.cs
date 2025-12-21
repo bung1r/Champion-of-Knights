@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyStatManager))]
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, BarrelHandler
 {
     public GameObject target;
     public EnemyStatManager statManager;
@@ -16,6 +16,9 @@ public class EnemyAI : MonoBehaviour
     private List<AbilityRuntime> enemyAbilityRuntimes = new List<AbilityRuntime>();
     private EnemyStats stats;
     public Animator animator;
+    public List<Transform> Barrels = new List<Transform>();
+    public List<Transform> barrels { get => Barrels; set => Barrels = value; }
+    public int lastBarrelFiredIndex {get; set;} = 0;
     [NonSerialized] public float timeEndLastAttack;
     public float moveSpeed = 2f;
     public float rotationSpeed = 20f;

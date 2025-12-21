@@ -25,7 +25,7 @@ public class RangedBomb : BulletPayload
         Collider[] hits = hitboxData.GetHits(self.gameObject);
         foreach (Collider hit in hits)
         {
-            if (hit.gameObject.layer == damageData.source.layer) return;
+            if (hit.gameObject.layer == damageData.source.layer) continue;
             if (hit.transform.root.TryGetComponent<IDamageable>(out var damageable))
             {
                 DamageData data = new DamageData(bombDamageData);

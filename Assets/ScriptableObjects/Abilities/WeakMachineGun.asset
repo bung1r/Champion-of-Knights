@@ -30,7 +30,7 @@ MonoBehaviour:
     range: 10
     pierce: 1
     rangedHitboxType: 0
-    bulletPrefab: {fileID: 5279583567173616410, guid: 3b4a325cf5c00ea4da133bc756f0c6fe,
+    bulletPrefab: {fileID: 7156414438788006602, guid: ff482955dbf534743910c4d26dd63b15,
       type: 3}
     speed: 4
     bulletPayload: {fileID: 11400000, guid: 1270fce2d9d8d904fbf0246523357b1d, type: 2}

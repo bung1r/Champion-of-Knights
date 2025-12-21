@@ -18,6 +18,7 @@ public class Stats : BaseStats
     public bool inAttackAnim = false;
     public bool isGuarding = false;
     public bool isParrying = false;
+    public int attackID = -1; // -1 means no attack, 0 means primary, etc. etc.
     public float stunTime = 0f; // 0 is not stunned, every x is one more sec of stun 
     public List<DamageMultiplier> damageMultipliers = new List<DamageMultiplier>();
 

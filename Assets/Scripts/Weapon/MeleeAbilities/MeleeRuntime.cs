@@ -34,7 +34,7 @@ public class MeleeRuntime : AbilityRuntime
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {
-            Debug.Log("Oh wow, the crit actually worked?");
+            // Debug.Log("Oh wow, the crit actually worked?");
             critAmt = critMultiplier;
         }
         

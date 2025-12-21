@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\RangedBullet.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\Resistances.cs" />
@@ -66,9 +67,9 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyAbility.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedRuntime.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Other\GuardAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\ChargedHelper.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStatsSO.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="Assets\Scripts\Stats\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Other\GuardRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStatManager.cs" />
     <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\BulletHandler.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Other\GuardHelper.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -26,12 +26,15 @@ public class ChargedRangedRuntime : RangedRuntime
     {
         return false;
     }
+
     public override void BeginUse()
     {
         if (!CanUse()) return;
         ChargedHelper.BeginUse(this, chargedStats);
-        statManager.BeginAttack();
+        statManager.BeginAttack(abilityBase);
     }
+
+
     public override void WhileUse()
     {
        ChargedHelper.WhileUse(this, chargedStats);

@@ -40,7 +40,22 @@ public class RangedHitboxData
     public void ShootBullet(GameObject owner, BulletData data)
     {
         Transform origin = owner.transform; 
-        BulletHandler.Instance.ShootBullet(bulletPrefab, origin, speed, data);
+        // check if owner has BarrelHandler
+        if (owner.TryGetComponent<BarrelHandler>(out var barrelHandler))
+        {
+            if (barrelHandler.barrels.Count == 0)
+            {
+                // Debug.Log("No barrels assigned to BarrelHandler on " + owner.name);
+                BulletHandler.Instance.ShootBullet(bulletPrefab, origin, speed, data);
+                return;
+            }
+            origin = barrelHandler.barrels[barrelHandler.lastBarrelFiredIndex];
+            barrelHandler.lastBarrelFiredIndex = (barrelHandler.lastBarrelFiredIndex + 1) % barrelHandler.barrels.Count;
+            BulletHandler.Instance.ShootBullet(bulletPrefab, origin, speed, data);
+        } else
+        {
+            return;
+        }
     }
     public RangedHitboxData() {}
     public RangedHitboxData(RangedHitboxData other)

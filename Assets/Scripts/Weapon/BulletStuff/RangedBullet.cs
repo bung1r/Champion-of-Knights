@@ -15,7 +15,7 @@ public class RangedBullet : MonoBehaviour
     [HideInInspector]public float pierceLeft;
     [HideInInspector]public int layer;
     [HideInInspector]public int groundLayer;
-    private Rigidbody rb;
+    [HideInInspector]public Rigidbody rb;
     private BulletPayload payload;
     private Vector3 lastPos;
     void Start()
@@ -28,7 +28,7 @@ public class RangedBullet : MonoBehaviour
         timeCreated = Time.time;
         pierceLeft = bulletData.rangedHitboxData.pierce;
         layer = bulletData.damageData.source.layer;
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
         payload = bulletData.rangedHitboxData.bulletPayload;
         Destroy(gameObject, bulletData.lifeTime);
     }
@@ -50,7 +50,10 @@ public class RangedBullet : MonoBehaviour
             {
                 if (plrStats.stats.isParrying)
                 {
+                    // reflect the bullet
+                    Debug.Log(rb == null);
                     rb.velocity = plrStats.transform.forward * bulletData.rangedHitboxData.speed * 12;
+                    transform.rotation = Quaternion.LookRotation(rb.velocity);
                     bulletData.owner = plrStats.gameObject;
                     bulletData.damageData.source = plrStats.gameObject;
                 } else

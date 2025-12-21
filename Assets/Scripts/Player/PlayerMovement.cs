@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Hello World! Although it sounds like bits and bytes! My circuitry is filled with mites...");
         rb = GetComponent<Rigidbody>();
         playerCombat = GetComponent<PlayerCombat>();
+        statManager = GetComponent<PlayerStatManager>();
         rb.freezeRotation = true;
         rb.drag = 0; // remove slowdown drag
         cam = Camera.main;

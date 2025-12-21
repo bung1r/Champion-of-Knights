@@ -27,11 +27,12 @@ public class StatManager : MonoBehaviour, IDamageable
     // simple getter
     public Stats GetStats() => _stats;
     public bool GetInAttack() => _stats.inAttackAnim;
-    public virtual void BeginAttack()
+    public virtual void BeginAttack(AbilityBase ability)
     {
         _stats.inAttackAnim = true;
         _stats.isRunning = false;
         _stats.isWalking = false;
+        _stats.attackID = ability.attackID;
     }
     public virtual void EndAttack()
     {
@@ -217,6 +218,7 @@ public class StatManager : MonoBehaviour, IDamageable
             Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
             playerStat.AddEXP(_stats.baseEXP);
         }
+        GlobalPrefabs.Instance.DeathVFX(transform);
         Destroy(gameObject);
     }
 

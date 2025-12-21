@@ -30,7 +30,7 @@ public class ChargedMeleeRuntime : MeleeRuntime
     {
         if (!CanUse()) return;
         ChargedHelper.BeginUse(this, chargedStats);
-        statManager.BeginAttack();
+        statManager.BeginAttack(abilityBase);
     }
     public override void WhileUse()
     {

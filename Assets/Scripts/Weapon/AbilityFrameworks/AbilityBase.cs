@@ -16,6 +16,7 @@ public abstract class AbilityBase : ScriptableObject
     public float attackLength = 1f;
     public float knockback = 0f;
     public float stunTime = 0.2f;
+    public int attackID = -1;
     [NonSerialized]public float lastUsedTime = 0f;
     public bool useOverflowStamina = true;
     public DamageData damageData = new DamageData();
@@ -60,6 +61,7 @@ public class AbilityRuntime : IAbility
     public float attackLength = 1f;
     public float knockback = 0f;
     public float stunTime = 0.2f;
+    public int attackID = -1;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
     public AbilityBase abilityBase;
@@ -78,6 +80,7 @@ public class AbilityRuntime : IAbility
         attackLength = other.attackLength;
         knockback = other.knockback;
         stunTime = other.stunTime;
+        attackID = other.attackID;
     }
     public AbilityRuntime() {}  
     public AbilityRuntime(AbilityBase other, StatManager manager)
@@ -99,7 +102,7 @@ public class AbilityRuntime : IAbility
         if (!CanUse()) return false;
         lastUsedTime = Time.time;
         statManager.UseStamina(staminaCost);
-        statManager.BeginAttack();
+        statManager.BeginAttack(abilityBase);
         Perform();
         BasicEndUse();
         return true;

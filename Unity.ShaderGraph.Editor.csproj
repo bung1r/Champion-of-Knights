@@ -69,8 +69,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\ParentGroupChange.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Math\Vector\RotateAboutAxisNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Interfaces\IHasCustomDeprecationMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\FormerNameAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Views\Slots\GradientSlotControlView.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\FormerNameAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Serialization\MultiJson.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\PropertyConnectionStateMaterialSlot.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Manipulators\WindowDraggable.cs" />

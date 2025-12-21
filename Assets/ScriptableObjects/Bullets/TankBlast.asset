@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe089acd762d9c46be61377d7a3e0a0, type: 3}
   m_Name: TankBlast
   m_EditorClassIdentifier: 
-  stunTime: 10
-  knockback: 10
+  stunTime: 1
+  knockback: 1
   variation: 0.1
   bombDamageData:
     baseDamage: 1

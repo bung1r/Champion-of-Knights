@@ -37,6 +37,7 @@ public class BulletHandler : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, origin.position + new Vector3(0,0.5f,0), origin.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             RangedBullet bulletScript = bullet.GetComponent<RangedBullet>();
+            bulletScript.rb = rb;
             bulletScript.bulletData = data;
             rb.velocity = origin.forward * speed * 10;
         }
@@ -59,3 +60,8 @@ public class BulletData
     }
 }
 
+public interface BarrelHandler
+{
+    List<Transform> barrels { get; set; }
+    int lastBarrelFiredIndex {get; set;}
+}

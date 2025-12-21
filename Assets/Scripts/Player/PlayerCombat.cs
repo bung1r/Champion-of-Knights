@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(PlayerMovement), typeof(InputHandler))]
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, BarrelHandler
 {  
     public StatManager statManager;
     public InputHandler input;
@@ -19,6 +19,9 @@ public class PlayerCombat : MonoBehaviour
     private AbilityRuntime RTSecondaryAbility;
     private Dictionary<int, AbilityRuntime> RTUsableAbilities = new Dictionary<int, AbilityRuntime>();
 
+    public List<Transform> Barrels = new List<Transform>();
+    public List<Transform> barrels { get => Barrels; set => Barrels = value; }
+    public int lastBarrelFiredIndex {get; set;} = 0;
     // all the 'holding' variables
     private bool primaryDown = false;
     private bool secondaryDown = false;
@@ -29,6 +32,7 @@ public class PlayerCombat : MonoBehaviour
     void Awake() {
         RTPrimaryAbility = primaryAbility.CreateRuntimeInstance(primaryAbility, statManager);   
         RTSecondaryAbility = secondaryAbility.CreateRuntimeInstance(secondaryAbility, statManager);  
+        if (input == null) input = GetComponent<InputHandler>();
         foreach (SkillSlotAndAbility skillSlot in otherUsableAbilities)
         {
             RTUsableAbilities.Add(skillSlot.skillSlot, skillSlot.abilityBase.CreateRuntimeInstance(skillSlot.abilityBase, statManager));
@@ -36,6 +40,7 @@ public class PlayerCombat : MonoBehaviour
     }
     void OnEnable()
     {
+        
         input.OnPrimaryDown += HandlePrimaryDown;
         input.OnPrimaryUp += HandlePrimaryUp;
 

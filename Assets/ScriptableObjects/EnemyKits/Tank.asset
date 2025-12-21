@@ -35,10 +35,11 @@ MonoBehaviour:
     inAttackAnim: 0
     isGuarding: 0
     isParrying: 0
+    attackID: -1
     stunTime: 0
     runAwayDist: 2
     comfortDist: 3
     runTowardsDist: 10
     cautionRange: 30
     aggroRange: 20
-    timeBetweenMoves: 0.5
+    timeBetweenMoves: 0
