@@ -56,6 +56,9 @@ public class RangedBullet : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(rb.velocity);
                     bulletData.owner = plrStats.gameObject;
                     bulletData.damageData.source = plrStats.gameObject;
+                    AudioManager.Instance.PlayParrySFX(plrStats.transform);
+                    plrStats.OnParry();
+                    return;
                 } else
                 {
                     if (payload != null) payload.OnPierce(transform, collision.transform, bulletData.damageData, lastPos);

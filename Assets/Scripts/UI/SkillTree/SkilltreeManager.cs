@@ -7,6 +7,11 @@ public class SkilltreeManager : MonoBehaviour
 {
     public PlayerStatManager statManager;
     public List<SkilltreeNode> allNodes = new List<SkilltreeNode>();
+
+    public void Start()
+    {
+        statManager = FindObjectOfType<PlayerStatManager>();
+    }
     public void UnlockNode(SkilltreeNode node) 
     {
         if (node.isUnlocked) {Debug.Log("Node is already unlocked!"); return;}
