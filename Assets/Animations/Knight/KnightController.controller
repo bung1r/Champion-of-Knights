@@ -72,9 +72,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: changeStates
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isGuarding
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1690553015883020196}
   m_Solo: 0
@@ -186,16 +183,10 @@ AnimatorStateTransition:
     m_ConditionEvent: isWalking
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: inAttackAnim
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: isRunning
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: changeStates
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isGuarding
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8892603770660236190}
@@ -416,7 +407,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: ActionLayer
+    m_Name: Movement
     m_StateMachine: {fileID: 5844721153147569261}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -621,7 +612,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ActionLayer
+  m_Name: Movement
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4423648410140252545}

@@ -178,10 +178,10 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Debugging\UIFoldoutEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Camera\CameraUI.Environment.Drawers.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Lighting\IESImporter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\BuildTargetExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Material\MaterialEditorExtension.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Camera\CameraUI.PhysicalCamera.Skin.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\LookDev\ComparisonGizmoController.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\BuildTargetExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\LookDev\DropArea.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\Lighting\LightAnchorHandles.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.12\Editor\EditorPrefBool.cs" />

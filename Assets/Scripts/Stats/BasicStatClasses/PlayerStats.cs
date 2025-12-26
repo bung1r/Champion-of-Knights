@@ -18,7 +18,7 @@ public class PlayerStats : Stats
     public float totalStyle;
     public float currentStyle;
     public float maxStyle;
-    public float styleLevel;
+    public float styleLevel = 0;
     
     public void ConstructPlayer(PlayerStats other)
     {

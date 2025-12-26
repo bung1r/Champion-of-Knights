@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6564255199422554196}
   - component: {fileID: 3938228066606835316}
   - component: {fileID: 7583280456252209601}
+  - component: {fileID: 671330559777042408}
   m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
@@ -227,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6a50ea4c73b554d86f69f05eb20d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsSO: {fileID: 11400000, guid: beb53e5e18df8744ca5d11355ca56191, type: 2}
+  hitSFX: {fileID: 0}
+  statsSO: {fileID: 11400000, guid: dff94cfaf20dd734f9d9c53fd30de45f, type: 2}
   stats:
     maxHP: 100
     turnSpeed: 100
@@ -259,6 +261,23 @@ MonoBehaviour:
     currentEXP: 0
     nextLevelEXP: 0
     skillPoints: 0
+    totalStyle: 0
+    currentStyle: 0
+    maxStyle: 0
+    styleLevel: 0
+--- !u!114 &671330559777042408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401569820131314333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde415aa5524b524ab495a216c87cf9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepType: 0
 --- !u!1001 &5196790665674577405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337,7 +356,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: a9339c1717a172b46bcdc14794d32eb0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

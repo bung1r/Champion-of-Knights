@@ -11,6 +11,7 @@ public class StatManager : MonoBehaviour, IDamageable
     private Stats _baseStats;
     private float lastUsedStamina = 0;
     private float lastSavedStamina = -1;
+    [SerializeField] private AudioSource hitSFX; // completely optional
     private Resistances resistances;
     public void Start()
     {
@@ -41,9 +42,17 @@ public class StatManager : MonoBehaviour, IDamageable
     // the taking damage logic, very cool. 
     public virtual void TakeDamage(DamageData damage)
     {
+        // calc damage then take damage. 
         float finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type)/_stats.resistances.Get(DamageType.All);
         _stats.currentHP -= finalDamage;
-        Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
+
+        // Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
+        
+        // checks whether a custom hit SFX is assigned, if not use the default one.
+        if (hitSFX != null) AudioManager.Instance.PlaySourceAtPointWithPitch(hitSFX, transform.position, 0.2f);
+        else AudioManager.Instance.PlayHitSFX(transform, 0.2f);
+        
+        // apply stun and knockback if applicable
         if (damage.abilityBase != null)
         {
             if (_stats.stunTime < damage.abilityBase.stunTime) {
@@ -51,6 +60,8 @@ public class StatManager : MonoBehaviour, IDamageable
                 Knockback(damage);
             }
         }
+
+        // die if we have no HP left
         if (_stats.currentHP <= 0) Die(damage);
     }
     public virtual void Knockback(DamageData damage)

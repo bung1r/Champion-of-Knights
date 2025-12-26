@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Properties;
 using UnityEngine;
 
@@ -13,6 +14,25 @@ public class StyleHUDManager : MonoBehaviour
     public StyleBonusDatabase bonusDatabase; // assign ts
     public GameObject styleText;
     public GameObject viewersText;
+    void Update()
+    {
+        for (int i = allStyles.Count - 1; i >= 0; i--)
+        {
+            if (Time.time - allStyles[i].timeCreated >= 2f && allStyles[i].styleObj.TryGetComponent<TextMeshProUGUI>(out var text))
+            {
+                float alpha = Mathf.Lerp(1f, 0f, (Time.time - allStyles[i].timeCreated - 2f) / 2f);
+                var color = text.color;
+                color.a = alpha;
+                text.color = color;
+            }
+
+            if (Time.time - allStyles[i].timeCreated >= 4f)
+            {
+                Destroy(allStyles[i].styleObj);
+                allStyles.RemoveAt(i);
+            }
+        }
+    } 
     public void AddEntry(StyleBonusTypes bonusType)
     {
         GameObject styleObj = Instantiate(textPrefab, listContainer.transform);

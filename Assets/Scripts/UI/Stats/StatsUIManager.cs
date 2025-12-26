@@ -32,4 +32,5 @@ public class StatsUIManager : MonoBehaviour
     {
         styleHUDManager.AddEntry(bonusType);
     }
+    public StyleBonusDatabase GetDatabase() => styleHUDManager.bonusDatabase;
 }

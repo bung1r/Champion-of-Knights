@@ -43,6 +43,7 @@ public class GuardRuntime : AbilityRuntime
     public override void BeginUse()
     {
         if (!CanUse()) return;
+        AudioManager.Instance.PlayGuardSFX(owner.transform);
         currentEntry = new ResistanceEntry(guardStats);
         stats.resistances.AddEntry(currentEntry);
         stats.isGuarding = true;

@@ -91,6 +91,7 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Artistic\Adjustment\SaturationNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Controls\ColorControl.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Enumerations\RenderQueue.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Artistic\Adjustment\InvertColorsNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Extensions\FieldExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Descriptors\KeywordDescriptor.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Input\Matrix\Matrix4Node.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Blackboard\SGBlackboardRow.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\Texture2DArrayShaderProperty.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Input\Geometry\PositionNode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Artistic\Adjustment\InvertColorsNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Inspector\PropertyDrawers\GradientPropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Views\PortInputView.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\SerializableTexture.cs" />
@@ -692,8 +692,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Procedural\CheckerboardNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Math\Wave\SquareWaveNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Controls\IControlAttribute.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Targets\BuiltIn\Editor\ShaderGraph\AssetCallbacks\CreateUnlitShaderGraph.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Attributes\GenerateBlocksAttribute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Targets\BuiltIn\Editor\ShaderGraph\AssetCallbacks\CreateUnlitShaderGraph.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Inspector\PropertyDrawers\SamplerStateNodePropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Inspector\PropertyDrawers\Vector2PropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\SearchWindowProvider.cs" />

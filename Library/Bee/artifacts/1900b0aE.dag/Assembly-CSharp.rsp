@@ -379,6 +379,7 @@
 "Assets/Scripts/UI/Stats/StyleHelpers.cs"
 "Assets/Scripts/UI/Stats/StyleHUDManager.cs"
 "Assets/Scripts/Utils/AudioManager.cs"
+"Assets/Scripts/Utils/Footsteps.cs"
 "Assets/Scripts/Utils/HitboxVisualizer.cs"
 "Assets/Scripts/Utils/WeightedRandom.cs"
 "Assets/Scripts/Weapon/AbilityFrameworks/AbilityBase.cs"

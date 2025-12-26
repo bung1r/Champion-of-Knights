@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\ChargedAbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\MeleeHelper.cs" />
     <Compile Include="Assets\Scripts\Stats\ScriptableObjects\PlayerStatsSO.cs" />
+    <Compile Include="Assets\Scripts\Utils\Footsteps.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIManager.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\PlayerStatManager.cs" />
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
@@ -98,8 +99,8 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeAbility.cs" />
     <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\DamageData.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardHelper.cs" />
