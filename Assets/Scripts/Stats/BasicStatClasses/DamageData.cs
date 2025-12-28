@@ -46,7 +46,7 @@ public class DamageMultiplier
 }
 public enum DamageType
 {
-    Physical, Magical, Poison, Electric, Crushing, Mental, Ethereal, All
+    Physical, Magical, Poison, Electric, Crushing, Mental, Ethereal, All, Fixed
 }
 
 public enum DamageMultiplierTypes

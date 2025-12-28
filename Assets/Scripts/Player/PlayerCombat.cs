@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -18,7 +19,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     private AbilityRuntime RTPrimaryAbility;
     private AbilityRuntime RTSecondaryAbility;
     private Dictionary<int, AbilityRuntime> RTUsableAbilities = new Dictionary<int, AbilityRuntime>();
-
+    private AbilityUIManager abilityUIManager;
     public List<Transform> Barrels = new List<Transform>();
     public List<Transform> barrels { get => Barrels; set => Barrels = value; }
     public int lastBarrelFiredIndex {get; set;} = 0;
@@ -171,6 +172,37 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
             if (RTUsableAbilities.ContainsKey(3)) RTUsableAbilities[3].WhileUse();
         }
     }
+    public void AssignAbilityUIManager(AbilityUIManager uiManager)
+    {
+        abilityUIManager = uiManager;
+        
+        // assign all abilities to the UI
+        abilityUIManager.AssignAbilities(RTUsableAbilities.Values.ToList());
+    }
+    // index = 0 is skill slot 1
+    public void ChangeAbilityAtIndex(AbilityBase newAbility, int index)
+    {
+        foreach (SkillSlotAndAbility skillSlot in otherUsableAbilities)
+        {
+            if (skillSlot.skillSlot == index + 1)
+            {
+                if (newAbility == null)
+                {
+                    skillSlot.abilityBase = null;
+                    RTUsableAbilities[index] = null;
+                    abilityUIManager.AssignAbilityAtIndex(null, index);
+                } 
+                else
+                {
+                    skillSlot.abilityBase = newAbility;
+                    RTUsableAbilities[index] = newAbility.CreateRuntimeInstance(newAbility, statManager);
+                    abilityUIManager.AssignAbilityAtIndex(RTUsableAbilities[index], index); 
+                }
+                return;
+            }
+        }
+    }
+
 }
 
 [Serializable]

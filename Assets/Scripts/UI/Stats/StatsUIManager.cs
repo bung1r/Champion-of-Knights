@@ -8,6 +8,8 @@ public class StatsUIManager : MonoBehaviour
 {
     [HideInInspector] public PlayerStatManager statManager;
     public StyleHUDManager styleHUDManager; // must be assigned
+    public InventoryManagerGUI inventoryManagerGUI; // must be assigned
+    public AbilityUIManager abilityUIManager;
     public StatsUIBar healthBar; //must be assigned
     public StatsUIBar stamBar; //must be assigned
     public StatsUIBar styleBar; //must be assigned
@@ -15,6 +17,8 @@ public class StatsUIManager : MonoBehaviour
     {
         statManager = FindObjectOfType<PlayerStatManager>();
         statManager.AssignUIManager(this);
+        inventoryManagerGUI.AssignUIManager(statManager);  
+        abilityUIManager.AssignPlayerCombat(statManager.GetPlayerCombat());
     }
     public void UpdateHP(float currHP, float maxHP)
     {
@@ -24,9 +28,10 @@ public class StatsUIManager : MonoBehaviour
     {
         stamBar.UpdateBar(currStam, maxStam);
     }
-    public void UpdateStyle(float currStyle, float maxStyle)
+    public void UpdateStyle(float currStyle, float maxStyle, float totalStyle, float viewers, float styleLevel)
     {
         styleBar.UpdateBar(currStyle, maxStyle);
+        styleHUDManager.UpdateText(totalStyle, viewers, styleLevel);
     }
     public void AddStyleEntry(StyleBonusTypes bonusType)
     {

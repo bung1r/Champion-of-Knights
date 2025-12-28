@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbcdd6a8d86c1749a1a02e22dd43d72, type: 3}
   m_Name: 360 Swing
   m_EditorClassIdentifier: 
+  abilityName: 360 Swing
   staminaCost: 50
   baseCooldown: 12
   critRate: 20
@@ -21,12 +22,12 @@ MonoBehaviour:
   attackLength: 1
   knockback: 7
   stunTime: 1.5
+  attackID: -1
   useOverflowStamina: 1
   damageData:
     baseDamage: 45
     type: 0
     source: {fileID: 0}
-  statManager: {fileID: 0}
   chargedStats:
     consumeStamAtBeginning: 1
     rampCost: 0

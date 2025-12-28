@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 3938228066606835316}
   - component: {fileID: 7583280456252209601}
   - component: {fileID: 671330559777042408}
+  - component: {fileID: 4145702859321237837}
   m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
@@ -181,7 +182,7 @@ MonoBehaviour:
   - skillSlot: 2
     abilityBase: {fileID: 11400000, guid: aea71cff396c79140a202462cce8f180, type: 2}
   - skillSlot: 3
-    abilityBase: {fileID: 11400000, guid: 1d30c9fa2ea873f4ab86406b762285bb, type: 2}
+    abilityBase: {fileID: 11400000, guid: f9cb47ce2ad35c949bd0ce75b193fb50, type: 2}
   Barrels: []
 --- !u!95 &6564255199422554196
 Animator:
@@ -278,6 +279,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepType: 0
+--- !u!114 &4145702859321237837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401569820131314333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582ef9a4703e112439621fba1be7226b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 11400000, guid: 4d4ef5b6862f828418843c8380455a53, type: 2}
+  - item: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
+  - item: {fileID: 11400000, guid: cbfa960f83a372e4a9714fcbe5b563a3, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  selectIndicator: {fileID: 0}
 --- !u!1001 &5196790665674577405
 PrefabInstance:
   m_ObjectHideFlags: 0

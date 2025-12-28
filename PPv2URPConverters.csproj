@@ -47,18 +47,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\MotionBlurConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\VignetteConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\PPv2ConversionIndexers.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\ColorGradingConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\BloomConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\ChromaticAberrationConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\PPv2Converter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\LensDistortionConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\PropertyConversions.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\GrainConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\PostProcessEffectSettingsConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\DepthOfFieldConverter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\MotionBlurConverter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\EffectConverters\LensDistortionConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Editor\Converter\PPv2\PPv2ToURPConvertersDefinition.asmdef" />
@@ -406,6 +406,10 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
@@ -920,8 +924,8 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
-    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
     <ProjectReference Include="UnityEditor.TestRunner.csproj" />
+    <ProjectReference Include="UnityEngine.TestRunner.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

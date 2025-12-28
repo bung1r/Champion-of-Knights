@@ -1,11 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection.Emit;
-using UnityEditor.Search;
-using UnityEngine;
-using UnityEngine.UIElements;
-
 [Serializable]
 public class Stats : BaseStats
 {

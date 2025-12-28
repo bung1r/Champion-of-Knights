@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor.Search;
 using UnityEngine;
 public class StatManager : MonoBehaviour, IDamageable
 {
@@ -39,14 +38,23 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         _stats.inAttackAnim = false;
     }
-    // the taking damage logic, very cool. 
-    public virtual void TakeDamage(DamageData damage)
+    // the taking damage logic, very cool. use when possilbe
+    public virtual void TakeDamage(DamageData damage, bool bypassMax = false) 
     {
         // calc damage then take damage. 
-        float finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type)/_stats.resistances.Get(DamageType.All);
+        float finalDamage;
+        if (damage.type == DamageType.Fixed)
+        {
+            finalDamage = damage.baseDamage;
+        } else
+        {
+            finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type)/_stats.resistances.Get(DamageType.All);
+        }
+       
         _stats.currentHP -= finalDamage;
+        if (_stats.currentHP > _stats.maxHP && !bypassMax) _stats.currentHP = _stats.maxHP;
 
-        // Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
+        Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
         
         // checks whether a custom hit SFX is assigned, if not use the default one.
         if (hitSFX != null) AudioManager.Instance.PlaySourceAtPointWithPitch(hitSFX, transform.position, 0.2f);
@@ -64,9 +72,10 @@ public class StatManager : MonoBehaviour, IDamageable
         // die if we have no HP left
         if (_stats.currentHP <= 0) Die(damage);
     }
+
     public virtual void Knockback(DamageData damage)
     {
-        if (damage.abilityBase.knockback > 0)
+        if (damage.abilityBase.knockback > 0 || damage.abilityBase.knockback < 0)
         {
             Vector3 vector = transform.position - damage.source.transform.position;
             vector.y = 0;
@@ -223,12 +232,16 @@ public class StatManager : MonoBehaviour, IDamageable
     }
     // what happens when we die? Oh no!
     public void Die(DamageData damage) {
-        if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))
+        if (damage.source != null)
         {
-            Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
-            playerStat.AddEXP(_stats.baseEXP);
-            playerStat.OnKill();
+            if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))
+            {
+                Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
+                playerStat.AddEXP(_stats.baseEXP);
+                playerStat.OnKill();
+            }
         }
+
         GlobalPrefabs.Instance.DeathVFX(transform);
         AudioManager.Instance.PlayDeathSFX(transform);
         Destroy(gameObject);

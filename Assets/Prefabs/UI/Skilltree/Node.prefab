@@ -65,9 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Test
-
-'
+  m_text: START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a786e254b67ccc4a9788759afb97453, type: 2}
   m_sharedMaterial: {fileID: -4773236401363262164, guid: 8a786e254b67ccc4a9788759afb97453,
@@ -228,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -284,10 +282,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skilltreeManager: {fileID: 0}
-  nodeName: Test
+  nodeName: Node 3
   nodeType: 3
   branchType: 1
-  connectedNodes: []
-  isUnlocked: 1
+  connectedNodes:
+  - {fileID: 0}
+  isUnlocked: 0
   canBeUnlocked: 0
+  almostCanBeUnlocked: 0
   abilityUnlock: {fileID: 0}
+  statModifiers: []

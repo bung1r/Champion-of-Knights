@@ -1,14 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Net.WebSockets;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
-using UnityEngine.UIElements;
+// search, uielemetns, 
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -152,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
             if (reverseCameraScrollDirection) a = -1;
             float scrollDelta = Input.mouseScrollDelta.y * a;
             camScrollValue += scrollDelta * camScrollScale;
-            Math.Clamp(camScrollValue, 0.5f, 1.5f);
+            camScrollValue = Math.Clamp(camScrollValue, 0.5f, 1f);
 
             cam.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y + camUpDistance * camScrollValue, rb.transform.position.z - camBackDistance * camScrollValue);
         }

@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu(menuName = "Style/Style Bonus Database")]
 [Serializable]

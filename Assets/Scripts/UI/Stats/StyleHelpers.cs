@@ -27,7 +27,6 @@ public class StyleEntry
         styleBonus = database.Get(type);
         if (styleObj.TryGetComponent<TextMeshProUGUI>(out var text))
         {
-            Debug.Log("Does this work?");
             text.text = $"+{styleBonus.name}";
         }
     }

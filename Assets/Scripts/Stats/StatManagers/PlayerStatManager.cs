@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Search;
 using UnityEngine;
 
 [Serializable]
@@ -12,11 +11,13 @@ public class PlayerStatManager : StatManager
     
     public PlayerStats stats;
     private StyleBonusDatabase bonusDatabase;
+    private PlayerCombat playerCombat;
     private float lastHP = 0f;
     private float lastStam = 0f;
     private StatsUIManager statsUIManager; 
     void Awake()
     {
+        playerCombat = GetComponent<PlayerCombat>();
         stats = statsSO.CreateRuntime();
         setPlayerStats(stats);
         AdjustLevels();
@@ -107,7 +108,6 @@ public class PlayerStatManager : StatManager
             while (StyleLevelToStyle(temp) > stats.totalStyle)
             {
                 temp -= 1;
-                Debug.Log(stats.totalStyle);
             } 
         }
         
@@ -135,7 +135,8 @@ public class PlayerStatManager : StatManager
 
         // Basically, goes down more the higher the styleLevel. 
         AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.75f) * Time.deltaTime));
-        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle);
+        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, 0, stats.styleLevel);
+        
     } 
     public void UIHandler()
     {
@@ -156,7 +157,8 @@ public class PlayerStatManager : StatManager
         UIHandler();
         StyleUpdate();
     }
-
+    public InventoryManagerGUI GetInventoryManagerGUI() => statsUIManager.inventoryManagerGUI;
+    public PlayerCombat GetPlayerCombat() => playerCombat;
     public void OnParry()
     {
         HandleStyleBonus(StyleBonusTypes.Parry);

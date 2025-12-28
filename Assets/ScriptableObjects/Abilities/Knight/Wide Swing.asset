@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f8c11eeaf1ced469b3a03b93cb7c1a, type: 3}
   m_Name: Wide Swing
   m_EditorClassIdentifier: 
+  abilityName: Wide Swing
   staminaCost: 20
   baseCooldown: 7
   critRate: 35

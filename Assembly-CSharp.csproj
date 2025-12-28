@@ -47,63 +47,72 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\RangedBullet.cs" />
-    <Compile Include="Assets\Scripts\Weapon\GUard\GuardAbility.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeAbility.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\ItemHelper.cs" />
+    <Compile Include="Assets\Scripts\UI\Ability\AbilityUI.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyCombat.cs" />
-    <Compile Include="Assets\Scripts\UI\Stats\StyleHUDManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\RangedBomb.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\BulletPayload.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\StatModifier.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\ChargedAbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\MeleeHelper.cs" />
-    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\PlayerStatsSO.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryManagerGUI.cs" />
     <Compile Include="Assets\Scripts\Utils\Footsteps.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIManager.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\PlayerStatManager.cs" />
     <Compile Include="Assets\Scripts\Utils\WeightedRandom.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedRangedRuntime.cs" />
-    <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeManager.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\Resistances.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
-    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyAbility.cs" />
-    <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\ChargedHelper.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Utils\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
-    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIBar.cs" />
     <Compile Include="Assets\Scripts\Utils\HitboxVisualizer.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\AllStats.cs" />
-    <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedAbility.cs" />
+    <Compile Include="Assets\Scripts\Weapon\ComplexAbility.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHelpers.cs" />
-    <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\Other\StyleHelpers.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\HealthConsumable.cs" />
+    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\EnemyStatsSO.cs" />
+    <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\BulletHandler.cs" />
+    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\StyleBonusDatabase.cs" />
+    <Compile Include="Assets\Scripts\Stats\BasicStatClasses\IDamageable.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeAbility.cs" />
+    <Compile Include="Assets\Scripts\Stats\BasicStatClasses\DamageData.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardHelper.cs" />
+    <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardAbility.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
+    <Compile Include="Assets\Scripts\UI\Stats\StyleHUDManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\PlayerStatsSO.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Ability\AbilityUIManager.cs" />
+    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
+    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
+    <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
+    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeRuntime.cs" />
+    <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedAbility.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\StatManager.cs" />
-    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\EnemyStatsSO.cs" />
-    <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
-    <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\BulletHandler.cs" />
+    <Compile Include="Assets\Scripts\Weapon\ComplexRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyMeleeRuntime.cs" />
-    <Compile Include="Assets\Scripts\Stats\ScriptableObjects\StyleBonusDatabase.cs" />
-    <Compile Include="Assets\Scripts\Stats\BasicStatClasses\IDamageable.cs" />
-    <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeAbility.cs" />
     <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
-    <Compile Include="Assets\Scripts\Stats\BasicStatClasses\DamageData.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Weapon\GUard\GuardHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -459,6 +468,10 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -951,29 +964,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.MemoryProfiler.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj" />
+    <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
+    <ProjectReference Include="Unity.MemoryProfiler.Editor.MemoryProfilerModule.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj" />
-    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />
     <ProjectReference Include="Unity.Burst.csproj" />
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj" />
-    <ProjectReference Include="PPv2URPConverters.csproj" />
-    <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
-    <ProjectReference Include="Unity.TextMeshPro.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj" />
-    <ProjectReference Include="Unity.Searcher.Editor.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
-    <ProjectReference Include="Unity.VSCode.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Config.Runtime.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Internal.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj" />
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj" />
     <ProjectReference Include="Unity.Mathematics.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
+    <ProjectReference Include="Unity.MemoryProfiler.Editor.csproj" />
+    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj" />
+    <ProjectReference Include="Unity.Collections.csproj" />
+    <ProjectReference Include="PPv2URPConverters.csproj" />
+    <ProjectReference Include="Unity.Mathematics.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
+    <ProjectReference Include="Unity.Searcher.Editor.csproj" />
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj" />
+    <ProjectReference Include="Unity.VSCode.Editor.csproj" />
+    <ProjectReference Include="Unity.Profiling.Core.csproj" />
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

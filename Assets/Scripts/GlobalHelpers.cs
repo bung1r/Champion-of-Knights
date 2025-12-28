@@ -27,7 +27,7 @@ public class GlobalPrefabs : MonoBehaviour
         if (target.root.TryGetComponent<BoxCollider>(out var boxCollider))
         {
             Vector3 targetPos = target.position + new Vector3(0, boxCollider.size.y/2, 0);
-            Debug.Log(targetPos);
+            // Debug.Log(targetPos);
             GameObject vfx = Instantiate(deathVFX, targetPos, target.rotation);
             Destroy(vfx, 2);
         }

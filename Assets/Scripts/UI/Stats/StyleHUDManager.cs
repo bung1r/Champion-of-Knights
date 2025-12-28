@@ -11,9 +11,10 @@ public class StyleHUDManager : MonoBehaviour
     public List<StyleEntry> allStyles = new List<StyleEntry>();
     public GameObject listContainer; // assign ts
     public GameObject textPrefab; // assign ts
-    public StyleBonusDatabase bonusDatabase; // assign ts
-    public GameObject styleText;
-    public GameObject viewersText;
+    public StyleBonusDatabase bonusDatabase; // assign ts\
+    public TextMeshProUGUI gradeText;
+    public TextMeshProUGUI styleText;
+    public TextMeshProUGUI viewersText;
     void Update()
     {
         for (int i = allStyles.Count - 1; i >= 0; i--)
@@ -39,10 +40,18 @@ public class StyleHUDManager : MonoBehaviour
         StyleEntry newEntry = new StyleEntry(bonusDatabase, styleObj, bonusType);
         allStyles.Add(newEntry);
     }
-    public void UpdateText(float currStyle, float viewers)
+    public void UpdateText(float currStyle, float viewers, float styleLevel)
     {
-        styleText.GetComponent<TMPro.TextMeshProUGUI>().text = $"Style: {Mathf.FloorToInt(currStyle)}";
-        viewersText.GetComponent<TMPro.TextMeshProUGUI>().text = $"Viewers: {viewers}";
+        if (styleLevel == 0) gradeText.text = "F";
+        else if (styleLevel == 1) gradeText.text = "D";
+        else if (styleLevel == 2) gradeText.text = "C";
+        else if (styleLevel == 3) gradeText.text = "B";
+        else if (styleLevel == 4) gradeText.text = "A";
+        else if (styleLevel == 5) gradeText.text = "S";
+        else if (styleLevel == 6) gradeText.text = "X";
+        
+        styleText.text = $"Style: {Mathf.FloorToInt(currStyle)}";
+        viewersText.text = $"Viewers: {viewers}";
     }
 }
 

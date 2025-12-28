@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeDamage(DamageData damage);
+    void TakeDamage(DamageData damage, bool bypassMax = false);
     
 }

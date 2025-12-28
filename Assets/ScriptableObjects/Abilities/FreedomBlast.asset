@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
   m_Name: FreedomBlast
   m_EditorClassIdentifier: 
+  abilityName: FREEDOM BLAST
   staminaCost: 1
-  baseCooldown: 0
+  baseCooldown: 0.1
   critRate: 100
   critMultiplier: 2
   variation: 0.2

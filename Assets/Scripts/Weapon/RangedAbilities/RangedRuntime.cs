@@ -35,7 +35,7 @@ public class RangedRuntime : AbilityRuntime
 
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {
-            Debug.Log("the attack crit!");
+            // Debug.Log("the attack crit!");
             critAmt = critMultiplier;
         }
         //

@@ -13,6 +13,8 @@ public class InputHandler : MonoBehaviour
     public event Action OnAbilitySlot1Up;
     public event Action OnAbilitySlot2Up;
     public event Action OnAbilitySlot3Up;
+    public event Action OnInteractDown;
+    public event Action OnInteractUp;
     private bool holding;
     private float holdStart;
 
@@ -43,31 +45,40 @@ public class InputHandler : MonoBehaviour
             OnSecondaryUp?.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             OnAbilitySlot1Down?.Invoke();
         } 
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             OnAbilitySlot1Up?.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             OnAbilitySlot2Down?.Invoke();
         } 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             OnAbilitySlot2Up?.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             OnAbilitySlot3Down?.Invoke();
         } 
-        if (Input.GetKeyUp(KeyCode.Alpha3))
+        if (Input.GetKeyUp(KeyCode.R))
         {
             OnAbilitySlot3Up?.Invoke();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnInteractDown?.Invoke();
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            OnInteractUp?.Invoke();
         }
     }
 }

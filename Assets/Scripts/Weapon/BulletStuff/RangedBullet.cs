@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -51,7 +50,6 @@ public class RangedBullet : MonoBehaviour
                 if (plrStats.stats.isParrying)
                 {
                     // reflect the bullet
-                    Debug.Log(rb == null);
                     rb.velocity = plrStats.transform.forward * bulletData.rangedHitboxData.speed * 12;
                     transform.rotation = Quaternion.LookRotation(rb.velocity);
                     bulletData.owner = plrStats.gameObject;

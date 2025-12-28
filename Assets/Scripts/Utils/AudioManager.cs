@@ -23,6 +23,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource roboticFootstepSFX;
     [SerializeField] private AudioSource windupChargeSFX;
     [SerializeField] private AudioSource styleMeterUpSFX;
+    [SerializeField] private AudioSource wrongBuzzerSFX;
+    [SerializeField] private AudioSource buyNodeSFX;
+    [SerializeField] private AudioSource levelUp;
+    [SerializeField] private AudioSource genericMenuClick;
+
     private List<AudioSource> activeSources = new List<AudioSource>();
     private Dictionary<AudioSource, float> sourceAndPitchDict = new Dictionary<AudioSource, float>();
     private void Awake()
@@ -34,7 +39,7 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
     public void Start()
     {
@@ -55,6 +60,10 @@ public class AudioManager : MonoBehaviour
         activeSources.Add(roboticFootstepSFX);
         activeSources.Add(windupChargeSFX);
         activeSources.Add(styleMeterUpSFX);
+        activeSources.Add(wrongBuzzerSFX);
+        activeSources.Add(buyNodeSFX);
+        activeSources.Add(levelUp);
+        activeSources.Add(genericMenuClick);
 
         foreach (AudioSource source in activeSources)
         {
@@ -96,7 +105,6 @@ public class AudioManager : MonoBehaviour
     {
         PlaySourceAtPointWithPitch(hitEnemySFX, origin.position, variation);
     }
-
     public void PlayParrySFX(Transform origin, float variation = 0.02f)
     {
         PlaySourceAtPointWithPitch(parrySFX, origin.position, variation);
@@ -110,7 +118,22 @@ public class AudioManager : MonoBehaviour
     {
         PlaySourceAtPointWithPitch(swingSFX, origin.position, variation);
     }
-    
+    public void PlayWrongBuzzerSFX(Transform origin, float variation = 0f)
+    {
+        PlaySourceAtPointWithPitch(wrongBuzzerSFX, origin.position, variation);
+    }
+    public void PlayBuyNodeSFX(Transform origin, float variation = 0f)
+    {
+        PlaySourceAtPointWithPitch(buyNodeSFX, origin.position, variation);
+    }
+    public void PlayLevelUpSFX(Transform origin, float variation = 0f)
+    {
+        PlaySourceAtPointWithPitch(levelUp, origin.position, variation);
+    }
+    public void PlayGenericMenuClickSFX(Transform origin, float variation = 0f)
+    {
+        PlaySourceAtPointWithPitch(genericMenuClick, origin.position, variation);
+    }
 }
 
 

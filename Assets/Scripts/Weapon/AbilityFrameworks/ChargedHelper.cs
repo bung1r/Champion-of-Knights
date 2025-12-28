@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
 using JetBrains.Annotations;
 using UnityEditor;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
@@ -74,6 +73,7 @@ public static class ChargedHelper
         // finalize stuff
         chargedStats.isCharging = false;
         chargedStats.percentCharged = 0f;
+        runtime.lastUsedTime = Time.time;
     }
 }
 

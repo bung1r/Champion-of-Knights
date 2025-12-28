@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Numerics;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +8,7 @@ using UnityEngine.UIElements;
 [Serializable]
 public abstract class AbilityBase : ScriptableObject
 {
+    public string abilityName = "Default";
     public float staminaCost = 20f;
     public float baseCooldown = 10f;
     public float critRate = 0f;
@@ -38,6 +40,9 @@ public abstract class AbilityBase : ScriptableObject
         } else if (other is GuardAbility)
         {
             return new GuardRuntime((GuardAbility)other, manager);
+        } else if (other is ComplexAbility)
+        {
+            return new ComplexAbilityRuntime((ComplexAbility)other, manager);
         } else
         {
             Debug.Log("You have not implemented the ability correctly!");
@@ -50,6 +55,7 @@ public abstract class AbilityBase : ScriptableObject
 
 public class AbilityRuntime : IAbility
 {
+    public string abilityName = "Default";
     public float staminaCost = 20f;
     public float baseCooldown = 10f;
     public float variation = 0.2f;
@@ -67,6 +73,7 @@ public class AbilityRuntime : IAbility
     public AbilityBase abilityBase;
     public void ConstructBase(AbilityBase other, StatManager manager)
     {
+        abilityName = other.abilityName;
         staminaCost = other.staminaCost;
         baseCooldown = other.baseCooldown;
         variation = other.variation;

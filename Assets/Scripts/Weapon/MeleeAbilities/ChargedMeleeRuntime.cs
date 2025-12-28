@@ -39,7 +39,9 @@ public class ChargedMeleeRuntime : MeleeRuntime
     public override void EndUse()
     {
         // basic checking
+        
         ChargedHelper.EndUse(this, chargedStats);
         statManager.EndAttack();
+
     }
 }
