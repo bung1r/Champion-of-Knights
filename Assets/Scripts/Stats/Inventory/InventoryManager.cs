@@ -87,8 +87,6 @@ public class InventoryManager : MonoBehaviour
     }
     public void BeginInteract()
     {
-        Debug.Log(selectedItem.runtime == null);
-        Debug.Log(selectedItem.item);
         if (selectedItem == null || selectedItem.item == null || selectedItem.runtime == null) return;
         selectedItem.runtime.Use(statManager);
         selectedItem.runtime.BeginUse(statManager);

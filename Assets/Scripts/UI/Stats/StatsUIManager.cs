@@ -19,6 +19,7 @@ public class StatsUIManager : MonoBehaviour
         statManager.AssignUIManager(this);
         inventoryManagerGUI.AssignUIManager(statManager);  
         abilityUIManager.AssignPlayerCombat(statManager.GetPlayerCombat());
+        RoundManager.Instance.AssignStatUIManager(this);
     }
     public void UpdateHP(float currHP, float maxHP)
     {

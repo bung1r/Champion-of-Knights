@@ -9,3 +9,9 @@ public class StyleBonus
     public string name;
     public bool canStack = false;
 }
+
+[Serializable]
+public enum StyleGrades
+{
+    F, D, C, B, A, S, X, P
+}

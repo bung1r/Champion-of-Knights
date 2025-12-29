@@ -135,9 +135,15 @@ public class PlayerStatManager : StatManager
 
         // Basically, goes down more the higher the styleLevel. 
         AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.75f) * Time.deltaTime));
-        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, 0, stats.styleLevel);
+        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, stats.viewers, stats.styleLevel);
         
     } 
+    public void CalculateViewers()
+    {
+        float stable = (stats.styleLevel + stats.currentStyle / stats.maxStyle) * 400;
+        float viewerGain = 0.2f * (stable - stats.viewers);
+        stats.viewers += viewerGain * Time.deltaTime;
+    }
     public void UIHandler()
     {
         if (statsUIManager == null) return;
@@ -155,16 +161,19 @@ public class PlayerStatManager : StatManager
     public override void PostUpdate()
     {
         UIHandler();
+        CalculateViewers();
         StyleUpdate();
     }
     public InventoryManagerGUI GetInventoryManagerGUI() => statsUIManager.inventoryManagerGUI;
     public PlayerCombat GetPlayerCombat() => playerCombat;
     public void OnParry()
     {
+        RoundManager.Instance.OnParry();
         HandleStyleBonus(StyleBonusTypes.Parry);
     }
     public void OnKill()
     {
+        RoundManager.Instance.OnEnemyKilled();
         HandleStyleBonus(StyleBonusTypes.Multikill);
     }
 

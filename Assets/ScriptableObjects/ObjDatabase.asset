@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37eeb8e3dda7e8440a2f7d76e4a1ebda, type: 3}
+  m_Name: ObjDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectiveDatabase
+  objectiveScalings:
+  - objectiveType: 6
+    baseAmount: 4
+    roundAddFactor: 1
+    roundMultFactor: 1
+    roundExpoFactor: 1
+    max: 6
+    min: 4
+    variation: 0.2
+    objectiveDescription: Reach {0} rank style
+    roundTo: 1
+    oneTimeComplete: 1
+  - objectiveType: 0
+    baseAmount: 2
+    roundAddFactor: 1
+    roundMultFactor: 1
+    roundExpoFactor: 1
+    max: 1
+    min: 6
+    variation: 0.3
+    objectiveDescription: Collect all {0} Orbs
+    roundTo: 1
+    oneTimeComplete: 1
+  - objectiveType: 1
+    baseAmount: 20
+    roundAddFactor: 5
+    roundMultFactor: 1.1
+    roundExpoFactor: 1
+    max: 300
+    min: 10
+    variation: 0.2
+    objectiveDescription: Kill {0} enemies
+    roundTo: 1
+    oneTimeComplete: 1
+  - objectiveType: 2
+    baseAmount: 30
+    roundAddFactor: 6
+    roundMultFactor: 1.1
+    roundExpoFactor: 1
+    max: 1000
+    min: 15
+    variation: 0.2
+    objectiveDescription: Parry {0} times
+    roundTo: 10
+    oneTimeComplete: 1
+  - objectiveType: 3
+    baseAmount: 500
+    roundAddFactor: 100
+    roundMultFactor: 1.1
+    roundExpoFactor: 1
+    max: 10000
+    min: 300
+    variation: 0.1
+    objectiveDescription: Maintain a {0} viewer average
+    roundTo: 100
+    oneTimeComplete: 0
+  - objectiveType: 4
+    baseAmount: 800
+    roundAddFactor: 200
+    roundMultFactor: 1.1
+    roundExpoFactor: 1
+    max: 100000
+    min: 1
+    variation: 0.2
+    objectiveDescription: Reach {0} viewers at one time
+    roundTo: 100
+    oneTimeComplete: 1
+  - objectiveType: 5
+    baseAmount: 2
+    roundAddFactor: 1
+    roundMultFactor: 1
+    roundExpoFactor: 1
+    max: 6
+    min: 2
+    variation: 0.2
+    objectiveDescription: Kill {0} enemies at the same time
+    roundTo: 1
+    oneTimeComplete: 1

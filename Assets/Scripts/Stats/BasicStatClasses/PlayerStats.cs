@@ -17,7 +17,7 @@ public class PlayerStats : Stats
     public float currentStyle;
     public float maxStyle;
     public float styleLevel = 0;
-    
+    public float viewers = 0f;
     public void ConstructPlayer(PlayerStats other)
     {
         totalEXP = other.totalEXP;

@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3592011118604522730}
   - component: {fileID: 7361670319137735743}
   m_Layer: 7
-  m_Name: DroneEnemy
+  m_Name: DroneEnemyFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

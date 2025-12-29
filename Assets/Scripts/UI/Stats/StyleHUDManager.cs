@@ -51,7 +51,7 @@ public class StyleHUDManager : MonoBehaviour
         else if (styleLevel == 6) gradeText.text = "X";
         
         styleText.text = $"Style: {Mathf.FloorToInt(currStyle)}";
-        viewersText.text = $"Viewers: {viewers}";
+        viewersText.text = $"Viewers: {Mathf.FloorToInt(viewers)}";
     }
 }
 
