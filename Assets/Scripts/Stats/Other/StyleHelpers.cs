@@ -15,3 +15,8 @@ public enum StyleGrades
 {
     F, D, C, B, A, S, X, P
 }
+
+public enum StyleBonusTypes
+{
+    Parry, Dodge, DuoParry, TriParry, MegaParry, Ricoshot, Multihit, Multikill, Kill, NaturalCauses
+}

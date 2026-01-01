@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 [Serializable]
 public class GuardStats
 {
-    public float parryThreshold = 0.1f;
+    private float parryThreshold = 0.1f;
     public DamageType resistance = DamageType.All; 
     public float resistAmount = 2f; // divide damage by 2
     public float speedReduction = 2f; // divide speed by 2

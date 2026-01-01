@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1803adfd3cba34dadd34c0bae9bd48, type: 3}
+  m_Name: Viewer Item Database
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 11400000, guid: cbfa960f83a372e4a9714fcbe5b563a3, type: 2}
+    baseWeight: 1200
+    viewerScaling: 0.8
+    maxWeight: 10000
+  - item: {fileID: 11400000, guid: 4d4ef5b6862f828418843c8380455a53, type: 2}
+    baseWeight: 500
+    viewerScaling: 1.5
+    maxWeight: 10000
+  - item: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
+    baseWeight: 100
+    viewerScaling: 2
+    maxWeight: 10000

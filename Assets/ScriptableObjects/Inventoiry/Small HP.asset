@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Small HP
   m_EditorClassIdentifier: 
   itemName: Small HP Potion
+  prefab: {fileID: 3825402875150333960, guid: 9469d5cfd039bf342b84af2f8de32e04, type: 3}
   icon: {fileID: 0}
   uses: 1
   cooldown: 2

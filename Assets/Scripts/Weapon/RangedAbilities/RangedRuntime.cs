@@ -60,12 +60,15 @@ public class RangedRuntime : AbilityRuntime
         {
             // basic calculations for raytracing, relatively easy. 
             Collider[] HitboxHits = hitboxData.GetHits(owner);
+            List<Transform> hitTransforms = new List<Transform>();
             foreach (Collider hit in HitboxHits)
             {
                 if (hit.transform.root.gameObject == owner) continue;
                 if (hit.transform.root.gameObject.layer == owner.layer) continue;
                 if (hit.transform.root.TryGetComponent<IDamageable>(out var damageable))
                 {
+                    if (hitTransforms.Contains(hit.transform.root)) continue;
+                    hitTransforms.Add(hit.transform.root);
                     DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner, abilityBase = abilityBase};
                     damageable.TakeDamage(data);
                 }

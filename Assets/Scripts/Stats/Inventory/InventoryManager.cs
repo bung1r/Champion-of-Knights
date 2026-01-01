@@ -18,13 +18,9 @@ public class InventoryManager : MonoBehaviour
         statManager = GetComponent<PlayerStatManager>();
         inputHandler = GetComponent<InputHandler>();
     }
-    public void OnEnable()
+    public void Start()
     {
-        inputHandler.OnInteractDown += BeginInteract;
-    }
-    public void OnDisable()
-    {
-        inputHandler.OnInteractDown -= BeginInteract;
+        selectedItem = items[selectedSlotIndex];
     }
     public void AssignInventoryGUI(InventoryManagerGUI gui)
     {
@@ -39,7 +35,7 @@ public class InventoryManager : MonoBehaviour
     public void ChangeSelectedSlot(int index)
     {
         selectedSlotIndex = index;
-        selectedItem = items[index];
+        selectedItem = items[selectedSlotIndex];
         inventoryManagerGUI.ChangeSelectedSlot(index);
     }
     public void UpdateSelectedSlot(Item item)
@@ -92,10 +88,10 @@ public class InventoryManager : MonoBehaviour
         selectedItem.runtime.BeginUse(statManager);
         if (selectedItem.runtime.usesRemaining <= 0)
         {
-            Debug.Log("GG EZ");
             WaitToUpdateSelectedSlot(null, selectedItem.item.performDelay);
         }
         
     }
-
+    public int GetSlotIndex() =>  selectedSlotIndex;
+    public ItemPair GetSelectedItem() => selectedItem;
 }   

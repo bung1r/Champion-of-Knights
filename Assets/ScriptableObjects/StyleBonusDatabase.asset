@@ -15,14 +15,14 @@ MonoBehaviour:
   bonuses:
   - type: 0
     style: 15
-    name: Parry
+    name: PARRY
     canStack: 0
   - type: 2
-    style: 25
-    name: Duo-Parry!
+    style: 30
+    name: DUO-PARRY!
     canStack: 0
   - type: 4
-    style: 30
+    style: 50
     name: MEGA-PARRY!!
     canStack: 1
   - type: 6
@@ -30,10 +30,22 @@ MonoBehaviour:
     name: MULTI-HIT
     canStack: 1
   - type: 7
-    style: 50
+    style: 60
     name: MULTIKILL!!
     canStack: 1
   - type: 5
     style: 40
-    name: Ricoshot!!
+    name: RICOSHOT
+    canStack: 0
+  - type: 9
+    style: 50
+    name: NATURAL CAUSES
+    canStack: 0
+  - type: 3
+    style: 40
+    name: TRI-PARRY
+    canStack: 0
+  - type: 8
+    style: 30
+    name: KILL
     canStack: 0

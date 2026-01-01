@@ -12,26 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
+  abilityName: Default
   staminaCost: 1
   baseCooldown: 0
-  critRate: 100
+  critRate: 0
   critMultiplier: 2
   variation: 0.2
   hitboxTimeDelay: 0
-  attackLength: 0.1
+  attackLength: 0.5
   knockback: 1
   stunTime: 0.2
+  attackID: -1
   useOverflowStamina: 0
   damageData:
-    baseDamage: 1
-    type: 0
+    baseDamage: 5
+    type: 1
     source: {fileID: 0}
   hitboxData:
     range: 10
     pierce: 1
     rangedHitboxType: 0
-    bulletPrefab: {fileID: 5279583567173616410, guid: 3b4a325cf5c00ea4da133bc756f0c6fe,
+    bulletPrefab: {fileID: 9210351738532903622, guid: e15154ba4012af54bac8fff912abfd84,
       type: 3}
-    speed: 3
+    speed: 1
     bulletPayload: {fileID: 0}
   owner: {fileID: 0}

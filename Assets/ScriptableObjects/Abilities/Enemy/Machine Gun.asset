@@ -16,8 +16,8 @@ MonoBehaviour:
   abilityData:
     currentPriority: 5
     basePriority: 5
-    minAttackRange: 2
-    maxAttackRange: 6
+    minAttackRange: 0
+    maxAttackRange: 8
     priorityAtMin: 0
     priorityAtMax: 0
     linearInterpolation: 0

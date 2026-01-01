@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e00d045c8f2dcf40b99b8a339b8c936, type: 3}
   m_Name: KnightGuard
   m_EditorClassIdentifier: 
+  abilityName: Default
   staminaCost: 0
-  baseCooldown: 0.2
+  baseCooldown: 0.4
   critRate: 0
   critMultiplier: 0
   variation: 0.2
@@ -21,15 +22,14 @@ MonoBehaviour:
   attackLength: 1
   knockback: 0
   stunTime: 0.2
+  attackID: -1
   useOverflowStamina: 1
   damageData:
     baseDamage: 0
     type: 0
     source: {fileID: 0}
-  statManager: {fileID: 0}
   owner: {fileID: 0}
   guardStats:
-    parryThreshold: 0.1
     resistance: 7
     resistAmount: 2
     speedReduction: 2

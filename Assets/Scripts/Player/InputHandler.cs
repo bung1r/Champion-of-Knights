@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour
     public event Action OnAbilitySlot3Up;
     public event Action OnInteractDown;
     public event Action OnInteractUp;
+    public event Action OnEscPressed;
     private bool holding;
     private float holdStart;
 
@@ -79,6 +80,11 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F))
         {
             OnInteractUp?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnEscPressed?.Invoke();
         }
     }
 }

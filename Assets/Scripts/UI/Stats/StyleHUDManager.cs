@@ -34,10 +34,10 @@ public class StyleHUDManager : MonoBehaviour
             }
         }
     } 
-    public void AddEntry(StyleBonusTypes bonusType)
+    public void AddEntry(StyleBonusTypes bonusType, int mult = 1)
     {
         GameObject styleObj = Instantiate(textPrefab, listContainer.transform);
-        StyleEntry newEntry = new StyleEntry(bonusDatabase, styleObj, bonusType);
+        StyleEntry newEntry = new StyleEntry(bonusDatabase, styleObj, bonusType, mult);
         allStyles.Add(newEntry);
     }
     public void UpdateText(float currStyle, float viewers, float styleLevel)

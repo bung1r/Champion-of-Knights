@@ -171,6 +171,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         {
             if (RTUsableAbilities.ContainsKey(3)) RTUsableAbilities[3].WhileUse();
         }
+        
     }
     public void AssignAbilityUIManager(AbilityUIManager uiManager)
     {
@@ -202,7 +203,11 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
             }
         }
     }
-
+    public void ResetParry()
+    {
+        RTSecondaryAbility.EndUse();
+        RTSecondaryAbility.lastUsedTime = -999f; 
+    }
 }
 
 [Serializable]

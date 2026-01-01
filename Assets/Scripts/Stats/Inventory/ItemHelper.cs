@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class Item : ScriptableObject
 {
     public string itemName = "New Item";
+    public GameObject prefab;
     public Sprite icon;
     public int uses = 1;
     public float cooldown = 0f; // how long before it can be used again
@@ -92,4 +93,13 @@ public class ItemPair
         }
         runtime = new ItemRuntime(item);
     }
+}
+
+[Serializable]
+public class DatabaseItemData
+{
+    public Item item;
+    public int baseWeight;  
+    public float viewerScaling; // how much the viewers affect the weight of this item.
+    public float maxWeight; 
 }

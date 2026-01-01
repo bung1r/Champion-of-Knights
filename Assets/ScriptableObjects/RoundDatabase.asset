@@ -22,5 +22,35 @@ MonoBehaviour:
         type: 3}
       weight: 10
       enemyValue: 1
-    roundBudget: 8
-    spawnInterval: 60
+    roundBudget: 10
+    spawnInterval: 30
+  - enemyWeights:
+    - enemyPrefab: {fileID: 8296662384254247459, guid: 65751b544faba5d42b509c20d0b12b0c,
+        type: 3}
+      weight: 5
+      enemyValue: 2
+    - enemyPrefab: {fileID: 6802328451975870939, guid: 53430b4dc195e4e47bb2d6faf97cf370,
+        type: 3}
+      weight: 5
+      enemyValue: 1
+    - enemyPrefab: {fileID: 919132149155446097, guid: 1fb2ad267d7fa8745ad7ee87f437e511,
+        type: 3}
+      weight: 1
+      enemyValue: 3
+    roundBudget: 14
+    spawnInterval: 30
+  - enemyWeights:
+    - enemyPrefab: {fileID: 8296662384254247459, guid: 65751b544faba5d42b509c20d0b12b0c,
+        type: 3}
+      weight: 6
+      enemyValue: 2
+    - enemyPrefab: {fileID: 6802328451975870939, guid: 53430b4dc195e4e47bb2d6faf97cf370,
+        type: 3}
+      weight: 3
+      enemyValue: 1
+    - enemyPrefab: {fileID: 919132149155446097, guid: 1fb2ad267d7fa8745ad7ee87f437e511,
+        type: 3}
+      weight: 3
+      enemyValue: 3
+    roundBudget: 20
+    spawnInterval: 30

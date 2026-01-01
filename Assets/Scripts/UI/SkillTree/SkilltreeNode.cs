@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class SkilltreeNode : MonoBehaviour
     }
     public void OnClickNode()
     {
+        UnityEngine.Debug.Log("Click??");
         skilltreeManager.UnlockNode(this);
     }
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Big HP
   m_EditorClassIdentifier: 
   itemName: Big HP Potion
+  prefab: {fileID: 528293155351621555, guid: a00f7e043a2e2f14fafd31c0a930e730, type: 3}
   icon: {fileID: 0}
   uses: 1
   cooldown: 2

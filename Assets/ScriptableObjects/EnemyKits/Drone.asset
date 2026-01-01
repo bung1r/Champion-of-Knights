@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Drone
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 100
-    turnSpeed: 100
-    walkSpeed: 1
+    maxHP: 20
+    turnSpeed: 300
+    walkSpeed: 4
     canSprint: 0
     sprintSpeed: 4
     sprintStaminaCost: 8
@@ -33,5 +33,13 @@ MonoBehaviour:
     isRunning: 0
     isWalking: 0
     inAttackAnim: 0
+    isGuarding: 0
+    isParrying: 0
+    attackID: -1
+    stunTime: 0
+    runAwayDist: 2
+    comfortDist: 3
+    runTowardsDist: 10
     cautionRange: 20
     aggroRange: 100
+    timeBetweenMoves: 0.5

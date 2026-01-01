@@ -39,7 +39,6 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
-        // DontDestroyOnLoad(gameObject);
     }
     public void Start()
     {
@@ -134,6 +133,11 @@ public class AudioManager : MonoBehaviour
     {
         PlaySourceAtPointWithPitch(genericMenuClick, origin.position, variation);
     }
+    public void PlayHitWallSFX(Transform origin, float variation = 0.05f)
+    {
+        PlaySourceAtPointWithPitch(thump2SFX, origin.position, variation);
+    }
+
 }
 
 

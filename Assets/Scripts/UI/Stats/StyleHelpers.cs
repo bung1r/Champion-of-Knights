@@ -8,10 +8,6 @@ public struct StyleBonuses
 {
     
 }
-public enum StyleBonusTypes
-{
-    Parry, Dodge, DuoParry, TriParry, MegaParry, Ricoshot, Multihit, Multikill
-}
 
 public class StyleEntry
 {
@@ -19,15 +15,21 @@ public class StyleEntry
     public float timeCreated;
     public StyleBonusTypes bonusType;
     public StyleBonus styleBonus;
-    public StyleEntry(StyleBonusDatabase database, GameObject obj, StyleBonusTypes type)
+    public int mult = 1;
+    public StyleEntry(StyleBonusDatabase database, GameObject obj, StyleBonusTypes type, int otherMult)
     {
         styleObj = obj;
         timeCreated = Time.time;
         bonusType = type;
+        mult = otherMult;
         styleBonus = database.Get(type);
         if (styleObj.TryGetComponent<TextMeshProUGUI>(out var text))
         {
             text.text = $"+{styleBonus.name}";
+            if (mult > 1)
+            {
+                text.text += $" x{mult}";
+            }
         }
     }
 }

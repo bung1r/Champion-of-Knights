@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [Serializable]
 public class PlayerStatManager : StatManager
@@ -13,8 +14,14 @@ public class PlayerStatManager : StatManager
     private StyleBonusDatabase bonusDatabase;
     private PlayerCombat playerCombat;
     private float lastHP = 0f;
+    private float lastMaxHP = 0f;
     private float lastStam = 0f;
+    private float lastEXP = -99f;
+    private int lastLevel = -1;
+    private int numParriesThisFrame = 0;
+    private int numEnemiesKilledThisFrame = 0;
     private StatsUIManager statsUIManager; 
+    private SkilltreeManager skilltreeManager;
     void Awake()
     {
         playerCombat = GetComponent<PlayerCombat>();
@@ -27,6 +34,10 @@ public class PlayerStatManager : StatManager
     {
         statsUIManager = uiManager;
         bonusDatabase = statsUIManager.GetDatabase();
+    }
+    public void AssignSkillTreeManager(SkilltreeManager stm)
+    {
+        skilltreeManager = stm;
     }
     public void AddEXP(float exp)
     {
@@ -124,11 +135,11 @@ public class PlayerStatManager : StatManager
         if (level == 0) return 0f;
         return 20f * level + 80f;
     }
-    public void HandleStyleBonus(StyleBonusTypes bonusType)
+    public void HandleStyleBonus(StyleBonusTypes bonusType, int mult = 1)
     {
         StyleBonus bonus = bonusDatabase.Get(bonusType);
-        statsUIManager.AddStyleEntry(bonusType);
-        AddStyle(bonus.style);
+        statsUIManager.AddStyleEntry(bonusType, mult);
+        AddStyle(bonus.style * mult);
     }
     public void StyleUpdate()
     {
@@ -147,7 +158,7 @@ public class PlayerStatManager : StatManager
     public void UIHandler()
     {
         if (statsUIManager == null) return;
-        if (lastHP != stats.currentHP)
+        if (lastHP != stats.currentHP || lastMaxHP != stats.maxHP)
         {
             statsUIManager.UpdateHP(stats.currentHP, stats.maxHP);
             lastHP = stats.currentHP;
@@ -157,6 +168,12 @@ public class PlayerStatManager : StatManager
             statsUIManager.UpdateStam(stats.currentStamina, stats.maxStamina);
             lastStam = stats.currentStamina;
         }
+        if (lastEXP != stats.currentEXP || lastLevel != (int)stats.level)
+        {
+            statsUIManager.UpdateEXP(stats.currentEXP, stats.nextLevelEXP + stats.currentEXP, (int)stats.level);
+            lastEXP = stats.currentEXP;
+            lastLevel = (int)stats.level;
+        }
     }
     public override void PostUpdate()
     {
@@ -165,17 +182,61 @@ public class PlayerStatManager : StatManager
         StyleUpdate();
     }
     public InventoryManagerGUI GetInventoryManagerGUI() => statsUIManager.inventoryManagerGUI;
+    public StatsUIManager GetStatsUIManager() => statsUIManager;
     public PlayerCombat GetPlayerCombat() => playerCombat;
+    public SkilltreeManager GetSkilltreeManager() => skilltreeManager;
     public void OnParry()
     {
+        AudioManager.Instance.PlayParrySFX(transform);
         RoundManager.Instance.OnParry();
-        HandleStyleBonus(StyleBonusTypes.Parry);
+        numParriesThisFrame += 1;
     }
     public void OnKill()
     {
         RoundManager.Instance.OnEnemyKilled();
-        HandleStyleBonus(StyleBonusTypes.Multikill);
+        numEnemiesKilledThisFrame += 1;
+    }
+    public void OnCollectOrb()
+    {
+        
+    }
+    public void OnCollectItem()
+    {
+        
     }
 
+    void LateUpdate()
+    {
+        if (numParriesThisFrame > 0) {
+            playerCombat.ResetParry();
+            if (numParriesThisFrame == 1)
+            {
+                HandleStyleBonus(StyleBonusTypes.Parry);
+            } else if (numParriesThisFrame == 2)
+            {
+                HandleStyleBonus(StyleBonusTypes.DuoParry);
+            } else if (numParriesThisFrame == 3)
+            {
+                HandleStyleBonus(StyleBonusTypes.TriParry);
+            } else
+            {
+                HandleStyleBonus(StyleBonusTypes.MegaParry, numParriesThisFrame);
+            }
+            numParriesThisFrame = 0;
+        }
+
+        if (numEnemiesKilledThisFrame > 0)
+        {
+            if (numEnemiesKilledThisFrame == 1)
+            {
+                HandleStyleBonus(StyleBonusTypes.Kill);
+            } else
+            {
+                HandleStyleBonus(StyleBonusTypes.Multikill, numEnemiesKilledThisFrame);
+                RoundManager.Instance.OnMultiKill(numEnemiesKilledThisFrame);
+            }
+            numEnemiesKilledThisFrame = 0;
+        }
+    }
 }
 

@@ -19,10 +19,10 @@ MonoBehaviour:
     canSprint: 1
     sprintSpeed: 8
     sprintStaminaCost: 10
-    maxStamina: 130
-    staminaRegen: 10
+    maxStamina: 120
+    staminaRegen: 20
     startStaminaRegen: 1.2
-    startStaminaRegenFromZero: 3
+    startStaminaRegenFromZero: 2.4
     overflowStaminaThreshold: 5
     baseEXP: 1000
     resistances:
@@ -30,9 +30,21 @@ MonoBehaviour:
     statModifiers: []
     currentHP: 100
     currentStamina: 100
+    isRunning: 0
+    isWalking: 0
+    inAttackAnim: 0
+    isGuarding: 0
+    isParrying: 0
+    attackID: -1
+    stunTime: 0
     statModifier: []
     totalEXP: 0
     level: 0
     currentEXP: 0
     nextLevelEXP: 0
     skillPoints: 0
+    totalStyle: 0
+    currentStyle: 0
+    maxStyle: 0
+    styleLevel: 0
+    viewers: 0

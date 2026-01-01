@@ -18,6 +18,7 @@ public class MeleeHitboxData
     public Vector3 hitboxOffset = new Vector3(0f,0.5f,1f);
     public Collider[] GetHits(GameObject owner)
     {
+        if (owner == null) return new Collider[0];
         Vector3 origin = owner.transform.position;
         Vector3 forward = owner.transform.forward;
         Vector3 up = owner.transform.up;

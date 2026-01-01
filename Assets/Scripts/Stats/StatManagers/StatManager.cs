@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 public class StatManager : MonoBehaviour, IDamageable
 {
 
@@ -41,6 +42,12 @@ public class StatManager : MonoBehaviour, IDamageable
     // the taking damage logic, very cool. use when possilbe
     public virtual void TakeDamage(DamageData damage, bool bypassMax = false) 
     {
+        if (this is PlayerStatManager playerStatManager && playerStatManager.stats.isParrying)
+        {
+            playerStatManager.OnParry();
+            damage.source.GetComponent<StatManager>()?.BasicStun(damage.abilityBase.stunTime/2);
+            return; // you parried, congrats!
+        }
         // calc damage then take damage. 
         float finalDamage;
         if (damage.type == DamageType.Fixed)
@@ -72,9 +79,12 @@ public class StatManager : MonoBehaviour, IDamageable
         // die if we have no HP left
         if (_stats.currentHP <= 0) Die(damage);
     }
-
     public virtual void Knockback(DamageData damage)
     {
+        if (TryGetComponent<NavMeshAgent>(out var agent))
+        {
+            agent.enabled = false;
+        }
         if (damage.abilityBase.knockback > 0 || damage.abilityBase.knockback < 0)
         {
             Vector3 vector = transform.position - damage.source.transform.position;
@@ -88,6 +98,10 @@ public class StatManager : MonoBehaviour, IDamageable
     }
     public virtual void Knockback(Vector3 source, float force)
     {
+        if (TryGetComponent<NavMeshAgent>(out var agent))
+        {
+            agent.enabled = false;
+        }
         Vector3 vector = transform.position - source;
         vector.y = 0;
         vector = vector.normalized * force;
@@ -231,7 +245,7 @@ public class StatManager : MonoBehaviour, IDamageable
         _stats.maxStamina = statDict[BaseStatsEnum.maxStamina];
     }
     // what happens when we die? Oh no!
-    public void Die(DamageData damage) {
+    public virtual void Die(DamageData damage) {
         if (damage.source != null)
         {
             if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [Serializable]
 public class SkilltreeManager : MonoBehaviour
 {
-    public PlayerStatManager statManager;
+    private PlayerStatManager statManager;
+    private Canvas parentCanvas;
     public List<SkilltreeNode> allNodes = new List<SkilltreeNode>();
     public SkilltreeNode originNode; // make sure to assign this in inspector, or have it as the first element of allNodes
     private Camera cam;
@@ -14,7 +17,13 @@ public class SkilltreeManager : MonoBehaviour
         if (originNode == null) originNode = allNodes[0];
         cam = Camera.main;
         statManager = FindObjectOfType<PlayerStatManager>();
+        parentCanvas = GetComponentInParent<Canvas>();
         FullInitTree(originNode);
+        RoundManager.Instance.AssignSkillTreeManager(this);
+        if (statManager)
+        {
+            statManager.AssignSkillTreeManager(this);
+        }
     }
     public void UnlockNode(SkilltreeNode node) 
     {
@@ -90,7 +99,6 @@ public class SkilltreeManager : MonoBehaviour
             InitTree(connectedNode);
         }
     }
-
     public void FullInitTree(SkilltreeNode node)
     {
         foreach (SkilltreeNode connectedNode in node.connectedNodes)
@@ -106,6 +114,18 @@ public class SkilltreeManager : MonoBehaviour
             connectedNode.UpdateNodeVisual();
             FullInitTree(connectedNode);
         }
+    }
+    public async void EnableAfterDelay(float delaySeconds)
+    {
+        await Task.Delay((int)(delaySeconds * 1000));
+        if (parentCanvas == null) return;
+        parentCanvas.enabled = true;
+    }
+    public async void DisableAfterDelay(float delaySeconds)
+    {
+        await Task.Delay((int)(delaySeconds * 1000));
+        if (parentCanvas == null) return; 
+        parentCanvas.enabled = false;
     }
 }
 

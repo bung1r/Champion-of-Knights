@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStatManager : StatManager
 {
@@ -13,4 +14,11 @@ public class EnemyStatManager : StatManager
         setEnemyStats(stats);
     }
 
-}
+    public override void PostStart()
+    {
+        if (TryGetComponent<NavMeshAgent>(out var agent) && stats != null)
+        {
+            agent.speed = stats.walkSpeed;
+            agent.angularSpeed = stats.turnSpeed;
+        }
+    } }

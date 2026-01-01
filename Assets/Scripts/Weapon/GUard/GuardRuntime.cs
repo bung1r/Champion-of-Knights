@@ -34,7 +34,7 @@ public class GuardRuntime : AbilityRuntime
     public override bool CanUse()
     {
         if (stats == null) stats = statManager.GetStats();
-        if (!stats.inAttackAnim && !stats.isGuarding)
+        if (!stats.inAttackAnim && !stats.isGuarding && Time.time - lastUsedTime >= baseCooldown)
         {
             return true;
         }
@@ -43,6 +43,7 @@ public class GuardRuntime : AbilityRuntime
     public override void BeginUse()
     {
         if (!CanUse()) return;
+        lastUsedTime = Time.time;
         AudioManager.Instance.PlayGuardSFX(owner.transform);
         currentEntry = new ResistanceEntry(guardStats);
         stats.resistances.AddEntry(currentEntry);
@@ -58,7 +59,6 @@ public class GuardRuntime : AbilityRuntime
     {
         stats.resistances.RemoveEntry(currentEntry);
         stats.isGuarding = false;
-        stats.isParrying = false;
     }
     // public IEnumerator HandleParryRoutine()
     // {

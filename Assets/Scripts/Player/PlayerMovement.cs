@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Camera Distances From Player")]
     public float camUpDistance = 10f;
-    public float camBackDistance = 2f;
+    public float camBackDistance = 0f;
     private float camScrollValue = 1f;
     public bool useScrollValue = true;
     private float camScrollScale = 0.25f;

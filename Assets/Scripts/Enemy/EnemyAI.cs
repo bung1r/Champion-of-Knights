@@ -6,6 +6,7 @@ using System.Data.SqlTypes;
 using System.Net;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(EnemyStatManager))]
 public class EnemyAI : MonoBehaviour, BarrelHandler
@@ -28,10 +29,12 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     public LayerMask targetLayer;
     private Rigidbody rb;
     private float distance;
+    private NavMeshAgent navMeshAgent;
     // Start is called before the first frame update
     private EnemyAI thisScript;
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         thisScript = GetComponent<EnemyAI>();
         statManager = gameObject.GetComponent<EnemyStatManager>();
@@ -57,18 +60,18 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     }
     void TurnToTarget()
     {
-        if (target == null) return;
-        if (stats.stunTime > 0) return;
-        // gets a vector between the enemy and target, then sets y to 0.
-        Vector3 lookdir = target.transform.position - transform.position;
-        lookdir.y = 0;
-        // stuff so the rotation happens smoothly, wow!
-        Quaternion targetRotation = Quaternion.LookRotation(lookdir, Vector3.up);
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRotation,
-            stats.turnSpeed * Time.fixedDeltaTime
-        );
+        // if (target == null) return;
+        // if (stats.stunTime > 0) return;
+        // // gets a vector between the enemy and target, then sets y to 0.
+        // Vector3 lookdir = target.transform.position - transform.position;
+        // lookdir.y = 0;
+        // // stuff so the rotation happens smoothly, wow!
+        // Quaternion targetRotation = Quaternion.LookRotation(lookdir, Vector3.up);
+        // transform.rotation = Quaternion.Slerp(
+        //     transform.rotation,
+        //     targetRotation,
+        //     stats.turnSpeed * Time.fixedDeltaTime
+        // );
 
 
     }
@@ -78,49 +81,52 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         if (rb == null) return;
         if (stats.inAttackAnim){stats.isWalking = false; return;}
         if (stats.stunTime > 0) return;
-        Vector3 dir = (target.transform.position - transform.position).normalized;
-        dir.y = 0;
-        if (distance < stats.runAwayDist)
-        {
-            retreating = true;
-            dir = (transform.position - target.transform.position).normalized;
-            dir.y = 0;
-            if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
-            {
-                stats.isRunning = true;
-                statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-                rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
-            } else
-            {
-                stats.isRunning = false;
-                stats.isWalking = true;
-                rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-            }  
-        } else if (distance > stats.runTowardsDist) 
-        {
-            if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
-            {
-                stats.isRunning = true;
-                statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-                rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
-            } else
-            {
-                stats.isRunning = false;
-                stats.isWalking = true;
-                rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-            }  
-        } else if (distance <= stats.comfortDist) // if it's comfortable, don't move it
-        {
-            stats.isRunning = false;
-            stats.isWalking = false;
-            retreating = false; 
-        } else
-        {
-            stats.isRunning = false;
-            stats.isWalking = true;
-            retreating = false;
-            rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-        }
+
+        // Vector3 dir = (target.transform.position - transform.position).normalized;
+        // dir.y = 0;
+        // if (distance < stats.runAwayDist)
+        // {
+        //     retreating = true;
+        //     dir = (transform.position - target.transform.position).normalized;
+        //     dir.y = 0;
+        //     if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
+        //     {
+        //         stats.isRunning = true;
+        //         statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
+        //         rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
+        //     } else
+        //     {
+        //         stats.isRunning = false;
+        //         stats.isWalking = true;
+        //         rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
+        //     }  
+        // } else if (distance > stats.runTowardsDist) 
+        // {
+        //     if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
+        //     {
+        //         stats.isRunning = true;
+        //         statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
+        //         rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
+        //     } else
+        //     {
+        //         stats.isRunning = false;
+        //         stats.isWalking = true;
+        //         rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
+        //     }  
+        // } else if (distance <= stats.comfortDist) // if it's comfortable, don't move it
+        // {
+        //     stats.isRunning = false;
+        //     stats.isWalking = false;
+        //     retreating = false; 
+        // } else
+        // {
+        //     stats.isRunning = false;
+        //     stats.isWalking = true;
+        //     retreating = false;
+        //     rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
+        // }
+        if (navMeshAgent.enabled == false) navMeshAgent.enabled = true;
+        navMeshAgent.SetDestination(target.transform.position);
     }
     void TryAttack()
     {

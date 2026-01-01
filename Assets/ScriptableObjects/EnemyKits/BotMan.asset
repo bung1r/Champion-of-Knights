@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BotMan
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 250
-    turnSpeed: 40
-    walkSpeed: 1
+    maxHP: 100
+    turnSpeed: 200
+    walkSpeed: 3
     canSprint: 0
     sprintSpeed: 1
     sprintStaminaCost: 0
@@ -37,8 +37,8 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
-    runAwayDist: 1.5
-    comfortDist: 4
+    runAwayDist: 0
+    comfortDist: 2
     runTowardsDist: 10
     cautionRange: 20
     aggroRange: 100
