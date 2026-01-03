@@ -172,9 +172,57 @@ public class StatManager : MonoBehaviour, IDamageable
     // need to add a multiplier?
     public void AddMultiplier(DamageMultiplier damageMultiplier)
     {
+        foreach (DamageMultiplier dm in _stats.damageMultipliers)
+        {
+            if (dm.source == damageMultiplier.source && dm.lifeTime == Mathf.Infinity && dm.type == damageMultiplier.type)
+            {
+                if (dm.type == DamageMultiplierTypes.Additive)
+                {
+                    dm.amount += damageMultiplier.amount;
+                    return;
+                } else if (dm.type == DamageMultiplierTypes.Multiplicative)
+                {
+                    dm.amount *= damageMultiplier.amount;
+                    return;
+                }
+            }
+        }
+        
         _stats.damageMultipliers.Add(damageMultiplier);
     }
-    
+    public void Spin(float force)
+    {
+        if (!TryGetComponent<Rigidbody>(out var rb)) return;
+        if (TryGetComponent<NavMeshAgent>(out var agent))
+        {
+            agent.enabled = false;
+            EnableAgentWithDelay(0.3f);
+        }
+        Debug.Log("MY BOENS");
+        Debug.Log(force);
+        rb.AddTorque(Vector3.up * force, ForceMode.Impulse);
+    }
+    public void Forward(float force)
+    {
+        if (!TryGetComponent<Rigidbody>(out var rb)) return;
+        if (TryGetComponent<NavMeshAgent>(out var agent))
+        {
+            agent.enabled = false;
+            EnableAgentWithDelay(0.3f);
+        }
+        Vector3 forwardDir = transform.forward;
+        forwardDir.y = 0;
+        forwardDir = forwardDir.normalized * force;
+        rb.AddForce(forwardDir, ForceMode.Impulse);
+    }
+    async public void EnableAgentWithDelay(float delay)
+    {
+        await Task.Delay((int)(delay * 1000));
+        if (TryGetComponent<NavMeshAgent>(out var agent))
+        {
+            agent.enabled = true;
+        }
+    }
 
     public void AddStatModifier(StatModifier modifier)
     {

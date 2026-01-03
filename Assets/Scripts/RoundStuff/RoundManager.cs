@@ -21,6 +21,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private GameObject audiencePackagePrefab;
     [SerializeField] private GameObject orbSpawnParent;
     [SerializeField] private GameObject orbPrefab;
+    [SerializeField] private AbilityEquipUIManager abilityEquipUIManager;
+    [SerializeField] private RoundSummaryManagerUI roundSummaryManagerUI;
     private List<Transform> orbSpawns = new List<Transform>(); // automatcially created
     public int currentRound = 0;
     public float roundDuration = 3f;
@@ -39,6 +41,7 @@ public class RoundManager : MonoBehaviour
     private int timesParried = 0;
     private int orbsCollected = 0;
     private int enemiesKilled = 0;
+    private int objectivesCompleted = 0;
     // time related things
     private float roundTimer = 0f;
     private float timeRemaining = 0f;
@@ -46,6 +49,7 @@ public class RoundManager : MonoBehaviour
     private float lastSpawnedEnemies = -999f;
     private float sumOfAllViewersThisRound = 0f;
     private float frameCount = 0f;
+    private int highestGradeThisRound = 0;
     private float highestViewersThisRound = 0f;
     private int multiKillCount = 0;
     private float lastReceivedGift = -10f;
@@ -102,6 +106,10 @@ public class RoundManager : MonoBehaviour
             if (player.stats.viewers > highestViewersThisRound)
             {
                 highestViewersThisRound = player.stats.viewers;
+            }
+            if ((int)player.stats.styleLevel > highestGradeThisRound)
+            {
+                highestGradeThisRound = (int)player.stats.styleLevel;
             }
 
             // objective handling.
@@ -270,13 +278,14 @@ public class RoundManager : MonoBehaviour
         sumOfAllViewersThisRound = 0f;
         frameCount = 0f;
         highestViewersThisRound = 0f;
+        highestGradeThisRound = 0;
     }
     public void EndCurrentRound()
     {
         currentRoundState = RoundStates.End;
         roundTimer = 0f;
         isRoundActive = false;
-
+        
         // cleanup all the enemies 
         for (int i = currentEnemies.Count - 1; i >= 0; i--)
         {
@@ -287,10 +296,15 @@ public class RoundManager : MonoBehaviour
             currentEnemies.RemoveAt(i);
         }
 
-
+        foreach (Objective obj in currentObjectives)
+        {
+            if (obj.IsComplete()) objectivesCompleted++;
+        }
+        UpdateRoundSummaryUI();
         BlackScreen.Instance.FadeToBlackWithDelay(afterRoundDuration - 2f, 2f);
         skilltreeManager.EnableAfterDelay(afterRoundDuration);
         statsUIManager.DisableAfterDelay(afterRoundDuration);
+        roundSummaryManagerUI.DisableAfterDelay(afterRoundDuration);
         Debug.Log("Round " + currentRound + " ended, begin shop phase soon.");
     }
     public void StartShopSequence()
@@ -306,12 +320,22 @@ public class RoundManager : MonoBehaviour
 
         BlackScreen.Instance.FadeToBlackWithDelay(shopDuration - 2f, 2f);
         skilltreeManager.DisableAfterDelay(shopDuration);
+        abilityEquipUIManager.DisableAfterDelay(shopDuration);
         statsUIManager.EnableAfterDelay(shopDuration);
     }
     public void EndShopSequence()
     {
         Debug.Log("The shop has closed.");
         StartBeforeRoundIntermission();
+    }
+    public void UpdateRoundSummaryUI()
+    {
+        roundSummaryManagerUI.UpdateObjectives(objectivesCompleted, currentObjectives.Count);
+        roundSummaryManagerUI.UpdateGrade(((StyleGrades)highestGradeThisRound).ToString());
+        roundSummaryManagerUI.UpdateViewerCount((int)highestViewersThisRound);
+        roundSummaryManagerUI.UpdateKills(enemiesKilled);
+        roundSummaryManagerUI.UpdateParries(timesParried);
+        roundSummaryManagerUI.EnableAfterDelay(0.2f);
     }
     public void AssignStatUIManager(StatsUIManager other)
     {

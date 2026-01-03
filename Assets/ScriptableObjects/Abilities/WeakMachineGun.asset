@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
   m_Name: WeakMachineGun
   m_EditorClassIdentifier: 
+  abilityName: BOOM
   staminaCost: 0.1
   baseCooldown: 0
   critRate: 0
@@ -21,6 +22,9 @@ MonoBehaviour:
   attackLength: 0.1
   knockback: 0.4
   stunTime: 0.2
+  forward: 0
+  spin: 0
+  attackID: -1
   useOverflowStamina: 0
   damageData:
     baseDamage: 0.1

@@ -13,6 +13,7 @@ public class PlayerStatManager : StatManager
     public PlayerStats stats;
     private StyleBonusDatabase bonusDatabase;
     private PlayerCombat playerCombat;
+    private PlayerMovement playerMovement;
     private float lastHP = 0f;
     private float lastMaxHP = 0f;
     private float lastStam = 0f;
@@ -25,6 +26,7 @@ public class PlayerStatManager : StatManager
     void Awake()
     {
         playerCombat = GetComponent<PlayerCombat>();
+        playerMovement = GetComponent<PlayerMovement>();
         stats = statsSO.CreateRuntime();
         setPlayerStats(stats);
         AdjustLevels();
@@ -185,6 +187,7 @@ public class PlayerStatManager : StatManager
     public StatsUIManager GetStatsUIManager() => statsUIManager;
     public PlayerCombat GetPlayerCombat() => playerCombat;
     public SkilltreeManager GetSkilltreeManager() => skilltreeManager;
+    public PlayerMovement GetPlayerMovement() => playerMovement;  
     public void OnParry()
     {
         AudioManager.Instance.PlayParrySFX(transform);

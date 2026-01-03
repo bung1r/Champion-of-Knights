@@ -18,6 +18,7 @@ public class SkilltreeNode : MonoBehaviour
     public bool almostCanBeUnlocked = false;
     public AbilityBase abilityUnlock;
     public List<StatModifierList> statModifiers = new List<StatModifierList>();
+    public List<DamageMultiplierLite> damageMultipliers = new List<DamageMultiplierLite>();
     private TextMeshProUGUI nodeText;
     private Button nodeButton;
     [NonSerialized] public StatModifier statDict;

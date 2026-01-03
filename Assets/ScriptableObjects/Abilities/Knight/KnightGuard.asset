@@ -22,6 +22,8 @@ MonoBehaviour:
   attackLength: 1
   knockback: 0
   stunTime: 0.2
+  forward: 0
+  spin: 0
   attackID: -1
   useOverflowStamina: 1
   damageData:

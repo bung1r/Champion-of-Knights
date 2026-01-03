@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Utils\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\UI\Ability\AbilityUISelect.cs" />
     <Compile Include="Assets\Scripts\Map\SpawnPlatformManager.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIBar.cs" />
     <Compile Include="Assets\Scripts\Utils\HitboxVisualizer.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\UI\Other\Blackscreen.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardHelper.cs" />
     <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\Round\RoundSummaryManagerUI.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHUDManager.cs" />
@@ -135,7 +137,9 @@
     <Compile Include="Assets\Scripts\Stats\StatManagers\StatManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\ComplexRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\QuitButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUIManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyMeleeRuntime.cs" />
+    <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUI.cs" />
     <Compile Include="Assets\Scripts\Utils\BootstrapSceneHandler.cs" />
     <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />

@@ -16,11 +16,14 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     public AbilityBase secondaryAbility;
     public List<SkillSlotAndAbility> otherUsableAbilities;
     // below are the 3 runtime skills, can and should be edited
+    public List<AbilityBase> allUnlockedAbilities = new List<AbilityBase>(); // done at runtime
+    [SerializeField] private AbilityEquipUIManager abilityEquipUIManager;
     private AbilityRuntime RTPrimaryAbility;
     private AbilityRuntime RTSecondaryAbility;
     private Dictionary<int, AbilityRuntime> RTUsableAbilities = new Dictionary<int, AbilityRuntime>();
     private AbilityUIManager abilityUIManager;
     public List<Transform> Barrels = new List<Transform>();
+
     public List<Transform> barrels { get => Barrels; set => Barrels = value; }
     public int lastBarrelFiredIndex {get; set;} = 0;
     // all the 'holding' variables
@@ -36,6 +39,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         if (input == null) input = GetComponent<InputHandler>();
         foreach (SkillSlotAndAbility skillSlot in otherUsableAbilities)
         {
+            UnlockAbility(skillSlot.abilityBase);
             RTUsableAbilities.Add(skillSlot.skillSlot, skillSlot.abilityBase.CreateRuntimeInstance(skillSlot.abilityBase, statManager));
         }
     }
@@ -104,6 +108,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot1Down = true;
         if (RTUsableAbilities.ContainsKey(1))
         {
+            if (RTUsableAbilities[1] == null) return;
             RTUsableAbilities[1].Use();
             RTUsableAbilities[1].BeginUse();
         }
@@ -113,6 +118,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot1Down = false;
         if (RTUsableAbilities.ContainsKey(1))
         {
+            if (RTUsableAbilities[1] == null) return;
             RTUsableAbilities[1].EndUse();
         }
     }
@@ -121,6 +127,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot2Down = true;
         if (RTUsableAbilities.ContainsKey(2))
         {
+            if (RTUsableAbilities[2] == null) return;
             RTUsableAbilities[2].Use();
             RTUsableAbilities[2].BeginUse();
         }
@@ -130,6 +137,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot2Down = false;
         if (RTUsableAbilities.ContainsKey(2))
         {
+            if (RTUsableAbilities[2] == null) return;
             RTUsableAbilities[2].EndUse();
         }
     }
@@ -138,6 +146,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot3Down = true;
         if (RTUsableAbilities.ContainsKey(3))
         {
+            if (RTUsableAbilities[3] == null) return;
             RTUsableAbilities[3].Use();
             RTUsableAbilities[3].BeginUse();
         }
@@ -147,6 +156,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         slot3Down = false;
         if (RTUsableAbilities.ContainsKey(3))
         {
+            if (RTUsableAbilities[3] == null) return;
             RTUsableAbilities[3].EndUse();
         }
     }
@@ -161,15 +171,15 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         }
         if (slot1Down)
         {
-            if (RTUsableAbilities.ContainsKey(1)) RTUsableAbilities[1].WhileUse();
+            if (RTUsableAbilities.ContainsKey(1) && RTUsableAbilities[1] != null)  RTUsableAbilities[1].WhileUse();
         }
         if (slot2Down)
         {
-            if (RTUsableAbilities.ContainsKey(2)) RTUsableAbilities[2].WhileUse();
+            if (RTUsableAbilities.ContainsKey(2) && RTUsableAbilities[2] != null) RTUsableAbilities[2].WhileUse();
         }
         if (slot3Down)
         {
-            if (RTUsableAbilities.ContainsKey(3)) RTUsableAbilities[3].WhileUse();
+            if (RTUsableAbilities.ContainsKey(3) && RTUsableAbilities[3] != null) RTUsableAbilities[3].WhileUse();
         }
         
     }
@@ -190,7 +200,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
                 if (newAbility == null)
                 {
                     skillSlot.abilityBase = null;
-                    RTUsableAbilities[index] = null;
+                    RTUsableAbilities[index + 1] = null;
                     abilityUIManager.AssignAbilityAtIndex(null, index);
                 } 
                 else
@@ -208,6 +218,24 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         RTSecondaryAbility.EndUse();
         RTSecondaryAbility.lastUsedTime = -999f; 
     }
+    public void EquipAbilityAtSlot(AbilityBase ability, int slot)
+    {
+       ChangeAbilityAtIndex(ability, slot - 1);
+    }
+    public void UnequipAbilityAtSlot(int slot)
+    {
+        ChangeAbilityAtIndex(null, slot - 1);
+    }
+    public void UnlockAbility(AbilityBase ability)
+    {
+        if (!allUnlockedAbilities.Contains(ability))
+        {
+            allUnlockedAbilities.Add(ability);
+            abilityEquipUIManager.UnlockAbility(ability, this);
+            Debug.Log("UNLOCK");
+        }
+    }
+    
 }
 
 [Serializable]

@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera cam;
     private Rigidbody rb;
     private Vector3 inputDir;
+    private Animator animator;
 
     [Header("Movement Stats")]
     public float jumpVelocity = 5f;
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerCombat = GetComponent<PlayerCombat>();
         statManager = GetComponent<PlayerStatManager>();
-        rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
         rb.drag = 0; // remove slowdown drag
         cam = Camera.main;
         stats = statManager.stats;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         stats = statManager.stats;
         TryJump();
         TryInteract();
+        Debug.Log(rb.velocity);
     }
 
     void FixedUpdate()
@@ -67,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FaceMouse()
     {
+        if (statManager.stats.inAttackAnim) return;
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.up, Vector3.zero);
         if (ground.Raycast(ray, out float enter))
@@ -88,18 +92,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void TryJump()
     {
-        timeSinceLastJump += Time.fixedDeltaTime;
+        timeSinceLastJump += Time.deltaTime;
         // Debug.Log($"JUMP LOGIC!!! {timeSinceLastJump}, {isGrounded}, {jumpPressed}");
         if (!isGrounded) return;
         if (timeSinceLastJump < jumpCooldown) return;
         if (jumpPressed)
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // reset Y
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // reset Y
             rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
             timeSinceLastJump = 0f;
         }
     }
-   
     void TryInteract()
     {
         
@@ -134,8 +137,11 @@ public class PlayerMovement : MonoBehaviour
             stats.isWalking = true;
             stats.isRunning = false;
         }
-        rb.MovePosition(rb.position + inputDir * speed * Time.fixedDeltaTime);
+        Vector3 moveXZ = new Vector3(inputDir.x, 0f, inputDir.z);
+        rb.MovePosition(rb.position + moveXZ * speed * Time.fixedDeltaTime);
+        
     }
+    
     void CamFollowPlayer()
     {
         if (useScrollValue)
@@ -144,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
             if (reverseCameraScrollDirection) a = -1;
             float scrollDelta = Input.mouseScrollDelta.y * a;
             camScrollValue += scrollDelta * camScrollScale;
-            camScrollValue = Math.Clamp(camScrollValue, 0.5f, 1f);
+            camScrollValue = Math.Clamp(camScrollValue, 1f, 1.5f);
 
             cam.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y + camUpDistance * camScrollValue, rb.transform.position.z - camBackDistance * camScrollValue);
         }

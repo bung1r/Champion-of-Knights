@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 public static class WeightedRandom
 {
     public static T Choose<T>(List<T> items, List<float> weights)

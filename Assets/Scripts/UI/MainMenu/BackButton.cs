@@ -8,7 +8,7 @@ public class BackButton : MonoBehaviour
     public void OnBackButtonPressed()
     {
         if (AudioManager.Instance != null) AudioManager.Instance.PlayGenericMenuClickSFX(Camera.main.transform);
-        canvasToClose.enabled = false;
-        canvasToOpen.enabled = true;
+        if (canvasToClose != null) canvasToClose.enabled = false;
+        if (canvasToOpen != null) canvasToOpen.enabled = true;
     }
 }

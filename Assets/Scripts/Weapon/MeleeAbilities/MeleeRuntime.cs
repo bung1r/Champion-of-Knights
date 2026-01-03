@@ -31,6 +31,8 @@ public class MeleeRuntime : AbilityRuntime
     // the actual performing code, pretty important if you ask me. 
     async public override void Perform()
     {
+        if (spin != 0f) statManager.Spin(spin);
+        if (forward != 0f) statManager.Forward(forward);
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {

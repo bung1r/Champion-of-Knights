@@ -76,6 +76,7 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
+    damageMultipliers: []
     runAwayDist: 2
     comfortDist: 3
     runTowardsDist: 10
@@ -114,7 +115,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296662384254247459}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8ead1f354731f8241a65030951141d28, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

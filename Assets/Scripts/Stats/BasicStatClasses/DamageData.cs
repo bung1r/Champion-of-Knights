@@ -26,11 +26,9 @@ public class DamageData
         source = data.source;
     }
 }
-public class DamageMultiplier
+[Serializable]
+public class DamageMultiplier : DamageMultiplierLite
 {
-    public DamageMultiplierTypes type = DamageMultiplierTypes.Additive;
-    public float amount = 0f;
-    public float lifeTime = Mathf.Infinity;
     public float timeCreated;
     public DamageMultiplier()
     {
@@ -42,7 +40,32 @@ public class DamageMultiplier
         amount = other.amount;
         lifeTime = other.lifeTime;
         timeCreated = Time.time;
+        source = other.source;
     }
+    public DamageMultiplier(DamageMultiplierLite other)
+    {
+        type = other.type;
+        amount = other.amount;
+        lifeTime = other.lifeTime;
+        if (lifeTime == -1f) lifeTime = Mathf.Infinity;
+        timeCreated = Time.time;
+        source = other.source;
+    }
+}
+
+[Serializable]
+public class DamageMultiplierLite
+{
+    public DamageMultiplierTypes type = DamageMultiplierTypes.Additive;
+    public float amount = 0f;
+    public float lifeTime = Mathf.Infinity;
+    public string source = null;
+
+    public DamageMultiplierLite()
+    {
+        lifeTime = Mathf.Infinity;
+    }
+
 }
 public enum DamageType
 {

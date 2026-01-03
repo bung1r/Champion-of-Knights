@@ -26,7 +26,7 @@ public class AnimationStateController : MonoBehaviour
     void Start()
     {
         // basic gettings
-        animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         statManager = gameObject.GetComponent<StatManager>();
         stats = statManager.GetStats();
 

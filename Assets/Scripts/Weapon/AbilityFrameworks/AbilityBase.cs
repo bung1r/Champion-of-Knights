@@ -18,6 +18,8 @@ public abstract class AbilityBase : ScriptableObject
     public float attackLength = 1f;
     public float knockback = 0f;
     public float stunTime = 0.2f;
+    public float forward = 0f; // boosts forward movement when using ability 
+    public float spin = 0f; // spins when using ability (melee only prob)
     public int attackID = -1;
     [NonSerialized]public float lastUsedTime = 0f;
     public bool useOverflowStamina = true;
@@ -67,6 +69,8 @@ public class AbilityRuntime : IAbility
     public float attackLength = 1f;
     public float knockback = 0f;
     public float stunTime = 0.2f;
+    public float spin = 0f;
+    public float forward = 0f;
     public int attackID = -1;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
@@ -87,6 +91,8 @@ public class AbilityRuntime : IAbility
         attackLength = other.attackLength;
         knockback = other.knockback;
         stunTime = other.stunTime;
+        forward = other.forward;
+        spin = other.spin;
         attackID = other.attackID;
     }
     public AbilityRuntime() {}  

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,9 +9,12 @@ using UnityEngine.Rendering;
 public class SkilltreeManager : MonoBehaviour
 {
     private PlayerStatManager statManager;
+    private PlayerCombat playerCombat;
     private Canvas parentCanvas;
     public List<SkilltreeNode> allNodes = new List<SkilltreeNode>();
     public SkilltreeNode originNode; // make sure to assign this in inspector, or have it as the first element of allNodes
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI skillPointsText;
     private Camera cam;
     public void Start()
     {
@@ -24,6 +28,15 @@ public class SkilltreeManager : MonoBehaviour
         {
             statManager.AssignSkillTreeManager(this);
         }
+        playerCombat = statManager.GetPlayerCombat();
+    }
+    public void Update()
+    {
+        if (statManager)
+        {
+            levelText.text = $"Level: {statManager.stats.level}";
+            skillPointsText.text = $"Skill Points: {statManager.GetSkillPoints()}";
+        }
     }
     public void UnlockNode(SkilltreeNode node) 
     {
@@ -36,10 +49,12 @@ public class SkilltreeManager : MonoBehaviour
         // checks the branch type and applies relevant bonuses
         if (node.branchType == BranchTypes.Survival)
         {
-            statManager.AddStatModifier(new StatModifier(new Dictionary<BaseStatsEnum, float>{
-                {BaseStatsEnum.maxStamina, 10},
-                {BaseStatsEnum.maxHP, 10},
-            }, StatModifierType.NodeBuff));
+            // statManager.AddStatModifier(new StatModifier(new Dictionary<BaseStatsEnum, float>{
+            //     {BaseStatsEnum.maxStamina, 10},
+            //     {BaseStatsEnum.maxHP, 10},
+            // }, StatModifierType.NodeBuff));
+
+            
         } else if (node.branchType == BranchTypes.Popularity)
         {
             
@@ -61,9 +76,19 @@ public class SkilltreeManager : MonoBehaviour
             {
                 statManager.AddStatModifier(node.statDict);
             }
+            if (node.damageMultipliers.Count > 0)
+            {
+                foreach (DamageMultiplierLite dm in node.damageMultipliers)
+                {
+                    statManager.AddMultiplier(new DamageMultiplier(dm));
+                }
+            }
         } else if (node.nodeType == NodeTypes.UnlockAbility)
         {
-            
+            if (node.abilityUnlock != null)
+            {
+                playerCombat.UnlockAbility(node.abilityUnlock);
+            }
         } else if (node.nodeType == NodeTypes.UnlockPassive)
         {
             
@@ -93,7 +118,7 @@ public class SkilltreeManager : MonoBehaviour
                 connectedNode.almostCanBeUnlocked = true;
             } else
             {
-                return;
+                continue;
             }
             connectedNode.UpdateNodeVisual();
             InitTree(connectedNode);
