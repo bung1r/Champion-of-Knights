@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: EV1B
+  m_EditorClassIdentifier: 
+  speakerName: Excited Viewer
+  dialogue:
+  - dialogueLine: Um... Thank you!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Acceptable is still pretty good, right?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Haha, it doesn't matter, I still get to meet you don't I?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Here's a small little present. For being honest, I guess?
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 11400000, guid: cbfa960f83a372e4a9714fcbe5b563a3, type: 2}
+  - dialogueLine: I'll still watch your streams though!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     public Animator animator;
     public List<Transform> Barrels = new List<Transform>();
     public List<Transform> barrels { get => Barrels; set => Barrels = value; }
+    public BoxCollider hitbox;
     public int lastBarrelFiredIndex {get; set;} = 0;
     [NonSerialized] public float timeEndLastAttack;
     public float moveSpeed = 2f;
@@ -43,6 +44,11 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         {
             enemyAbilityRuntimes.Add(ability.CreateRuntimeInstance(ability, statManager));
         }
+        hitbox = GetComponent<BoxCollider>();
+        if (hitbox == null) hitbox = GetComponentInChildren<BoxCollider>();
+
+        float dia = Math.Min(hitbox.size.x, hitbox.size.z);
+        navMeshAgent.radius = dia / 2f * 0.9f; // slightly smaller than hitbox
         
     }
 
@@ -79,7 +85,6 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     {
         if (target == null) return;
         if (rb == null) return;
-        if (stats.inAttackAnim){stats.isWalking = false; return;}
         if (stats.stunTime > 0) return;
 
         // Vector3 dir = (target.transform.position - transform.position).normalized;

@@ -23,6 +23,8 @@ MonoBehaviour:
     staminaRegen: 20
     startStaminaRegen: 1.2
     startStaminaRegenFromZero: 2.4
+    regenHP: 2
+    startRegenHP: 2
     overflowStaminaThreshold: 5
     baseEXP: 1000
     resistances:
@@ -37,6 +39,7 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
+    damageMultipliers: []
     statModifier: []
     totalEXP: 0
     level: 0

@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\StatModifier.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\ChargedAbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\MeleeHelper.cs" />
+    <Compile Include="Assets\Scripts\UI\Other\SimpleEnableText.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventoryManagerGUI.cs" />
     <Compile Include="Assets\Scripts\Utils\Footsteps.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIManager.cs" />
@@ -70,10 +71,12 @@
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyChargedRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Map\IInteractable.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\FullDialogue.cs" />
     <Compile Include="Assets\Scripts\Utils\MasterStuff.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundDatabase.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\Resistances.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\ViewerItemDatabase.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyAbility.cs" />
     <Compile Include="Assets\Scripts\Map\SpawnPlatform.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedRuntime.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyRangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Utils\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityUISelect.cs" />
     <Compile Include="Assets\Scripts\Map\SpawnPlatformManager.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIBar.cs" />
@@ -88,10 +92,12 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\AllStats.cs" />
     <Compile Include="Assets\Scripts\Weapon\ComplexAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\BulletHandler.cs" />
+    <Compile Include="Assets\Scripts\Map\DronePackage.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHelpers.cs" />
     <Compile Include="Assets\Scripts\Stats\Other\StyleHelpers.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\Items\HealthConsumable.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\Objective.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\ChoiceButton.cs" />
     <Compile Include="Assets\Scripts\Stats\ScriptableObjects\EnemyStatsSO.cs" />
     <Compile Include="Assets\Scripts\UI\Other\Timer.cs" />
     <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
@@ -110,6 +116,7 @@
     <Compile Include="Assets\Scripts\UI\Round\RoundSummaryManagerUI.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
+    <Compile Include="Assets\Scripts\Map\Talkable.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHUDManager.cs" />
     <Compile Include="Assets\Scripts\Stats\ScriptableObjects\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundData.cs" />
@@ -118,6 +125,7 @@
     <Compile Include="Assets\Scripts\UI\Ability\AbilityUIManager.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\ObjectiveDatabase.cs" />
     <Compile Include="Assets\Scripts\UI\Round\ObjectiveUIElement.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\DialogueChoice.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
@@ -131,6 +139,7 @@
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\PlayButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Round\GameOverUIManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\PlayerStats.cs" />

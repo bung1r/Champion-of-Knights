@@ -103,6 +103,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   Barrels:
   - {fileID: 8112837345435564306}
+  hitbox: {fileID: 0}
   moveSpeed: 2
   rotationSpeed: 20
   searchRadius: 100
@@ -155,7 +156,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -349,6 +350,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865064391339405807, guid: 1fb2ad267d7fa8745ad7ee87f437e511,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 53.874084
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865064391339405807, guid: 1fb2ad267d7fa8745ad7ee87f437e511,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.2514
       objectReference: {fileID: 0}
     - target: {fileID: 6512510688612296998, guid: 1fb2ad267d7fa8745ad7ee87f437e511,
         type: 3}

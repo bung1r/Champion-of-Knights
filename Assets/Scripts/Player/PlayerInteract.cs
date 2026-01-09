@@ -42,18 +42,22 @@ public class PlayerInteract : MonoBehaviour
 
             if (nearbyPickup == null && nearbyInteractable == null)
             {
-                if (inventoryManager.GetSelectedItem().item == null)
+                if (inventoryManager.GetSelectedItem().item == null || DialogueManager.Instance.InDialogue())
                 {
                     statsUIManager.HideInteractPrompt();
                 } else
                 {
                     statsUIManager.ShowInteractPrompt("F to use " + inventoryManager.GetSelectedItem().item.itemName);
                 }
-            }
+            } 
         }
     }
     void HandleInteractDown()
     {
+        if (DialogueManager.Instance.InDialogue()) {
+            DialogueManager.Instance.ProgressToNextDialogue();
+            return;
+        }
         if (nearbyInteractable != null)
         {
             nearbyInteractable.Interact(gameObject);
@@ -94,6 +98,12 @@ public class PlayerInteract : MonoBehaviour
                 nearbyInteractable = orb;
                 nearbyPickup = null;
                 statsUIManager.ShowInteractPrompt($"F to collect {orb.customName}");
+                return;
+            } else if (collider.TryGetComponent(out Talkable talkable))
+            {
+                nearbyInteractable = talkable;
+                nearbyPickup = null;
+                statsUIManager.ShowInteractPrompt($"F to talk to {talkable.customName}");
                 return;
             }
         }

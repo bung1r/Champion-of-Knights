@@ -37,6 +37,8 @@ public class BaseStats
     public float staminaRegen = 10f;
     public float startStaminaRegen = 1f;
     public float startStaminaRegenFromZero = 2.5f;
+    public float regenHP = 0f; // per second
+    public float startRegenHP = 2f; // seconds after taking damage
     // AKA if you use a 50 stamina move with 45 stamina, you are able to. 
     public float overflowStaminaThreshold = 5f;
     public float baseEXP = 100f; // EXP on kill!
@@ -55,6 +57,8 @@ public class BaseStats
         startStaminaRegenFromZero = other.startStaminaRegenFromZero;
         overflowStaminaThreshold = other.overflowStaminaThreshold;
         baseEXP = other.baseEXP;
+        regenHP = other.regenHP;
+        startRegenHP = other.startRegenHP;
         resistances = new Resistances(other.resistances);
     }
     public BaseStats() {}
@@ -93,5 +97,8 @@ public class EnemyStats : Stats
 
 public enum BaseStatsEnum
 {
-    maxHP,turnSpeed,walkSpeed,canSprint,sprintSpeed,sprintStaminaCost,maxStamina,staminaRegen,startStaminaRegen,startStaminaRegenFromZero,overflowStaminaThreshold,baseEXP 
+    maxHP,turnSpeed,walkSpeed,canSprint,sprintSpeed,
+    sprintStaminaCost,maxStamina,staminaRegen,startStaminaRegen,
+    startStaminaRegenFromZero,overflowStaminaThreshold,baseEXP,
+    regenHP,startRegenHP,
 }

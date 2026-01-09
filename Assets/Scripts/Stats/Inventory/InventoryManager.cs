@@ -94,4 +94,17 @@ public class InventoryManager : MonoBehaviour
     }
     public int GetSlotIndex() =>  selectedSlotIndex;
     public ItemPair GetSelectedItem() => selectedItem;
+
+    public void GiveItem(Item item)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].item == null)
+            {
+                items[i].UpdateItem(item);
+                inventoryManagerGUI.AssignItemInit(i, item);
+                return;
+            }
+        }
+    }
 }   

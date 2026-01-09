@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class RoundSummaryManagerUI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RoundSummaryManagerUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highestViewerCountText;
     [SerializeField] private TextMeshProUGUI verdictText;
     [SerializeField] private TextMeshProUGUI flavorText;
+    [SerializeField] private TextMeshProUGUI roundCountText;
     private List<string> positiveFlavorTexts = new List<string>()
     {
         "You feel one step closer to making it back home!",
@@ -32,6 +34,7 @@ public class RoundSummaryManagerUI : MonoBehaviour
     void Start()
     {
         roundSummaryCanvas = GetComponentInParent<Canvas>();
+        roundSummaryCanvas.enabled = false;
     }
     
     public void UpdateObjectives(int completed, int total)
@@ -68,7 +71,10 @@ public class RoundSummaryManagerUI : MonoBehaviour
     {
         highestViewerCountText.text = "Highest Viewer Count: " + viewerCount.ToString();
     }
-
+    public void UpdateRoundCount(int roundCount)
+    {
+        roundCountText.text = "Round " + roundCount.ToString() + " Summary";
+    }
     async public void EnableAfterDelay(float delaySeconds)
     {
         await Task.Delay((int)(delaySeconds * 1000));

@@ -10,6 +10,7 @@ public class StatModifier
     public ModifierTypes generalModifierType = ModifierTypes.Additive;
     public Dictionary<BaseStatsEnum, float> statDict = new Dictionary<BaseStatsEnum, float>
         {
+            
             // {BaseStatsEnum.baseEXP, 0},
             // {BaseStatsEnum.maxHP, 0},
             // {BaseStatsEnum.sprintSpeed, 0},

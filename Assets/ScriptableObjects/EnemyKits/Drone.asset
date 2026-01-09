@@ -37,6 +37,7 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
+    damageMultipliers: []
     runAwayDist: 2
     comfortDist: 3
     runTowardsDist: 10

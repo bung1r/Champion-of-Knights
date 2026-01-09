@@ -82,6 +82,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     // there's a lot, but it's not perfomance heavy!
     void HandlePrimaryDown()
     {
+        if (ActionIsInvalid()) return;
         // wow so neat and nice!!! i'm so cool :D
         primaryDown = true;
         RTPrimaryAbility.Use();
@@ -89,22 +90,26 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandlePrimaryUp()
     {
+        if (ActionIsInvalid()) return;
         primaryDown = false;
         RTPrimaryAbility.EndUse();
     }
     void HandleSecondaryDown()
     {
+        if (ActionIsInvalid()) return;
         secondaryDown = true;
         RTSecondaryAbility.Use();
         RTSecondaryAbility.BeginUse();
     }
     void HandleSecondaryUp()
     {
+        if (ActionIsInvalid()) return;
         secondaryDown = false;
         RTSecondaryAbility.EndUse();
     }
     void HandleSlot1Down()
     {
+        if (ActionIsInvalid()) return;
         slot1Down = true;
         if (RTUsableAbilities.ContainsKey(1))
         {
@@ -115,6 +120,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandleSlot1Up()
     {
+        if (ActionIsInvalid()) return;
         slot1Down = false;
         if (RTUsableAbilities.ContainsKey(1))
         {
@@ -124,6 +130,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandleSlot2Down()
     {
+        if (ActionIsInvalid()) return;
         slot2Down = true;
         if (RTUsableAbilities.ContainsKey(2))
         {
@@ -134,6 +141,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandleSlot2Up()
     {
+        if (ActionIsInvalid()) return;
         slot2Down = false;
         if (RTUsableAbilities.ContainsKey(2))
         {
@@ -143,6 +151,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandleSlot3Down()
     {
+        if (ActionIsInvalid()) return;
         slot3Down = true;
         if (RTUsableAbilities.ContainsKey(3))
         {
@@ -153,6 +162,7 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void HandleSlot3Up()
     {
+        if (ActionIsInvalid()) return;
         slot3Down = false;
         if (RTUsableAbilities.ContainsKey(3))
         {
@@ -162,6 +172,8 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     void Update()
     {
+        if (RoundManager.Instance.currentRoundState == RoundStates.Shop || RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory) return;
+
         if (primaryDown) {
             RTPrimaryAbility.WhileUse();
         }
@@ -182,6 +194,10 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
             if (RTUsableAbilities.ContainsKey(3) && RTUsableAbilities[3] != null) RTUsableAbilities[3].WhileUse();
         }
         
+    }
+    public bool ActionIsInvalid()
+    {
+        return RoundManager.Instance.currentRoundState == RoundStates.Shop || RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory;
     }
     public void AssignAbilityUIManager(AbilityUIManager uiManager)
     {
@@ -206,8 +222,8 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
                 else
                 {
                     skillSlot.abilityBase = newAbility;
-                    RTUsableAbilities[index] = newAbility.CreateRuntimeInstance(newAbility, statManager);
-                    abilityUIManager.AssignAbilityAtIndex(RTUsableAbilities[index], index); 
+                    RTUsableAbilities[index + 1] = newAbility.CreateRuntimeInstance(newAbility, statManager);
+                    abilityUIManager.AssignAbilityAtIndex(RTUsableAbilities[index + 1], index); 
                 }
                 return;
             }

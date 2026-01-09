@@ -18,11 +18,17 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private ObjectiveDatabase objectiveDatabase;
     [SerializeField] private RoundDatabase roundDatabase;
     [SerializeField] private ViewerItemDatabase viewerItemDatabase;
+    [SerializeField] private GameObject packageDronePrefab;
     [SerializeField] private GameObject audiencePackagePrefab;
     [SerializeField] private GameObject orbSpawnParent;
     [SerializeField] private GameObject orbPrefab;
     [SerializeField] private AbilityEquipUIManager abilityEquipUIManager;
     [SerializeField] private RoundSummaryManagerUI roundSummaryManagerUI;
+    [SerializeField] private GameOverUIManager gameOverCanvas;
+    [SerializeField] private GameOverUIManager victoryCanvas;
+    [SerializeField] private SimpleEnableText packageDropText;
+    [SerializeField] private GameObject PRISON;
+    [SerializeField] private GameObject spawnLocationsParent;
     private List<Transform> orbSpawns = new List<Transform>(); // automatcially created
     public int currentRound = 0;
     public float roundDuration = 3f;
@@ -32,10 +38,17 @@ public class RoundManager : MonoBehaviour
     public float updateStatInterval = 0.1f;
     // private float startingViewers = 100f; // start with 100 viewers in order not to rig it. 
     private List<GameObject> currentEnemies = new List<GameObject>();
+    private List<GameObject> currentPackages = new List<GameObject>();
+    private List<GameObject> currentOnGroundItems = new List<GameObject>();
     private List<Orb> currentOrbs = new List<Orb>();
     public bool isRoundActive = false;
     public RoundStates currentRoundState = RoundStates.Nothing;
+    public float enemyScaling = 1f; // one is normal, increase by 0.2 every round 
     // below are all the main stats tracked for rounds.
+    [Space(10)]
+    [Header("Fun Stuff!")]
+    public bool RIGGED = false;
+    public int RIGGEDSPAWN = -1;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
     private int timesParried = 0;
@@ -55,7 +68,7 @@ public class RoundManager : MonoBehaviour
     private float lastReceivedGift = -10f;
     private float lastGiftCheck = -10f;
     private float giftCooldown = 10f;
-    private float maxGiftTime = 20f;
+    private float maxGiftTime = 30f;
     private float giftVar = 10000f;
 
     void Awake()
@@ -88,7 +101,10 @@ public class RoundManager : MonoBehaviour
 
         if (currentRoundState == RoundStates.Active)
         {
-            if (player == null) return; 
+            if (player == null) {
+                EndCurrentRound();
+                return; 
+            }
             roundTimer += Time.deltaTime;
             timeRemaining = roundDuration - roundTimer;
             roundManagerUI.UpdateTimer(timeRemaining);
@@ -174,12 +190,11 @@ public class RoundManager : MonoBehaviour
             {
                 lastGiftCheck = Time.time;
                 float giftChance = UnityEngine.Random.Range(0, giftVar);
-                giftVar -= 450f;
+                giftVar -= 300f;
                 if (giftChance < player.stats.viewers || Time.time - lastReceivedGift > maxGiftTime + giftCooldown)
                 {
-                    giftVar = 10000f;
+                    giftVar = 20000f;
                     lastReceivedGift = Time.time;
-                    lastGiftCheck = Time.time;
                     AudienceGiftEvent();
                 }
             }
@@ -210,8 +225,32 @@ public class RoundManager : MonoBehaviour
             roundManagerUI.UpdateTimer(timeRemaining);
             if (roundTimer >= afterRoundDuration)
             {
-                StartShopSequence();
+                if (RIGGED) {
+                    StartVictorySequence(); 
+                    return;
+                }
+                if (objectivesCompleted == currentObjectives.Count && player != null)
+                {
+                    if (currentRound >= 10)
+                    {
+                        //completed all rounds? You win!
+                        StartVictorySequence();
+                    } else
+                    {
+                        StartShopSequence();
+                    }
+                } 
+                {
+                    // didn't complete all objectives? You lose. 
+                    StartGameOverSequence();
+                }
             }
+        } else if (currentRoundState == RoundStates.GameOver)
+        {
+            // do nothing for now.
+        } else if (currentRoundState == RoundStates.GameVictory)
+        {
+            // do nothing for now.
         }
     
 
@@ -219,12 +258,25 @@ public class RoundManager : MonoBehaviour
     public void AudienceGiftEvent() {
         // give the player a random item as a gift from the audience.
         Item audienceItem = viewerItemDatabase.GetAudienceItem(player.stats.viewers);
-        GameObject audiencePackage = Instantiate(audiencePackagePrefab, player.transform.position + Vector3.up * 3f, Quaternion.identity);
-        audiencePackage.GetComponent<Package>().item = audienceItem;
+        Debug.Log("The audience has sent you a gift: " + audienceItem.itemName);
+        // create the drone that brings the package 
+        GameObject packageDrone = Instantiate(packageDronePrefab, player.transform.position + Vector3.up * 5f + Vector3.forward * 6f, Quaternion.identity);
+        DronePackage dronePackage = packageDrone.GetComponent<DronePackage>();
+        dronePackage.item = audienceItem;
+        dronePackage.packagePrefab = audiencePackagePrefab;
+        dronePackage.targetPos = new Vector3(player.transform.position.x, player.transform.position.y + 3f, player.transform.position.z);
+        packageDrone.GetComponent<Rigidbody>().velocity = (dronePackage.targetPos - packageDrone.transform.position).normalized * 5f;
+    
+        // set the text
+        packageDropText.EnableTextForSeconds(2f);
+
+        // GameObject audiencePackage = Instantiate(audiencePackagePrefab, player.transform.position + Vector3.up * 3f, Quaternion.identity);
+        // audiencePackage.GetComponent<Package>().item = audienceItem;
     }
     public void StartBeforeRoundIntermission()
     {
         BlackScreen.Instance.FadeFromBlack(1f);
+        KnightSpawnIn();
         currentRoundState = RoundStates.Begin;
         roundTimer = 0f;
         Debug.Log("Round will begin soon!");
@@ -237,7 +289,7 @@ public class RoundManager : MonoBehaviour
         //assign the objectives for the round. 
         currentObjectives.Clear();
         roundManagerUI.ClearEntries();
-        CreateNewObjectives(2,5);
+        CreateNewObjectives(currentRoundData.minObjectives,currentRoundData.maxObjectives);
     }
     public void CreateNewObjectives(int min, int max)
     {
@@ -280,12 +332,10 @@ public class RoundManager : MonoBehaviour
         highestViewersThisRound = 0f;
         highestGradeThisRound = 0;
     }
-    public void EndCurrentRound()
+    private void CleanUpRound()
     {
-        currentRoundState = RoundStates.End;
-        roundTimer = 0f;
-        isRoundActive = false;
-        
+        // clean up any remaining enemies, packages, items, orbs, etc.
+
         // cleanup all the enemies 
         for (int i = currentEnemies.Count - 1; i >= 0; i--)
         {
@@ -296,21 +346,73 @@ public class RoundManager : MonoBehaviour
             currentEnemies.RemoveAt(i);
         }
 
+        // cleanup all the packages 
+        for (int i = currentPackages.Count - 1; i >= 0; i--)
+        {
+            if (currentPackages[i] != null)
+            {
+                Destroy(currentPackages[i]);
+            }
+            currentPackages.RemoveAt(i);
+        }
+
+        // cleanup all the on ground items
+        for (int i = currentOnGroundItems.Count - 1; i >= 0; i--)
+        {
+            if (currentOnGroundItems[i] != null)
+            {
+                Destroy(currentOnGroundItems[i]);
+            }
+            currentOnGroundItems.RemoveAt(i);
+        }
+
+        // clean up all the orbs
+        for (int i = currentOrbs.Count - 1; i >= 0; i--)
+        {
+            if (currentOrbs[i] != null)
+            {
+                Destroy(currentOrbs[i].gameObject);
+            }
+            currentOrbs.RemoveAt(i);
+        }
+    }
+    public void EndCurrentRound()
+    {
+        currentRoundState = RoundStates.End;
+        roundTimer = 0f;
+        isRoundActive = false;
+        
+        CleanUpRound();
+
         foreach (Objective obj in currentObjectives)
         {
-            if (obj.IsComplete()) objectivesCompleted++;
+            if (obj.IsCompleteFull()) objectivesCompleted++;
         }
+
+        // round summary UI popup and update 
         UpdateRoundSummaryUI();
+
+        // disabling some UI to prepare for next phase
         BlackScreen.Instance.FadeToBlackWithDelay(afterRoundDuration - 2f, 2f);
-        skilltreeManager.EnableAfterDelay(afterRoundDuration);
         statsUIManager.DisableAfterDelay(afterRoundDuration);
         roundSummaryManagerUI.DisableAfterDelay(afterRoundDuration);
-        Debug.Log("Round " + currentRound + " ended, begin shop phase soon.");
+
+        if (objectivesCompleted == currentObjectives.Count)
+        {
+            // continue if you did all the objectives
+            skilltreeManager.EnableAfterDelay(afterRoundDuration);
+            Debug.Log("Round " + currentRound + " ended, begin shop phase soon.");
+        }
+
+
+
     }
     public void StartShopSequence()
     {
         BlackScreen.Instance.FadeFromBlack(2f);
 
+        // send player to prison so they don't kill themselves or something
+        SENDTOPRISON();
 
         roundTimer = 0f;
         currentRoundState = RoundStates.Shop;
@@ -328,6 +430,32 @@ public class RoundManager : MonoBehaviour
         Debug.Log("The shop has closed.");
         StartBeforeRoundIntermission();
     }
+    public void StartGameOverSequence()
+    {
+        BlackScreen.Instance.FadeFromBlack(2f);
+        roundManagerUI.DisableTimer();
+        currentRoundState = RoundStates.GameOver;
+        SENDTOPRISON();
+
+        if (player == null)
+        {
+            gameOverCanvas.EnableUI("You have died. Now you'll never make it back home.");
+        } else if (objectivesCompleted < currentObjectives.Count) 
+        {
+            gameOverCanvas.EnableUI("You failed to complete all objectives. You will be punished.");
+        } else
+        {
+            gameOverCanvas.EnableUI("Hey :LOL!!! IDK HOW YOU GOT HERE XD you GOT ME!!!! you lost tho...");
+        }
+    }
+    public void StartVictorySequence()
+    {
+        BlackScreen.Instance.FadeFromBlack(2f);
+        roundManagerUI.DisableTimer();
+        currentRoundState = RoundStates.GameVictory;
+        SENDTOPRISON();
+        victoryCanvas.EnableUI("You have completed 10 rounds, and may finally return home! Congratulations!");
+    }
     public void UpdateRoundSummaryUI()
     {
         roundSummaryManagerUI.UpdateObjectives(objectivesCompleted, currentObjectives.Count);
@@ -335,6 +463,7 @@ public class RoundManager : MonoBehaviour
         roundSummaryManagerUI.UpdateViewerCount((int)highestViewersThisRound);
         roundSummaryManagerUI.UpdateKills(enemiesKilled);
         roundSummaryManagerUI.UpdateParries(timesParried);
+        roundSummaryManagerUI.UpdateRoundCount(currentRound);
         roundSummaryManagerUI.EnableAfterDelay(0.2f);
     }
     public void AssignStatUIManager(StatsUIManager other)
@@ -395,9 +524,30 @@ public class RoundManager : MonoBehaviour
 
         }
     }
+    public void AddPackage(GameObject package)
+    {
+        currentPackages.Add(package);
+    }
+    public void AddOnGroundItem(GameObject item)
+    {
+        currentOnGroundItems.Add(item);
+    }
+    public void SENDTOPRISON()
+    {
+        if (player == null) return;
+        player.transform.position = PRISON.transform.position + Vector3.up * 2f;
+    }
+    public void KnightSpawnIn()
+    {
+        if (RIGGEDSPAWN >= 0 && RIGGEDSPAWN < spawnLocationsParent.transform.childCount) {
+            player.transform.position = spawnLocationsParent.transform.GetChild(RIGGEDSPAWN).position;
+            return; 
+        }
+        player.transform.position = spawnLocationsParent.transform.GetChild(UnityEngine.Random.Range(0, spawnLocationsParent.transform.childCount)).position;
+    }
 }
 
 public enum RoundStates
 {
-    Active, Shop, Intermission, Begin, End, Nothing
+    Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory
 }

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 2000
-    turnSpeed: 1
-    walkSpeed: 1
+    maxHP: 500
+    turnSpeed: 50
+    walkSpeed: 3
     canSprint: 0
-    sprintSpeed: 1
+    sprintSpeed: 4
     sprintStaminaCost: 8
     maxStamina: 100
     staminaRegen: 10
@@ -37,6 +37,7 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
+    damageMultipliers: []
     runAwayDist: 2
     comfortDist: 3
     runTowardsDist: 10

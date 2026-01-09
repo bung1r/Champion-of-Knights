@@ -26,7 +26,14 @@ public class RoundManagerUI : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(seconds);
         roundTimer.text = string.Format("{0:D2}:{1:D2}", time.Minutes, time.Seconds);
     }
-
+    public void DisableTimer()
+    {
+        roundTimer.alpha = 0f;
+    }
+    public void EnableTimer()
+    {
+        roundTimer.alpha = 1f;
+    }  
     public void AddEntry(ObjectiveScaling objScaling, Objective objective)
     {
         objectiveUIManager.AddEntry(objScaling, objective);

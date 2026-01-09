@@ -11,6 +11,8 @@ public class StatManager : MonoBehaviour, IDamageable
     private Stats _baseStats;
     private float lastUsedStamina = 0;
     private float lastSavedStamina = -1;
+    private float lastTakenDamage = -1f;
+    private float lastSavedHP = -1f;
     [SerializeField] private AudioSource hitSFX; // completely optional
     private Resistances resistances;
     public void Start()
@@ -140,6 +142,26 @@ public class StatManager : MonoBehaviour, IDamageable
 
         lastSavedStamina = _stats.currentStamina;
     }
+    public virtual void RegenerateHP()
+    {
+        if (lastSavedHP > _stats.currentHP)
+        {
+            Debug.Log("DAMAGE TAKEN ");
+            lastTakenDamage = Time.time;
+        }
+
+        if (Time.time - lastTakenDamage > _stats.startRegenHP)
+        {
+             // regen HP
+
+            _stats.currentHP += _stats.regenHP * Time.deltaTime;
+            _stats.currentHP = Mathf.Min(_stats.currentHP, _stats.maxHP);
+            
+        }
+
+        lastSavedHP = _stats.currentHP;
+    }
+    
     // iterates through multipliers and destroys ones that shouldn't be there anymore. 
     public virtual void CheckMultipliers()
     {
@@ -260,7 +282,9 @@ public class StatManager : MonoBehaviour, IDamageable
             {BaseStatsEnum.staminaRegen, _baseStats.staminaRegen},
             {BaseStatsEnum.walkSpeed, _baseStats.walkSpeed},
             {BaseStatsEnum.sprintStaminaCost, _baseStats.sprintStaminaCost},
-            {BaseStatsEnum.maxStamina, _baseStats.maxStamina}
+            {BaseStatsEnum.maxStamina, _baseStats.maxStamina},
+            {BaseStatsEnum.regenHP, _baseStats.regenHP},
+            {BaseStatsEnum.startRegenHP, _baseStats.startRegenHP},
         };
 
         // complicated :(
@@ -291,6 +315,8 @@ public class StatManager : MonoBehaviour, IDamageable
         _stats.walkSpeed = statDict[BaseStatsEnum.walkSpeed];
         _stats.sprintStaminaCost = statDict[BaseStatsEnum.sprintStaminaCost];
         _stats.maxStamina = statDict[BaseStatsEnum.maxStamina];
+        _stats.regenHP = statDict[BaseStatsEnum.regenHP];
+        _stats.startRegenHP = statDict[BaseStatsEnum.startRegenHP];
     }
     // what happens when we die? Oh no!
     public virtual void Die(DamageData damage) {
@@ -315,6 +341,7 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         StunHandler();
         RegenerateStamina();
+        RegenerateHP();
         CheckMultipliers();
     }
     public virtual void PostUpdate() {}

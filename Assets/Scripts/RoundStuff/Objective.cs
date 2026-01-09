@@ -65,6 +65,11 @@ public class Objective
     {
         return isOneTime && currentAmount >= targetAmount;
     }
+    
+    public bool IsCompleteFull()
+    {
+        return currentAmount >= targetAmount;
+    }
 }
 
 [Serializable]

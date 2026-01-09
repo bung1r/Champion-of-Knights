@@ -72,7 +72,9 @@ public class RangedBullet : MonoBehaviour
         if (collision.gameObject == null) return;
         if (bulletData.damageData.source == null) return;
         if (collision.gameObject.layer == bulletData.damageData.source.layer) return;
-
+        if (this == null) return;
+        // if (!payload) return;
+        // if (lastPos == null) return;
 
         if (collision.transform.root.TryGetComponent<IDamageable>(out var damageable))
         {
@@ -90,7 +92,10 @@ public class RangedBullet : MonoBehaviour
                     return;
                 } else
                 {
-                    if (payload != null) payload.OnPierce(transform, collision.transform, bulletData.damageData, lastPos);
+                    if (transform != null && payload != null && collision != null && lastPos != null)
+                    {
+                        payload.OnPierce(transform, collision.transform, bulletData.damageData, lastPos);
+                    } 
                     damageable.TakeDamage(bulletData.damageData);
                     pierceLeft -= 1;
                 }

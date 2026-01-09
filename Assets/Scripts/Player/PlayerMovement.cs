@@ -50,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
+        RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
+        RoundManager.Instance.currentRoundState == RoundStates.GameVictory
+        ) return;
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
         holdShift = Input.GetKey(KeyCode.LeftShift);
@@ -57,11 +61,14 @@ public class PlayerMovement : MonoBehaviour
         stats = statManager.stats;
         TryJump();
         TryInteract();
-        Debug.Log(rb.velocity);
     }
 
     void FixedUpdate()
     {
+        if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
+        RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
+        RoundManager.Instance.currentRoundState == RoundStates.GameVictory
+        ) return;
         Move();
         FaceMouse();
         CamFollowPlayer();
@@ -122,24 +129,42 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
-        // don't do anything if there isn't any movement
-        if ((inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) || stats.inAttackAnim) {stats.isWalking = false; stats.isRunning = false; return;}
-        // the sprint logic 
-        if (holdShift && statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime) && !stats.isGuarding && !stats.inAttackAnim)
+        // no movement
+        if ((inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) || stats.inAttackAnim)
+        {
+            stats.isWalking = false;
+            stats.isRunning = false;
+
+            // stop horizontal movement, keep gravity
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
+            return;
+        }
+
+        // sprint logic
+        if (holdShift &&
+            statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime) &&
+            !stats.isGuarding &&
+            !stats.inAttackAnim)
         {
             statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
             speed = CalcSpeed(stats.sprintSpeed);
             stats.isRunning = true;
             stats.isWalking = false;
-        } else
+        }
+        else
         {
             speed = CalcSpeed(stats.walkSpeed);
             stats.isWalking = true;
             stats.isRunning = false;
         }
-        Vector3 moveXZ = new Vector3(inputDir.x, 0f, inputDir.z);
-        rb.MovePosition(rb.position + moveXZ * speed * Time.fixedDeltaTime);
-        
+
+        Vector3 moveXZ = new Vector3(inputDir.x, 0f, inputDir.z).normalized;
+
+        rb.velocity = new Vector3(
+            moveXZ.x * speed,
+            rb.velocity.y,   // keep gravity / jumping
+            moveXZ.z * speed
+        );
     }
     
     void CamFollowPlayer()
