@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\BobUpAndDown.cs" />
     <Compile Include="Assets\Scripts\Stats\Other\DeathBrick.cs" />
+    <Compile Include="Assets\Scripts\UI\Other\GlitchEffectController.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\CreditsButton.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedAbility.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventorySlot.cs" />

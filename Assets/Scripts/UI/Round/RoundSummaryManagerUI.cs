@@ -15,6 +15,9 @@ public class RoundSummaryManagerUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI verdictText;
     [SerializeField] private TextMeshProUGUI flavorText;
     [SerializeField] private TextMeshProUGUI roundCountText;
+    [SerializeField] private TextMeshProUGUI loyalViewersGainedText;
+    [SerializeField] private TextMeshProUGUI repGainedText;
+    [SerializeField] private TextMeshProUGUI corruptionGainedText;
     private List<string> positiveFlavorTexts = new List<string>()
     {
         "You feel one step closer to making it back home!",
@@ -75,6 +78,57 @@ public class RoundSummaryManagerUI : MonoBehaviour
     {
         roundCountText.text = "Round " + roundCount.ToString() + " Summary";
     }
+    public void UpdateLoyalViewersGained (int loyalViewers)
+    {
+        if (loyalViewers > 0)
+        {
+            loyalViewersGainedText.text = "Loyal Viewers Gained: " + loyalViewers.ToString();
+            loyalViewersGainedText.color = Color.green;
+        } else if (loyalViewers < 0)
+        {
+            flavorText.text = "Loyal Viewers Lost: " + Mathf.Abs(loyalViewers).ToString();
+            loyalViewersGainedText.color = Color.red;
+        } else
+        {
+            loyalViewersGainedText.text = "Loyal Viewers Gained: 0";
+            loyalViewersGainedText.color = Color.white;
+        }
+    }
+
+    public void UpdateRepGained(int repGained)
+    {
+        if (repGained > 0)
+        {
+            repGainedText.text = "Reputation Gained: " + repGained.ToString();
+            repGainedText.color = Color.green;
+        } else if (repGained < 0)
+        {
+            repGainedText.text = "Reputation Lost: " + Mathf.Abs(repGained).ToString();
+            repGainedText.color = Color.red;
+        } else
+        {
+            repGainedText.text = "Reputation Gained: 0";
+            repGainedText.color = Color.white;
+        }
+    }
+
+    public void UpdateCorruptionGained(int corruptionGained)
+    {
+        if (corruptionGained > 0)
+        {
+            corruptionGainedText.text = "Corruption Gained: " + corruptionGained.ToString();
+            corruptionGainedText.color = Color.red;
+        } else if (corruptionGained < 0)
+        {
+            corruptionGainedText.text = "Corruption Lost: " + Mathf.Abs(corruptionGained).ToString();
+            corruptionGainedText.color = Color.green;
+        } else
+        {
+            corruptionGainedText.text = "Corruption Gained: 0";
+            corruptionGainedText.color = Color.white;
+        }
+    }
+
     async public void EnableAfterDelay(float delaySeconds)
     {
         await Task.Delay((int)(delaySeconds * 1000));

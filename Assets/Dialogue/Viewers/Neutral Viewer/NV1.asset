@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: NV1
+  m_EditorClassIdentifier: 
+  speakerName: Neutral Viewer
+  dialogue:
+  - dialogueLine: Hey so um...
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I've seen your work, and it's... alright?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: To be honest, I've watched a lot of Knights in my time.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: And what makes and breaks a Knight is how well they do outside
+      the battlefield!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: So tell me, what do you value?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: So tell me, what do you value?
+    choices:
+    - choiceText: Getting back home.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: aca601ad5d7f5f047baf64b4525faeb5, type: 2}
+        reputation: -1
+        loyalviewers: 1
+        sponsers: 0
+        money: 0
+        corruption: -1
+        givenItem: {fileID: 0}
+    - choiceText: The Code of Chivalry.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 6dc4b624c27ba8e46b5b9c4c7034bd66, type: 2}
+        reputation: 5
+        loyalviewers: 5
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: Viewership.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 91155226dd62bed4f99bc942ba495804, type: 2}
+        reputation: -10
+        loyalviewers: -10
+        sponsers: 0
+        money: 0
+        corruption: 5
+        givenItem: {fileID: 0}
+    - choiceText: None of your business.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: eb912e235fb71f6409707bd37dde50bd, type: 2}
+        reputation: 2
+        loyalviewers: 3
+        sponsers: 0
+        money: 0
+        corruption: -5
+        givenItem: {fileID: 0}
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

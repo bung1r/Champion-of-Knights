@@ -50,10 +50,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
-        RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
-        RoundManager.Instance.currentRoundState == RoundStates.GameVictory
-        ) return;
+        // if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
+        // RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
+        // RoundManager.Instance.currentRoundState == RoundStates.GameVictory
+        // ) return;
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
         holdShift = Input.GetKey(KeyCode.LeftShift);
@@ -65,10 +65,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
-        RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
-        RoundManager.Instance.currentRoundState == RoundStates.GameVictory
-        ) return;
+        // if (RoundManager.Instance.currentRoundState == RoundStates.Shop ||
+        // RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
+        // RoundManager.Instance.currentRoundState == RoundStates.GameVictory
+        // ) return;
         Move();
         FaceMouse();
         CamFollowPlayer();

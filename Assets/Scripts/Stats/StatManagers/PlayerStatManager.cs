@@ -145,17 +145,40 @@ public class PlayerStatManager : StatManager
     }
     public void StyleUpdate()
     {
-
+        if (RoundManager.Instance.currentRoundState != RoundStates.Active) {
+            return;
+        }
         // Basically, goes down more the higher the styleLevel. 
         AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.75f) * Time.deltaTime));
-        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, stats.viewers, stats.styleLevel);
         
     } 
     public void CalculateViewers()
     {
-        float stable = (stats.styleLevel + stats.currentStyle / stats.maxStyle) * 400;
-        float viewerGain = 0.2f * (stable - stats.viewers);
+        if (RoundManager.Instance.currentRoundState != RoundStates.Active) return;
+        float viewerGainFactor = 10f * (1.5f + ((stats.reputation - (stats.corruption/2f)) / 100f)); // reputation affects viewer gain
+        float viewerLossFactor = 10f * (1.5f + stats.corruption / 100f); // corruption affects viewer loss
+        float idealStyle = Mathf.Sqrt(RoundManager.Instance.currentRound); // the 'stable' level, basically where you don't gain or lose viewers
+        float fullStyleLevel = stats.styleLevel + stats.currentStyle / stats.maxStyle; // stylelevel with the fraction added on
+
+        // maxixium possible viewers at that level
+        float maxViewersPerLevel = fullStyleLevel * viewerGainFactor * 20f + 100f;
+        maxViewersPerLevel += stats.loyalViewers * 2f;
+
+        float diff = fullStyleLevel - idealStyle;
+        float viewerGain = Mathf.Sign(diff) * Mathf.Sqrt(Mathf.Abs(diff));
+
+        // slow down viewer gain as you approach max viewers
+        if (viewerGain > 0 && stats.viewers + viewerGain > maxViewersPerLevel - 150f)
+        {
+            viewerGain = Mathf.Max((maxViewersPerLevel - stats.viewers)/50f, 0f);
+        } 
+
+        if (viewerGain>=0) viewerGain *= viewerGainFactor;
+        else viewerGain *= viewerLossFactor;
+
         stats.viewers += viewerGain * Time.deltaTime;
+        stats.viewers = Mathf.Max(stats.viewers, stats.loyalViewers);
+        // stats.viewers = Mathf.Max(stats.viewers , 0f); 
     }
     public void UIHandler()
     {
@@ -176,6 +199,16 @@ public class PlayerStatManager : StatManager
             lastEXP = stats.currentEXP;
             lastLevel = (int)stats.level;
         }
+
+        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, stats.viewers, stats.styleLevel, stats.reputation, stats.corruption);
+    }
+    public void ResetRoundStats()
+    {
+        stats.viewers = 0f;
+        stats.styleLevel = 0f;
+        stats.currentStyle = 0f;
+        stats.totalStyle = 0f;
+        statsUIManager.UpdateStyle(stats.currentStyle, stats.maxStyle, stats.totalStyle, stats.viewers, stats.styleLevel, stats.reputation, stats.corruption);
     }
     public override void PostUpdate()
     {
@@ -207,7 +240,26 @@ public class PlayerStatManager : StatManager
     {
         
     }
-
+    public void AddRep(int rep)
+    {
+        stats.reputation += rep;
+        stats.reputation = Mathf.Clamp(stats.reputation, -100f, 100f);
+    }
+    public void AddCorruption(int corr)
+    {
+        stats.corruption += corr;
+        stats.corruption = Mathf.Clamp(stats.corruption, 0f, 100f);
+    }  
+    public void AddSponsers(int spon)
+    {
+        stats.sponsers += spon;
+        stats.sponsers = Mathf.Max(stats.sponsers, 0f);
+    }
+    public void AddLoyalViewers(int loyal)
+    {
+        stats.loyalViewers += loyal;
+        stats.loyalViewers = Mathf.Max(stats.loyalViewers, 0f);
+    } 
     void LateUpdate()
     {
         if (numParriesThisFrame > 0) {

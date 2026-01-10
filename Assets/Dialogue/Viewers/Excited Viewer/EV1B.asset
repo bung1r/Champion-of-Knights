@@ -56,11 +56,11 @@ MonoBehaviour:
       hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      reputation: 0
+      reputation: 2
       loyalviewers: 0
       sponsers: 0
       money: 0
-      corruption: 0
+      corruption: -1
       givenItem: {fileID: 11400000, guid: cbfa960f83a372e4a9714fcbe5b563a3, type: 2}
   - dialogueLine: I'll still watch your streams though!
     choices: []

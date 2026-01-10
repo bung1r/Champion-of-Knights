@@ -74,7 +74,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Gotta live somehow, right? Haha...
+  - dialogueLine: Knights aren't supposed to be nice... I think...
     choices: []
     effects:
       hasEffects: 0
@@ -89,12 +89,12 @@ MonoBehaviour:
   - dialogueLine: Still so rude...
     choices: []
     effects:
-      hasEffects: 0
+      hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      reputation: 0
-      loyalviewers: 0
+      reputation: -5
+      loyalviewers: -1
       sponsers: 0
       money: 0
-      corruption: 0
+      corruption: -3
       givenItem: {fileID: 0}

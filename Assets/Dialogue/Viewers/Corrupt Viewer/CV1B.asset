@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: CV1B
+  m_EditorClassIdentifier: 
+  speakerName: Corruption
+  dialogue:
+  - dialogueLine: No?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Oh come on. We both know you don't mean that.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Look at you. Filth.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Taking sponsorships, appealing to the masses like you were born
+      to do.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: You were nothing as Knight, but now, you finally mean something.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: 'Now let me ask you once more. Will you stay here forever? Satisfy
+      your viewers and gain popularity until you die? '
+    choices:
+    - choiceText: Of course.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: b3990710c0af45d4eb9fb699a6f9948b, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: Yes.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: b3990710c0af45d4eb9fb699a6f9948b, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: Obviously!
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: b3990710c0af45d4eb9fb699a6f9948b, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: Why not?
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: b3990710c0af45d4eb9fb699a6f9948b, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: No.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 8b150c532074f3e43aaa9ade6fad7e88, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

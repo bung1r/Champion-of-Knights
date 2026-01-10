@@ -17,6 +17,10 @@ public class DialogueManager : MonoBehaviour
     private int currentDialogueIndex = 0;
     private PlayerStatManager player;
     private InventoryManager inventory;
+    private float nextLineDelay = 0.3f;
+    private float lastContinuedDialogueLine = 0f;
+    private float nextDialogueDelay = 0.8f;
+    private float lastLeftDialogue = 0f;
 
     void Awake()
     {
@@ -72,6 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     public void HideDialogue()
     {
+        lastLeftDialogue = Time.time;
         dialogueInUse = null;
         currentDialogueIndex = 0;
         currentTalkingTo = null;
@@ -81,6 +86,7 @@ public class DialogueManager : MonoBehaviour
     public void StartFullDialogue(FullDialogue dialogue, Talkable talkable = null)
     {
         if (dialogueInUse != null) return;
+        if (Time.time - lastLeftDialogue < nextDialogueDelay) return;
         currentTalkingTo = talkable;
         dialogueInUse = dialogue;
         currentDialogueIndex = 0;
@@ -89,6 +95,8 @@ public class DialogueManager : MonoBehaviour
     public void ProgressToNextDialogue()
     {
         if (dialogueInUse == null) return;
+        if (Time.time - lastContinuedDialogueLine < nextLineDelay) return;
+        lastContinuedDialogueLine = Time.time;
         Dialogue currentDialogue = dialogueInUse.dialogue[currentDialogueIndex];   
         if (currentDialogue.choices.Count > 0) return; // must make a choice first
         if (currentDialogue.effects.hasEffects)
@@ -135,62 +143,13 @@ public class DialogueManager : MonoBehaviour
 
     public void HandleEffects(Dialogue currentDialogue)
     {
-        // Implement stat changes and other effects here
-        if (currentDialogue.effects.givenItem) 
-            inventory.GiveItem(currentDialogue.effects.givenItem);
-        
-
-
-        if (currentDialogue.effects.endDialogue)
-        {
-            if (currentDialogue.effects.nextDialogue != null)
-            {
-                currentTalkingTo.dialogue = currentDialogue.effects.nextDialogue;
-            }
-            HideDialogue();
-            return;
-        } else
-        {
-            if (currentDialogue.effects.nextDialogue != null)
-            {
-                dialogueInUse = currentDialogue.effects.nextDialogue;
-                currentDialogueIndex = 0;
-                ShowCurrentDialogueLine();
-                return;
-            }
-
-            currentDialogueIndex++;
-            ShowCurrentDialogueLine();
-        }
+        EffectHandler(currentDialogue.effects);
     }
 
     public void HandleChoiceEffects(DialogueChoice choice)
     {
         // Implement stat changes and other effects here
-        if (choice.effects.givenItem) 
-            inventory.GiveItem(choice.effects.givenItem);
-
-        if (choice.effects.endDialogue)
-        {
-            if (choice.effects.nextDialogue != null)
-            {
-                currentTalkingTo.dialogue = choice.effects.nextDialogue;
-            }
-            HideDialogue();
-            return;
-        } else
-        {
-            if (choice.effects.nextDialogue != null)
-            {
-                dialogueInUse = choice.effects.nextDialogue;
-                currentDialogueIndex = 0;
-                ShowCurrentDialogueLine();
-                return;
-            }
-
-            currentDialogueIndex++;
-            ShowCurrentDialogueLine();
-        }
+        EffectHandler(choice.effects);
 
         foreach (Transform choiceButton in choicesContainer.transform)
         {
@@ -198,7 +157,39 @@ public class DialogueManager : MonoBehaviour
         }
     }
     
+    private void EffectHandler(DialogueEffects effects)
+    {
+        // Implement stat changes and other effects here
+        if (effects.givenItem) 
+            inventory.GiveItem(effects.givenItem);
 
+        player.AddRep((int)effects.reputation);
+        player.AddCorruption((int)effects.corruption);
+        player.AddSponsers((int)effects.sponsers);
+        player.AddLoyalViewers((int)effects.loyalviewers); 
+        
+        if (effects.endDialogue)
+        {
+            if (effects.nextDialogue != null)
+            {
+                currentTalkingTo.dialogue = effects.nextDialogue;
+            }
+            HideDialogue();
+            return;
+        } else
+        {
+            if (effects.nextDialogue != null)
+            {
+                dialogueInUse = effects.nextDialogue;
+                currentDialogueIndex = 0;
+                ShowCurrentDialogueLine();
+                return;
+            }
+
+            currentDialogueIndex++;
+            ShowCurrentDialogueLine();
+        }
+    }
     public void SelectChoice(DialogueChoice dialogueChoice)
     {
         if (dialogueInUse == null) return;

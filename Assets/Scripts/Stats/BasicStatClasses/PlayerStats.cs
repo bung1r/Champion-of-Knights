@@ -18,6 +18,11 @@ public class PlayerStats : Stats
     public float maxStyle;
     public float styleLevel = 0;
     public float viewers = 0f;
+    public float loyalViewers = 0f;
+    public float money = 0f; 
+    public float reputation = 0f; // -100 -> 100
+    public float corruption = 0f; // 0 -> 100
+    public float sponsers = 0f; // as many as you want
     public void ConstructPlayer(PlayerStats other)
     {
         totalEXP = other.totalEXP;

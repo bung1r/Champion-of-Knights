@@ -24,6 +24,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private GameObject orbPrefab;
     [SerializeField] private AbilityEquipUIManager abilityEquipUIManager;
     [SerializeField] private RoundSummaryManagerUI roundSummaryManagerUI;
+    [SerializeField] private GlitchEffectController glitchEffectController;
     [SerializeField] private GameOverUIManager gameOverCanvas;
     [SerializeField] private GameOverUIManager victoryCanvas;
     [SerializeField] private SimpleEnableText packageDropText;
@@ -48,6 +49,7 @@ public class RoundManager : MonoBehaviour
     [Space(10)]
     [Header("Fun Stuff!")]
     public bool RIGGED = false;
+    public bool INFINITERIGGED = false;
     public int RIGGEDSPAWN = -1;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
@@ -70,6 +72,9 @@ public class RoundManager : MonoBehaviour
     private float giftCooldown = 10f;
     private float maxGiftTime = 30f;
     private float giftVar = 10000f;
+    private int loyalViewersGained = 0;
+    private int repGained = 0;
+    private int corruptionGained = 0;
 
     void Awake()
     {
@@ -98,7 +103,7 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     { 
-
+        glitchEffectController.SetCorruptionLevel(player.stats.corruption / 100f);
         if (currentRoundState == RoundStates.Active)
         {
             if (player == null) {
@@ -389,18 +394,21 @@ public class RoundManager : MonoBehaviour
             if (obj.IsCompleteFull()) objectivesCompleted++;
         }
 
+        // additional calculations
+        loyalViewersGained = CalcLoyalViewersGained();
+        player.stats.loyalViewers += loyalViewersGained;
+
         // round summary UI popup and update 
         UpdateRoundSummaryUI();
 
         // disabling some UI to prepare for next phase
         BlackScreen.Instance.FadeToBlackWithDelay(afterRoundDuration - 2f, 2f);
-        statsUIManager.DisableAfterDelay(afterRoundDuration);
+        // statsUIManager.DisableAfterDelay(afterRoundDuration);
         roundSummaryManagerUI.DisableAfterDelay(afterRoundDuration);
 
         if (objectivesCompleted == currentObjectives.Count)
         {
             // continue if you did all the objectives
-            skilltreeManager.EnableAfterDelay(afterRoundDuration);
             Debug.Log("Round " + currentRound + " ended, begin shop phase soon.");
         }
 
@@ -411,6 +419,8 @@ public class RoundManager : MonoBehaviour
     {
         BlackScreen.Instance.FadeFromBlack(2f);
 
+        player.ResetRoundStats();
+        
         // send player to prison so they don't kill themselves or something
         SENDTOPRISON();
 
@@ -432,6 +442,10 @@ public class RoundManager : MonoBehaviour
     }
     public void StartGameOverSequence()
     {
+        if (INFINITERIGGED) {
+            StartShopSequence();
+            return;
+        }
         BlackScreen.Instance.FadeFromBlack(2f);
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.GameOver;
@@ -450,6 +464,10 @@ public class RoundManager : MonoBehaviour
     }
     public void StartVictorySequence()
     {
+        if (INFINITERIGGED) {
+            StartShopSequence();
+            return;
+        }
         BlackScreen.Instance.FadeFromBlack(2f);
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.GameVictory;
@@ -464,6 +482,9 @@ public class RoundManager : MonoBehaviour
         roundSummaryManagerUI.UpdateKills(enemiesKilled);
         roundSummaryManagerUI.UpdateParries(timesParried);
         roundSummaryManagerUI.UpdateRoundCount(currentRound);
+        roundSummaryManagerUI.UpdateLoyalViewersGained(loyalViewersGained);
+        roundSummaryManagerUI.UpdateRepGained(repGained);
+        roundSummaryManagerUI.UpdateCorruptionGained(corruptionGained);
         roundSummaryManagerUI.EnableAfterDelay(0.2f);
     }
     public void AssignStatUIManager(StatsUIManager other)
@@ -523,6 +544,12 @@ public class RoundManager : MonoBehaviour
             }
 
         }
+    }
+    public int CalcLoyalViewersGained()
+    {
+        // loyal viewers gained is 10% of total viewers this round, rounded down.
+        float gain = ((player.stats.viewers - player.stats.loyalViewers) + (highestViewersThisRound - player.stats.loyalViewers))/2f;
+        return Mathf.FloorToInt(gain * 0.2f);
     }
     public void AddPackage(GameObject package)
     {

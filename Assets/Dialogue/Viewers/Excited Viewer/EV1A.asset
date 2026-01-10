@@ -56,9 +56,9 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      reputation: 0
-      loyalviewers: 0
+      reputation: 8
+      loyalviewers: 5
       sponsers: 0
       money: 0
-      corruption: 0
+      corruption: 2
       givenItem: {fileID: 0}

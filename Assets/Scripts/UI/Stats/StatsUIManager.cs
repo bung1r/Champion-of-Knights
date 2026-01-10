@@ -38,11 +38,12 @@ public class StatsUIManager : MonoBehaviour
     {
         stamBar.UpdateBar(currStam, maxStam);
     }
-    public void UpdateStyle(float currStyle, float maxStyle, float totalStyle, float viewers, float styleLevel)
+    public void UpdateStyle(float currStyle, float maxStyle, float totalStyle, float viewers, float styleLevel, float reputation, float corruption)
     {
         styleBar.UpdateBar(currStyle, maxStyle);
-        styleHUDManager.UpdateText(totalStyle, viewers, styleLevel);
+        styleHUDManager.UpdateText(totalStyle, viewers, styleLevel, reputation, corruption);
     }
+    
     public void UpdateEXP(float currEXP, float maxEXP, int level)
     {
         expBar.UpdateBar(currEXP, maxEXP);

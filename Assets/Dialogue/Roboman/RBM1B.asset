@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: RobotmanIntro2
+  m_Name: RBM1B
   m_EditorClassIdentifier: 
   speakerName: Roboman
   dialogue:
-  - dialogueLine: Talking to me again, Mr. Knight?
+  - dialogueLine: Corruption? Now that's a good question.
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -26,11 +26,11 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Hmm... let me see...
+  - dialogueLine: It's subtle, yet it's important.
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -38,11 +38,12 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Here's a tip for you!
+  - dialogueLine: '''Corruption'' is the amount the future has ''infected'' you,
+      in simple terms.'
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -50,11 +51,12 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Reputation is the amount that viewers like you, essentially.
+  - dialogueLine: If you've been corrupted by the future, going back home will never
+      be the same.
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -62,11 +64,12 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Keep your reputation up in order to keep up your viewers!
+  - dialogueLine: Your vision will become blurry, and you'll get used to the various
+      gadgets we provide you.
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -74,12 +77,11 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You will need to sacrifice reputation for other gains at some point
-      but... we'll cross that bridge once we get there, yeah?
+  - dialogueLine: You'll deal more damage with our weapons... but at a major cost.
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -87,11 +89,10 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: For now, just explore this place! It's your only place to rest
-      in the chaos that is content creation.
+  - dialogueLine: Don't accept too many sponserships, and stick to your moral code.
     choices: []
     effects:
-      hasEffects: 0
+      hasEffects: 1
       endDialogue: 1
       nextDialogue: {fileID: 0}
       reputation: 0

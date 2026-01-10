@@ -15,6 +15,8 @@ public class StyleHUDManager : MonoBehaviour
     public TextMeshProUGUI gradeText;
     public TextMeshProUGUI styleText;
     public TextMeshProUGUI viewersText;
+    public TextMeshProUGUI reputationText;
+    public TextMeshProUGUI corruptionText;
     void Update()
     {
         for (int i = allStyles.Count - 1; i >= 0; i--)
@@ -40,7 +42,7 @@ public class StyleHUDManager : MonoBehaviour
         StyleEntry newEntry = new StyleEntry(bonusDatabase, styleObj, bonusType, mult);
         allStyles.Add(newEntry);
     }
-    public void UpdateText(float currStyle, float viewers, float styleLevel)
+    public void UpdateText(float currStyle, float viewers, float styleLevel, float reputation, float corruption)
     {
         if (styleLevel == 0) gradeText.text = "F";
         else if (styleLevel == 1) gradeText.text = "D";
@@ -50,8 +52,20 @@ public class StyleHUDManager : MonoBehaviour
         else if (styleLevel == 5) gradeText.text = "S";
         else if (styleLevel == 6) gradeText.text = "X";
         
-        styleText.text = $"Style: {Mathf.FloorToInt(currStyle)}";
+        // styleText.text = $"Style: {Mathf.FloorToInt(currStyle)}";
         viewersText.text = $"Viewers: {Mathf.FloorToInt(viewers)}";
+        
+        reputationText.text = $"Rep: {Mathf.FloorToInt(reputation)}";
+        if (reputation >= 0)
+        {
+            reputationText.color = new Color(1f - reputation/100f, 1f, 1f - reputation/100f);
+        } else
+        {
+            reputationText.color = new Color(1f, 1f - Math.Abs(reputation)/100f, 1f - Math.Abs(reputation)/100f);
+        }
+
+        corruptionText.text = $"Corruption: {Mathf.FloorToInt(corruption)}";
+        corruptionText.color = new Color(1f, 1f - corruption/100f, 1f - corruption/100f);
     }
 }
 
