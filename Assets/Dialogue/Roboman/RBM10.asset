@@ -10,127 +10,112 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: EndingF
+  m_Name: RBM10
   m_EditorClassIdentifier: 
-  speakerName: Ending
+  speakerName: Roboman
   dialogue:
-  - dialogueLine: You accepted the corruption that filled your soul.
+  - dialogueLine: Congratulations, Mr. Knight.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: When you were asked whether or not you wanted to go home or to
-      stay in the future forever, you stayed in a heartbeat.
+  - dialogueLine: You have finally completed your final round.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: After all, your new purpose in life was to dedicate everything
-      you had to your viewers and your sponsors, no matter the cost.
+  - dialogueLine: It truly has been a pleasure. It truly, truly has.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: But eventually, this overwhelming devotion came crashing to a halt.
-      You were appealing to viewers too much, and in doing so, drove them out instead.
+  - dialogueLine: But now it's time for you too make your final decision.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Continued efforts to salvage your failing stream all ended in utter
-      failure.
+  - dialogueLine: Even as your guide, I can't sway your decisions. That's not part
+      of my job.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You were soon deemed unift to continue content creation. But you
-      found a peace, knowing your stress would end.
+  - dialogueLine: So tell me, and to the rest of your viewers.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: '"Never regret thy fall, O Icarus of the fearless flight, For the
-      greatest tragedy of them all, Is never to feel the burning light."'
-    choices: []
+  - dialogueLine: Will you stay and continue creating content? Or will you go back
+      to your home time, and live out the rest of your days?
+    choices:
+    - choiceText: Leave
+      effects:
+        hasEffects: 0
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: a4c1b0a689f1e054ca83ece981509f00, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: Stay
+      effects:
+        hasEffects: 0
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: c75e64e7e311240409c15149aef2542b, type: 2}
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
-      complexEffects: []
-      reputation: 0
-      loyalviewers: 0
-      sponsers: 0
-      money: 0
-      corruption: 0
-      givenItem: {fileID: 0}
-  - dialogueLine: Goodbye, Mr. Knight.
-    choices: []
-    effects:
-      hasEffects: 0
-      endDialogue: 0
-      nextDialogue: {fileID: 0}
-      complexEffects: []
-      reputation: 0
-      loyalviewers: 0
-      sponsers: 0
-      money: 0
-      corruption: 0
-      givenItem: {fileID: 0}
-  - dialogueLine: 'Ending F: Icarus.'
-    choices: []
-    effects:
-      hasEffects: 1
-      endDialogue: 0
-      nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
-      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

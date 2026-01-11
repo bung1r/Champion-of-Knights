@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: EndingF
+  m_Name: FV10B
   m_EditorClassIdentifier: 
-  speakerName: Ending
+  speakerName: Unfamiliar Viewer
   dialogue:
-  - dialogueLine: You accepted the corruption that filled your soul.
+  - dialogueLine: Hey!!!
     choices: []
     effects:
       hasEffects: 0
@@ -27,8 +27,8 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: When you were asked whether or not you wanted to go home or to
-      stay in the future forever, you stayed in a heartbeat.
+  - dialogueLine: How is it?? You're almost at the last round now!!!! Isn't that
+      exciting???
     choices: []
     effects:
       hasEffects: 0
@@ -41,8 +41,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: After all, your new purpose in life was to dedicate everything
-      you had to your viewers and your sponsors, no matter the cost.
+  - dialogueLine: Before you complete your final round.
     choices: []
     effects:
       hasEffects: 0
@@ -55,8 +54,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: But eventually, this overwhelming devotion came crashing to a halt.
-      You were appealing to viewers too much, and in doing so, drove them out instead.
+  - dialogueLine: I must tell you one last thing.
     choices: []
     effects:
       hasEffects: 0
@@ -69,8 +67,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Continued efforts to salvage your failing stream all ended in utter
-      failure.
+  - dialogueLine: I don't really care what decision you make but...
     choices: []
     effects:
       hasEffects: 0
@@ -83,8 +80,8 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You were soon deemed unift to continue content creation. But you
-      found a peace, knowing your stress would end.
+  - dialogueLine: Make what you think is the best decision? Whether to stay, or to
+      leave.
     choices: []
     effects:
       hasEffects: 0
@@ -97,8 +94,8 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: '"Never regret thy fall, O Icarus of the fearless flight, For the
-      greatest tragedy of them all, Is never to feel the burning light."'
+  - dialogueLine: To be honest, it's gonna suck without being able to watch such
+      a cool Knight like you but...
     choices: []
     effects:
       hasEffects: 0
@@ -111,7 +108,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Goodbye, Mr. Knight.
+  - dialogueLine: You have something to get back to, right?
     choices: []
     effects:
       hasEffects: 0
@@ -124,12 +121,12 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: 'Ending F: Icarus.'
+  - dialogueLine: Alright then, good luck! Hahah!
     choices: []
     effects:
-      hasEffects: 1
+      hasEffects: 0
       endDialogue: 0
-      nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
+      nextDialogue: {fileID: 0}
       complexEffects: []
       reputation: 0
       loyalviewers: 0

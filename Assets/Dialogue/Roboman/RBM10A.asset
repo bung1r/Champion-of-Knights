@@ -10,40 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: RBM4
+  m_Name: RBM10A
   m_EditorClassIdentifier: 
   speakerName: Roboman
   dialogue:
-  - dialogueLine: Good work out there, Mr. Knight!
+  - dialogueLine: Very well then.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You've done pretty well this round.
+  - dialogueLine: Goodbye then, Mr. Knight.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Continue that pressure up, and you'll be out of here in no time!
+  - dialogueLine: It was... truly a pleasure, being your guide. I wish you all the
+      best.
     choices: []
     effects:
-      hasEffects: 0
+      hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 4
+        intValue: 1
+        floatValue: 0
+        stringValue: 
       reputation: 0
       loyalviewers: 0
       sponsers: 0

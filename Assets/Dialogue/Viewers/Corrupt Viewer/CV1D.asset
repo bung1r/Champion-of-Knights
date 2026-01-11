@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -44,6 +46,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -56,6 +59,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -68,6 +72,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -80,6 +85,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -89,9 +95,14 @@ MonoBehaviour:
   - dialogueLine: One last spectacle for our viewers. Before we go.
     choices: []
     effects:
-      hasEffects: 0
+      hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 4
+        intValue: 3
+        floatValue: 0
+        stringValue: 
       reputation: 0
       loyalviewers: 0
       sponsers: 0

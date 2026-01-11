@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: RBM3
+  m_Name: RBM3B
   m_EditorClassIdentifier: 
   speakerName: Roboman
   dialogue:
@@ -26,7 +26,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You've done pretty well this round.
+  - dialogueLine: You did alright this round.
     choices: []
     effects:
       hasEffects: 0

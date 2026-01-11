@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -44,6 +46,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -57,19 +60,21 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Days of regrets, sorrows, and tears. You chose to go back here,
-      yet you regretted it.
+  - dialogueLine: Days of regrets, sorrows, and tears. You had chosen to go back
+      home, yet you regretted it.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -77,12 +82,13 @@ MonoBehaviour:
       corruption: 0
       givenItem: {fileID: 0}
   - dialogueLine: You had once had viewers and popularity and a reputation you had
-      to uphold between all of them.
+      to uphold. Real responsibilities.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -97,44 +103,49 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You had to share it. And share you did. To anybody and everybody.
+  - dialogueLine: You had to share your experiences. And share you did. To anybody
+      and everybody who would or wouldn't listen.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You were crazy. Insane. A former Knight speaks of an incomprehensible
-      future, headlines say.
+  - dialogueLine: You were crazy. Insane. "A former Knight speaks of an incomprehensible
+      future", papers would say.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You are shunned, and the local police quickly lock you up to prevent
-      you from disturbing the peace.
+  - dialogueLine: You were shunned, and the local police quickly locked you up to
+      prevent you from disturbing the peace.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -148,6 +159,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -160,6 +172,7 @@ MonoBehaviour:
       hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

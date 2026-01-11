@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
-  m_Name: CV1A
+  m_Name: RBM10B
   m_EditorClassIdentifier: 
-  speakerName: Corruption
+  speakerName: Roboman
   dialogue:
-  - dialogueLine: I knew you'd say that.
+  - dialogueLine: Very well then.
     choices: []
     effects:
       hasEffects: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Now come, let's tell our guide.
+  - dialogueLine: I suppose we'll be seeing each other VERY often.
     choices: []
     effects:
       hasEffects: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: We'll stay in this world.
+  - dialogueLine: Well then, it's about that time then, isn't it?
     choices: []
     effects:
       hasEffects: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: We'll entertain the masses.
+  - dialogueLine: Hurry up in the shops. Your next round is about to begin.
     choices: []
     effects:
       hasEffects: 0
@@ -66,10 +66,10 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Just... forget the past.
+  - dialogueLine: To celebrate your choice, here's a Big HP Potion.
     choices: []
     effects:
-      hasEffects: 0
+      hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 0}
       complexEffects: []
@@ -78,21 +78,8 @@ MonoBehaviour:
       sponsers: 0
       money: 0
       corruption: 0
-      givenItem: {fileID: 0}
-  - dialogueLine: Let it all wash away...
-    choices: []
-    effects:
-      hasEffects: 0
-      endDialogue: 0
-      nextDialogue: {fileID: 0}
-      complexEffects: []
-      reputation: 0
-      loyalviewers: 0
-      sponsers: 0
-      money: 0
-      corruption: 0
-      givenItem: {fileID: 0}
-  - dialogueLine: And be free.
+      givenItem: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
+  - dialogueLine: A token of goodwill, if you will.
     choices: []
     effects:
       hasEffects: 1
@@ -100,7 +87,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 0}
       complexEffects:
       - effectType: 4
-        intValue: 4
+        intValue: 2
         floatValue: 0
         stringValue: 
       reputation: 0

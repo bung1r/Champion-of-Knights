@@ -37,6 +37,7 @@ public class BlackScreen : MonoBehaviour
 
         if (isFadingFromBlack)
         {
+            Debug.Log("Fading from black update");
             float t = (Time.time - startFadeFromBlack) / fadeDuration;
             if (t >= 1f)
             {

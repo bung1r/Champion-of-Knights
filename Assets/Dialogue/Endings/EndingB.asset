@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,18 +33,20 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: But... you could never the future off you.
+  - dialogueLine: But... you could never quite shake the future off you.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -57,6 +60,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -71,6 +75,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -84,6 +89,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -97,6 +103,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -104,25 +111,27 @@ MonoBehaviour:
       corruption: 0
       givenItem: {fileID: 0}
   - dialogueLine: You may not be able to move on... but you could try to replace
-      it.
+      that experience with something greater.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You ran into battlefield, whether or not those sides were winning.
-      You didn't care anymore. You just needed to forget your past.
+  - dialogueLine: You ran into battlefield, whether or not those sides were allies
+      or enemies. You didn't care anymore. You just needed to forget your past.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -136,6 +145,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -150,6 +160,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -162,6 +173,7 @@ MonoBehaviour:
       hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

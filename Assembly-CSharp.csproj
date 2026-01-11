@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\UI\Dialogue\FullDialogue.cs" />
     <Compile Include="Assets\Scripts\Utils\MasterStuff.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundDatabase.cs" />
+    <Compile Include="Assets\Scripts\RoundStuff\DialogueRound.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\Resistances.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\ViewerItemDatabase.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue\Dialogue.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\RangedHelper.cs" />
     <Compile Include="Assets\Scripts\Map\Talkable.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHUDManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialogue\ComplexDialogueEffect.cs" />
     <Compile Include="Assets\Scripts\Stats\ScriptableObjects\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundData.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundManager.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Scripts\Weapon\ComplexRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\QuitButton.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUIManager.cs" />
+    <Compile Include="Assets\Scripts\RoundStuff\DialogueRoundHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUI.cs" />
     <Compile Include="Assets\Scripts\Utils\BootstrapSceneHandler.cs" />

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 
 
@@ -12,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueContentText;
     public GameObject choicesContainer;
     public GameObject choiceButtonPrefab;
+    public Image bgImage;
     private FullDialogue dialogueInUse;
     private Talkable currentTalkingTo;
     private int currentDialogueIndex = 0;
@@ -85,8 +87,10 @@ public class DialogueManager : MonoBehaviour
 
     public void StartFullDialogue(FullDialogue dialogue, Talkable talkable = null)
     {
+        if (dialogue == null) return;
         if (dialogueInUse != null) return;
         if (Time.time - lastLeftDialogue < nextDialogueDelay) return;
+        if (talkable != null) talkable.OnTalkedTo();
         currentTalkingTo = talkable;
         dialogueInUse = dialogue;
         currentDialogueIndex = 0;
@@ -168,6 +172,11 @@ public class DialogueManager : MonoBehaviour
         player.AddSponsers((int)effects.sponsers);
         player.AddLoyalViewers((int)effects.loyalviewers); 
         
+        foreach (ComplexDialogueEffect effect in effects.complexEffects)
+        {
+            ComplexEffectHandler(effect);
+        }
+        
         if (effects.endDialogue)
         {
             if (effects.nextDialogue != null)
@@ -194,5 +203,36 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueInUse == null) return;
         HandleChoiceEffects(dialogueChoice);
+    }
+    public void EnableBG()
+    {
+        bgImage.enabled = true;
+    }
+    public void ComplexEffectHandler(ComplexDialogueEffect effect)
+    {
+        switch (effect.effectType)
+        {
+            case DialogueEffectTypes.Reputation:
+                player.AddRep((int)effect.floatValue);
+                break;
+            case DialogueEffectTypes.LoyalViewers:
+                player.AddLoyalViewers((int)effect.floatValue);
+                break;
+            case DialogueEffectTypes.Sponsor:
+                player.AddSponsers((int)effect.floatValue);
+                break;
+            case DialogueEffectTypes.Money:
+                // player.AddMoney((int)effect.floatValue);
+                break;
+            case DialogueEffectTypes.Corruption:
+                player.AddCorruption((int)effect.floatValue);
+                break;
+            case DialogueEffectTypes.DoEnding:
+                RoundManager.Instance.ending = effect.intValue;
+                RoundManager.Instance.EndRoundSequence();
+                break;
+            default:
+                break;
+        }
     }
 }

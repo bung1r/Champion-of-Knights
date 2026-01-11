@@ -16,6 +16,7 @@ public class DialogueEffects
     public bool hasEffects = false;
     public bool endDialogue = true;
     public FullDialogue nextDialogue; // optional
+    public List<ComplexDialogueEffect> complexEffects = new List<ComplexDialogueEffect>();
     public float reputation = 0;
     public float loyalviewers = 0;
     public float sponsers = 0;

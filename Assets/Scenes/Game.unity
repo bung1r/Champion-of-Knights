@@ -2306,6 +2306,7 @@ MonoBehaviour:
   choicesContainer: {fileID: 922787183}
   choiceButtonPrefab: {fileID: 161769534705272766, guid: 3c748ac8b810f9a43b7544331e2240cd,
     type: 3}
+  bgImage: {fileID: 927440280}
 --- !u!114 &185503388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3606,6 +3607,7 @@ GameObject:
   - component: {fileID: 392003536}
   - component: {fileID: 392003537}
   - component: {fileID: 392003538}
+  - component: {fileID: 392003539}
   m_Layer: 0
   m_Name: Master
   m_TagString: Untagged
@@ -3699,7 +3701,7 @@ MonoBehaviour:
   packageDropText: {fileID: 670554461}
   PRISON: {fileID: 456183442}
   spawnLocationsParent: {fileID: 1907490146}
-  currentRound: 0
+  currentRound: 6
   roundDuration: 4
   shopDuration: 9999
   beforeRoundDuration: 4
@@ -3711,6 +3713,7 @@ MonoBehaviour:
   RIGGED: 0
   INFINITERIGGED: 1
   RIGGEDSPAWN: 0
+  ending: -1
 --- !u!114 &392003538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3725,6 +3728,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManagerPrefab: {fileID: 561193753238756498, guid: e6bb8a216229cd64b9ed4c4827179037,
     type: 3}
+--- !u!114 &392003539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392003532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7e9c31fee9f914dae0003e2e530aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guide: {fileID: 1366625050}
+  guideRoundsDialogues:
+  - roundDialogue:
+    - {fileID: 11400000, guid: 682b039fbcef3e94cb6b056d9249f9ef, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: d264337e5ea3f604b982af7d8f679be0, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: 442524f454aea444cbaeb2afdb21aba7, type: 2}
+    - {fileID: 11400000, guid: eafa9f02cafea954999a7640150db69f, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: 398824ae67e3bee468208c83b587fa73, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: eb8773e18ed69cb418c66241d458b2b7, type: 2}
+  viewer: {fileID: 1291298434}
+  allViewers:
+    roundDialogue:
+    - {fileID: 11400000, guid: 6292fcaed723f7845bcad4132857411c, type: 2}
+    - {fileID: 11400000, guid: 4211a47d7af937e4d8c8bbc939ec7a9e, type: 2}
+    - {fileID: 11400000, guid: 2c92fafad7408e045a38df0347752a84, type: 2}
+    - {fileID: 11400000, guid: 623e6821e5350b74c95516e66d45b511, type: 2}
+    - {fileID: 11400000, guid: 9da7fddf7368dc14d8c4bef531d1d17b, type: 2}
+    - {fileID: 11400000, guid: b598c37d0ddd9bf489b23ad3b8e9510d, type: 2}
+  persistentViewerRoundDialogue:
+  - roundDialogue:
+    - {fileID: 11400000, guid: 7f0e519946939634d8776daf304996b7, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: 0596e7dc1603dbc4d804d4c1ffe89951, type: 2}
+    - {fileID: 11400000, guid: a14846c8b29e7464f8be9ed0f9e932e9, type: 2}
+    - {fileID: 11400000, guid: 458e3847582f7ce4bb815f92e964a469, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: 777ccbea4188ba8468241601ee5b9580, type: 2}
+    - {fileID: 11400000, guid: c1f1bbf73e8369a43a4f47364b8bccce, type: 2}
+    - {fileID: 11400000, guid: 1bc792e5ddd5ff24aba1034373781cdc, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: 04832db1123faff4a8cacef046a83408, type: 2}
+    - {fileID: 11400000, guid: 2a7d4f1c1da66c44a9ae65362de4178e, type: 2}
+    - {fileID: 11400000, guid: 6daa18c02fdd8ac40a1060c1f0025d99, type: 2}
+    - {fileID: 11400000, guid: 88bee810414a37942a31de6212215db4, type: 2}
+  - roundDialogue:
+    - {fileID: 11400000, guid: f48591488bd491047b89d49d1c2f81e9, type: 2}
+    - {fileID: 11400000, guid: 6fd82bec266c78d40a8ed92703a58d9b, type: 2}
+  corruptionDialogue: {fileID: 11400000, guid: f4175b292f076a3439c76e9a802089d2, type: 2}
+  shopkeeper: {fileID: 0}
+  shopkeeperDialogues:
+    roundDialogue: []
+  endingDialogues:
+  - {fileID: 11400000, guid: b197a18920566c3438e4cbe28f745c01, type: 2}
+  - {fileID: 11400000, guid: d8c5d9fde730ec144bb624186243e25f, type: 2}
+  - {fileID: 11400000, guid: cb880e72bf5d93f4abd6082e2eea04bc, type: 2}
+  - {fileID: 11400000, guid: 9f3cde08b45f39a49b869a7b1fdf4386, type: 2}
+  - {fileID: 11400000, guid: 0dd1ed9a099a0b74f9eee58a470e5233, type: 2}
+  - {fileID: 11400000, guid: 968a07a9f14f5464cab26dbdc5066e39, type: 2}
 --- !u!1 &409213216
 GameObject:
   m_ObjectHideFlags: 0
@@ -17225,13 +17292,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927440278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.5345911, g: 0.5345911, b: 0.5345911, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17607,7 +17674,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953967275}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -26060,7 +26127,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859131042}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -26074,7 +26141,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1000
+  m_SortingOrder: 999
   m_TargetDisplay: 0
 --- !u!224 &1859131046
 RectTransform:

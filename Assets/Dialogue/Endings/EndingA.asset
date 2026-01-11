@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -45,43 +47,47 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You are transported back to your time.
+  - dialogueLine: You were transported back to your time.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You had left during a major development in Knighthood.
+  - dialogueLine: You had left during a major development in the world of Knighthood.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Now, your lord was dead due to an uprising, with the entire system
-      in chaos.
+  - dialogueLine: Your lord had been killed due to an uprising, one uprising of many
+      within the region.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -94,18 +100,21 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: 'You finally reunite with your wife and kids, who deeply miss you. '
+  - dialogueLine: 'You finally reunited with your wife and kids, who deeply missed
+      you. '
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -118,19 +127,21 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You couldn't burden someone with that kind of knowledge. Though
-      it still haunted you at all times.
+  - dialogueLine: You couldn't burden someone with that kind of knowledge, no matter
+      how much you wanted to scream it to the rest of the ignorant world.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -144,6 +155,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -156,6 +168,7 @@ MonoBehaviour:
       hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

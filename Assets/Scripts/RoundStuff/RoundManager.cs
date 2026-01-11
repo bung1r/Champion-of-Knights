@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -53,6 +54,7 @@ public class RoundManager : MonoBehaviour
     public int RIGGEDSPAWN = -1;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
+    public int ending = -1; // 1 = A, 2 = B, 3 = C...
     private int timesParried = 0;
     private int orbsCollected = 0;
     private int enemiesKilled = 0;
@@ -256,7 +258,17 @@ public class RoundManager : MonoBehaviour
         } else if (currentRoundState == RoundStates.GameVictory)
         {
             // do nothing for now.
-        }
+        } else if (currentRoundState == RoundStates.PreVictory)
+        {
+            roundTimer += Time.deltaTime;
+            if (roundTimer >= 2f)
+            {
+                StartEndingSequence();
+            }
+        } else if (currentRoundState == RoundStates.GameVictory)
+        {
+            // do nothing for now.
+        }   
     
 
     }
@@ -394,6 +406,9 @@ public class RoundManager : MonoBehaviour
             if (obj.IsCompleteFull()) objectivesCompleted++;
         }
 
+        // update the dialogue for the intermission people
+        DialogueRoundHandler.Instance.HandleRoundDialogue(currentRound);
+
         // additional calculations
         loyalViewersGained = CalcLoyalViewersGained();
         player.stats.loyalViewers += loyalViewersGained;
@@ -474,6 +489,24 @@ public class RoundManager : MonoBehaviour
         SENDTOPRISON();
         victoryCanvas.EnableUI("You have completed 10 rounds, and may finally return home! Congratulations!");
     }
+    public void EndRoundSequence()
+    {
+        roundTimer = 0f;
+        BlackScreen.Instance.FadeToBlack(2f);
+        roundManagerUI.DisableTimer();
+        currentRoundState = RoundStates.PreVictory;
+    }
+    public void StartEndingSequence()
+    {
+        BlackScreen.Instance.FadeFromBlack(2f);
+        roundTimer = 0f;
+        currentRoundState = RoundStates.GameVictory;
+        FullDialogue chosenEnding = DialogueRoundHandler.Instance.GetEndingDialogue(ending);
+        DialogueManager.Instance.StartFullDialogue(chosenEnding, null);
+        DialogueManager.Instance.EnableBG();
+        SENDTOMEGAPRISON();
+
+    }
     public void UpdateRoundSummaryUI()
     {
         roundSummaryManagerUI.UpdateObjectives(objectivesCompleted, currentObjectives.Count);
@@ -526,7 +559,7 @@ public class RoundManager : MonoBehaviour
     {
         orbsCollected++;
     }
-    public void SpawnOrbs(int amt)
+    private void SpawnOrbs(int amt)
     {
         if (orbSpawnParent == null) return;
         
@@ -545,7 +578,7 @@ public class RoundManager : MonoBehaviour
 
         }
     }
-    public int CalcLoyalViewersGained()
+    private int CalcLoyalViewersGained()
     {
         // loyal viewers gained is 10% of total viewers this round, rounded down.
         float gain = ((player.stats.viewers - player.stats.loyalViewers) + (highestViewersThisRound - player.stats.loyalViewers))/2f;
@@ -559,12 +592,17 @@ public class RoundManager : MonoBehaviour
     {
         currentOnGroundItems.Add(item);
     }
-    public void SENDTOPRISON()
+    private void SENDTOPRISON()
     {
         if (player == null) return;
         player.transform.position = PRISON.transform.position + Vector3.up * 2f;
     }
-    public void KnightSpawnIn()
+    // prison, but actually prison where the player can't do shit
+    private void SENDTOMEGAPRISON()
+    {
+
+    }
+    private void KnightSpawnIn()
     {
         if (RIGGEDSPAWN >= 0 && RIGGEDSPAWN < spawnLocationsParent.transform.childCount) {
             player.transform.position = spawnLocationsParent.transform.GetChild(RIGGEDSPAWN).position;
@@ -572,9 +610,15 @@ public class RoundManager : MonoBehaviour
         }
         player.transform.position = spawnLocationsParent.transform.GetChild(UnityEngine.Random.Range(0, spawnLocationsParent.transform.childCount)).position;
     }
+
+    
+
+
+    public float GetHighestViewersThisRound => highestViewersThisRound;
+    public PlayerStatManager GetPlayer => player;
 }
 
 public enum RoundStates
 {
-    Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory
+    Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory, PreVictory,
 }
