@@ -81,6 +81,20 @@ public class InventoryManager : MonoBehaviour
         }
 
     }
+    public void PickUpItem(Item item)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].item == null)
+            {
+                items[i].UpdateItem(item);
+                inventoryManagerGUI.AssignItemInit(i, item);
+                return;
+            }
+        }
+    
+        inventoryManagerGUI.UpdateSelectSlot(item);
+    } 
     public void BeginInteract()
     {
         if (selectedItem == null || selectedItem.item == null || selectedItem.runtime == null) return;
@@ -106,5 +120,7 @@ public class InventoryManager : MonoBehaviour
                 return;
             }
         }
+
+        Instantiate(item.prefab, statManager.transform.position + statManager.transform.forward * 0.3f + statManager.transform.up * 0.5f, Quaternion.identity);
     }
 }   

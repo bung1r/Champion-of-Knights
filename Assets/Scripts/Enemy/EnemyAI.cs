@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(EnemyStatManager))]
+[RequireComponent(typeof(EnemyStatManager), typeof(BoxCollider), typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : MonoBehaviour, BarrelHandler
 {
     public GameObject target;
@@ -31,6 +32,9 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     private Rigidbody rb;
     private float distance;
     private NavMeshAgent navMeshAgent;
+    private float lastUpdatePos = -999f;
+    private float posUpdateInterval = 0.2f;
+    private AbilityRuntime currentAbility = null;
     // Start is called before the first frame update
     private EnemyAI thisScript;
     void Start()
@@ -49,6 +53,8 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
 
         float dia = Math.Min(hitbox.size.x, hitbox.size.z);
         navMeshAgent.radius = dia / 2f * 0.9f; // slightly smaller than hitbox
+
+        
         
     }
 
@@ -85,8 +91,15 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     {
         if (target == null) return;
         if (rb == null) return;
-        if (stats.stunTime > 0) return;
-
+        if (stats.stunTime > 0) {
+            if (currentAbility != null)
+            {
+                currentAbility.Cancel();
+                currentAbility = null;
+            }
+            return;
+        }
+    
         // Vector3 dir = (target.transform.position - transform.position).normalized;
         // dir.y = 0;
         // if (distance < stats.runAwayDist)
@@ -130,8 +143,47 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         //     retreating = false;
         //     rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
         // }
-        if (navMeshAgent.enabled == false) navMeshAgent.enabled = true;
-        navMeshAgent.SetDestination(target.transform.position);
+        if (navMeshAgent.enabled == false) {
+            rb.isKinematic = true;
+            navMeshAgent.enabled = true;
+        }    
+
+        // update the target position every so often
+        if (Time.time - lastUpdatePos > posUpdateInterval)
+        {
+            navMeshAgent.SetDestination(target.transform.position);
+            lastUpdatePos = Time.time;
+        }
+
+        // stop if within comfort distance
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance <= stats.comfortDist)
+        {
+            navMeshAgent.isStopped = true;
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.angularSpeed = stats.turnSpeed;
+        } else
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.updateRotation = true;
+        }
+
+        if (navMeshAgent.isStopped)
+        {
+            stats.isWalking = false;
+            Vector3 lookdir = target.transform.position - transform.position;
+            lookdir.y = 0;
+            // stuff so the rotation happens smoothly, wow!
+            Quaternion targetRotation = Quaternion.LookRotation(lookdir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                stats.turnSpeed/100 * Time.fixedDeltaTime
+            );
+        } else
+        {
+            stats.isWalking = true;
+        }
     }
     void TryAttack()
     {
@@ -162,11 +214,11 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         
         if (choose)
         {
-            AbilityRuntime chosenAbility = WeightedRandom.Choose(enemyAbilityRuntimes, weights);      
+            currentAbility = WeightedRandom.Choose(enemyAbilityRuntimes, weights);      
 
             // use the ability
-            chosenAbility.BeginUse();
-            chosenAbility.Use();
+            currentAbility.BeginUse();
+            currentAbility.Use();
         } 
     }
     

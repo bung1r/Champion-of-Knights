@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,7 +46,9 @@ public class DialogueRoundHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    void Start()
+    {
+    }
     void OnEnable()
     {
         viewer.onTalkedTo += OnViewerTalkedTo;
@@ -76,7 +79,9 @@ public class DialogueRoundHandler : MonoBehaviour
         // pick 3 random viewer dialogues.
         while (thisRoundViewerDialogues.Count < 3) {
             FullDialogue randDialogue = allViewers.roundDialogue[UnityEngine.Random.Range(0, allViewers.roundDialogue.Count)];
+
             if (!thisRoundViewerDialogues.Contains(randDialogue)) {
+                Debug.Log(randDialogue.name);
                 thisRoundViewerDialogues.Add(randDialogue);
             }
         }
@@ -84,6 +89,7 @@ public class DialogueRoundHandler : MonoBehaviour
         GuideDialogue(roundIndex);
         PersistentViewerDialogue(roundIndex);
 
+        viewer.dialogue = thisRoundViewerDialogues[0];
     }
 
     void PersistentViewerDialogue(int roundIndex)

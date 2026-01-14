@@ -42,7 +42,7 @@
     <UnityVersion>2022.3.62f2</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\lamtr\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\lamtr\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.1\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\RoundStuff\ObjectiveDatabase.cs" />
     <Compile Include="Assets\Scripts\UI\Round\ObjectiveUIElement.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue\DialogueChoice.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
@@ -136,17 +137,21 @@
     <Compile Include="Assets\Scripts\Stats\Other\DeathBrick.cs" />
     <Compile Include="Assets\Scripts\UI\Other\GlitchEffectController.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\CreditsButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Other\ItemPerformHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\ChargedRangedAbility.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInteract.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\StatConsumable.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\PlayButton.cs" />
     <Compile Include="Assets\Scripts\UI\Round\GameOverUIManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\BombBehavior.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedRuntime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\StatManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\BombItem.cs" />
     <Compile Include="Assets\Scripts\Weapon\ComplexRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\QuitButton.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUIManager.cs" />

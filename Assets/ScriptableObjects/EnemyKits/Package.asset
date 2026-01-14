@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Package
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 80
+    maxHP: 30
     turnSpeed: 0
     walkSpeed: 0
     canSprint: 0
@@ -23,6 +23,8 @@ MonoBehaviour:
     staminaRegen: 0
     startStaminaRegen: 0
     startStaminaRegenFromZero: 0
+    regenHP: 0
+    startRegenHP: 2
     overflowStaminaThreshold: 0
     baseEXP: 50
     resistances:
@@ -37,9 +39,10 @@ MonoBehaviour:
     isParrying: 0
     attackID: -1
     stunTime: 0
+    damageMultipliers: []
     runAwayDist: 2
     comfortDist: 3
     runTowardsDist: 10
-    cautionRange: 30
-    aggroRange: 20
+    cautionRange: 100
+    aggroRange: 1000
     timeBetweenMoves: 0.5

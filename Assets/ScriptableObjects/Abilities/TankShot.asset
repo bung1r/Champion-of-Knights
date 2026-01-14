@@ -10,30 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
-  m_Name: FreedomBlast
+  m_Name: TankShot
   m_EditorClassIdentifier: 
-  abilityName: FREEDOM BLAST
-  staminaCost: 1
-  baseCooldown: 0.1
-  critRate: 100
+  abilityName: BOOM
+  staminaCost: 0.1
+  baseCooldown: 0
+  critRate: 0
   critMultiplier: 2
   variation: 0.2
   hitboxTimeDelay: 0
   attackLength: 0.1
-  knockback: 1
+  knockback: 0.4
   stunTime: 0.2
+  forward: 0
+  spin: 0
   attackID: -1
   useOverflowStamina: 0
   damageData:
-    baseDamage: 1
+    baseDamage: 0.1
     type: 0
     source: {fileID: 0}
   hitboxData:
     range: 10
     pierce: 1
     rangedHitboxType: 0
-    bulletPrefab: {fileID: 7156414438788006602, guid: ff482955dbf534743910c4d26dd63b15,
+    bulletPrefab: {fileID: 9210351738532903622, guid: e15154ba4012af54bac8fff912abfd84,
       type: 3}
-    speed: 9
-    bulletPayload: {fileID: 11400000, guid: b98e7f1026ea6ea4d90be1737a6ce548, type: 2}
+    speed: 2
+    bulletPayload: {fileID: 11400000, guid: 1270fce2d9d8d904fbf0246523357b1d, type: 2}
   owner: {fileID: 0}

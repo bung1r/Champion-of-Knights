@@ -20,8 +20,8 @@ MonoBehaviour:
   variation: 0.2
   hitboxTimeDelay: 0.2
   attackLength: 0.4
-  knockback: 0.3
-  stunTime: 0.5
+  knockback: 3
+  stunTime: 0.3
   forward: 0
   spin: 0
   attackID: 0

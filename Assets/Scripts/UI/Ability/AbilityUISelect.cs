@@ -19,6 +19,10 @@ public class AbilityUISelect : MonoBehaviour
     public void SetAbility(AbilityBase newAbility) {
         if (abilityText == null) abilityText = GetComponentInChildren<TextMeshProUGUI>();
         ability = newAbility;
+        if (ability == null) {
+            abilityText.text = "None";
+            return;
+        }
         abilityText.text = ability.abilityName;
     }
     public void AssignUIManager(AbilityEquipUIManager manager)

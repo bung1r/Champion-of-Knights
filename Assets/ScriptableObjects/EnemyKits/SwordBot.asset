@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded79c87197e3574399aa1d0d3345050, type: 3}
+  m_Name: SwordBot
+  m_EditorClassIdentifier: 
+  baseStats:
+    maxHP: 200
+    turnSpeed: 300
+    walkSpeed: 2.5
+    canSprint: 0
+    sprintSpeed: 1
+    sprintStaminaCost: 0
+    maxStamina: 100
+    staminaRegen: 10
+    startStaminaRegen: 1
+    startStaminaRegenFromZero: 2.5
+    regenHP: 0
+    startRegenHP: 2
+    overflowStaminaThreshold: 5
+    baseEXP: 150
+    resistances:
+      entries: []
+    statModifiers: []
+    currentHP: 100
+    currentStamina: 100
+    isRunning: 0
+    isWalking: 0
+    inAttackAnim: 0
+    isGuarding: 0
+    isParrying: 0
+    attackID: -1
+    stunTime: 0
+    damageMultipliers: []
+    runAwayDist: 0
+    comfortDist: 2
+    runTowardsDist: 10
+    cautionRange: 100
+    aggroRange: 1000
+    timeBetweenMoves: 0.3

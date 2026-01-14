@@ -66,7 +66,7 @@ public class PlayerInteract : MonoBehaviour
         } else
         {
             inventoryManager.BeginInteract();
-        }
+        }//
     }
 
     void HandleInteractUp()
@@ -88,7 +88,6 @@ public class PlayerInteract : MonoBehaviour
             if (collider.TryGetComponent(out PickUpItem pickup))
             {
                 // Wow, found a pickup!
-                Debug.Log("Found a pickup: " + pickup.item.itemName);
                 nearbyPickup = pickup;
                 nearbyInteractable = pickup;
                 statsUIManager.ShowInteractPrompt($"F to pickup {pickup.item.itemName}");

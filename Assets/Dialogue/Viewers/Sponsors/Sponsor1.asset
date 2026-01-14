@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: Sponsor1
+  m_EditorClassIdentifier: 
+  speakerName: Sponsor
+  dialogue:
+  - dialogueLine: Hello, Knight!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 20
+      loyalviewers: 0
+      sponsers: 1
+      money: 0
+      corruption: 20
+      givenItem: {fileID: 0}
+  - dialogueLine: We have seen your work, and have decided that we are interested
+      in sponsoring YOU! Yes, YOU!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: This is a pretigious deal at Sponsors Inc., so please make your
+      decision wisely.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: We will give you more futuristic items, like Bombs, and a higher
+      reputation through our many sources. All you have to do is say yes. What do
+      you say?
+    choices:
+    - choiceText: Yes.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 01baa852a955cba4c9bddd7c13134390, type: 2}
+        complexEffects: []
+        reputation: 15
+        loyalviewers: 0
+        sponsers: 1
+        money: 0
+        corruption: 20
+        givenItem: {fileID: 0}
+    - choiceText: No.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: f5e017559e9bea74893e8c4e504cad27, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

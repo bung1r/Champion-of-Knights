@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSFX: {fileID: 0}
-  statsSO: {fileID: 11400000, guid: 56d0ece75b0ce1d4b848abb088d0a192, type: 2}
+  statsSO: {fileID: 11400000, guid: ed73c14270fc5044aae8e312ca19e2f5, type: 2}
   stats:
     maxHP: 100
     turnSpeed: 100
@@ -62,6 +62,8 @@ MonoBehaviour:
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
+    regenHP: 0
+    startRegenHP: 2
     overflowStaminaThreshold: 5
     baseEXP: 100
     resistances:
@@ -100,6 +102,7 @@ MonoBehaviour:
   enemyAbilities: []
   animator: {fileID: 0}
   Barrels: []
+  hitbox: {fileID: 0}
   moveSpeed: 2
   rotationSpeed: 20
   searchRadius: 100
@@ -154,7 +157,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!195 &591930823654558995
 NavMeshAgent:

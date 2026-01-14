@@ -23,6 +23,8 @@ MonoBehaviour:
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
+    regenHP: 0
+    startRegenHP: 2
     overflowStaminaThreshold: 5
     baseEXP: 1000
     resistances:
@@ -39,8 +41,8 @@ MonoBehaviour:
     stunTime: 0
     damageMultipliers: []
     runAwayDist: 2
-    comfortDist: 3
-    runTowardsDist: 10
-    cautionRange: 30
-    aggroRange: 20
+    comfortDist: 10
+    runTowardsDist: 20
+    cautionRange: 100
+    aggroRange: 1000
     timeBetweenMoves: 0

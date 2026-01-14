@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections;
+using UnityEditor;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,7 +30,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource buyNodeSFX;
     [SerializeField] private AudioSource levelUp;
     [SerializeField] private AudioSource genericMenuClick;
-
+    [SerializeField] private AudioSource battleMusic;
+    private float battleMusicMaxVolume;
+    [SerializeField] private AudioSource menuMusic;
+    private float menuMusicMaxVolume;
+    [SerializeField] private AudioSource intermissionMusic;
+    private float intermissionMusicMaxVolume;
     private List<AudioSource> activeSources = new List<AudioSource>();
     private Dictionary<AudioSource, float> sourceAndPitchDict = new Dictionary<AudioSource, float>();
     private void Awake()
@@ -39,6 +47,10 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
+
+        battleMusicMaxVolume = battleMusic.volume;
+        menuMusicMaxVolume = menuMusic.volume;
+        intermissionMusicMaxVolume = intermissionMusic.volume;
     }
     public void Start()
     {
@@ -137,7 +149,61 @@ public class AudioManager : MonoBehaviour
     {
         PlaySourceAtPointWithPitch(thump2SFX, origin.position, variation);
     }
+    public void PlayMenuMusic(float fadeInTime)
+    {
+        StartCoroutine(FadeInMusic(menuMusic, menuMusicMaxVolume, fadeInTime));
+    }
+    public void DisableMenuMusic(float fadeOutTime)
+    {
+        StartCoroutine(FadeOutMusic(menuMusic, fadeOutTime));
+    }
+    public void PlayBattleMusic(float fadeInTime)
+    {
+        StartCoroutine(FadeInMusic(battleMusic, battleMusicMaxVolume, fadeInTime));
+    }
+    public void DisableBattleMusic(float fadeOutTime)
+    {
+        StartCoroutine(FadeOutMusic(battleMusic, fadeOutTime));
+    }
+    public void PlayIntermissionMusic(float fadeInTime)
+    {
+        StartCoroutine(FadeInMusic(intermissionMusic, intermissionMusicMaxVolume, fadeInTime));
+    }
+    public void DisableIntermissionMusic(float fadeOutTime)
+    {
+        StartCoroutine(FadeOutMusic(intermissionMusic, fadeOutTime));
+    }
 
+    IEnumerator FadeInMusic(AudioSource musicSource, float targetVolume, float duration)
+    {
+        musicSource.volume = 0;
+        musicSource.Play();
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(0, targetVolume, time / duration);
+            yield return null;
+        }
+
+        musicSource.volume = targetVolume;
+    }
+
+    IEnumerator FadeOutMusic(AudioSource musicSource, float duration)
+    {
+        float startVolume = musicSource.volume;
+
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume, 0, time / duration);
+            yield return null;
+        }
+
+        musicSource.Stop();
+        musicSource.volume = startVolume;
+    }
 }
 
 

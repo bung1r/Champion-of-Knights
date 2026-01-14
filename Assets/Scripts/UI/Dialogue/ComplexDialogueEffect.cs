@@ -8,6 +8,7 @@ public class ComplexDialogueEffect
     public int intValue; // optional
     public float floatValue; // optional
     public string stringValue; // optional
+    public Item itemValue; // optional  
 }
 
 [Serializable]
@@ -19,4 +20,7 @@ public enum DialogueEffectTypes
     Money,
     DoEnding,
     LoyalViewers,
+    GiveItem,
+    MidGameChoice,
+    OpenVictoryScreen,
 }

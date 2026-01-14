@@ -16,12 +16,30 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: cbfa960f83a372e4a9714fcbe5b563a3, type: 2}
     baseWeight: 1200
     viewerScaling: 0.8
+    sponsorScaling: 0
     maxWeight: 10000
   - item: {fileID: 11400000, guid: 4d4ef5b6862f828418843c8380455a53, type: 2}
     baseWeight: 500
     viewerScaling: 1.5
+    sponsorScaling: 0
     maxWeight: 10000
   - item: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
     baseWeight: 100
     viewerScaling: 2
+    sponsorScaling: 0
+    maxWeight: 10000
+  - item: {fileID: 11400000, guid: 730eaafea278fdf41ab9eb1d117867d7, type: 2}
+    baseWeight: 0
+    viewerScaling: 0
+    sponsorScaling: 500
+    maxWeight: 10000
+  - item: {fileID: 11400000, guid: 1da8cc64b92f4284ba15212d823a91f7, type: 2}
+    baseWeight: 0
+    viewerScaling: 0
+    sponsorScaling: 600
+    maxWeight: 10000
+  - item: {fileID: 11400000, guid: 4cce35fd3ce02924d9e37cd6474f3cd0, type: 2}
+    baseWeight: 100
+    viewerScaling: 1.5
+    sponsorScaling: 300
     maxWeight: 10000

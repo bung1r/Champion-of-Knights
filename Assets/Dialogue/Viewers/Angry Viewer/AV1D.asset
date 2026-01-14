@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: AV1D
+  m_EditorClassIdentifier: 
+  speakerName: Angry Viewer
+  dialogue:
+  - dialogueLine: ...what? WHAT? WHAT!!??!!?!?!?!??!?!?!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: LET ME AT HIM!!!!! LET ME AT HIM!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I'LL GET OVER TO YOU IF IT'S THE LAST THING I DOOO!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I KNOW PEOPLE IN HIGH PLACES, YOU BETTER BE SCARED!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: -1
+      sponsers: 0
+      money: 0
+      corruption: -2
+      givenItem: {fileID: 0}
+  - dialogueLine: I'LL SHUT YOU DOWN FASTER THAN YOU CAN FINISH YOUR NEXT ROUND!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: -1
+      sponsers: 0
+      money: 0
+      corruption: -2
+      givenItem: {fileID: 0}
+  - dialogueLine: YOU'RE FINISHED, KNIGHT!!! FINISHED!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: -1
+      sponsers: 0
+      money: 0
+      corruption: -2
+      givenItem: {fileID: 0}
+  - dialogueLine: '*You feel better*'
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 5
+      loyalviewers: -1
+      sponsers: 0
+      money: 0
+      corruption: -3
+      givenItem: {fileID: 0}

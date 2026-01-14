@@ -34,7 +34,6 @@ public class SkilltreeNode : MonoBehaviour
     }
     public void OnClickNode()
     {
-        UnityEngine.Debug.Log("Click??");
         skilltreeManager.UnlockNode(this);
     }
 

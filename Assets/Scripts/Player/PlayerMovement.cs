@@ -124,13 +124,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (divider <= 0) divider = 1f;
-    
+        if (stats.inAttackAnim) divider *= 3f;
         return speed/divider;
     }
     void Move()
     {
         // no movement
-        if ((inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0) || stats.inAttackAnim)
+        if (inputDir.x == 0 && inputDir.y == 0 && inputDir.z == 0)
         {
             stats.isWalking = false;
             stats.isRunning = false;

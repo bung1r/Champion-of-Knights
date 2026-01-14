@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acddd65b3c4a015428d1aca4168d4c49, type: 3}
+  m_Name: Big Bomb
+  m_EditorClassIdentifier: 
+  itemName: Big Bomb
+  prefab: {fileID: 3362225612508227571, guid: 3d76952b0b4ae254cadd0944dd25ce37, type: 3}
+  icon: {fileID: 0}
+  uses: 1
+  cooldown: 0
+  duration: 1
+  performDelay: 0.3
+  hitboxData:
+    transform: {fileID: 0}
+    shape: 1
+    radius: 3
+    boxRadius: {x: 5, y: 5, z: 5}
+    hitboxOffset: {x: 0, y: 0.5, z: 1}
+  damageData:
+    baseDamage: 220
+    type: 0
+    source: {fileID: 0}
+  realBombPrefab: {fileID: 3362225612508227571, guid: 4142c2723213dd343ae6f578130fd8bd,
+    type: 3}

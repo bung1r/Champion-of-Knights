@@ -26,7 +26,6 @@ public class MeleeHitboxData
         Vector3 center = origin + (forward * hitboxOffset.z) + (up * hitboxOffset.y) + (side * hitboxOffset.x);
         if (shape == PhysicsHitboxShapes.Sphere)
         {
-            Debug.Log(transform == null);
             HitboxVisualizer.Instance.DrawSphere(owner.transform, center, radius, 0.3f);
             return Physics.OverlapSphere(center, radius);
         } else

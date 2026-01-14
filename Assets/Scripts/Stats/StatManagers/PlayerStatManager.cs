@@ -242,12 +242,21 @@ public class PlayerStatManager : StatManager
     }
     public void AddRep(int rep)
     {
-        stats.reputation += rep;
+        float floatRep = (float)rep;
+        if (RoundManager.Instance.midGameChoice == "Honor") floatRep *= 1.3f;
+        else if (RoundManager.Instance.midGameChoice == "Popularity") floatRep *= 1.3f;
+        else if (RoundManager.Instance.midGameChoice == "Destruction") floatRep *= 0.9f;
+        stats.reputation += Mathf.RoundToInt(floatRep);
         stats.reputation = Mathf.Clamp(stats.reputation, -100f, 100f);
     }
     public void AddCorruption(int corr)
     {
-        stats.corruption += corr;
+        float floatCorr = (float)corr;
+        if (RoundManager.Instance.midGameChoice == "Destruction") floatCorr *= 1.1f;
+        else if (RoundManager.Instance.midGameChoice == "Honor") floatCorr *= 0.9f;
+        else if (RoundManager.Instance.midGameChoice == "Popularity") floatCorr *= 1.5f;
+
+        stats.corruption += Mathf.RoundToInt(floatCorr);
         stats.corruption = Mathf.Clamp(stats.corruption, 0f, 100f);
     }  
     public void AddSponsers(int spon)

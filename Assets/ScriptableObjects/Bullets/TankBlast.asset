@@ -16,7 +16,7 @@ MonoBehaviour:
   knockback: 1
   variation: 0.1
   bombDamageData:
-    baseDamage: 1
+    baseDamage: 10
     type: 0
     source: {fileID: 0}
   hitboxData:

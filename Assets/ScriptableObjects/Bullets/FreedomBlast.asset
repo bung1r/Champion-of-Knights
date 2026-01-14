@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: FreedomBlast
   m_EditorClassIdentifier: 
   stunTime: 3
-  knockback: 100
+  knockback: 2
   variation: 0.1
   bombDamageData:
-    baseDamage: 100
+    baseDamage: 20
     type: 0
     source: {fileID: 0}
   hitboxData:

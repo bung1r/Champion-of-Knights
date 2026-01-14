@@ -63,6 +63,8 @@ MonoBehaviour:
     staminaRegen: 10
     startStaminaRegen: 1
     startStaminaRegenFromZero: 2.5
+    regenHP: 0
+    startRegenHP: 2
     overflowStaminaThreshold: 5
     baseEXP: 100
     resistances:
@@ -158,7 +160,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!195 &6047155274216662563
 NavMeshAgent:

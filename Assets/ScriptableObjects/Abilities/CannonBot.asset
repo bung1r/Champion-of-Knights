@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
+  m_Name: CannonBot
+  m_EditorClassIdentifier: 
+  abilityName: Default
+  staminaCost: 0
+  baseCooldown: 2
+  critRate: 0
+  critMultiplier: 2
+  variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 1
+  knockback: 2
+  stunTime: 0.2
+  forward: 0
+  spin: 0
+  attackID: -1
+  useOverflowStamina: 1
+  damageData:
+    baseDamage: 10
+    type: 0
+    source: {fileID: 0}
+  hitboxData:
+    range: 10
+    pierce: 1
+    rangedHitboxType: 0
+    bulletPrefab: {fileID: 3509864726927457149, guid: 2fbbc9b23e259a842bf7397cf1f262ab,
+      type: 3}
+    speed: 1.5
+    bulletPayload: {fileID: 11400000, guid: 9c7d2fa5c96bf03428ab14a9db671551, type: 2}
+  owner: {fileID: 0}

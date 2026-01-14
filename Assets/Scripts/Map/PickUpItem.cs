@@ -12,7 +12,7 @@ public class PickUpItem : MonoBehaviour, IInteractable
     {
         InventoryManager inventoryManager = interactor.GetComponent<InventoryManager>();
         
-        inventoryManager.UpdateSelectedSlot(item);
+        inventoryManager.PickUpItem(item);
 
         Destroy(gameObject);
     }

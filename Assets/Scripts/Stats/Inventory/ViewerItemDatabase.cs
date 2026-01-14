@@ -17,14 +17,14 @@ public class ViewerItemDatabase : ScriptableObject
         }
         return itemList;
     }
-    public Item GetAudienceItem(float viewers)
+    public Item GetAudienceItem(float viewers, float sponsors)
     {
         List<Item> itemList = new List<Item>();
         List<float> weightList = new List<float>();
         foreach (DatabaseItemData data in items)
         {
             itemList.Add(data.item);
-            float calculatedWeight = data.baseWeight + (viewers * data.viewerScaling);
+            float calculatedWeight = data.baseWeight + (viewers * data.viewerScaling) + (sponsors * data.sponsorScaling);
             calculatedWeight = Mathf.Min(calculatedWeight, data.maxWeight);
             weightList.Add(calculatedWeight);
         }

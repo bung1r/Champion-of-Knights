@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdda12097179cbd47bbe921858af2c23, type: 3}
+  m_Name: Adrenaline Pump
+  m_EditorClassIdentifier: 
+  itemName: Adrenaline Pump
+  prefab: {fileID: 7141266783359232643, guid: a684b1bdbc0d2a541982369145f78f89, type: 3}
+  icon: {fileID: 0}
+  uses: 1
+  cooldown: 0
+  duration: 1
+  performDelay: 0.3
+  statModifier:
+    statModifierType: 0
+    generalModifierType: 1
+    duration: 15
+    statList:
+    - baseStatsEnum: 0
+      value: 1.3
+    - baseStatsEnum: 6
+      value: 1.3
+    - baseStatsEnum: 2
+      value: 1.3
+    - baseStatsEnum: 4
+      value: 1.3
+    - baseStatsEnum: 7
+      value: 2
+    - baseStatsEnum: 12
+      value: 2
+    - baseStatsEnum: 5
+      value: 0.8
+    timeCreated: 0

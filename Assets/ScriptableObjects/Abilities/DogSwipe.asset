@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f8c11eeaf1ced469b3a03b93cb7c1a, type: 3}
+  m_Name: DogSwipe
+  m_EditorClassIdentifier: 
+  abilityName: Default
+  staminaCost: 0
+  baseCooldown: 5
+  critRate: 0
+  critMultiplier: 2
+  variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 1
+  knockback: 0
+  stunTime: 0.2
+  forward: 0
+  spin: 0
+  attackID: -1
+  useOverflowStamina: 1
+  damageData:
+    baseDamage: 20
+    type: 0
+    source: {fileID: 0}
+  hitboxData:
+    transform: {fileID: 0}
+    shape: 0
+    radius: 10
+    boxRadius: {x: 0.4, y: 0.4, z: 0.5}
+    hitboxOffset: {x: 0, y: 0.25, z: 1}
+  owner: {fileID: 0}

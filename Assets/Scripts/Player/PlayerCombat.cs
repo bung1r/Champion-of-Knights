@@ -39,6 +39,10 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
         if (input == null) input = GetComponent<InputHandler>();
         foreach (SkillSlotAndAbility skillSlot in otherUsableAbilities)
         {
+            if (skillSlot.abilityBase == null) {
+                RTUsableAbilities.Add(skillSlot.skillSlot, null);
+                continue;
+            }
             UnlockAbility(skillSlot.abilityBase);
             RTUsableAbilities.Add(skillSlot.skillSlot, skillSlot.abilityBase.CreateRuntimeInstance(skillSlot.abilityBase, statManager));
         }
@@ -244,11 +248,11 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     }
     public void UnlockAbility(AbilityBase ability)
     {
+        if (ability == null) return;
         if (!allUnlockedAbilities.Contains(ability))
         {
             allUnlockedAbilities.Add(ability);
             abilityEquipUIManager.UnlockAbility(ability, this);
-            Debug.Log("UNLOCK");
         }
     }
     

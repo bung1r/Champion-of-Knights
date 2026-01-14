@@ -79,7 +79,15 @@ public class StatManager : MonoBehaviour, IDamageable
         }
 
         // die if we have no HP left
-        if (_stats.currentHP <= 0) Die(damage);
+        if (_stats.currentHP <= 0)
+        {
+            if (RoundManager.Instance.JOURNALISTMODE && this is PlayerStatManager)
+            {
+                _stats.currentHP = 1;
+                return;
+            }
+            Die(damage);
+        }
     }
     public virtual void Knockback(DamageData damage)
     {
@@ -94,6 +102,7 @@ public class StatManager : MonoBehaviour, IDamageable
             vector = vector.normalized * damage.abilityBase.knockback;
             if (TryGetComponent<Rigidbody>(out var rb))
             {
+                rb.isKinematic = false;
                 rb.AddForce(vector, ForceMode.Impulse);  
             }
         }  
@@ -109,6 +118,7 @@ public class StatManager : MonoBehaviour, IDamageable
         vector = vector.normalized * force;
         if (TryGetComponent<Rigidbody>(out var rb))
         {
+            rb.isKinematic = false;
             rb.AddForce(vector, ForceMode.Impulse);  
         }
     }
@@ -146,7 +156,6 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         if (lastSavedHP > _stats.currentHP)
         {
-            Debug.Log("DAMAGE TAKEN ");
             lastTakenDamage = Time.time;
         }
 
@@ -243,6 +252,11 @@ public class StatManager : MonoBehaviour, IDamageable
         if (TryGetComponent<NavMeshAgent>(out var agent))
         {
             agent.enabled = true;
+            if (TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.isKinematic = true;
+                
+            }
         }
     }
 
@@ -250,8 +264,8 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         if (modifier.statModifierType == StatModifierType.TempBuff)
         {
-            
             _stats.statModifiers.Add(modifier);
+            Debug.Log("Added Temp Buff");
         } else if (modifier.statModifierType == StatModifierType.NodeBuff)
         {
             bool foundIt = false;
@@ -268,8 +282,8 @@ public class StatManager : MonoBehaviour, IDamageable
                 _stats.statModifiers.Add(modifier);
             }
         }
-        // apply the stat changes
-        ApplyStatModifiers();
+        // // apply the stat changes
+        // ApplyStatModifiers();
     }
     // Apply the stat Modifiers
     public void ApplyStatModifiers()
@@ -287,6 +301,7 @@ public class StatManager : MonoBehaviour, IDamageable
             {BaseStatsEnum.startRegenHP, _baseStats.startRegenHP},
         };
 
+
         // complicated :(
         foreach (StatModifier entry in _stats.statModifiers)
         {
@@ -297,16 +312,22 @@ public class StatManager : MonoBehaviour, IDamageable
                 {
                     statDict[kvPair.Key] += kvPair.Value;
                 }
-            } else if (entry.generalModifierType == ModifierTypes.Multiplicative)
-            // if multiplicative, multiply the multiplied values then multiply at the end of calculation
-            {
-                
-            } else
-            {
-                Debug.Log("You should never be setting, lol!");
-            }
+            } 
         }
 
+        foreach (StatModifier entry in _stats.statModifiers)
+        {
+            if (entry.generalModifierType == ModifierTypes.Multiplicative)
+            {
+                Debug.Log(entry.statDict.Count);
+                foreach (KeyValuePair<BaseStatsEnum, float> kvPair in entry.statDict)
+                {
+                    
+                    statDict[kvPair.Key] *= kvPair.Value;
+                    Debug.Log(statDict[kvPair.Key]);
+                }
+            }
+        } 
         
         _stats.baseEXP = statDict[BaseStatsEnum.baseEXP];
         _stats.maxHP = statDict[BaseStatsEnum.maxHP];
@@ -317,6 +338,23 @@ public class StatManager : MonoBehaviour, IDamageable
         _stats.maxStamina = statDict[BaseStatsEnum.maxStamina];
         _stats.regenHP = statDict[BaseStatsEnum.regenHP];
         _stats.startRegenHP = statDict[BaseStatsEnum.startRegenHP];
+    }
+    public void CheckStatModifiers()
+    {
+        // if (this is PlayerStatManager psm)
+        // {
+        //     Debug.Log($"{_stats.statModifiers.Count == 1} at {Time.time}");
+        // }
+        if (_stats.statModifiers.Count == 0) return;
+        for (int i = _stats.statModifiers.Count - 1; i >= 0; i--)
+        {
+            StatModifier modifier = _stats.statModifiers[i];
+            if (modifier.statModifierType == StatModifierType.TempBuff && Time.time - modifier.timeCreated > modifier.duration)
+            {
+                _stats.statModifiers.RemoveAt(i);
+            }
+        }
+        ApplyStatModifiers();
     }
     // what happens when we die? Oh no!
     public virtual void Die(DamageData damage) {
@@ -343,6 +381,7 @@ public class StatManager : MonoBehaviour, IDamageable
         RegenerateStamina();
         RegenerateHP();
         CheckMultipliers();
+        CheckStatModifiers();
     }
     public virtual void PostUpdate() {}
 

@@ -37,7 +37,6 @@ public class BlackScreen : MonoBehaviour
 
         if (isFadingFromBlack)
         {
-            Debug.Log("Fading from black update");
             float t = (Time.time - startFadeFromBlack) / fadeDuration;
             if (t >= 1f)
             {
@@ -60,7 +59,6 @@ public class BlackScreen : MonoBehaviour
     public void FadeFromBlack(float timeInSeconds)
     {
         if (image.color.a <= 0f) return;
-        Debug.Log("Fading from black");
         isFadingFromBlack = true;
         isFadingToBlack = false;
 

@@ -26,6 +26,10 @@ public class AbilityEquipUI : MonoBehaviour
         {
             if (skillSlot.skillSlot == slot)
             {
+                if (skillSlot.abilityBase == null) {
+                    abilityText.text = "None";
+                    continue;
+                }
                 equippedAbility = skillSlot.abilityBase;
                 abilityText.text = equippedAbility.abilityName;
             }

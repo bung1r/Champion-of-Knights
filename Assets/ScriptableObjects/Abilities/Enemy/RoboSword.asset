@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d4dae222ba8efc4f9986748b3b36592, type: 3}
-  m_Name: Machine Gun
+  m_Name: RoboSword
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: b6b1f18e3fe8604469559f723c582a19, type: 2}
+  ability: {fileID: 11400000, guid: 55a007179d1396a448b7eb4525de402c, type: 2}
   abilityData:
     currentPriority: 5
     basePriority: 5
     minAttackRange: 0
-    maxAttackRange: 8
-    priorityAtMin: 0
-    priorityAtMax: 0
+    maxAttackRange: 2
+    priorityAtMin: 5
+    priorityAtMax: 5
     linearInterpolation: 0

@@ -101,5 +101,6 @@ public class DatabaseItemData
     public Item item;
     public int baseWeight;  
     public float viewerScaling; // how much the viewers affect the weight of this item.
+    public float sponsorScaling; // how much the sponsors affect the weight of this item.
     public float maxWeight; 
 }

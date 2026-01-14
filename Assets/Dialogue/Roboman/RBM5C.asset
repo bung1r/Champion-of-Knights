@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -45,6 +47,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -58,6 +61,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -68,9 +72,15 @@ MonoBehaviour:
       slightly less reputation and slightly more corruption from all sources.*'
     choices: []
     effects:
-      hasEffects: 0
-      endDialogue: 0
-      nextDialogue: {fileID: 0}
+      hasEffects: 1
+      endDialogue: 1
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects:
+      - effectType: 7
+        intValue: 0
+        floatValue: 0
+        stringValue: Destruction
+        itemValue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
       sponsers: 0

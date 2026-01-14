@@ -18,21 +18,10 @@ MonoBehaviour:
     roundAddFactor: 1
     roundMultFactor: 1
     roundExpoFactor: 1
-    max: 6
+    max: 7
     min: 4
     variation: 0
     objectiveDescription: Reach {0} rank style
-    roundTo: 1
-    oneTimeComplete: 1
-  - objectiveType: 0
-    baseAmount: 2
-    roundAddFactor: 1
-    roundMultFactor: 1
-    roundExpoFactor: 1
-    max: 4
-    min: 1
-    variation: 0.3
-    objectiveDescription: Collect all {0} Orbs
     roundTo: 1
     oneTimeComplete: 1
   - objectiveType: 1
@@ -47,32 +36,32 @@ MonoBehaviour:
     roundTo: 1
     oneTimeComplete: 1
   - objectiveType: 2
-    baseAmount: 30
-    roundAddFactor: 6
-    roundMultFactor: 1.1
+    baseAmount: 15
+    roundAddFactor: 3.5
+    roundMultFactor: 1.01
     roundExpoFactor: 1
-    max: 1000
-    min: 15
+    max: 45
+    min: 5
     variation: 0.2
     objectiveDescription: Parry {0} times
-    roundTo: 10
+    roundTo: 1
     oneTimeComplete: 1
   - objectiveType: 3
-    baseAmount: 500
-    roundAddFactor: 100
-    roundMultFactor: 1.1
-    roundExpoFactor: 1
+    baseAmount: 200
+    roundAddFactor: 120
+    roundMultFactor: 1.2
+    roundExpoFactor: 1.05
     max: 10000
-    min: 300
+    min: 200
     variation: 0.1
     objectiveDescription: Maintain a {0} viewer average
     roundTo: 100
     oneTimeComplete: 0
   - objectiveType: 4
-    baseAmount: 800
-    roundAddFactor: 200
-    roundMultFactor: 1.1
-    roundExpoFactor: 1
+    baseAmount: 600
+    roundAddFactor: 140
+    roundMultFactor: 1.2
+    roundExpoFactor: 1.07
     max: 100000
     min: 1
     variation: 0.2
@@ -80,11 +69,11 @@ MonoBehaviour:
     roundTo: 100
     oneTimeComplete: 1
   - objectiveType: 5
-    baseAmount: 2
+    baseAmount: 3
     roundAddFactor: 1
-    roundMultFactor: 1
+    roundMultFactor: 1.05
     roundExpoFactor: 1
-    max: 6
+    max: 10
     min: 2
     variation: 0.2
     objectiveDescription: Kill {0} enemies at the same time

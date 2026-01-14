@@ -3,6 +3,7 @@ using System.Collections;
 using System.Numerics;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 [Serializable]
@@ -72,6 +73,7 @@ public class AbilityRuntime : IAbility
     public float spin = 0f;
     public float forward = 0f;
     public int attackID = -1;
+    // private bool isCancelled = false;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
     public AbilityBase abilityBase;
@@ -101,7 +103,10 @@ public class AbilityRuntime : IAbility
         ConstructBase(other, manager);
     }
 
-
+    public virtual void Cancel()
+    {
+        // isCancelled = true;
+    }
     public virtual bool CanUse()
     {
         if (Time.time - lastUsedTime > baseCooldown && statManager.CanUseStamina(staminaCost, useOverflowStamina) && !statManager.GetInAttack())
@@ -143,5 +148,6 @@ public interface IAbility
     bool Use(); // instant use 
     void BeginUse(); // this is for a charge (hold down)
     void EndUse(); // this is for ending a charged move
+    void Cancel();
     float GetCooldownRemaining();
 }

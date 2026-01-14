@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,6 +24,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private GameObject orbPrefab;
     [SerializeField] private AbilityEquipUIManager abilityEquipUIManager;
     [SerializeField] private RoundSummaryManagerUI roundSummaryManagerUI;
+    [SerializeField] private Canvas openSkillTreeCanvas;
     [SerializeField] private GlitchEffectController glitchEffectController;
     [SerializeField] private GameOverUIManager gameOverCanvas;
     [SerializeField] private GameOverUIManager victoryCanvas;
@@ -35,6 +35,7 @@ public class RoundManager : MonoBehaviour
     public int currentRound = 0;
     public float roundDuration = 3f;
     public float shopDuration = 3f;
+    private bool blackStartedFadingShop = false;
     public float beforeRoundDuration = 3f;
     public float afterRoundDuration = 3f; // time between round end and transition.
     public float updateStatInterval = 0.1f;
@@ -46,12 +47,16 @@ public class RoundManager : MonoBehaviour
     public bool isRoundActive = false;
     public RoundStates currentRoundState = RoundStates.Nothing;
     public float enemyScaling = 1f; // one is normal, increase by 0.2 every round 
+    public string midGameChoice = "";
+    public const int finalRound = 7;
     // below are all the main stats tracked for rounds.
     [Space(10)]
     [Header("Fun Stuff!")]
     public bool RIGGED = false;
     public bool INFINITERIGGED = false;
     public int RIGGEDSPAWN = -1;
+    public bool JOURNALISTMODE = false;
+    public bool DEBUGMODE = false;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
     public int ending = -1; // 1 = A, 2 = B, 3 = C...
@@ -77,7 +82,7 @@ public class RoundManager : MonoBehaviour
     private int loyalViewersGained = 0;
     private int repGained = 0;
     private int corruptionGained = 0;
-
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -96,20 +101,33 @@ public class RoundManager : MonoBehaviour
                 orbSpawns.Add(child);
             }
         }
+
+        if (DEBUGMODE == false)
+        {
+            roundDuration = 180f;
+            shopDuration = 120f;
+            beforeRoundDuration = 4f;
+            afterRoundDuration = 4f;
+            RIGGEDSPAWN = -1;
+            RIGGED = false;
+            INFINITERIGGED = false;
+            currentRound = 0;
+        }
     }
     void Start()
     {
-
+        openSkillTreeCanvas.enabled = false;
         StartBeforeRoundIntermission();
+        AudioManager.Instance.DisableMenuMusic(1f);
     }
-
+    
     void Update()
     { 
         glitchEffectController.SetCorruptionLevel(player.stats.corruption / 100f);
         if (currentRoundState == RoundStates.Active)
         {
             if (player == null) {
-                EndCurrentRound();
+                StartGameOverSequence();
                 return; 
             }
             roundTimer += Time.deltaTime;
@@ -208,9 +226,19 @@ public class RoundManager : MonoBehaviour
 
         } else if (currentRoundState == RoundStates.Shop)
         {
+            if (currentRound == finalRound)
+            {
+                roundManagerUI.UpdateTimer(215940f); // basically infinite time
+                return;
+            }
             roundTimer += Time.deltaTime;
             timeRemaining = shopDuration - roundTimer;
             roundManagerUI.UpdateTimer(timeRemaining);
+            if (roundTimer >= shopDuration - 2f && !blackStartedFadingShop)
+            {
+                blackStartedFadingShop = true;
+                BlackScreen.Instance.FadeToBlack(2f);
+            }
             if (roundTimer >= shopDuration)
             {
                 EndShopSequence();
@@ -232,21 +260,11 @@ public class RoundManager : MonoBehaviour
             roundManagerUI.UpdateTimer(timeRemaining);
             if (roundTimer >= afterRoundDuration)
             {
-                if (RIGGED) {
-                    StartVictorySequence(); 
-                    return;
-                }
                 if (objectivesCompleted == currentObjectives.Count && player != null)
                 {
-                    if (currentRound >= 10)
-                    {
-                        //completed all rounds? You win!
-                        StartVictorySequence();
-                    } else
-                    {
-                        StartShopSequence();
-                    }
+                    StartShopSequence();
                 } 
+                else 
                 {
                     // didn't complete all objectives? You lose. 
                     StartGameOverSequence();
@@ -274,7 +292,7 @@ public class RoundManager : MonoBehaviour
     }
     public void AudienceGiftEvent() {
         // give the player a random item as a gift from the audience.
-        Item audienceItem = viewerItemDatabase.GetAudienceItem(player.stats.viewers);
+        Item audienceItem = viewerItemDatabase.GetAudienceItem(player.stats.viewers, player.stats.sponsers);
         Debug.Log("The audience has sent you a gift: " + audienceItem.itemName);
         // create the drone that brings the package 
         GameObject packageDrone = Instantiate(packageDronePrefab, player.transform.position + Vector3.up * 5f + Vector3.forward * 6f, Quaternion.identity);
@@ -293,6 +311,7 @@ public class RoundManager : MonoBehaviour
     public void StartBeforeRoundIntermission()
     {
         BlackScreen.Instance.FadeFromBlack(1f);
+        AudioManager.Instance.PlayBattleMusic(3f);
         KnightSpawnIn();
         currentRoundState = RoundStates.Begin;
         roundTimer = 0f;
@@ -348,6 +367,7 @@ public class RoundManager : MonoBehaviour
         frameCount = 0f;
         highestViewersThisRound = 0f;
         highestGradeThisRound = 0;
+        objectivesCompleted = 0;
     }
     private void CleanUpRound()
     {
@@ -420,7 +440,7 @@ public class RoundManager : MonoBehaviour
         BlackScreen.Instance.FadeToBlackWithDelay(afterRoundDuration - 2f, 2f);
         // statsUIManager.DisableAfterDelay(afterRoundDuration);
         roundSummaryManagerUI.DisableAfterDelay(afterRoundDuration);
-
+        AudioManager.Instance.DisableBattleMusic(afterRoundDuration);
         if (objectivesCompleted == currentObjectives.Count)
         {
             // continue if you did all the objectives
@@ -433,7 +453,9 @@ public class RoundManager : MonoBehaviour
     public void StartShopSequence()
     {
         BlackScreen.Instance.FadeFromBlack(2f);
-
+        AudioManager.Instance.PlayIntermissionMusic(3f);
+        blackStartedFadingShop = false;
+        openSkillTreeCanvas.enabled = true;
         player.ResetRoundStats();
         
         // send player to prison so they don't kill themselves or something
@@ -442,29 +464,38 @@ public class RoundManager : MonoBehaviour
         roundTimer = 0f;
         currentRoundState = RoundStates.Shop;
         Debug.Log("The shop is now open for " + shopDuration + " seconds.");
-
-        
-
-        BlackScreen.Instance.FadeToBlackWithDelay(shopDuration - 2f, 2f);
-        skilltreeManager.DisableAfterDelay(shopDuration);
-        abilityEquipUIManager.DisableAfterDelay(shopDuration);
-        statsUIManager.EnableAfterDelay(shopDuration);
+    }
+    public void SkipShopSequence()
+    {
+        if (currentRound == finalRound) return;
+        openSkillTreeCanvas.enabled = false;
+        roundTimer = shopDuration - 4f;
     }
     public void EndShopSequence()
     {
+        skilltreeManager.DisableAfterDelay(0f);
+        abilityEquipUIManager.DisableAfterDelay(0f);
+        statsUIManager.EnableAfterDelay(0f);
+
         Debug.Log("The shop has closed.");
+        openSkillTreeCanvas.enabled = false;
+        AudioManager.Instance.DisableIntermissionMusic(1f);
         StartBeforeRoundIntermission();
     }
     public void StartGameOverSequence()
     {
-        if (INFINITERIGGED) {
+        if ((INFINITERIGGED || JOURNALISTMODE) && player != null) {
             StartShopSequence();
             return;
         }
+
         BlackScreen.Instance.FadeFromBlack(2f);
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.GameOver;
         SENDTOPRISON();
+
+        AudioManager.Instance.PlayIntermissionMusic(2f);
+        AudioManager.Instance.DisableBattleMusic(1f);
 
         if (player == null)
         {
@@ -495,6 +526,9 @@ public class RoundManager : MonoBehaviour
         BlackScreen.Instance.FadeToBlack(2f);
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.PreVictory;
+        AudioManager.Instance.DisableIntermissionMusic(1f);
+        AudioManager.Instance.PlayMenuMusic(3f);
+        openSkillTreeCanvas.enabled = false;
     }
     public void StartEndingSequence()
     {
@@ -595,12 +629,47 @@ public class RoundManager : MonoBehaviour
     private void SENDTOPRISON()
     {
         if (player == null) return;
-        player.transform.position = PRISON.transform.position + Vector3.up * 2f;
+        player.transform.position = PRISON.transform.position + Vector3.up * 1f;
+    }
+    public void GameJournalistMode(bool enable)
+    {
+        JOURNALISTMODE = enable;
     }
     // prison, but actually prison where the player can't do shit
+    // hello, malcolm here, i didnt code this.
     private void SENDTOMEGAPRISON()
     {
 
+    }
+    public void MakeMidGameChoice(string choice)
+    {
+        midGameChoice = choice;
+        if (midGameChoice == "Honor")
+        {
+            player.AddMultiplier(
+                new DamageMultiplier{
+                    timeCreated = Time.time,
+                    type = DamageMultiplierTypes.Multiplicative,
+                    amount = 0.7f,
+                    lifeTime = Mathf.Infinity,
+                    source = "MidGameChoice"
+                }
+            );
+        } else if (midGameChoice == "Popularity")
+        {
+            // something idk
+        } else if (midGameChoice == "Destruction")
+        {
+            player.AddMultiplier(
+                new DamageMultiplier{
+                    timeCreated = Time.time,
+                    type = DamageMultiplierTypes.Multiplicative,
+                    amount = 1.3f,
+                    lifeTime = Mathf.Infinity,
+                    source = "MidGameChoice"
+                }
+            );
+        }
     }
     private void KnightSpawnIn()
     {

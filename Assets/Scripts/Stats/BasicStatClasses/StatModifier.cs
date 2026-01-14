@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ public class StatModifier
 {
     public StatModifierType statModifierType = StatModifierType.TempBuff;
     public ModifierTypes generalModifierType = ModifierTypes.Additive;
+    public float duration;
+    public List<StatModifierList> statList = new List<StatModifierList>();
+    [HideInInspector] public float timeCreated;
     public Dictionary<BaseStatsEnum, float> statDict = new Dictionary<BaseStatsEnum, float>
         {
             
@@ -38,8 +42,20 @@ public class StatModifier
         } 
         
     }
+    public StatModifier() {
+
+    }
+    public StatModifier(StatModifier other)
+    {
+        statDict = other.statList.ToDictionary(stat => stat.baseStatsEnum, stat => stat.value);
+        statModifierType = other.statModifierType;
+        generalModifierType = other.generalModifierType;
+        duration = other.duration;
+        timeCreated = Time.time;
+    }
     public StatModifier(List<StatModifierList> statModifierList)
     {
+        timeCreated = Time.time;
         foreach (StatModifierList statModifierList1 in statModifierList)
         {
             statDict.Add(statModifierList1.baseStatsEnum, statModifierList1.value);
