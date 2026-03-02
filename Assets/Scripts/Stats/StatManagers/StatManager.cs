@@ -14,7 +14,7 @@ public class StatManager : MonoBehaviour, IDamageable
     private float lastTakenDamage = -1f;
     private float lastSavedHP = -1f;
     [SerializeField] private AudioSource hitSFX; // completely optional
-    private Resistances resistances;
+    private Resistances resistances;//
     public void Start()
     {
         PreStart();
@@ -44,10 +44,11 @@ public class StatManager : MonoBehaviour, IDamageable
     // the taking damage logic, very cool. use when possilbe
     public virtual void TakeDamage(DamageData damage, bool bypassMax = false) 
     {
-        if (this is PlayerStatManager playerStatManager && playerStatManager.stats.isParrying)
+        if (this is PlayerStatManager playerStatManager && playerStatManager.stats.isParrying && damage.type != DamageType.Fixed && damage.source != null)
         {
             playerStatManager.OnParry();
             damage.source.GetComponent<StatManager>()?.BasicStun(damage.abilityBase.stunTime/2);
+            damage.source.GetComponent<StatManager>()?.Knockback(playerStatManager.transform.position, damage.baseDamage/10f);
             return; // you parried, congrats!
         }
         // calc damage then take damage. 
@@ -118,6 +119,7 @@ public class StatManager : MonoBehaviour, IDamageable
         vector = vector.normalized * force;
         if (TryGetComponent<Rigidbody>(out var rb))
         {
+            Debug.Log("Knockback applied");
             rb.isKinematic = false;
             rb.AddForce(vector, ForceMode.Impulse);  
         }
@@ -389,7 +391,16 @@ public class StatManager : MonoBehaviour, IDamageable
     // will contain everything in the start that happens in this script
     public virtual void CoreStart()
     {
-
+        foreach (DamageType damageType in Enum.GetValues(typeof(DamageType)))
+        {
+            if (_stats.resistances.Get(damageType) > 0) continue;
+            _stats.resistances.AddEntry(new ResistanceEntry
+            {
+                type = damageType,
+                resistance = 1f,
+            });
+            Debug.Log("Default resist aded");
+        }
     }
     public virtual void PostStart() {}
     // setters for the stats, don't worry about it!

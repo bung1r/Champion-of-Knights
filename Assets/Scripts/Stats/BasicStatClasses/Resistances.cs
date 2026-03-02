@@ -18,13 +18,7 @@ public class Resistances
                 total+=entry.resistance;
             }          
         }
-        if (total > 0)
-        {
-            return total;
-        } else
-        {
-            return 1f;
-        }
+        return total;
     }
 
     public void AddEntry(ResistanceEntry entry)

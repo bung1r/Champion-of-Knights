@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Properties;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void ChangeSelectedSlot(int index)
     {
+        if (index < 0 || index >= items.Count) return;
         selectedSlotIndex = index;
         selectedItem = items[selectedSlotIndex];
         inventoryManagerGUI.ChangeSelectedSlot(index);

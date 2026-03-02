@@ -14,49 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName: Roboman
   dialogue:
-  - dialogueLine: Viewers?
+  - dialogueLine: ...Congratulations, Mr. Knight! You survived and completed all
+      the objectives!
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Oh, they're the ones that watch your battles!
+  - dialogueLine: Of course, this won't be your last battle, but you've gotten past
+      the first hurdle.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: They give you supply crates, and motivation!
+  - dialogueLine: Again, good work out there, Mr. Knight!
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You'll also need a bunch of them if you want to go back to your
-      own time.
+  - dialogueLine: If you need to know anything, talk to me and I'll give you a little
+      more detail about your job. I am your guide, after all!
     choices: []
     effects:
       hasEffects: 0
-      endDialogue: 0
+      endDialogue: 1
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -69,6 +75,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -81,7 +88,8 @@ MonoBehaviour:
     effects:
       hasEffects: 1
       endDialogue: 1
-      nextDialogue: {fileID: 0}
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

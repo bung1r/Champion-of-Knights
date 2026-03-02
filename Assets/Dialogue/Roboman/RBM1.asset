@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 1
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -33,6 +34,7 @@ MonoBehaviour:
         hasEffects: 1
         endDialogue: 0
         nextDialogue: {fileID: 11400000, guid: f4ab4019a33dc714a80fdd5817ec2ed0, type: 2}
+        complexEffects: []
         reputation: 0
         loyalviewers: 0
         sponsers: 0
@@ -44,6 +46,7 @@ MonoBehaviour:
         hasEffects: 1
         endDialogue: 0
         nextDialogue: {fileID: 11400000, guid: 16b1fd5b329b26746bb72664cf24d9a1, type: 2}
+        complexEffects: []
         reputation: 0
         loyalviewers: 0
         sponsers: 0
@@ -54,7 +57,8 @@ MonoBehaviour:
       effects:
         hasEffects: 1
         endDialogue: 0
-        nextDialogue: {fileID: 11400000, guid: 0f104f7083c24d146bf08a98f87fd466, type: 2}
+        nextDialogue: {fileID: 11400000, guid: 26734819d3fed15449d0cec22fef054d, type: 2}
+        complexEffects: []
         reputation: 0
         loyalviewers: 0
         sponsers: 0
@@ -65,6 +69,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 1
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

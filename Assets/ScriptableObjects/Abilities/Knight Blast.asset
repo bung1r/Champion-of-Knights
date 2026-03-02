@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight Blast
   m_EditorClassIdentifier: 
   abilityName: Knight Blast
-  staminaCost: 1
+  staminaCost: 20
   baseCooldown: 0.1
   critRate: 0
   critMultiplier: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
   attackID: -1
   useOverflowStamina: 0
   damageData:
-    baseDamage: 20
+    baseDamage: 15
     type: 0
     source: {fileID: 0}
   hitboxData:

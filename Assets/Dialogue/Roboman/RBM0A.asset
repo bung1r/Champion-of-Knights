@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: RBM0A
+  m_EditorClassIdentifier: 
+  speakerName: Roboman
+  dialogue:
+  - dialogueLine: Mr. Knight.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Are you ready for the battle ahead? It'll be unlike anything you've
+      faced before.
+    choices:
+    - choiceText: I'm ready.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 7c974ca80de32dc498d9825256069c2a, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: I'm not ready.
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 52a8a2db0ad0d1441abb980ac16b706e, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    effects:
+      hasEffects: 1
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

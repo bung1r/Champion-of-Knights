@@ -34,6 +34,7 @@ public class InventoryManagerGUI : MonoBehaviour
 
     public void ChangeSelectedSlot(int index)
     {
+        if (inventorySlots[index] == null) return;
         selectedSlot = inventorySlots[index];
         selectIndicator.position = selectedSlot.transform.position;
         

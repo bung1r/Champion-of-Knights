@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private GlitchEffectController glitchEffectController;
     [SerializeField] private GameOverUIManager gameOverCanvas;
     [SerializeField] private GameOverUIManager victoryCanvas;
-    [SerializeField] private SimpleEnableText packageDropText;
+    [SerializeField] public SimpleEnableText packageDropText;
     [SerializeField] private GameObject PRISON;
     [SerializeField] private GameObject spawnLocationsParent;
     private List<Transform> orbSpawns = new List<Transform>(); // automatcially created
@@ -57,6 +57,7 @@ public class RoundManager : MonoBehaviour
     public int RIGGEDSPAWN = -1;
     public bool JOURNALISTMODE = false;
     public bool DEBUGMODE = false;
+    public bool START_WITH_TUTORIAL = false;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
     public int ending = -1; // 1 = A, 2 = B, 3 = C...
@@ -680,14 +681,11 @@ public class RoundManager : MonoBehaviour
         player.transform.position = spawnLocationsParent.transform.GetChild(UnityEngine.Random.Range(0, spawnLocationsParent.transform.childCount)).position;
     }
 
-    
-
-
     public float GetHighestViewersThisRound => highestViewersThisRound;
     public PlayerStatManager GetPlayer => player;
 }
 
 public enum RoundStates
 {
-    Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory, PreVictory,
+    Tutorial, Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory, PreVictory,
 }

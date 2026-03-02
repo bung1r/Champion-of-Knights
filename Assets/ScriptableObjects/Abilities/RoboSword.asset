@@ -18,8 +18,8 @@ MonoBehaviour:
   critRate: 0
   critMultiplier: 2
   variation: 0.3
-  hitboxTimeDelay: 0.4
-  attackLength: 0.7
+  hitboxTimeDelay: 0.55
+  attackLength: 1
   knockback: 5
   stunTime: 1
   forward: 0

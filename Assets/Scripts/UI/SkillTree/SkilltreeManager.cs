@@ -83,6 +83,13 @@ public class SkilltreeManager : MonoBehaviour
                     statManager.AddMultiplier(new DamageMultiplier(dm));
                 }
             }
+            if (node.resistances.Count > 0)
+            {
+                foreach (ResistanceEntry re in node.resistances)
+                {
+                    statManager.GetStats().resistances.AddEntry(new ResistanceEntry(re));
+                }
+            }
         } else if (node.nodeType == NodeTypes.UnlockAbility)
         {
             if (node.abilityUnlock != null)

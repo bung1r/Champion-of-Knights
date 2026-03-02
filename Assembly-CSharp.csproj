@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\UI\Dialogue\FullDialogue.cs" />
     <Compile Include="Assets\Scripts\Utils\MasterStuff.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\RoundDatabase.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\DialogueRound.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\Resistances.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\ViewerItemDatabase.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Assets\Scripts\Utils\BootstrapSceneHandler.cs" />
     <Compile Include="Assets\Scripts\UI\SkillTree\SkilltreeNode.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\SettingsButton.cs" />
     <Compile Include="Assets\Scripts\Map\PickUpItem.cs" />
   </ItemGroup>
   <ItemGroup>

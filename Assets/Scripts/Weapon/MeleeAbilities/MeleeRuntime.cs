@@ -69,6 +69,20 @@ public class MeleeRuntime : AbilityRuntime
             if (hit.transform.root.TryGetComponent<IDamageable>(out var damageable))
             {
                 if (hitTransforms.Contains(hit.transform.root)) continue;
+
+                // checks if the target is parrying
+                // if (hit.transform.root.TryGetComponent<StatManager>(out var statManager))
+                // {
+                //     if (statManager.GetStats().isParrying) {
+                //         if (statManager is PlayerStatManager playerStatManager) playerStatManager.OnParry();
+                //         Debug.Log("Parried melee attack!");
+                //         AudioManager.Instance.PlayParrySFX(hit.transform.root);
+                //         owner.GetComponent<StatManager>().Knockback(hit.transform.root.position, 100f);
+                //         hitTransforms.Add(hit.transform.root);
+                //         continue;
+                //     }
+                // }
+
                 hitTransforms.Add(hit.transform.root);
                 DamageData data = new DamageData {baseDamage = realDamage, type = damageData.type, source = owner, abilityBase = abilityBase};
                 damageable.TakeDamage(data);

@@ -23,4 +23,6 @@ public enum DialogueEffectTypes
     GiveItem,
     MidGameChoice,
     OpenVictoryScreen,
+    TopTextEnable,
+    Blackscreen,
 }

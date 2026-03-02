@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: TRBM0D
+  m_EditorClassIdentifier: 
+  speakerName: Metal Talking Thingy???
+  dialogue:
+  - dialogueLine: Oh, haha! I'm getting a tiny bit ahead of myself aren't I?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I'll teach you the ropes of your new job, as a Streamer!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: How to use our items, how to complete objectives, stuff like that!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I'll have to kill you if you aren't fit for viewing.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Well it doesn't matter as long as you're capable, right?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: For your first task, go into the next room and defeat the enemies,
+      and come back into this room once you're done!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Don't worry, your sword has been enhanced, so it can't dull anymore.
+      Well then, good luck!
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 1
+      nextDialogue: {fileID: 11400000, guid: 79fc9c131f3b02c44b89c0047b944052, type: 2}
+      complexEffects:
+      - effectType: 9
+        intValue: 0
+        floatValue: 10
+        stringValue: LMB for base Attack, RMB for Parry.
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

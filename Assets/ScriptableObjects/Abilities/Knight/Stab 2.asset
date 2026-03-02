@@ -15,17 +15,19 @@ MonoBehaviour:
   abilityName: Default
   staminaCost: 20
   baseCooldown: 10
-  critRate: 100
+  critRate: 0
   critMultiplier: 2
   variation: 0.2
   hitboxTimeDelay: 0.2
   attackLength: 1
   knockback: 0
   stunTime: 0.6
+  forward: 0
+  spin: 0
   attackID: -1
   useOverflowStamina: 1
   damageData:
-    baseDamage: 50
+    baseDamage: 130
     type: 0
     source: {fileID: 0}
   hitboxData:

@@ -282,6 +282,13 @@ public class DialogueManager : MonoBehaviour
             case DialogueEffectTypes.OpenVictoryScreen:
                 RoundManager.Instance.StartVictorySequence();
                 break;
+            case DialogueEffectTypes.TopTextEnable:
+                RoundManager.Instance.packageDropText.EnableTextForSeconds(effect.floatValue, 1f, effect.stringValue);
+                break;
+            case DialogueEffectTypes.Blackscreen:
+                BlackScreen.Instance.FadeToBlack(effect.floatValue);
+                BlackScreen.Instance.FadeFromBlackWithDelay(effect.intValue, 0.5f);
+                break;
             default:
                 break;
         }

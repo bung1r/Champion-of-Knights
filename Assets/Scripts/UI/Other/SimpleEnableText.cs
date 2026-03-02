@@ -6,11 +6,11 @@ public class SimpleEnableText : MonoBehaviour
 {
     public TextMeshProUGUI textObject;
     public float startAlpha = 0f;
+    public string defaultText = "A viewer has given you a gift!";
     private bool isFading = false;
     private bool isEnabling = false;
     private float actionStart = -999f;
     private float actionDuration = -999f;
-
     void Start()
     {
         if (textObject == null) textObject = GetComponent<TextMeshProUGUI>();
@@ -42,15 +42,17 @@ public class SimpleEnableText : MonoBehaviour
         }
     }    
 
-    async public void EnableTextForSeconds(float seconds, float fadeOutDuration = 1f)
+    async public void EnableTextForSeconds(float seconds, float fadeOutDuration = 1f, string text = null)
     {
-        EnableText();
+        if (text == null) text = defaultText;
+        EnableText(text);
         await System.Threading.Tasks.Task.Delay((int)(seconds * 1000));
         FadeOutText(1f);
     }
 
-    public void EnableText()
+    public void EnableText(string text)
     {
+        textObject.text = text;
         textObject.alpha = 1f;
     }
 

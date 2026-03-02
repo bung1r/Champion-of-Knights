@@ -38,6 +38,12 @@ public class AudioManager : MonoBehaviour
     private float intermissionMusicMaxVolume;
     private List<AudioSource> activeSources = new List<AudioSource>();
     private Dictionary<AudioSource, float> sourceAndPitchDict = new Dictionary<AudioSource, float>();
+    private Dictionary<AudioSource, string> sourceAndTypeDict = new Dictionary<AudioSource, string>();
+    private Dictionary<AudioSource, float> sourceAndVolumeDict = new Dictionary<AudioSource, float>();
+    private Dictionary<AudioSource, float> sourceAndCurrentVolumeDict = new Dictionary<AudioSource, float>();
+    public float masterVolume = 100f;
+    public float musicVolume = 50f;
+    public float sfxVolume = 50f;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -55,6 +61,9 @@ public class AudioManager : MonoBehaviour
     public void Start()
     {
         // add all active sources to the list for pitch variation tracking 
+        activeSources.Add(menuMusic);
+        activeSources.Add(battleMusic);
+        activeSources.Add(intermissionMusic);
         activeSources.Add(deathSFX);
         activeSources.Add(hitSFX);
         activeSources.Add(parrySFX);
@@ -80,14 +89,34 @@ public class AudioManager : MonoBehaviour
         {
             if (source == null) continue;
             sourceAndPitchDict[source] = source.pitch;
+            sourceAndVolumeDict[source] = source.volume;
+
+            if (source.clip.length > 10f)
+            {
+                sourceAndTypeDict[source] = "music";
+                sourceAndCurrentVolumeDict[source] = source.volume;
+            } else
+            {
+                sourceAndTypeDict[source] = "sfx";
+            }
         }
-    }
+
+
+    }       
     public void PlaySourceAtPointWithPitch(AudioSource source, Vector3 position, float variation = 0.05f)
     {
         if (source != null)
         {
             float basePitch = sourceAndPitchDict[source];
             source.pitch = UnityEngine.Random.Range(basePitch - variation, basePitch + variation);
+            float baseVolume = sourceAndVolumeDict[source];
+            if (sourceAndTypeDict[source] == "music")
+            {
+                source.volume = baseVolume * (musicVolume / 50f) * (masterVolume / 100f);
+            } else
+            {
+                source.volume = baseVolume * (sfxVolume / 50f) * (masterVolume / 100f);
+            }
             source.transform.position = position;
             source.PlayOneShot(source.clip);
         }
@@ -182,11 +211,11 @@ public class AudioManager : MonoBehaviour
         while (time < duration)
         {
             time += Time.deltaTime;
-            musicSource.volume = Mathf.Lerp(0, targetVolume, time / duration);
+            sourceAndCurrentVolumeDict[musicSource] = Mathf.Lerp(0, targetVolume, time / duration);
             yield return null;
         }
 
-        musicSource.volume = targetVolume;
+        sourceAndCurrentVolumeDict[musicSource] = targetVolume;
     }
 
     IEnumerator FadeOutMusic(AudioSource musicSource, float duration)
@@ -203,6 +232,13 @@ public class AudioManager : MonoBehaviour
 
         musicSource.Stop();
         musicSource.volume = startVolume;
+    }
+    void Update()
+    {
+        foreach (var kvp in sourceAndCurrentVolumeDict)
+        {
+            kvp.Key.volume = kvp.Value * (masterVolume / 100f) * (musicVolume / 50f);
+        }
     }
 }
 
