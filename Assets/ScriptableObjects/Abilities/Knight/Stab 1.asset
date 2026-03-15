@@ -22,7 +22,13 @@ MonoBehaviour:
   attackLength: 1
   knockback: 0
   stunTime: 0.4
+  forward: 0
+  spin: 0
   attackID: -1
+  audioHelpers:
+  - audioName: Stab1SFX
+    variation: 0.05
+    delay: 0
   useOverflowStamina: 1
   damageData:
     baseDamage: 25

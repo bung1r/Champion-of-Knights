@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 // might be the worst code i've ever written
 public class Item : ScriptableObject
@@ -9,11 +10,11 @@ public class Item : ScriptableObject
     public GameObject prefab;
     public Sprite icon;
     public int uses = 1;
+    public List<ItemAudioHelper> audioHelpers = new List<ItemAudioHelper>();
     public float cooldown = 0f; // how long before it can be used again
     public float duration = 1f; // how look it takes for action to complete
     public float performDelay = 0.3f; // delay before perform is called after use
     public virtual bool Use(StatManager statManager = null) {
-        Debug.Log("RAHH");
         FullPerform(statManager); return true;
         }
     public virtual bool CanUse() {return false;}
@@ -24,6 +25,7 @@ public class Item : ScriptableObject
     
     async private void FullPerform(StatManager statManager = null)
     {
+        AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);
         await Task.Delay((int)(performDelay * 1000));
         Perform(statManager);
     } // DO NOT OVERRIDE THIS UNLESS NECESSARY, BRO!
@@ -103,4 +105,12 @@ public class DatabaseItemData
     public float viewerScaling; // how much the viewers affect the weight of this item.
     public float sponsorScaling; // how much the sponsors affect the weight of this item.
     public float maxWeight; 
+}
+
+[Serializable]
+public class ItemAudioHelper
+{
+    public string audioName;
+    public float variation;
+    public float delay;
 }

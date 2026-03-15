@@ -67,8 +67,14 @@ public class StatManager : MonoBehaviour, IDamageable
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
         
         // checks whether a custom hit SFX is assigned, if not use the default one.
-        if (hitSFX != null) AudioManager.Instance.PlaySourceAtPointWithPitch(hitSFX, transform.position, 0.2f);
-        else AudioManager.Instance.PlayHitSFX(transform, 0.2f);
+        if (finalDamage >= 0)
+        {
+            if (hitSFX != null) AudioManager.Instance.PlaySourceAtPointWithPitch(hitSFX, transform.position, 0.2f);
+            else AudioManager.Instance.PlayHitSFX(transform, 0.2f);
+        } else {
+            AudioManager.Instance.PlayHealSFX(transform);
+        }
+        
         
         // apply stun and knockback if applicable
         if (damage.abilityBase != null)
@@ -399,7 +405,7 @@ public class StatManager : MonoBehaviour, IDamageable
                 type = damageType,
                 resistance = 1f,
             });
-            Debug.Log("Default resist aded");
+            // Debug.Log("Default resist aded");
         }
     }
     public virtual void PostStart() {}

@@ -16,7 +16,11 @@ MonoBehaviour:
   prefab: {fileID: 528293155351621555, guid: a00f7e043a2e2f14fafd31c0a930e730, type: 3}
   icon: {fileID: 0}
   uses: 1
-  cooldown: 2
-  duration: 0.6
-  performDelay: 0.3
+  audioHelpers:
+  - audioName: BigPotionSFX
+    variation: 0.05
+    delay: 0
+  cooldown: 3
+  duration: 3
+  performDelay: 2.5
   healAmount: 100

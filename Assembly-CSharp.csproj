@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\RangedBullet.cs" />
     <Compile Include="Assets\Scripts\UI\Round\RoundUIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Stats\StatsUIFillBar.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeAbility.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\ItemHelper.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityUI.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\MeleeHelper.cs" />
     <Compile Include="Assets\Scripts\UI\Other\SimpleEnableText.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventoryManagerGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Other\ViginetteController.cs" />
     <Compile Include="Assets\Scripts\Utils\Footsteps.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIManager.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\PackageStatManager.cs" />

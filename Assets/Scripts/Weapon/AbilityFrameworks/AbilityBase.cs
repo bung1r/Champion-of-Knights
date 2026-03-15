@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -22,6 +23,7 @@ public abstract class AbilityBase : ScriptableObject
     public float forward = 0f; // boosts forward movement when using ability 
     public float spin = 0f; // spins when using ability (melee only prob)
     public int attackID = -1;
+    public List<ItemAudioHelper> audioHelpers = new List<ItemAudioHelper>();
     [NonSerialized]public float lastUsedTime = 0f;
     public bool useOverflowStamina = true;
     public DamageData damageData = new DamageData();
@@ -73,6 +75,7 @@ public class AbilityRuntime : IAbility
     public float spin = 0f;
     public float forward = 0f;
     public int attackID = -1;
+    public List<ItemAudioHelper> audioHelpers = new List<ItemAudioHelper>();
     // private bool isCancelled = false;
     public DamageData damageData = new DamageData();
     public StatManager statManager;
@@ -96,13 +99,13 @@ public class AbilityRuntime : IAbility
         forward = other.forward;
         spin = other.spin;
         attackID = other.attackID;
+        audioHelpers = other.audioHelpers;
     }
     public AbilityRuntime() {}  
     public AbilityRuntime(AbilityBase other, StatManager manager)
     {
         ConstructBase(other, manager);
     }
-
     public virtual void Cancel()
     {
         // isCancelled = true;

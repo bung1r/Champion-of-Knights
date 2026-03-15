@@ -25,6 +25,10 @@ MonoBehaviour:
   forward: 0
   spin: 0
   attackID: 0
+  audioHelpers:
+  - audioName: SwordSwooshSFX
+    variation: 0.1
+    delay: 0.05
   useOverflowStamina: 1
   damageData:
     baseDamage: 15

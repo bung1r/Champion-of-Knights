@@ -185,6 +185,8 @@ public class PlayerStatManager : StatManager
         if (statsUIManager == null) return;
         if (lastHP != stats.currentHP || lastMaxHP != stats.maxHP)
         {
+            AudioManager.Instance.SetHeartbeatVolume(stats.currentHP, stats.maxHP);
+            ViginetteController.Instance.SetViginette(stats.currentHP, stats.maxHP);
             statsUIManager.UpdateHP(stats.currentHP, stats.maxHP);
             lastHP = stats.currentHP;
         }

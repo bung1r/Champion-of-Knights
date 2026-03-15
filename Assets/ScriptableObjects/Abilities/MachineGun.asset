@@ -25,6 +25,10 @@ MonoBehaviour:
   forward: 0
   spin: 0
   attackID: -1
+  audioHelpers:
+  - audioName: DroneShootSFX
+    variation: 0.05
+    delay: 0
   useOverflowStamina: 0
   damageData:
     baseDamage: 5

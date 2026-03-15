@@ -31,7 +31,8 @@ public class RangedRuntime : AbilityRuntime
     // the actual performing code, pretty important if you ask me. 
     async public override void Perform()
     {
-        if (spin != 0f) statManager.Spin(spin);
+        // if (spin != 0f) statManager.Spin(spin);
+        AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);
         if (forward != 0f) statManager.Forward(forward);
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
 

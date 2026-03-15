@@ -25,6 +25,13 @@ MonoBehaviour:
   forward: 0
   spin: 0
   attackID: 1
+  audioHelpers:
+  - audioName: ShortWindupSFX
+    variation: 0.05
+    delay: 0
+  - audioName: LongSwordSwooshSFX
+    variation: 0.05
+    delay: 0.24
   useOverflowStamina: 1
   damageData:
     baseDamage: 60

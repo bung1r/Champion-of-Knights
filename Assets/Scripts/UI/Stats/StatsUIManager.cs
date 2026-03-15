@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class StatsUIManager : MonoBehaviour
@@ -16,10 +17,12 @@ public class StatsUIManager : MonoBehaviour
     public AbilityUIManager abilityUIManager;
     public StatsUIBar healthBar; //must be assigned
     public StatsUIBar stamBar; //must be assigned
+    public Transform followMouse; //must be assigned
     public StatsUIBar styleBar; //must be assigned
     public StatsUIBar expBar; //must be assigned
     public TextMeshProUGUI levelText; // must be assigned
     public TextMeshProUGUI fToInteract; //assign ts
+
 
     public void Start()
     {
@@ -29,6 +32,7 @@ public class StatsUIManager : MonoBehaviour
         inventoryManagerGUI.AssignUIManager(statManager);  
         abilityUIManager.AssignPlayerCombat(statManager.GetPlayerCombat());
         RoundManager.Instance.AssignStatUIManager(this);
+        
     }
     public void UpdateHP(float currHP, float maxHP)
     {
@@ -81,4 +85,6 @@ public class StatsUIManager : MonoBehaviour
     {
         escMenuCanvas.enabled = !escMenuCanvas.enabled;
     }   
+
+
 }

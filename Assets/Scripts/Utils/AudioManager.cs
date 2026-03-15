@@ -10,23 +10,29 @@ using UnityEngine.Rendering;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
-    [SerializeField] private AudioSource deathSFX;
-    [SerializeField] private AudioSource hitSFX;
-    [SerializeField] private AudioSource parrySFX;
-    [SerializeField] private AudioSource swingSFX;
-    [SerializeField] private AudioSource thump1SFX;
-    [SerializeField] private AudioSource thump2SFX;
-    [SerializeField] private AudioSource thump3SFX;
-    [SerializeField] private AudioSource hitEnemySFX;
-    [SerializeField] private AudioSource guardSFX;
-    [SerializeField] private AudioSource footstepGrassSFX;
-    [SerializeField] private AudioSource footstepConcreteSFX;
-    [SerializeField] private AudioSource footstepEchoSFX;
-    [SerializeField] private AudioSource windupSwingSFX;
-    [SerializeField] private AudioSource roboticFootstepSFX;
-    [SerializeField] private AudioSource windupChargeSFX;
-    [SerializeField] private AudioSource styleMeterUpSFX;
-    [SerializeField] private AudioSource wrongBuzzerSFX;
+    [SerializeField] public AudioSource deathSFX;
+    [SerializeField] public AudioSource hitSFX;
+    [SerializeField] public AudioSource parrySFX;
+    [SerializeField] public AudioSource swingSFX;
+    [SerializeField] public AudioSource thump1SFX;
+    [SerializeField] public AudioSource thump2SFX;
+    [SerializeField] public AudioSource thump3SFX;
+    [SerializeField] public AudioSource hitEnemySFX;
+    [SerializeField] public AudioSource guardSFX;
+    [SerializeField] public AudioSource footstepGrassSFX;
+    [SerializeField] public AudioSource footstepConcreteSFX;
+    [SerializeField] public AudioSource footstepEchoSFX;
+    [SerializeField] public AudioSource windupSwingSFX;
+    [SerializeField] public AudioSource roboticFootstepSFX;
+    [SerializeField] public AudioSource windupChargeSFX;
+    [SerializeField] public AudioSource styleMeterUpSFX;
+    [SerializeField] public AudioSource wrongBuzzerSFX;
+    [SerializeField] public AudioSource nearDeathHeartbeatSFX;
+    [SerializeField] public AudioSource healSFX;
+    [SerializeField] public AudioSource droneShootSFX;
+    [SerializeField] public AudioSource swordWhooshSFX;
+    [SerializeField] public AudioSource drinkPotionRegSFX;
+    [SerializeField] public AudioSource drinkPotionBigSFX;
     [SerializeField] private AudioSource buyNodeSFX;
     [SerializeField] private AudioSource levelUp;
     [SerializeField] private AudioSource genericMenuClick;
@@ -37,6 +43,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource intermissionMusic;
     private float intermissionMusicMaxVolume;
     private List<AudioSource> activeSources = new List<AudioSource>();
+    public Dictionary<string, AudioSource> NameToAudio = new Dictionary<string, AudioSource>();
     private Dictionary<AudioSource, float> sourceAndPitchDict = new Dictionary<AudioSource, float>();
     private Dictionary<AudioSource, string> sourceAndTypeDict = new Dictionary<AudioSource, string>();
     private Dictionary<AudioSource, float> sourceAndVolumeDict = new Dictionary<AudioSource, float>();
@@ -61,37 +68,23 @@ public class AudioManager : MonoBehaviour
     public void Start()
     {
         // add all active sources to the list for pitch variation tracking 
-        activeSources.Add(menuMusic);
-        activeSources.Add(battleMusic);
-        activeSources.Add(intermissionMusic);
-        activeSources.Add(deathSFX);
-        activeSources.Add(hitSFX);
-        activeSources.Add(parrySFX);
-        activeSources.Add(swingSFX);
-        activeSources.Add(thump1SFX);
-        activeSources.Add(thump2SFX);
-        activeSources.Add(thump3SFX);
-        activeSources.Add(hitEnemySFX);
-        activeSources.Add(guardSFX);
-        activeSources.Add(footstepGrassSFX);
-        activeSources.Add(footstepConcreteSFX);
-        activeSources.Add(footstepEchoSFX);
-        activeSources.Add(windupSwingSFX);
-        activeSources.Add(roboticFootstepSFX);
-        activeSources.Add(windupChargeSFX);
-        activeSources.Add(styleMeterUpSFX);
-        activeSources.Add(wrongBuzzerSFX);
-        activeSources.Add(buyNodeSFX);
-        activeSources.Add(levelUp);
-        activeSources.Add(genericMenuClick);
+        foreach (Transform child in transform)
+        {
+            AudioSource source = child.GetComponent<AudioSource>();
+            if (source != null)
+            {
+                activeSources.Add(source);
+            }
+        }
 
         foreach (AudioSource source in activeSources)
         {
             if (source == null) continue;
             sourceAndPitchDict[source] = source.pitch;
             sourceAndVolumeDict[source] = source.volume;
+            NameToAudio[source.gameObject.name] = source;
 
-            if (source.clip.length > 10f)
+            if (source.clip.length > 30f)
             {
                 sourceAndTypeDict[source] = "music";
                 sourceAndCurrentVolumeDict[source] = source.volume;
@@ -101,7 +94,8 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-
+        nearDeathHeartbeatSFX.volume = 0f; 
+        nearDeathHeartbeatSFX.Play();
     }       
     public void PlaySourceAtPointWithPitch(AudioSource source, Vector3 position, float variation = 0.05f)
     {
@@ -119,6 +113,25 @@ public class AudioManager : MonoBehaviour
             }
             source.transform.position = position;
             source.PlayOneShot(source.clip);
+        }
+    }
+    public async void PlaySourceAtPointWithPitchAsync(AudioSource source, Vector3 position, float delay, float variation = 0.05f)
+    {
+        await Task.Delay((int)(delay * 1000)); // delay to ensure the source is ready to play
+        if (source != null)
+        {
+            PlaySourceAtPointWithPitch(source, position, variation);
+        }
+    }
+    public void HandleAudioHelpers(List<ItemAudioHelper> audioHelpers, Transform origin)
+    {
+        foreach (ItemAudioHelper audioHelper in audioHelpers)
+        {
+            AudioSource source = NameToAudio[audioHelper.audioName];
+            if (source != null)
+            {
+                PlaySourceAtPointWithPitchAsync(source, origin.position, audioHelper.delay, audioHelper.variation);
+            }
         }
     }
     public void PlayDeathSFX(Transform origin, float variation = 0.05f)
@@ -177,6 +190,16 @@ public class AudioManager : MonoBehaviour
     public void PlayHitWallSFX(Transform origin, float variation = 0.05f)
     {
         PlaySourceAtPointWithPitch(thump2SFX, origin.position, variation);
+    }
+    public void PlayHealSFX(Transform origin, float variation = 0f)
+    {
+        PlaySourceAtPointWithPitch(healSFX, origin.position, variation);
+    }
+    public void SetHeartbeatVolume(float hp, float maxhp)
+    {
+        float ratio = hp / maxhp;
+        float targetVolume = (1f - Mathf.Min(1f, ratio * 5f)) * 1f;
+        sourceAndCurrentVolumeDict[nearDeathHeartbeatSFX] = targetVolume;
     }
     public void PlayMenuMusic(float fadeInTime)
     {
