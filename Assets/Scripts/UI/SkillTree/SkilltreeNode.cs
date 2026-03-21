@@ -13,6 +13,7 @@ public class SkilltreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public NodeTypes nodeType = NodeTypes.None;
     public BranchTypes branchType = BranchTypes.None;
     public List<SkilltreeNode> connectedNodes = new List<SkilltreeNode>();  
+    public string desc;
     public bool isUnlocked = false;
     public bool canBeUnlocked = false;
     public bool almostCanBeUnlocked = false;

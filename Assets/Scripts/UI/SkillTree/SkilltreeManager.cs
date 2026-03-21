@@ -81,10 +81,12 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (remove)
         {
             if (hoverNode == tempNode) tempNode = null;
+            if (hoverNode == null) tempNode = null;
         } else
         {
-            if (node.isUnlocked) tempNode = null;
             tempNode = node;
+            if (node.isUnlocked) tempNode = null;
+            if (node.almostCanBeUnlocked == false && node.canBeUnlocked == false) tempNode = null;
         }
         
         if (tempNode != hoverNode)
