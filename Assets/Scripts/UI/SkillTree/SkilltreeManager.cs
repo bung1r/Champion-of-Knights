@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 
 [Serializable]
-public class SkilltreeManager : MonoBehaviour
+public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
+
 {
     private PlayerStatManager statManager;
     private PlayerCombat playerCombat;
     private Canvas parentCanvas;
     public List<SkilltreeNode> allNodes = new List<SkilltreeNode>();
     public SkilltreeNode originNode; // make sure to assign this in inspector, or have it as the first element of allNodes
+    public SkilltreeNode hoverNode;
+    public SkillInfoHoverThingy skillInfoHoverThingy; // assign in inspector
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI skillPointsText;
     private Camera cam;
+    public RectTransform skillTreeRoot;   
+    private Vector2 lastMousePosition;
     public void Start()
     {
         if (originNode == null) originNode = allNodes[0];
         cam = Camera.main;
         statManager = FindObjectOfType<PlayerStatManager>();
+        
         parentCanvas = GetComponentInParent<Canvas>();
         FullInitTree(originNode);
         RoundManager.Instance.AssignSkillTreeManager(this);
+        if (skillTreeRoot == null) skillTreeRoot = GetComponent<RectTransform>();
         if (statManager)
         {
             statManager.AssignSkillTreeManager(this);
@@ -37,6 +45,54 @@ public class SkilltreeManager : MonoBehaviour
             levelText.text = $"Level: {statManager.stats.level}";
             skillPointsText.text = $"Skill Points: {statManager.GetSkillPoints()}";
         }
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        lastMousePosition = eventData.position;
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (skillTreeRoot == null) return;
+
+        Vector2 delta = eventData.position - lastMousePosition;
+        skillTreeRoot.anchoredPosition += delta;
+        lastMousePosition = eventData.position;
+        ClampToCanvas();
+    }
+
+    private void ClampToCanvas()
+    {
+        Vector2 pos = skillTreeRoot.anchoredPosition;
+ 
+        float contentWidth = skillTreeRoot.rect.width;
+        float contentHeight = skillTreeRoot.rect.height;
+
+        contentWidth -= 1920;
+        contentHeight -= 1080;
+
+        float xCoordinate = Mathf.Clamp(pos.x, -contentWidth/2 - 50, contentWidth/2 + 50);
+        float yCoordinate = Mathf.Clamp(pos.y, -contentHeight/2 - 50, contentHeight/2 + 50);
+
+        skillTreeRoot.anchoredPosition = new Vector2(xCoordinate, yCoordinate);
+    }
+    public void OnHoverNode(PointerEventData eventData, SkilltreeNode node, bool remove=false)
+    {
+        SkilltreeNode tempNode = node;
+        if (remove)
+        {
+            if (hoverNode == tempNode) tempNode = null;
+        } else
+        {
+            if (node.isUnlocked) tempNode = null;
+            tempNode = node;
+        }
+        
+        if (tempNode != hoverNode)
+        {
+            hoverNode = tempNode;
+            skillInfoHoverThingy.HoverNodeChange();
+        }
+
     }
     public void UnlockNode(SkilltreeNode node) 
     {

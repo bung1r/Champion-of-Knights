@@ -57,6 +57,7 @@ public class RoundManager : MonoBehaviour
     public int RIGGEDSPAWN = -1;
     public bool JOURNALISTMODE = false;
     public bool DEBUGMODE = false;
+    public int STARTING_SKILL_POINTS = 0;
     public bool START_WITH_TUTORIAL = false;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
@@ -105,6 +106,7 @@ public class RoundManager : MonoBehaviour
 
         if (DEBUGMODE == false)
         {
+            STARTING_SKILL_POINTS = 0;
             roundDuration = 180f;
             shopDuration = 120f;
             beforeRoundDuration = 4f;
@@ -114,12 +116,18 @@ public class RoundManager : MonoBehaviour
             INFINITERIGGED = false;
             currentRound = 0;
         }
+
+        
     }
     void Start()
     {
         openSkillTreeCanvas.enabled = false;
         StartBeforeRoundIntermission();
         AudioManager.Instance.DisableMenuMusic(1f);
+        if (DEBUGMODE == true)
+        {
+            player.stats.skillPoints = STARTING_SKILL_POINTS;
+        }
     }
     
     void Update()

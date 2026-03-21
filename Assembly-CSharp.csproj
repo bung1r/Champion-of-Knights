@@ -54,6 +54,7 @@
     <Compile Include="Assets\Scripts\Stats\Inventory\ItemHelper.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityUI.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyCombat.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillTree\SkillInfoHoverThingy.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\RangedBomb.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\BulletPayload.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />

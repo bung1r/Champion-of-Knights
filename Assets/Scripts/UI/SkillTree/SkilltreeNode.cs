@@ -4,9 +4,9 @@ using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 [Serializable]
-public class SkilltreeNode : MonoBehaviour
+public class SkilltreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public SkilltreeManager skilltreeManager;
     public string nodeName;
@@ -70,6 +70,14 @@ public class SkilltreeNode : MonoBehaviour
             nodeText.text = "???";
         }
         nodeButton.colors = colors;
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        skilltreeManager.OnHoverNode(eventData, this);
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        skilltreeManager.OnHoverNode(eventData, this, true);
     }
 }
 
