@@ -33,6 +33,7 @@ public class DialogueRoundHandler : MonoBehaviour
     // 5 -> future use
     public FullDialogue corruptionDialogue;
     public Talkable shopkeeper;
+    public Talkable tutorialBot;
     public DialogueRound shopkeeperDialogues;
     public List<FullDialogue> endingDialogues = new List<FullDialogue>();
     void Awake()
@@ -64,7 +65,10 @@ public class DialogueRoundHandler : MonoBehaviour
             talkable.SwitchDialouge(null);
         }
     }   
-
+    public void TutorialBotSpeak()
+    {
+        DialogueManager.Instance.StartFullDialogue(tutorialBot.dialogue, tutorialBot);
+    }
     public void HandleRoundDialogue(int roundIndex)
     {
         thisRoundViewerDialogues.Clear();

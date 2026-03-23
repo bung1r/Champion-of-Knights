@@ -25,4 +25,5 @@ public enum DialogueEffectTypes
     OpenVictoryScreen,
     TopTextEnable,
     Blackscreen,
+    DialogueBlackScreen,
 }

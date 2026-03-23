@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 public class StatManager : MonoBehaviour, IDamageable
 {
 
@@ -15,6 +16,8 @@ public class StatManager : MonoBehaviour, IDamageable
     private float lastSavedHP = -1f;
     [SerializeField] private AudioSource hitSFX; // completely optional
     private Resistances resistances;//
+    public FloatEvent OnTakeDamage;
+    public UnityEvent OnDeath;
     public void Start()
     {
         PreStart();
@@ -61,9 +64,10 @@ public class StatManager : MonoBehaviour, IDamageable
             finalDamage = damage.baseDamage/_stats.resistances.Get(damage.type)/_stats.resistances.Get(DamageType.All);
         }
        
+
         _stats.currentHP -= finalDamage;
         if (_stats.currentHP > _stats.maxHP && !bypassMax) _stats.currentHP = _stats.maxHP;
-
+        OnTakeDamage.Invoke(finalDamage);
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
         
         // checks whether a custom hit SFX is assigned, if not use the default one.
@@ -370,12 +374,13 @@ public class StatManager : MonoBehaviour, IDamageable
         {
             if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))
             {
+                OnDeath.Invoke();
                 Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
                 playerStat.AddEXP(_stats.baseEXP);
                 playerStat.OnKill();
             }
         }
-
+        
         GlobalPrefabs.Instance.DeathVFX(transform);
         AudioManager.Instance.PlayDeathSFX(transform);
         Destroy(gameObject);

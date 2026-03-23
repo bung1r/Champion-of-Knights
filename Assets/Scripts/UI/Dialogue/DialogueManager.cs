@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     public GameObject choicesContainer;
     public GameObject choiceButtonPrefab;
     public Image bgImage;
+    public Color bgImageBaseColor = new Color(136, 136, 136, 255);
+    private CanvasGroup canvasGroup;
     private FullDialogue dialogueInUse;
     private Talkable currentTalkingTo;
     private int currentDialogueIndex = 0;
@@ -55,9 +57,53 @@ public class DialogueManager : MonoBehaviour
         dialogueContentText.maxVisibleCharacters = fullText.Length;
         typingCoroutine = null;
     }
+    private Coroutine FadeCoroutine;
+    private IEnumerator FadeOutBG(float time)
+    {
+        print("step 3 fr fr");
+        while (bgImage.color.a > 0f)
+        {
+            print("fading out fr fr");
+            yield return null;
+            bgImage.color -= new Color(0,0,0,1/time * Time.deltaTime);
+        }
+        bgImage.color = new Color(bgImage.color.r, bgImage.color.g, bgImage.color.b, 0f);
+    }
+    private IEnumerator FadeInBG(float time)
+    {
+        while (bgImage.color.a < 1f)
+        {
+            yield return null;
+            bgImage.color += new Color(0,0,0,1/time * Time.deltaTime);
+        }
+        bgImage.color = new Color(bgImage.color.r, bgImage.color.g, bgImage.color.b, 1f);
+    }
+    public void FadeOutBGFunc(float time)
+    {
+        if (FadeCoroutine != null)
+        {
+            StopCoroutine(FadeCoroutine);
+            FadeCoroutine = null;
+        }
+
+        print("step 2");
+        FadeCoroutine = StartCoroutine(FadeOutBG(time));
+    }
+    public void FadeInBGFunc(float time)
+    {
+        if (FadeCoroutine != null)
+        {
+            StopCoroutine(FadeCoroutine);
+            FadeCoroutine = null;
+        }
+
+        FadeCoroutine = StartCoroutine(FadeInBG(time));
+    }
     void Start()
     {
+        canvasGroup = GetComponent<CanvasGroup>();
         dialogueCanvas = GetComponentInParent<Canvas>();
+        dialogueCanvas.enabled = true;
         HideDialogue();
     }
 
@@ -96,7 +142,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         
-        dialogueCanvas.enabled = true;
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 
     public void HideDialogue()
@@ -105,7 +153,10 @@ public class DialogueManager : MonoBehaviour
         dialogueInUse = null;
         currentDialogueIndex = 0;
         currentTalkingTo = null;
-        dialogueCanvas.enabled = false;
+        // dialogueCanvas.enabled = false;
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void StartFullDialogue(FullDialogue dialogue, Talkable talkable = null)
@@ -138,6 +189,7 @@ public class DialogueManager : MonoBehaviour
         if (currentDialogue.choices.Count > 0) return; // must make a choice first
         if (currentDialogue.effects.hasEffects)
         {
+            Debug.Log("step -1");
             HandleEffects(currentDialogue);
             return;
         }
@@ -247,10 +299,16 @@ public class DialogueManager : MonoBehaviour
     }
     public void EnableBG()
     {
+        EnableBG(bgImageBaseColor);
+    }
+    public void EnableBG(Color color)
+    {
+        bgImage.color = color;
         bgImage.enabled = true;
     }
     public void ComplexEffectHandler(ComplexDialogueEffect effect)
     {
+        Debug.Log("Step 0");
         switch (effect.effectType)
         {
             case DialogueEffectTypes.Reputation:
@@ -288,6 +346,17 @@ public class DialogueManager : MonoBehaviour
             case DialogueEffectTypes.Blackscreen:
                 BlackScreen.Instance.FadeToBlack(effect.floatValue);
                 BlackScreen.Instance.FadeFromBlackWithDelay(effect.intValue, 0.5f);
+                break;
+            case DialogueEffectTypes.DialogueBlackScreen:
+                // float is length of fade, string is in/out
+                if (effect.stringValue == "in")
+                {
+                    FadeInBGFunc(effect.floatValue);
+                } else
+                {
+                    print("Step 1");
+                    FadeOutBGFunc(effect.floatValue);
+                }
                 break;
             default:
                 break;

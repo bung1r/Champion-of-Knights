@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\RoundStuff\DialogueRound.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\Resistances.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\ViewerItemDatabase.cs" />
+    <Compile Include="Assets\Scripts\Utils\EventsWithParameters.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyAbility.cs" />
     <Compile Include="Assets\Scripts\Map\SpawnPlatform.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Scripts\Utils\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\UI\Dialogue\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Other\BossUIBar.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityUISelect.cs" />
     <Compile Include="Assets\Scripts\Map\SpawnPlatformManager.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StatsUIBar.cs" />

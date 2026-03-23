@@ -12,6 +12,7 @@ public class EnemyStatManager : StatManager
     {
         stats = statsSO.CreateRuntime();
         setEnemyStats(stats);
+
     }
 
     public override void PostStart()
@@ -20,5 +21,10 @@ public class EnemyStatManager : StatManager
         {
             agent.speed = stats.walkSpeed;
             agent.angularSpeed = stats.turnSpeed;
+        }
+       
+        if (stats.isBoss)
+        {
+            BossUIBar.Instance.AttachEnemyToBar(this);
         }
     } }

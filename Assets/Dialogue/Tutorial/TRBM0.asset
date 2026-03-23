@@ -30,14 +30,14 @@ MonoBehaviour:
   - dialogueLine: You're finally awake! That's good, I mean, it was a long way down...
     choices: []
     effects:
-      hasEffects: 0
-      endDialogue: 1
+      hasEffects: 1
+      endDialogue: 0
       nextDialogue: {fileID: 0}
       complexEffects:
-      - effectType: 0
+      - effectType: 11
         intValue: 0
-        floatValue: 0
-        stringValue: 
+        floatValue: 5
+        stringValue: out
         itemValue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   - dialogueLine: Nevermind that, welcome good Knight! You're now a participant in
       our Past-To-Stream program! PTS for short. What an honor!
     choices:
-    - choiceText: Who are you?
+    - choiceText: Where am I?
       effects:
         hasEffects: 1
         endDialogue: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
         money: 0
         corruption: 0
         givenItem: {fileID: 0}
-    - choiceText: Where am I?
+    - choiceText: Who are you?
       effects:
         hasEffects: 1
         endDialogue: 0
@@ -77,6 +77,18 @@ MonoBehaviour:
         hasEffects: 1
         endDialogue: 0
         nextDialogue: {fileID: 11400000, guid: 96b815f953592be409eb8ac8155d9a98, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: (Skip Tutorial)
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 4afb24473ae35fd4cb017439b479826e, type: 2}
         complexEffects: []
         reputation: 0
         loyalviewers: 0

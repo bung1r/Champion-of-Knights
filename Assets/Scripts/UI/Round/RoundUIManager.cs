@@ -10,7 +10,7 @@ public class RoundManagerUI : MonoBehaviour
 {
     private RoundManager roundManager;
     [SerializeField] private TextMeshProUGUI roundTimer;
-    [SerializeField] private ObjectiveUIManager objectiveUIManager;
+    [SerializeField] public ObjectiveUIManager objectiveUIManager;
     void Start()
     {
         roundManager = RoundManager.Instance;

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ded79c87197e3574399aa1d0d3345050, type: 3}
-  m_Name: TestBlock
+  m_Name: SlayerBotBoss
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 10000
-    turnSpeed: 0
-    walkSpeed: 0
+    maxHP: 2800
+    turnSpeed: 300
+    walkSpeed: 8
     canSprint: 0
     sprintSpeed: 0
     sprintStaminaCost: 8

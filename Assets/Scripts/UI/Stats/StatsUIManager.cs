@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -58,10 +59,33 @@ public class StatsUIManager : MonoBehaviour
     {
         styleHUDManager.AddEntry(bonusType, mult);
     }
+    public Coroutine InteractCoroutine;
     public void ShowInteractPrompt(string flavorText = "F to interact")
     {
-        fToInteract.text = flavorText;
+        if (flavorText == fToInteract.text) return;
+        if (InteractCoroutine != null)
+        {
+            StopCoroutine(InteractCoroutine);
+            InteractCoroutine = null;
+        }
+
+
+        InteractCoroutine = StartCoroutine(HandleInteractVisibility(flavorText));
+        
+    }
+    public IEnumerator HandleInteractVisibility(string flavorText, float time=1.5f)
+    {
         fToInteract.gameObject.SetActive(true);
+        fToInteract.text = flavorText;
+        fToInteract.alpha = 1f;
+        yield return new WaitForSeconds(time);
+        float fadeDuration = 0.5f;
+        while (fToInteract.alpha > 0f)
+        {
+            yield return null;
+            fToInteract.alpha -= 1/fadeDuration * Time.deltaTime;
+        }
+        fToInteract.alpha = 0f;
     }
     public void HideInteractPrompt()
     {
@@ -86,5 +110,5 @@ public class StatsUIManager : MonoBehaviour
         escMenuCanvas.enabled = !escMenuCanvas.enabled;
     }   
 
-
+    
 }

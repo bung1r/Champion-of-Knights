@@ -77,6 +77,7 @@ public class EnemyStats : Stats
     public float cautionRange = 30f;
     public float aggroRange = 20f;
     public float timeBetweenMoves = 0.5f;
+    public bool isBoss = false;
     public void EnemyConstruct(EnemyStats other)
     {
         runAwayDist = other.runAwayDist;
@@ -86,6 +87,7 @@ public class EnemyStats : Stats
         currentHP = other.maxHP;
         currentStamina = other.maxStamina;
         comfortDist = other.comfortDist;
+        isBoss = other.isBoss;
     }
     public EnemyStats() {}
     public EnemyStats(EnemyStats other)

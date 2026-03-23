@@ -48,6 +48,7 @@ public class RoundManager : MonoBehaviour
     public RoundStates currentRoundState = RoundStates.Nothing;
     public float enemyScaling = 1f; // one is normal, increase by 0.2 every round 
     public string midGameChoice = "";
+    public float introCutsceneLength = 2f;
     public const int finalRound = 7;
     // below are all the main stats tracked for rounds.
     [Space(10)]
@@ -58,7 +59,8 @@ public class RoundManager : MonoBehaviour
     public bool JOURNALISTMODE = false;
     public bool DEBUGMODE = false;
     public int STARTING_SKILL_POINTS = 0;
-    public bool START_WITH_TUTORIAL = false;
+    public bool START_WITH_BEGIN = false;
+    public bool START_WITH_NOTHING = false;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
     public int ending = -1; // 1 = A, 2 = B, 3 = C...
@@ -107,6 +109,8 @@ public class RoundManager : MonoBehaviour
         if (DEBUGMODE == false)
         {
             STARTING_SKILL_POINTS = 0;
+            START_WITH_BEGIN = false;
+            START_WITH_NOTHING = false;
             roundDuration = 180f;
             shopDuration = 120f;
             beforeRoundDuration = 4f;
@@ -122,12 +126,26 @@ public class RoundManager : MonoBehaviour
     void Start()
     {
         openSkillTreeCanvas.enabled = false;
-        StartBeforeRoundIntermission();
+    
         AudioManager.Instance.DisableMenuMusic(1f);
         if (DEBUGMODE == true)
         {
             player.stats.skillPoints = STARTING_SKILL_POINTS;
         }
+
+        if (START_WITH_NOTHING) {
+            currentRoundState = RoundStates.Nothing;
+            return;
+        }
+        if (START_WITH_BEGIN)
+        {
+            StartBeforeRoundIntermission();
+        } else
+        {
+            StartCoroutine(StartTutorialSequence());
+        }
+
+    
     }
     
     void Update()
@@ -295,7 +313,11 @@ public class RoundManager : MonoBehaviour
         } else if (currentRoundState == RoundStates.GameVictory)
         {
             // do nothing for now.
-        }   
+        } else if (currentRoundState == RoundStates.Tutorial)
+        {
+            roundTimer += Time.deltaTime;
+            // something or other, I'm not sure.
+        }
     
 
     }
@@ -317,6 +339,17 @@ public class RoundManager : MonoBehaviour
         // GameObject audiencePackage = Instantiate(audiencePackagePrefab, player.transform.position + Vector3.up * 3f, Quaternion.identity);
         // audiencePackage.GetComponent<Package>().item = audienceItem;
     }
+    public IEnumerator StartTutorialSequence()
+    {
+        Debug.Log("Tutorial hasbegun");
+        DialogueManager.Instance.EnableBG(Color.black);
+        roundManagerUI.DisableTimer();
+        currentRoundState = RoundStates.Tutorial;
+        roundTimer = 0f;
+        // Spawn Knight in the tutorial region
+        yield return new WaitForSeconds(2f);
+        DialogueRoundHandler.Instance.TutorialBotSpeak();
+    }
     public void StartBeforeRoundIntermission()
     {
         BlackScreen.Instance.FadeFromBlack(1f);
@@ -325,16 +358,19 @@ public class RoundManager : MonoBehaviour
         currentRoundState = RoundStates.Begin;
         roundTimer = 0f;
         Debug.Log("Round will begin soon!");
+
+        PreSetUpRound();
+        //assign the objectives for the round. 
+        currentRound++;
+        currentRoundData = roundDatabase.GetRoundData(currentRound);
+        currentObjectives.Clear();
+        roundManagerUI.ClearEntries();
+        CreateNewObjectives(currentRoundData.minObjectives,currentRoundData.maxObjectives);
     }
     public void StartNewRound()
     {
         // basic setup for a new round.
         SetUpRound();
-
-        //assign the objectives for the round. 
-        currentObjectives.Clear();
-        roundManagerUI.ClearEntries();
-        CreateNewObjectives(currentRoundData.minObjectives,currentRoundData.maxObjectives);
     }
     public void CreateNewObjectives(int min, int max)
     {
@@ -358,13 +394,9 @@ public class RoundManager : MonoBehaviour
             }
         }
     }
-    private void SetUpRound()
+    private void PreSetUpRound()
     {
         player.stats.viewers = 0;
-        currentRoundState = RoundStates.Active;
-        currentRound++;
-        currentRoundData = roundDatabase.GetRoundData(currentRound);
-        isRoundActive = true;
         roundTimer = 0f;
         lastUpdatedStat = 0f;
         lastSpawnedEnemies = -999f;
@@ -377,6 +409,13 @@ public class RoundManager : MonoBehaviour
         highestViewersThisRound = 0f;
         highestGradeThisRound = 0;
         objectivesCompleted = 0;
+
+        roundManagerUI.objectiveUIManager.BringToMiddleRegular();
+    }
+    private void SetUpRound()
+    {
+        currentRoundState = RoundStates.Active;
+        roundManagerUI.objectiveUIManager.TakeToProperPosition();
     }
     private void CleanUpRound()
     {
@@ -695,5 +734,5 @@ public class RoundManager : MonoBehaviour
 
 public enum RoundStates
 {
-    Tutorial, Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory, PreVictory,
+    Tutorial, Active, Shop, Intermission, Begin, End, Nothing, GameOver, GameVictory, PreVictory, IntroCutscene
 }
