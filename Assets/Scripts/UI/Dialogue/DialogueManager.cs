@@ -63,7 +63,6 @@ public class DialogueManager : MonoBehaviour
         print("step 3 fr fr");
         while (bgImage.color.a > 0f)
         {
-            print("fading out fr fr");
             yield return null;
             bgImage.color -= new Color(0,0,0,1/time * Time.deltaTime);
         }
@@ -189,7 +188,7 @@ public class DialogueManager : MonoBehaviour
         if (currentDialogue.choices.Count > 0) return; // must make a choice first
         if (currentDialogue.effects.hasEffects)
         {
-            Debug.Log("step -1");
+            // Debug.Log("step -1");
             HandleEffects(currentDialogue);
             return;
         }
@@ -308,7 +307,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void ComplexEffectHandler(ComplexDialogueEffect effect)
     {
-        Debug.Log("Step 0");
+        // Debug.Log("Step 0");
         switch (effect.effectType)
         {
             case DialogueEffectTypes.Reputation:
@@ -358,8 +357,20 @@ public class DialogueManager : MonoBehaviour
                     FadeOutBGFunc(effect.floatValue);
                 }
                 break;
+            case DialogueEffectTypes.SendToShop:
+                StartCoroutine(SendToPrisonCoroutine(effect.floatValue));
+                break;
+            case DialogueEffectTypes.StartRound:
+                RoundManager.Instance.EndShopSequence();
+                break;
             default:
                 break;
         }
+    }
+
+    private IEnumerator SendToPrisonCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        RoundManager.Instance.SENDTOPRISON();
     }
 }

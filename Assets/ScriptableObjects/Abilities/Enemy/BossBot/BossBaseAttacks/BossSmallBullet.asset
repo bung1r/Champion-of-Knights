@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606fd21e11428b240b6e23da29d62db2, type: 3}
+  m_Name: BossSmallBullet
+  m_EditorClassIdentifier: 
+  abilityName: NO
+  staminaCost: 0
+  baseCooldown: 0
+  critRate: 0
+  critMultiplier: 0
+  variation: 0.1
+  hitboxTimeDelay: 0
+  attackLength: 0.2
+  knockback: 1
+  stunTime: 0.1
+  forward: 0
+  spin: 0
+  attackID: -1
+  audioHelpers:
+  - audioName: BossSmallShoot
+    variation: 0.1
+    delay: 0
+  useOverflowStamina: 1
+  damageData:
+    baseDamage: 1
+    type: 0
+    source: {fileID: 0}
+  hitboxData:
+    range: 20
+    pierce: 1
+    rangedHitboxType: 0
+    bulletPrefab: {fileID: 7049029674490180849, guid: 4ace0bbc1e349f441a2f39b64d0cafb5,
+      type: 3}
+    speed: 2
+    spread: 5
+    bulletPayload: {fileID: 0}
+  owner: {fileID: 0}

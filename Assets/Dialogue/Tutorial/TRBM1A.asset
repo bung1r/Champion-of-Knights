@@ -98,6 +98,11 @@ MonoBehaviour:
         floatValue: 0
         stringValue: 
         itemValue: {fileID: 0}
+      - effectType: 12
+        intValue: 0
+        floatValue: 2
+        stringValue: 
+        itemValue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
       sponsers: 0

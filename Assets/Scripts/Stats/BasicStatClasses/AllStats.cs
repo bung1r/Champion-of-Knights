@@ -15,7 +15,7 @@ public class Stats : BaseStats
     public int attackID = -1; // -1 means no attack, 0 means primary, etc. etc.
     public float stunTime = 0f; // 0 is not stunned, every x is one more sec of stun 
     public List<DamageMultiplier> damageMultipliers = new List<DamageMultiplier>();
-
+    public List<PassiveAbilityBase> passiveAbilities = new List<PassiveAbilityBase>();
     public Stats() {}
     public Stats(Stats other)
     {
@@ -43,6 +43,20 @@ public class BaseStats
     public float overflowStaminaThreshold = 5f;
     public float baseEXP = 100f; // EXP on kill!
     public Resistances resistances = new Resistances();
+    // the stats i had to add for reasons. Bad code? Yes. Do I have time? Nah...
+    // destruction path
+    public float parryAdder = 0f;
+    public float parryDmgMultiplier = 1f;
+    public float popularityMultiplier = 1f; // only for players
+    public float knockbackMultiplier = 1f;
+    public float stunTimeMultiplier = 1f;
+    // popularity path
+    public float supplyCrateCooldownReduction = 0f;
+    public float styleMultiplier = 1f;
+    public float corruptionMultiplier = 1f;
+    // honor path
+    public float repMultiplier = 1f;
+    public float staminaUsageMultiplier = 1f;
     public void Construct(Stats other)
     {
         maxHP = other.maxHP;
@@ -60,6 +74,22 @@ public class BaseStats
         regenHP = other.regenHP;
         startRegenHP = other.startRegenHP;
         resistances = new Resistances(other.resistances);
+        // the stats i had to add for reasons. Bad code? Yes. Do I have time? Nah...
+
+        parryAdder = other.parryAdder;
+        parryDmgMultiplier = other.parryDmgMultiplier;
+        popularityMultiplier = other.popularityMultiplier;
+        knockbackMultiplier = other.knockbackMultiplier;
+        stunTimeMultiplier = other.stunTimeMultiplier;
+
+        supplyCrateCooldownReduction = other.supplyCrateCooldownReduction;
+        styleMultiplier = other.styleMultiplier;
+        corruptionMultiplier = other.corruptionMultiplier;
+
+        repMultiplier = other.repMultiplier;
+        staminaUsageMultiplier = other.staminaUsageMultiplier;
+        
+
     }
     public BaseStats() {}
     public BaseStats(Stats other)
@@ -102,5 +132,7 @@ public enum BaseStatsEnum
     maxHP,turnSpeed,walkSpeed,canSprint,sprintSpeed,
     sprintStaminaCost,maxStamina,staminaRegen,startStaminaRegen,
     startStaminaRegenFromZero,overflowStaminaThreshold,baseEXP,
-    regenHP,startRegenHP,
+    regenHP,startRegenHP,parryAdder,parryDmgMultiplier,popularityMultiplier,
+    knockbackMultiplier,stunTimeMultiplier,supplyCrateCooldownReduction,styleMultiplier,
+    corruptionMultiplier,repMultiplier,staminaUsageMultiplier
 }

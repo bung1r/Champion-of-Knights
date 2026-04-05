@@ -11,6 +11,7 @@ public class SpawnPlatform : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-transform.localScale.x/2, transform.localScale.x/2), transform.localScale.y + 0.5f, Random.Range(-transform.localScale.z/2, transform.localScale.z/2));
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        enemy.name = enemyPrefab.name;
         RoundManager.Instance.AddEnemy(enemy);
     }
 }

@@ -78,30 +78,41 @@ public class RangedBullet : MonoBehaviour
 
         if (collision.transform.root.TryGetComponent<IDamageable>(out var damageable))
         {
-            if (collision.transform.root.TryGetComponent<PlayerStatManager>(out var plrStats))
+            if (collision.transform.root.TryGetComponent<StatManager>(out var unitStats))
             {
-                if (plrStats.stats.isParrying)
+
+                if (unitStats.GetStats().isParrying)
                 {
                     // reflect the bullet
                     if (rb == null) return;
-                    rb.velocity = plrStats.transform.forward * bulletData.rangedHitboxData.speed * 25;
+                    rb.velocity = unitStats.transform.forward * bulletData.rangedHitboxData.speed * 25;
                     transform.rotation = Quaternion.LookRotation(rb.velocity);
-                    bulletData.owner = plrStats.gameObject;
-                    bulletData.damageData.source = plrStats.gameObject;
-                    plrStats.OnParry();
+                    bulletData.owner = unitStats.gameObject;
+                    bulletData.damageData.source = unitStats.gameObject;
+                    unitStats.OnParry.Invoke();
                     return;
                 } else
                 {
+                    // Debug.Log(unitStats.transform.name);
                     if (transform != null && payload != null && collision != null && lastPos != null)
                     {
                         payload.OnPierce(transform, collision.transform, bulletData.damageData, lastPos);
                     } 
-                    damageable.TakeDamage(bulletData.damageData);
+                    DamageData dmgData = bulletData.damageData;
+                    if (unitStats.GetStats().parryDmgMultiplier != 1f)
+                    {
+                        dmgData = new DamageData
+                        {
+                            baseDamage = dmgData.baseDamage * unitStats.GetStats().parryDmgMultiplier,
+                            type = dmgData.type,
+                            source = dmgData.source
+                        };
+                    }
+                    damageable.TakeDamage(dmgData);
                     pierceLeft -= 1;
                 }
             } else
             {
-                
                 damageable.TakeDamage(bulletData.damageData);
                 pierceLeft -= 1;
             }

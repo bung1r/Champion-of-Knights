@@ -48,6 +48,10 @@ public class AudioManager : MonoBehaviour
     private Dictionary<AudioSource, string> sourceAndTypeDict = new Dictionary<AudioSource, string>();
     private Dictionary<AudioSource, float> sourceAndVolumeDict = new Dictionary<AudioSource, float>();
     private Dictionary<AudioSource, float> sourceAndCurrentVolumeDict = new Dictionary<AudioSource, float>();
+
+    private List<string> claps = new List<string>() { "Clap2", "Clap3", "Clap4", "Clap5" };
+
+
     public float masterVolume = 100f;
     public float musicVolume = 50f;
     public float sfxVolume = 50f;
@@ -88,15 +92,16 @@ public class AudioManager : MonoBehaviour
             {
                 sourceAndTypeDict[source] = "music";
                 sourceAndCurrentVolumeDict[source] = source.volume;
-            } else
+            }
+            else
             {
                 sourceAndTypeDict[source] = "sfx";
             }
         }
 
-        nearDeathHeartbeatSFX.volume = 0f; 
+        nearDeathHeartbeatSFX.volume = 0f;
         nearDeathHeartbeatSFX.Play();
-    }       
+    }
     public void PlaySourceAtPointWithPitch(AudioSource source, Vector3 position, float variation = 0.05f)
     {
         if (source != null)
@@ -107,7 +112,8 @@ public class AudioManager : MonoBehaviour
             if (sourceAndTypeDict[source] == "music")
             {
                 source.volume = baseVolume * (musicVolume / 50f) * (masterVolume / 100f);
-            } else
+            }
+            else
             {
                 source.volume = baseVolume * (sfxVolume / 50f) * (masterVolume / 100f);
             }
@@ -123,6 +129,26 @@ public class AudioManager : MonoBehaviour
             PlaySourceAtPointWithPitch(source, position, variation);
         }
     }
+    public AudioSource PlaySourceWithDedicatedAudioSource(AudioSource source, Vector3 position, float variation = 0.05f)
+    {
+        if (source != null)
+        {
+            GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+            tempGO.transform.position = position; // set its position
+            AudioSource tempSource = tempGO.AddComponent<AudioSource>(); // add an audio source
+            tempSource.clip = source.clip; // set the clip to play
+            tempSource.volume = source.volume;
+            tempSource.spatialBlend = source.spatialBlend; // make it 2D sound
+            tempSource.dopplerLevel = source.dopplerLevel;
+            float basePitch = sourceAndPitchDict[source];
+            tempSource.pitch = UnityEngine.Random.Range(basePitch - variation, basePitch + variation);
+            tempSource.Play(); // play the clip
+            Destroy(tempGO, source.clip.length / tempSource.pitch); // destroy after it finishes playing
+            return tempSource;
+        }
+        return null;
+    }
+
     public void HandleAudioHelpers(List<ItemAudioHelper> audioHelpers, Transform origin)
     {
         foreach (ItemAudioHelper audioHelper in audioHelpers)
@@ -263,6 +289,78 @@ public class AudioManager : MonoBehaviour
             kvp.Key.volume = kvp.Value * (masterVolume / 100f) * (musicVolume / 50f);
         }
     }
+
+    private List<string> lowShouts = new List<string>() { "GoodJob", "FunnyWoohoo", "YouGotThis", "YeahBaby", "DontDieNow" };
+    private List<string> midShouts = new List<string>() {"YeahLetsGo", "ThatsMyKnight" };
+    private List<string> highshouts = new List<string>() { "GetALoadOfThisGuy", "IBetAllMyMoney" };
+
+    private float clapAudioScaling = 0.21f;
+    private float shoutAudioScaling = 0.17f;
+    public void PlayAudience(int viewers)
+    {
+        int clapAudios = 0;
+        float cheerDuration = UnityEngine.Random.Range(4f, 5.5f);
+        int shoutAudios = 0;
+        if (viewers < 1000)
+        { // 0 - 999 viewers (Claps: Min 3, Max 5)
+            clapAudios = (int)Mathf.Max(3, Mathf.Pow(viewers, clapAudioScaling)+1); // cool formula, min 3 claps. 
+            shoutAudios = (int)Mathf.Max(1, Mathf.Pow(viewers, shoutAudioScaling)); // cool formula, min 1 shout
+        }
+        else if (viewers < 15000) // 1000 - 14999 viewers  (Claps: Min 3, Max 9)
+        {
+            clapAudios = (int)Mathf.Max(3, Mathf.Pow(viewers, clapAudioScaling) + 1 + UnityEngine.Random.Range(-1f, 1f)); // introduce some variation
+            shoutAudios = (int)Mathf.Max(1, Mathf.Pow(viewers, shoutAudioScaling) + UnityEngine.Random.Range(-0.5f, 1f)); // introduce some variation
+        }
+        else  // 15k viewers+ (Claps: Min 8, Max 12)
+        {
+            clapAudios = (int)Mathf.Clamp(Mathf.Pow(viewers, clapAudioScaling) + 1 + UnityEngine.Random.Range(-1f, 1.5f), 2, 12); // introduce some variation
+            shoutAudios = (int)Mathf.Clamp(Mathf.Pow(viewers, shoutAudioScaling) + UnityEngine.Random.Range(-0.5f, 1f), 1, 10); // introduce some variation
+        }
+
+        for (int i = 0; i < clapAudios; i++)
+        {
+            string clapName = claps[UnityEngine.Random.Range(0, claps.Count)];
+            AudioSource clapSource = NameToAudio[clapName];
+            float delay = UnityEngine.Random.Range(0f,1f);
+            StartCoroutine(HandleAudioSource(clapSource, delay, Vector3.zero, 0.15f, Time.fixedDeltaTime + cheerDuration)); // position can be adjusted as needed
+        }
+
+        for (int i = 0; i < shoutAudios; i++)
+        {
+            string shoutName = lowShouts[UnityEngine.Random.Range(0, lowShouts.Count)];
+            AudioSource shoutSource = NameToAudio[shoutName];
+            float delay = Mathf.Max(0f, UnityEngine.Random.Range(0f, cheerDuration - shoutSource.clip.length + 0.1f));
+            StartCoroutine(HandleAudioSource(shoutSource, delay, Vector3.zero, 0.3f, Time.fixedDeltaTime + cheerDuration)); // position can be adjusted as needed
+        }
+    }
+
+    private IEnumerator HandleAudioSource(AudioSource originalSource, float delay, Vector3 position, float variation, float endTime = -1f, float fadeOutTime = 1.5f)
+    {
+        // Debug.Log("Consider this audio source: " + originalSource.gameObject.name+ "handled!");
+        yield return new WaitForSeconds(delay);
+        AudioSource source = PlaySourceWithDedicatedAudioSource(originalSource, position, variation); // position can be adjusted as needed
+        while (true)
+        {
+            yield return new WaitForFixedUpdate();
+            if (source == null) yield break; // source might have been destroyed if the clip finished playing
+            // if (endTime - Time.fixedDeltaTime < fadeOutTime)
+            // {
+            //     source.volume = Mathf.Lerp(sourceAndVolumeDict[originalSource], 0, 1 - (fadeOutTime / (fadeOutTime - Time.fixedDeltaTime)));
+            // } else
+            // {
+            //     source.volume = sourceAndVolumeDict[originalSource];
+            // }
+
+            if (endTime - Time.fixedDeltaTime < 0f)
+            {
+                source.Stop();
+                Destroy(source.gameObject);
+                yield break;
+            }
+        }
+       
+    }
+
 }
 
 

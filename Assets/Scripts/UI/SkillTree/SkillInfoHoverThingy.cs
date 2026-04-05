@@ -21,7 +21,8 @@ public class SkillInfoHoverThingy : MonoBehaviour
         if (node.almostCanBeUnlocked == false)
         {
             nameText.text = node.nodeName;
-            costText.text = "Cost: 1 Skill Point";
+            costText.text = $"Cost: {node.cost} Skill Point";
+            if (node.cost != 1)  costText.text += "s";
             // make the description automatically
             if (node.desc == "")
             {
@@ -53,12 +54,26 @@ public class SkillInfoHoverThingy : MonoBehaviour
                     } else if (statModifier.baseStatsEnum == BaseStatsEnum.maxStamina)
                     {
                         coolString = $"{statModifier.value} Max Stamina";
-                    } 
+                    }
 
 
                     if (coolString != null) stringList.Add(coolString);
                 }
-        
+
+                foreach (var resistance in node.resistances)
+                {
+                    string coolString = null;
+                    if (resistance.type == DamageType.Physical)
+                    {
+                        coolString = $"+{resistance.resistance} Phys. Dmg Resistance";
+                    } else if (resistance.type == DamageType.All)
+                    {
+                        coolString = $"{resistance.resistance} Dmg Resistance";
+                    }
+
+                    if (coolString != null) stringList.Add(coolString);
+                }
+
                 if (stringList.Count > 0)
                 {
                     string fullString = "Desc: Gain ";

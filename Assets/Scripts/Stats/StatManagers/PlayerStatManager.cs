@@ -11,6 +11,8 @@ public class PlayerStatManager : StatManager
     public PlayerStatsSO statsSO;
     
     public PlayerStats stats;
+    private List<(float time, float value)> styleHistory = new List<(float time, float value)>();
+    private float audienceShoutCooldown = -999f;
     private StyleBonusDatabase bonusDatabase;
     private PlayerCombat playerCombat;
     private PlayerMovement playerMovement;
@@ -31,6 +33,8 @@ public class PlayerStatManager : StatManager
         setPlayerStats(stats);
         AdjustLevels();
         AwakeAdjustStyle();
+        OnParry.AddListener(OnParryFunc);
+        OnKill.AddListener(OnKillFunc);
     }   
     public void AssignUIManager(StatsUIManager uiManager)
     {
@@ -76,6 +80,7 @@ public class PlayerStatManager : StatManager
     public float GetSkillPoints() => stats.skillPoints;
     public void AddStyle(float amount)
     {
+        amount *= stats.styleMultiplier;
         stats.totalStyle += amount;
         stats.totalStyle = Mathf.Max(stats.totalStyle, 0); // can't go below 0, bro~!
         if (stats.totalStyle == 0) {
@@ -127,7 +132,6 @@ public class PlayerStatManager : StatManager
         
         return temp;
     }
-    
     public float StyleLevelToStyle(float level)
     {
         return (10 * Mathf.Pow(level, 2)) + (90 * level);
@@ -143,15 +147,42 @@ public class PlayerStatManager : StatManager
         statsUIManager.AddStyleEntry(bonusType, mult);
         AddStyle(bonus.style * mult);
     }
+    private float GetStyleValueAtTime(float t)
+    {
+        for (int i = styleHistory.Count - 1; i >= 0; i--)
+        {
+            if (styleHistory[i].time <= t)
+                return styleHistory[i].value;
+        }
+
+        return stats.currentStyle;
+    }
     public void StyleUpdate()
     {
-        if (RoundManager.Instance.currentRoundState != RoundStates.Active) {
+        if (RoundManager.Instance.currentRoundState != RoundStates.Active && RoundManager.Instance.currentRoundState != RoundStates.Nothing) {
             return;
         }
         // Basically, goes down more the higher the styleLevel. 
         AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.75f) * Time.deltaTime));
         
-    } 
+        styleHistory.Add((Time.time, stats.totalStyle));
+
+        while (styleHistory.Count > 0 && styleHistory[0].time < Time.time - 1f)
+        {
+            styleHistory.RemoveAt(0);
+        }
+        
+        float triggerDiff = Mathf.Clamp(stats.totalStyle * 0.35f, 150f, 1000f);
+        if (stats.totalStyle - GetStyleValueAtTime(Time.time - 0.2f) > triggerDiff)
+        {
+            if (audienceShoutCooldown > Time.time) return;
+            AudioManager.Instance.PlayAudience((int)stats.viewers);
+            // Debug.Log($"YOU SO COOL!!! YOU 0.2 SECONDS AGO: {GetStyleValueAtTime(Time.time - 0.2f)}, NOW: {stats.totalStyle}");
+            audienceShoutCooldown = Time.time + 5f;
+
+        }
+
+    }
     public void CalculateViewers()
     {
         if (RoundManager.Instance.currentRoundState != RoundStates.Active) return;
@@ -176,7 +207,7 @@ public class PlayerStatManager : StatManager
         if (viewerGain>=0) viewerGain *= viewerGainFactor;
         else viewerGain *= viewerLossFactor;
 
-        stats.viewers += viewerGain * Time.deltaTime;
+        stats.viewers += viewerGain * stats.popularityMultiplier * Time.deltaTime;
         stats.viewers = Mathf.Max(stats.viewers, stats.loyalViewers);
         // stats.viewers = Mathf.Max(stats.viewers , 0f); 
     }
@@ -223,13 +254,13 @@ public class PlayerStatManager : StatManager
     public PlayerCombat GetPlayerCombat() => playerCombat;
     public SkilltreeManager GetSkilltreeManager() => skilltreeManager;
     public PlayerMovement GetPlayerMovement() => playerMovement;  
-    public void OnParry()
+    public void OnParryFunc()
     {
         AudioManager.Instance.PlayParrySFX(transform);
         RoundManager.Instance.OnParry();
         numParriesThisFrame += 1;
     }
-    public void OnKill()
+    public void OnKillFunc()
     {
         RoundManager.Instance.OnEnemyKilled();
         numEnemiesKilledThisFrame += 1;
@@ -244,7 +275,7 @@ public class PlayerStatManager : StatManager
     }
     public void AddRep(int rep)
     {
-        float floatRep = (float)rep;
+        float floatRep = (float)rep * stats.repMultiplier;
         if (RoundManager.Instance.midGameChoice == "Honor") floatRep *= 1.3f;
         else if (RoundManager.Instance.midGameChoice == "Popularity") floatRep *= 1.3f;
         else if (RoundManager.Instance.midGameChoice == "Destruction") floatRep *= 0.9f;
@@ -253,7 +284,7 @@ public class PlayerStatManager : StatManager
     }
     public void AddCorruption(int corr)
     {
-        float floatCorr = (float)corr;
+        float floatCorr = (float)corr * stats.corruptionMultiplier;
         if (RoundManager.Instance.midGameChoice == "Destruction") floatCorr *= 1.1f;
         else if (RoundManager.Instance.midGameChoice == "Honor") floatCorr *= 0.9f;
         else if (RoundManager.Instance.midGameChoice == "Popularity") floatCorr *= 1.5f;

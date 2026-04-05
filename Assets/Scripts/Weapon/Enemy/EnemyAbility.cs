@@ -28,6 +28,12 @@ public class EnemyAbility : ScriptableObject
         } else if (other.ability is ChargedRangedAbility)
         {
             return new EnemyChargedRangedRuntime(other, manager);
+        } else if (other.ability is GuardAbility)
+        {
+            return new EnemyGuardRuntime(other, manager);
+        } else if (other.ability is ComplexAbility)
+        {
+            return new EnemyComplexRuntime(other, manager);
         }
         return new EnemyMeleeRuntime(other, manager);
     }

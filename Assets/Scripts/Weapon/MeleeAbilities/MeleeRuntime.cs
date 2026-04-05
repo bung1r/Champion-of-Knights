@@ -21,7 +21,7 @@ public class MeleeRuntime : AbilityRuntime
         owner = manager.gameObject;
         hitboxData.transform = owner.transform;
     }
-    public MeleeRuntime() {}
+    public MeleeRuntime() {} 
     public MeleeRuntime(MeleeAbility other, StatManager manager)
     {
         ConstructBase(other, manager);

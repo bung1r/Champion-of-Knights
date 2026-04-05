@@ -32,6 +32,7 @@ public class RangedRuntime : AbilityRuntime
     async public override void Perform()
     {
         // if (spin != 0f) statManager.Spin(spin);
+        if (statManager == null) return;
         AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);
         if (forward != 0f) statManager.Forward(forward);
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();

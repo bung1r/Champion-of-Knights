@@ -18,6 +18,11 @@ public class StatManager : MonoBehaviour, IDamageable
     private Resistances resistances;//
     public FloatEvent OnTakeDamage;
     public UnityEvent OnDeath;
+    public UnityEvent OnParry;
+    public FloatEvent OnHit;
+    public UnityEvent OnKill;
+    public UnityEvent OnUpdate;
+    public UnityEvent OnUseItem;
     public void Start()
     {
         PreStart();
@@ -47,11 +52,19 @@ public class StatManager : MonoBehaviour, IDamageable
     // the taking damage logic, very cool. use when possilbe
     public virtual void TakeDamage(DamageData damage, bool bypassMax = false) 
     {
-        if (this is PlayerStatManager playerStatManager && playerStatManager.stats.isParrying && damage.type != DamageType.Fixed && damage.source != null)
+        if (_stats.isParrying && damage.type != DamageType.Fixed && damage.source != null)
         {
-            playerStatManager.OnParry();
+
+            OnParry.Invoke();
             damage.source.GetComponent<StatManager>()?.BasicStun(damage.abilityBase.stunTime/2);
-            damage.source.GetComponent<StatManager>()?.Knockback(playerStatManager.transform.position, damage.baseDamage/10f);
+            damage.source.GetComponent<StatManager>()?.Knockback(transform.position, damage.baseDamage/10f * _stats.knockbackMultiplier);
+
+            // if (this is PlayerStatManager playerStatManager)
+            // {
+            //     damage.source.GetComponent<StatManager>()?.BasicStun(damage.abilityBase.stunTime/2);
+            //     damage.source.GetComponent<StatManager>()?.Knockback(playerStatManager.transform.position, damage.baseDamage/10f);
+            // }
+            
             return; // you parried, congrats!
         }
         // calc damage then take damage. 
@@ -67,6 +80,7 @@ public class StatManager : MonoBehaviour, IDamageable
 
         _stats.currentHP -= finalDamage;
         if (_stats.currentHP > _stats.maxHP && !bypassMax) _stats.currentHP = _stats.maxHP;
+        damage.source?.GetComponent<StatManager>()?.OnHit.Invoke(finalDamage);
         OnTakeDamage.Invoke(finalDamage);
         Debug.Log($"{gameObject.name} took {finalDamage} {damage.type} damage!");
         
@@ -76,7 +90,10 @@ public class StatManager : MonoBehaviour, IDamageable
             if (hitSFX != null) AudioManager.Instance.PlaySourceAtPointWithPitch(hitSFX, transform.position, 0.2f);
             else AudioManager.Instance.PlayHitSFX(transform, 0.2f);
         } else {
-            AudioManager.Instance.PlayHealSFX(transform);
+           if (finalDamage < -10.1f) // must be a big enough heal so life steal doesn't trigger ts like hell
+            {
+                AudioManager.Instance.PlayHealSFX(transform);
+            }
         }
         
         
@@ -84,7 +101,7 @@ public class StatManager : MonoBehaviour, IDamageable
         if (damage.abilityBase != null)
         {
             if (_stats.stunTime < damage.abilityBase.stunTime) {
-                _stats.stunTime = damage.abilityBase.stunTime;
+                BasicStun(damage.abilityBase.stunTime);
                 Knockback(damage);
             }
         }
@@ -110,7 +127,13 @@ public class StatManager : MonoBehaviour, IDamageable
         {
             Vector3 vector = transform.position - damage.source.transform.position;
             vector.y = 0;
-            vector = vector.normalized * damage.abilityBase.knockback;
+            if (damage.source != null && damage.source.TryGetComponent<StatManager>(out var statManager))
+            {
+                vector = vector.normalized * (damage.abilityBase.knockback * statManager.GetStats().knockbackMultiplier);
+            } else
+            {
+                vector = vector.normalized * damage.abilityBase.knockback;
+            }
             if (TryGetComponent<Rigidbody>(out var rb))
             {
                 rb.isKinematic = false;
@@ -129,13 +152,13 @@ public class StatManager : MonoBehaviour, IDamageable
         vector = vector.normalized * force;
         if (TryGetComponent<Rigidbody>(out var rb))
         {
-            Debug.Log("Knockback applied");
             rb.isKinematic = false;
             rb.AddForce(vector, ForceMode.Impulse);  
         }
     }
     public virtual void BasicStun(float stunTime)
     {
+        stunTime *= _stats.stunTimeMultiplier;
         if (_stats.stunTime < stunTime) {
             _stats.stunTime = stunTime;
         }
@@ -190,7 +213,7 @@ public class StatManager : MonoBehaviour, IDamageable
         for (int i = multiplierList.Count - 1; i >= 0; i--)
         {
             DamageMultiplier value = multiplierList[i];
-            if (Time.time - value.lifeTime > value.lifeTime) multiplierList.RemoveAt(i);
+            if (Time.time - value.timeCreated > value.lifeTime) multiplierList.RemoveAt(i);
         }
     }
     // this will return false you do not have enough stamina to use
@@ -198,11 +221,13 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         // basic checking, also checks overflow as well. 
             // makes sure no negative shinanegans happen. 
+        staminaCost *= _stats.staminaUsageMultiplier;
         _stats.currentStamina = Mathf.Clamp(_stats.currentStamina - staminaCost, 0, _stats.maxStamina);
     }
 
     public bool CanUseStamina(float staminaCost, bool allowOverflow = false)
     {   
+        staminaCost *= _stats.staminaUsageMultiplier;
         float temp = 0;
         if (allowOverflow) temp -= _stats.overflowStaminaThreshold;
         if (_stats.currentStamina - staminaCost >= temp && _stats.currentStamina>0)
@@ -213,7 +238,7 @@ public class StatManager : MonoBehaviour, IDamageable
     }
     public List<DamageMultiplier> GetAllDamageMultipliers() => _stats.damageMultipliers;
     // need to add a multiplier?
-    public void AddMultiplier(DamageMultiplier damageMultiplier)
+    public void AddMultiplier(DamageMultiplier damageMultiplier, string addType = "add")
     {
         foreach (DamageMultiplier dm in _stats.damageMultipliers)
         {
@@ -221,17 +246,62 @@ public class StatManager : MonoBehaviour, IDamageable
             {
                 if (dm.type == DamageMultiplierTypes.Additive)
                 {
-                    dm.amount += damageMultiplier.amount;
+                    if (addType == "add")
+                    {
+                        dm.amount += damageMultiplier.amount;
+                    } else if (addType == "set")
+                    {
+                        dm.amount = damageMultiplier.amount;
+                    }
                     return;
                 } else if (dm.type == DamageMultiplierTypes.Multiplicative)
                 {
-                    dm.amount *= damageMultiplier.amount;
+                    if (addType == "add")
+                    {
+                        dm.amount *= damageMultiplier.amount;
+                    } else if (addType == "set")
+                    {
+                        dm.amount = damageMultiplier.amount;
+                    }
                     return;
                 }
             }
         }
         
         _stats.damageMultipliers.Add(damageMultiplier);
+    }
+    
+    [HideInInspector] public List<PassiveAbilityRuntime> passiveRuntimeAbilities = new List<PassiveAbilityRuntime>();
+    public void AddPassive(PassiveAbilityBase passive)
+    {
+        _stats.passiveAbilities.Add(passive);
+        PassiveAbilityRuntime runtime = passive.CreateRuntimeInstance(passive, this);
+        runtime.Init(gameObject);
+        OnTakeDamage.AddListener(runtime.OnTakeDamage);
+        OnHit.AddListener(runtime.OnHit);
+        OnKill.AddListener(runtime.OnKill);
+        OnParry.AddListener(runtime.OnParry);
+        OnDeath.AddListener(runtime.OnDeath);
+        OnUpdate.AddListener(runtime.OnUpdate);
+        OnUseItem.AddListener(runtime.OnUseItem);
+        passiveRuntimeAbilities.Add(runtime);
+    }
+    public void RemovePassive(PassiveAbilityBase passive)
+    {
+        int index = _stats.passiveAbilities.IndexOf(passive);
+        if (index >= 0)
+        {
+            PassiveAbilityRuntime runtime = passiveRuntimeAbilities[index];
+            OnTakeDamage.RemoveListener(runtime.OnTakeDamage);
+            OnHit.RemoveListener(runtime.OnHit);
+            OnKill.RemoveListener(runtime.OnKill);
+            OnParry.RemoveListener(runtime.OnParry);
+            OnDeath.RemoveListener(runtime.OnDeath);
+            OnUpdate.RemoveListener(runtime.OnUpdate);
+            OnUseItem.RemoveListener(runtime.OnUseItem);
+            _stats.passiveAbilities.RemoveAt(index);
+            passiveRuntimeAbilities.RemoveAt(index);
+        }
     }
     public void Spin(float force)
     {
@@ -311,6 +381,16 @@ public class StatManager : MonoBehaviour, IDamageable
             {BaseStatsEnum.maxStamina, _baseStats.maxStamina},
             {BaseStatsEnum.regenHP, _baseStats.regenHP},
             {BaseStatsEnum.startRegenHP, _baseStats.startRegenHP},
+            {BaseStatsEnum.parryAdder, _baseStats.parryAdder},
+            {BaseStatsEnum.parryDmgMultiplier, _baseStats.parryDmgMultiplier},
+            {BaseStatsEnum.popularityMultiplier, _baseStats.popularityMultiplier},
+            {BaseStatsEnum.knockbackMultiplier, _baseStats.knockbackMultiplier},
+            {BaseStatsEnum.stunTimeMultiplier, _baseStats.stunTimeMultiplier},
+            {BaseStatsEnum.supplyCrateCooldownReduction, _baseStats.supplyCrateCooldownReduction},
+            {BaseStatsEnum.styleMultiplier, _baseStats.styleMultiplier},
+            {BaseStatsEnum.corruptionMultiplier, _baseStats.corruptionMultiplier},
+            {BaseStatsEnum.repMultiplier, _baseStats.repMultiplier},
+            {BaseStatsEnum.staminaUsageMultiplier, _baseStats.staminaUsageMultiplier},
         };
 
 
@@ -350,6 +430,16 @@ public class StatManager : MonoBehaviour, IDamageable
         _stats.maxStamina = statDict[BaseStatsEnum.maxStamina];
         _stats.regenHP = statDict[BaseStatsEnum.regenHP];
         _stats.startRegenHP = statDict[BaseStatsEnum.startRegenHP];
+        _stats.parryAdder = statDict[BaseStatsEnum.parryAdder];
+        _stats.parryDmgMultiplier = statDict[BaseStatsEnum.parryDmgMultiplier];
+        _stats.popularityMultiplier = statDict[BaseStatsEnum.popularityMultiplier];
+        _stats.knockbackMultiplier = statDict[BaseStatsEnum.knockbackMultiplier];
+        _stats.stunTimeMultiplier = statDict[BaseStatsEnum.stunTimeMultiplier];
+        _stats.supplyCrateCooldownReduction = statDict[BaseStatsEnum.supplyCrateCooldownReduction];
+        _stats.styleMultiplier = statDict[BaseStatsEnum.styleMultiplier];
+        _stats.corruptionMultiplier = statDict[BaseStatsEnum.corruptionMultiplier];
+        _stats.repMultiplier = statDict[BaseStatsEnum.repMultiplier];
+        _stats.staminaUsageMultiplier = statDict[BaseStatsEnum.staminaUsageMultiplier];
     }
     public void CheckStatModifiers()
     {
@@ -372,13 +462,15 @@ public class StatManager : MonoBehaviour, IDamageable
     public virtual void Die(DamageData damage) {
         if (damage.source != null)
         {
+            damage.source.GetComponent<StatManager>()?.OnKill.Invoke();
             if (damage.source.TryGetComponent<PlayerStatManager>(out var playerStat))
             {
                 OnDeath.Invoke();
                 Debug.Log($"{gameObject.name} has died! {damage.source.name} gained {_stats.baseEXP} EXP");
                 playerStat.AddEXP(_stats.baseEXP);
-                playerStat.OnKill();
             }
+
+
         }
         
         GlobalPrefabs.Instance.DeathVFX(transform);
@@ -390,6 +482,7 @@ public class StatManager : MonoBehaviour, IDamageable
     // will contain everything that happens in this script
     protected virtual void CoreUpdate()
     {
+        OnUpdate?.Invoke();
         StunHandler();
         RegenerateStamina();
         RegenerateHP();

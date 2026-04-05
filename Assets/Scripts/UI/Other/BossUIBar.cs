@@ -25,11 +25,13 @@ public class BossUIBar : StatsUIBar
         {
             Destroy(gameObject);
         }
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
     }
     void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0f;
+
     }
     private Coroutine ResetDmgCoroutine;
     private IEnumerator ResetDmgBar()
@@ -47,6 +49,8 @@ public class BossUIBar : StatsUIBar
     }
     public void AttachEnemyToBar(EnemyStatManager enemy)
     {
+        Debug.Log("Enemy attached");
+        
         canvasGroup.alpha = 1f;
         if (this.enemy != null)
         {
@@ -63,7 +67,7 @@ public class BossUIBar : StatsUIBar
     }
     public void OnDeath()
     {
-        DisableBarAfterDelay(5f);
+        StartCoroutine(DisableBarAfterDelay(5f));
         enemy.OnDeath.RemoveListener(OnDeath);
     }
     public void OnTakeDamage(float damage)

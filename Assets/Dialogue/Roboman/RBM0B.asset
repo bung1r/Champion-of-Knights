@@ -34,9 +34,9 @@ MonoBehaviour:
       endDialogue: 1
       nextDialogue: {fileID: 0}
       complexEffects:
-      - effectType: 10
-        intValue: 2
-        floatValue: 2
+      - effectType: 13
+        intValue: 0
+        floatValue: 0
         stringValue: 
         itemValue: {fileID: 0}
       reputation: 0

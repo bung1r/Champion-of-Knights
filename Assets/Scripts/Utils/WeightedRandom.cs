@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 public static class WeightedRandom
 {
     public static T Choose<T>(List<T> items, List<float> weights)
     {
+        
         if (items.Count != weights.Count || items.Count == 0)
         {
+            Debug.Log(items.Count);
+            Debug.Log(weights.Count);
             Debug.LogError("Items and weights lists must have the same non-zero length.");
             return default;
         }

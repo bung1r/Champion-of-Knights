@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: RBM7
+  m_EditorClassIdentifier: 
+  speakerName: Roboman
+  dialogue:
+  - dialogueLine: Congraulations, Mr. Knight! You've made it to your final round!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Of course it hasn't been easy, I've seen you throughout the way.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: But this next round will be unlike anything you've ever faced before.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Instead of the numerous of weak enemies you've faced before...
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: There will be one BIG enemy instead. A "boss" if you will.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I'd recommend you prepare for this battle. After all, you can go
+      home after this!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: The reason we have a boss is because taking people back to the
+      past is a dificult process, and the butterfly effect makes things reeeaaallly
+      complicted. So, only the best of warriors can survive.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Everything you've done has led up to this very moment. Goodluck,
+      Mr. Knight. I'll see you one last time if you make it out alive.
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 1
+      nextDialogue: {fileID: 11400000, guid: 3e998699a307a374e8e4687415a7bb81, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

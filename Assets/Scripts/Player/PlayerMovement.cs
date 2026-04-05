@@ -54,6 +54,11 @@ public class PlayerMovement : MonoBehaviour
         // RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
         // RoundManager.Instance.currentRoundState == RoundStates.GameVictory
         // ) return;
+        if (RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory) {
+            rb.velocity = Vector3.zero;
+            statManager.stats.isWalking = false;
+            statManager.stats.isRunning = false;
+        }
         inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
         holdShift = Input.GetKey(KeyCode.LeftShift);
@@ -69,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
         // RoundManager.Instance.currentRoundState == RoundStates.GameOver ||
         // RoundManager.Instance.currentRoundState == RoundStates.GameVictory
         // ) return;
+        if (RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory) {
+            return;
+        }
         Move();
         FaceMouse();
         CamFollowPlayer();

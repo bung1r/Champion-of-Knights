@@ -50,6 +50,7 @@ public class AnimationStateController : MonoBehaviour
         if (prevInAttackAnim != stats.inAttackAnim  || prevInAttackAnim!=stats.inAttackAnim || prevIsGuarding!=stats.isGuarding || prevIsParrying!=stats.isParrying)
         {
             animator.SetTrigger(upperBodyChangeHash);
+            // Debug.Log("Upper body change at " + Time.time);
         }
         
         if (prevIsWalking!=stats.isWalking || prevIsRunning!=stats.isRunning || prevInAttackAnim!=stats.inAttackAnim || prevIsGuarding!=stats.isGuarding || prevIsParrying!=stats.isParrying)

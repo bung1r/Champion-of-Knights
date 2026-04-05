@@ -15,6 +15,7 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Canvas parentCanvas;
     public List<SkilltreeNode> allNodes = new List<SkilltreeNode>();
     public SkilltreeNode originNode; // make sure to assign this in inspector, or have it as the first element of allNodes
+    public SkilltreeNode bridgeNode; // the bridge to the 3 paths, unlocked at a certain day.
     public SkilltreeNode hoverNode;
     public SkillInfoHoverThingy skillInfoHoverThingy; // assign in inspector
     public TextMeshProUGUI levelText;
@@ -96,12 +97,14 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
         }
 
     }
-    public void UnlockNode(SkilltreeNode node) 
+    
+    public void UnlockNode(SkilltreeNode node, bool externalUnlock=false) 
     {
+        if (node.trueUnlockable == false && externalUnlock == false) {return;}
         if (!node.almostCanBeUnlocked && !node.canBeUnlocked) {return;}
         if (node.isUnlocked) {Debug.Log("Node is already unlocked!"); AudioManager.Instance.PlayWrongBuzzerSFX(cam.transform); return;}
         if (!node.canBeUnlocked || node.almostCanBeUnlocked) {Debug.Log("Node cannot be unlocked yet!"); AudioManager.Instance.PlayWrongBuzzerSFX(cam.transform); return;}
-        if (statManager.GetSkillPoints() < 1) {Debug.Log("No skill points to spend!"); AudioManager.Instance.PlayWrongBuzzerSFX(cam.transform); return;}
+        if (statManager.GetSkillPoints() < node.cost) {Debug.Log("No skill points to spend!"); AudioManager.Instance.PlayWrongBuzzerSFX(cam.transform); return;}
         
         
         // checks the branch type and applies relevant bonuses
@@ -156,20 +159,22 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
             }
         } else if (node.nodeType == NodeTypes.UnlockPassive)
         {
-            
+            statManager.AddPassive(node.passiveUnlock);
         } else
         {
             Debug.Log($"A node type with the name {Enum.GetName(typeof(BranchTypes), node.nodeType)} has not yet been implemented");
         }
         
         AudioManager.Instance.PlayBuyNodeSFX(cam.transform);
-        statManager.stats.skillPoints -= 1;
+        statManager.stats.skillPoints -= node.cost;
+        if (node.corruptionCost != 0) statManager.AddCorruption(node.corruptionCost);
         node.isUnlocked = true;
         node.UpdateNodeVisual();
         InitTree(node);
-        Debug.Log($"{node.nodeName} successfully purchased at {Time.time}");
+        // Debug.Log($"{node.nodeName} successfully purchased at {Time.time}");
     }
     // recursively initializes the skill tree from a given node
+    
     public void InitTree(SkilltreeNode node)
     {
         foreach (SkilltreeNode connectedNode in node.connectedNodes)
@@ -178,7 +183,7 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
             {
                 connectedNode.canBeUnlocked = true;
                 connectedNode.almostCanBeUnlocked = false;
-            } else if (node.canBeUnlocked && connectedNode.isUnlocked == false)
+            } else if (node.canBeUnlocked && connectedNode.isUnlocked == false && connectedNode.canBeUnlocked == false)
             {
                 connectedNode.almostCanBeUnlocked = true;
             } else
@@ -203,6 +208,43 @@ public class SkilltreeManager : MonoBehaviour, IBeginDragHandler, IDragHandler
             } 
             connectedNode.UpdateNodeVisual();
             FullInitTree(connectedNode);
+        }
+    }
+    private void MoveAllHonNodes()
+    {
+        foreach (SkilltreeNode node in transform)
+        {
+            if (node.transform.name.Contains("HonNode"))
+            {
+                node.transform.position += new Vector3(50000,0,0);
+            }
+        }
+    }
+
+    public void MoveAllPathNodes(string except)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent<SkilltreeNode>(out var node))
+            {
+               if (node.transform.name.Contains("HonNode") && except != "Honor")
+                {
+                    node.transform.position += new Vector3(50000,0,0);
+                    continue;
+                }
+
+                if (node.transform.name.Contains("PopNode") && except != "Popularity")
+                {
+                    node.transform.position += new Vector3(50000,0,0);
+                    continue;
+                }
+
+                if (node.transform.name.Contains("DesNode") && except != "Destruction")
+                {
+                    node.transform.position += new Vector3(50000,0,0);
+                    continue;
+                } 
+            }
         }
     }
     public async void EnableAfterDelay(float delaySeconds)

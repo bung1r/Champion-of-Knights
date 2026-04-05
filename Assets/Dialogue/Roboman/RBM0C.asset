@@ -40,7 +40,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Talk to me once you're ready.
+  - dialogueLine: Well... not really, but talk to me once you're ready.
     choices: []
     effects:
       hasEffects: 0

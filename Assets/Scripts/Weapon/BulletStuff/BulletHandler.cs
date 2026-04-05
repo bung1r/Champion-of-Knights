@@ -39,7 +39,10 @@ public class BulletHandler : MonoBehaviour
             RangedBullet bulletScript = bullet.GetComponent<RangedBullet>();
             bulletScript.rb = rb;
             bulletScript.bulletData = data;
-            rb.velocity = origin.forward * speed * 10;
+            float spread = UnityEngine.Random.Range(-bulletScript.bulletData.rangedHitboxData.spread, bulletScript.bulletData.rangedHitboxData.spread);
+            Quaternion spreadRotation = Quaternion.Euler(0, spread, 0);
+            Vector3 shootDirection = spreadRotation * origin.forward;
+            rb.velocity = shootDirection * speed * 10;
         }
        
     }

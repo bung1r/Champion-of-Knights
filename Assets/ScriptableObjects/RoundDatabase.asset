@@ -116,28 +116,6 @@ MonoBehaviour:
     maxObjectives: 4
     enemyScaling: 1.6
   - enemyWeights:
-    - enemyPrefab: {fileID: 6652338760824479673, guid: d6ec05b88da1a454e98c2cac7b927049,
-        type: 3}
-      weight: 10
-      enemyValue: 1
-    - enemyPrefab: {fileID: 6802328451975870939, guid: 53430b4dc195e4e47bb2d6faf97cf370,
-        type: 3}
-      weight: 10
-      enemyValue: 1
-    - enemyPrefab: {fileID: 1314433601523645799, guid: 7f86726aa96cdb14586cd950039d93c0,
-        type: 3}
-      weight: 5
-      enemyValue: 2
-    - enemyPrefab: {fileID: 8296662384254247459, guid: 65751b544faba5d42b509c20d0b12b0c,
-        type: 3}
-      weight: 5
-      enemyValue: 2
-    roundBudget: 40
-    spawnInterval: 30
-    minObjectives: 4
-    maxObjectives: 5
-    enemyScaling: 1.7
-  - enemyWeights:
     - enemyPrefab: {fileID: 6802328451975870939, guid: 53430b4dc195e4e47bb2d6faf97cf370,
         type: 3}
       weight: 1
@@ -167,3 +145,13 @@ MonoBehaviour:
     minObjectives: 5
     maxObjectives: 5
     enemyScaling: 1.9
+  - enemyWeights:
+    - enemyPrefab: {fileID: 5679012972141586579, guid: bee9cda10604c8841a2db88e742b3cfe,
+        type: 3}
+      weight: 1
+      enemyValue: 1
+    roundBudget: 1
+    spawnInterval: 999
+    minObjectives: 1
+    maxObjectives: 1
+    enemyScaling: 1

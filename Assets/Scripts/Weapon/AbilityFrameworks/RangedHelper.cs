@@ -17,6 +17,7 @@ public class RangedHitboxData
     [Header("Physical Bullet Only")]
     public GameObject bulletPrefab;
     public float speed = 4f;
+    public float spread = 0f;
     public BulletPayload bulletPayload; // optional~!
     
     
@@ -66,6 +67,7 @@ public class RangedHitboxData
         bulletPrefab = other.bulletPrefab;
         speed = other.speed;
         bulletPayload = other.bulletPayload;
+        spread = other.spread;
     }
 }
 

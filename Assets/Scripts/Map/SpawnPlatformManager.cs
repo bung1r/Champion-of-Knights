@@ -45,16 +45,24 @@ public class SpawnPlatformManager : MonoBehaviour
         return closestPlatforms;
     }
 
-    public void SpawnEnemies(List<GameObject> enemyPrefabs, UnityEngine.Vector3 position)
+    public void SpawnEnemies(List<GameObject> enemyPrefabs, UnityEngine.Vector3 position, int fixedSpawnPosIndex=-1)
     {
         foreach (GameObject enemyPrefab in enemyPrefabs)
         {
-            // get the 3 closest platforms to position
-            List<SpawnPlatform> closestPlatforms = GetClosestPlatformsFromPos(position, 3);
+            if (fixedSpawnPosIndex == -1)
+            {
+                // get the 3 closest platforms to position
+                List<SpawnPlatform> closestPlatforms = GetClosestPlatformsFromPos(position, 3);
+                
+                // choose random platform from closest platforms
+                SpawnPlatform chosenPlatform = closestPlatforms[Random.Range(0, closestPlatforms.Count)];
+                chosenPlatform.SpawnEnemy(enemyPrefab);
+            } else
+            {
+                SpawnPlatform chosenPlatform = spawnPlatforms[fixedSpawnPosIndex];
+                chosenPlatform.SpawnEnemy(enemyPrefab);
+            }
             
-            // choose random platform from closest platforms
-            SpawnPlatform chosenPlatform = closestPlatforms[Random.Range(0, closestPlatforms.Count)];
-            chosenPlatform.SpawnEnemy(enemyPrefab);
         }
     }
 

@@ -16,6 +16,7 @@ public class RoundManager : MonoBehaviour
     private SkilltreeManager skilltreeManager;
     private RoundManagerUI roundManagerUI;
     [SerializeField] private ObjectiveDatabase objectiveDatabase;
+    [SerializeField] private ObjectiveDatabase manualObjectiveDatabase; // must trigger manually, such as the boss kill one.
     [SerializeField] private RoundDatabase roundDatabase;
     [SerializeField] private ViewerItemDatabase viewerItemDatabase;
     [SerializeField] private GameObject packageDronePrefab;
@@ -34,6 +35,7 @@ public class RoundManager : MonoBehaviour
     private List<Transform> orbSpawns = new List<Transform>(); // automatcially created
     public int currentRound = 0;
     public float roundDuration = 3f;
+    public float finalRoundDuration = 6000f; // 10 minutes. If you somehow run out of time, you're a bum.
     public float shopDuration = 3f;
     private bool blackStartedFadingShop = false;
     public float beforeRoundDuration = 3f;
@@ -53,11 +55,11 @@ public class RoundManager : MonoBehaviour
     // below are all the main stats tracked for rounds.
     [Space(10)]
     [Header("Fun Stuff!")]
+    public bool DEBUGMODE = false;
     public bool RIGGED = false;
     public bool INFINITERIGGED = false;
     public int RIGGEDSPAWN = -1;
     public bool JOURNALISTMODE = false;
-    public bool DEBUGMODE = false;
     public int STARTING_SKILL_POINTS = 0;
     public bool START_WITH_BEGIN = false;
     public bool START_WITH_NOTHING = false;
@@ -80,7 +82,7 @@ public class RoundManager : MonoBehaviour
     private int multiKillCount = 0;
     private float lastReceivedGift = -10f;
     private float lastGiftCheck = -10f;
-    private float giftCooldown = 10f;
+    private float giftCooldown = 15f;
     private float maxGiftTime = 30f;
     private float giftVar = 10000f;
     private int loyalViewersGained = 0;
@@ -112,6 +114,7 @@ public class RoundManager : MonoBehaviour
             START_WITH_BEGIN = false;
             START_WITH_NOTHING = false;
             roundDuration = 180f;
+            finalRoundDuration = 6000f;
             shopDuration = 120f;
             beforeRoundDuration = 4f;
             afterRoundDuration = 4f;
@@ -158,11 +161,20 @@ public class RoundManager : MonoBehaviour
                 return; 
             }
             roundTimer += Time.deltaTime;
-            timeRemaining = roundDuration - roundTimer;
+
+            
+            if (currentRound == finalRound) {
+                timeRemaining = finalRoundDuration - roundTimer;
+            } else
+            {
+                timeRemaining = roundDuration - roundTimer;
+            }
+
             roundManagerUI.UpdateTimer(timeRemaining);
             
             
-            if (roundTimer >= roundDuration)
+            float trueRoundDuration = currentRound == finalRound ? finalRoundDuration : roundDuration;
+            if (roundTimer >= trueRoundDuration)
             {
                 EndCurrentRound();
                 return;
@@ -208,37 +220,43 @@ public class RoundManager : MonoBehaviour
                     } else if (obj.objectiveType == ObjectiveTypes.StyleLevel)
                     {
                         obj.currentAmount = (int)player.stats.styleLevel;
+                    } else if (obj.objectiveType == ObjectiveTypes.KillBoss)
+                    {
+                        obj.currentAmount = enemiesKilled;
                     }
 
                     
                 }
             }
 
+            if (currentRound == finalRound && currentObjectives[0].IsComplete()) EndCurrentRound();
+
             //enemy spawn handling
             if (Time.time - lastSpawnedEnemies > currentRoundData.spawnInterval)
             {
-                lastSpawnedEnemies = Time.time;
-                int totalValue = 0;
-                
+                if (currentRound != finalRound) {
+                    lastSpawnedEnemies = Time.time;
+                    int totalValue = 0;
+                    
 
-                // spawn enemies based on weights until budget is reached.
-                List<GameObject> enemyPool = currentRoundData.enemyWeights.Select(e => e.enemyPrefab).ToList();
-                List<int> weightPool = currentRoundData.enemyWeights.Select(e => e.weight).ToList();
-                List<GameObject> enemiesToSpawn = new List<GameObject>();
-                while (totalValue < currentRoundData.roundBudget)
-                {
-                    GameObject chosenEnemy = WeightedRandom.Choose(enemyPool, weightPool);
-                    EnemyWeights enemyWeight = currentRoundData.GetEnemyWeights(chosenEnemy);
-                    enemiesToSpawn.Add(chosenEnemy);
-                    totalValue += enemyWeight.enemyValue;
+                    // spawn enemies based on weights until budget is reached.
+                    List<GameObject> enemyPool = currentRoundData.enemyWeights.Select(e => e.enemyPrefab).ToList();
+                    List<int> weightPool = currentRoundData.enemyWeights.Select(e => e.weight).ToList();
+                    List<GameObject> enemiesToSpawn = new List<GameObject>();
+                    while (totalValue < currentRoundData.roundBudget)
+                    {
+                        GameObject chosenEnemy = WeightedRandom.Choose(enemyPool, weightPool);
+                        EnemyWeights enemyWeight = currentRoundData.GetEnemyWeights(chosenEnemy);
+                        enemiesToSpawn.Add(chosenEnemy);
+                        totalValue += enemyWeight.enemyValue;
+                    }
+                    
+                    SpawnPlatformManager.Instance.SpawnEnemies(enemiesToSpawn, player.transform.position);
                 }
-                
-                SpawnPlatformManager.Instance.SpawnEnemies(enemiesToSpawn, player.transform.position);
-
             }
 
             // audience gift handling
-            if (Time.time - lastReceivedGift > giftCooldown && Time.time - lastGiftCheck > 1f && player.stats.viewers > 0f)
+            if (Time.time - lastReceivedGift > giftCooldown - player.stats.supplyCrateCooldownReduction && Time.time - lastGiftCheck > 1f && player.stats.viewers > 0f)
             {
                 lastGiftCheck = Time.time;
                 float giftChance = UnityEngine.Random.Range(0, giftVar);
@@ -255,12 +273,13 @@ public class RoundManager : MonoBehaviour
         {
             if (currentRound == finalRound)
             {
-                roundManagerUI.UpdateTimer(215940f); // basically infinite time
+                roundManagerUI.UpdateTimer(215940f); // basically infinite time, this is AFTER the final round btw.
                 return;
             }
             roundTimer += Time.deltaTime;
             timeRemaining = shopDuration - roundTimer;
             roundManagerUI.UpdateTimer(timeRemaining);
+            
             if (roundTimer >= shopDuration - 2f && !blackStartedFadingShop)
             {
                 blackStartedFadingShop = true;
@@ -365,12 +384,29 @@ public class RoundManager : MonoBehaviour
         currentRoundData = roundDatabase.GetRoundData(currentRound);
         currentObjectives.Clear();
         roundManagerUI.ClearEntries();
-        CreateNewObjectives(currentRoundData.minObjectives,currentRoundData.maxObjectives);
+        if (currentRound == finalRound)
+        {
+            ObjectiveScaling objScale = manualObjectiveDatabase.objectiveScalings[0]; // index 0 will be the final boss objective
+            Objective newObj = objScale.CalculateObjective();
+            currentObjectives.Add(newObj);
+            roundManagerUI.AddEntry(objScale, newObj);
+        } else
+        {
+            CreateNewObjectives(currentRoundData.minObjectives,currentRoundData.maxObjectives);
+        }
+        
     }
     public void StartNewRound()
     {
         // basic setup for a new round.
         SetUpRound();
+        if (currentRound == finalRound)
+        {
+            List<GameObject> enemyPool = currentRoundData.enemyWeights.Select(e => e.enemyPrefab).ToList();
+            List<GameObject> enemiesToSpawn = new List<GameObject>{enemyPool[0]}; // the only one will be the boss. 
+            SpawnPlatformManager.Instance.SpawnEnemies(enemiesToSpawn, player.transform.position, 4); 
+            // replace 4 with the actual spawn platform spawn index
+        }
     }
     public void CreateNewObjectives(int min, int max)
     {
@@ -379,6 +415,7 @@ public class RoundManager : MonoBehaviour
         {
             while (true) {
                 ObjectiveScaling objScale = objectiveDatabase.objectiveScalings[UnityEngine.Random.Range(0, objectiveDatabase.objectiveScalings.Count)];
+                
                 if (!chosenObjectives.ContainsKey(objScale.objectiveType))
                 {
                     chosenObjectives.Add(objScale.objectiveType, true);
@@ -512,6 +549,7 @@ public class RoundManager : MonoBehaviour
         roundTimer = 0f;
         currentRoundState = RoundStates.Shop;
         Debug.Log("The shop is now open for " + shopDuration + " seconds.");
+        DialogueRoundHandler.Instance.GuideBotSpeak();
     }
     public void SkipShopSequence()
     {
@@ -674,7 +712,7 @@ public class RoundManager : MonoBehaviour
     {
         currentOnGroundItems.Add(item);
     }
-    private void SENDTOPRISON()
+    public void SENDTOPRISON()
     {
         if (player == null) return;
         player.transform.position = PRISON.transform.position + Vector3.up * 1f;
@@ -689,11 +727,27 @@ public class RoundManager : MonoBehaviour
     {
 
     }
+    
     public void MakeMidGameChoice(string choice)
     {
         midGameChoice = choice;
+
+        // remove all other connected nodes, so we just left with the correct ones fr fr. 
+        for (int i = skilltreeManager.bridgeNode.connectedNodes.Count - 1; i >= 0; i--)
+        {
+            if (skilltreeManager.bridgeNode.connectedNodes[i].nodeName != $"Path of {choice}")
+            {
+                skilltreeManager.bridgeNode.connectedNodes[i].transform.position = new Vector3(50000,50000,0);
+                skilltreeManager.bridgeNode.connectedNodes.RemoveAt(i);
+            }
+        }
+
+        skilltreeManager.UnlockNode(skilltreeManager.bridgeNode, true);
+        skilltreeManager.MoveAllPathNodes(choice);
+
         if (midGameChoice == "Honor")
         {
+            
             player.AddMultiplier(
                 new DamageMultiplier{
                     timeCreated = Time.time,
@@ -705,7 +759,8 @@ public class RoundManager : MonoBehaviour
             );
         } else if (midGameChoice == "Popularity")
         {
-            // something idk
+            // something related to popularity or something, idk. 
+            
         } else if (midGameChoice == "Destruction")
         {
             player.AddMultiplier(

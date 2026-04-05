@@ -13,31 +13,29 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour, BarrelHandler
 {
     public GameObject target;
+
     public EnemyStatManager statManager;
     public List<EnemyAbility> enemyAbilities = new List<EnemyAbility>();
     private List<AbilityRuntime> enemyAbilityRuntimes = new List<AbilityRuntime>();
-    private EnemyStats stats;
-    public Animator animator;
+    [HideInInspector] public EnemyStats stats;
+    // public Animator animator;
     public List<Transform> Barrels = new List<Transform>();
     public List<Transform> barrels { get => Barrels; set => Barrels = value; }
     public BoxCollider hitbox;
     public int lastBarrelFiredIndex {get; set;} = 0;
     [NonSerialized] public float timeEndLastAttack;
-    public float moveSpeed = 2f;
-    public float rotationSpeed = 20f;
-    public float searchRadius = 100f;
     public bool retreating = false;
     public bool runTowards = false;
     public LayerMask targetLayer;
-    private Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
     private float distance;
-    private NavMeshAgent navMeshAgent;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
     private float lastUpdatePos = -999f;
     private float posUpdateInterval = 0.2f;
-    private AbilityRuntime currentAbility = null;
+    public AbilityRuntime currentAbility = null;
     // Start is called before the first frame update
     private EnemyAI thisScript;
-    void Start()
+    public void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -59,18 +57,17 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         target = SearchForTarget();
     }
-    void FixedUpdate()
+    public void FixedUpdate()
     {
-        if (target!= null) distance = Vector3.Distance(transform.position, target.transform.position);
-        TurnToTarget();
-        SmartMove();
-        TryAttack();
+        PreFixedUpdate();
+        CoreFixedUpdate();
+        PostFixedUpdate();
     }
-    void TurnToTarget()
+    public void TurnToTarget()
     {
         // if (target == null) return;
         // if (stats.stunTime > 0) return;
@@ -87,7 +84,21 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
 
 
     }
-    void SmartMove()
+    // calc short for calculator, by the way.
+    public virtual float CalcSpeed(float speed)
+    {
+        float divider = 0;
+        if (stats.isGuarding && currentAbility is EnemyGuardRuntime guard)
+        {
+            divider += guard.guardStats.speedReduction;
+        }
+
+
+        if (divider == 0) divider = 1f;
+        if (stats.inAttackAnim) divider *= 3f;
+        return speed/divider;
+    }
+    public virtual void SmartMove()
     {
         if (target == null) return;
         if (rb == null) return;
@@ -99,50 +110,7 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
             }
             return;
         }
-    
-        // Vector3 dir = (target.transform.position - transform.position).normalized;
-        // dir.y = 0;
-        // if (distance < stats.runAwayDist)
-        // {
-        //     retreating = true;
-        //     dir = (transform.position - target.transform.position).normalized;
-        //     dir.y = 0;
-        //     if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
-        //     {
-        //         stats.isRunning = true;
-        //         statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-        //         rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
-        //     } else
-        //     {
-        //         stats.isRunning = false;
-        //         stats.isWalking = true;
-        //         rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-        //     }  
-        // } else if (distance > stats.runTowardsDist) 
-        // {
-        //     if (statManager.CanUseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime))
-        //     {
-        //         stats.isRunning = true;
-        //         statManager.UseStamina(stats.sprintStaminaCost * Time.fixedDeltaTime);
-        //         rb.MovePosition(transform.position + dir * stats.sprintSpeed * Time.fixedDeltaTime);
-        //     } else
-        //     {
-        //         stats.isRunning = false;
-        //         stats.isWalking = true;
-        //         rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-        //     }  
-        // } else if (distance <= stats.comfortDist) // if it's comfortable, don't move it
-        // {
-        //     stats.isRunning = false;
-        //     stats.isWalking = false;
-        //     retreating = false; 
-        // } else
-        // {
-        //     stats.isRunning = false;
-        //     stats.isWalking = true;
-        //     retreating = false;
-        //     rb.MovePosition(transform.position + dir * stats.walkSpeed * Time.fixedDeltaTime);
-        // }
+
         if (navMeshAgent.enabled == false) {
             rb.isKinematic = true;
             navMeshAgent.enabled = true;
@@ -166,6 +134,7 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         {
             navMeshAgent.isStopped = false;
             navMeshAgent.updateRotation = true;
+            navMeshAgent.speed = CalcSpeed(stats.walkSpeed);
         }
 
         if (navMeshAgent.isStopped)
@@ -185,21 +154,33 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
             stats.isWalking = true;
         }
     }
-    void TryAttack()
+    public virtual bool TryAttack()
     {
-        if (target == null) return;
+        List<int> includedIndexes = new List<int>();
+        for (int i = 0; i < enemyAbilityRuntimes.Count; i++)
+        {
+            includedIndexes.Add(i);
+        }
+        return TryAttack(includedIndexes);
+    }
+    public virtual bool TryAttack(List<int> includedIndexes)
+    {
+        if (target == null) return false;
         if (stats.inAttackAnim)
         {
             timeEndLastAttack = Time.time;
-            return;
+            return false;
         } 
-        if (retreating) return;
-        if (runTowards) return;
-        if (Time.time - timeEndLastAttack < stats.timeBetweenMoves) return;
-        if (stats.stunTime > 0) return;
+        if (stats.isGuarding) return false;
+        if (retreating) return false;
+        if (runTowards) return false;
+        if (Time.time - timeEndLastAttack < stats.timeBetweenMoves) return false;
+        if (stats.stunTime > 0) return false;
         bool choose = false;
         List<float> weights = new List<float>();
-        foreach (AbilityRuntime abilityRuntime in enemyAbilityRuntimes)
+        List<AbilityRuntime> possibleAbilities = new List<AbilityRuntime>();
+        foreach (int i in includedIndexes) possibleAbilities.Add(enemyAbilityRuntimes[i]);   
+        foreach (AbilityRuntime abilityRuntime in possibleAbilities)
         {
             if (abilityRuntime is EnemyAbilityI enemyAbility)
             {
@@ -214,15 +195,28 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
         
         if (choose)
         {
-            currentAbility = WeightedRandom.Choose(enemyAbilityRuntimes, weights);      
+            currentAbility = WeightedRandom.Choose(possibleAbilities, weights);      
 
             // use the ability
             currentAbility.BeginUse();
             currentAbility.Use();
+
+            return true;
         } 
+
+        return false;
     }
     
-    float CalculatePriority(EnemyAbilityData enemyAbilityData) 
+    public virtual bool TryAttack(int a=-1, int b=-1, int c=-1, int d=-1, int e=-1) {
+        List<int> temp = new List<int>();
+        if (a!=-1) temp.Add(a);
+        if (b!=-1) temp.Add(b);
+        if (c!=-1) temp.Add(c);
+        if (d!=-1) temp.Add(d);
+        if (e!=-1) temp.Add(e);
+        return TryAttack(temp);
+    }
+    public float CalculatePriority(EnemyAbilityData enemyAbilityData) 
     {
         // float distance = Vector3.(transform.position, target.transform.position);
         if (enemyAbilityData.minAttackRange > distance || enemyAbilityData.maxAttackRange < distance) return 0;
@@ -244,7 +238,6 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
             return enemyAbilityData.basePriority;
         }
     }
-    
     GameObject SearchForTarget()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, stats.aggroRange, targetLayer);
@@ -271,4 +264,16 @@ public class EnemyAI : MonoBehaviour, BarrelHandler
 
         return closest;
     }
+
+    public virtual void PreStart() {}
+    public virtual void PostStart() {}
+    public virtual void PreFixedUpdate() {}
+    public virtual void CoreFixedUpdate()
+    {
+        if (target!= null) distance = Vector3.Distance(transform.position, target.transform.position);
+        TurnToTarget();
+        SmartMove();
+        TryAttack();
+    }
+    public virtual void PostFixedUpdate() {}
 }

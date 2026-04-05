@@ -15,11 +15,13 @@ public class DialogueRoundHandler : MonoBehaviour
 
     public Talkable guide;
     public List<DialogueRound> guideRoundsDialogues;
-    // 0 is intro 
+    // 0 is after round 1 dialogue 
     // 1 and 3 are hard coded dialogue
     // 2 is recurring dialogue
     // 4 end of game dialogue
-    // 5 -> future use
+    // 5 is intro
+    // 6 is before final round dialogue
+    
     public Talkable viewer;
     public DialogueRound allViewers;
     private List<FullDialogue> thisRoundViewerDialogues = new List<FullDialogue>();
@@ -31,6 +33,10 @@ public class DialogueRoundHandler : MonoBehaviour
     // 3 recurring dialogue
     // 4 end of game dialogue
     // 5 -> future use
+    public List<DialogueRound> tutorialBotDialogues;
+    // 0 is intro
+    // 1 is the 'after completing' objective
+
     public FullDialogue corruptionDialogue;
     public Talkable shopkeeper;
     public Talkable tutorialBot;
@@ -49,6 +55,11 @@ public class DialogueRoundHandler : MonoBehaviour
     }
     void Start()
     {
+        if (RoundManager.Instance.DEBUGMODE == false)
+        {
+            tutorialBot.dialogue = tutorialBotDialogues[0].roundDialogue[0];
+            guide.dialogue = guideRoundsDialogues[5].roundDialogue[0];
+        }
     }
     void OnEnable()
     {
@@ -68,6 +79,10 @@ public class DialogueRoundHandler : MonoBehaviour
     public void TutorialBotSpeak()
     {
         DialogueManager.Instance.StartFullDialogue(tutorialBot.dialogue, tutorialBot);
+    }
+    public void GuideBotSpeak()
+    {
+        DialogueManager.Instance.StartFullDialogue(guide.dialogue, guide);
     }
     public void HandleRoundDialogue(int roundIndex)
     {
@@ -174,6 +189,9 @@ public class DialogueRoundHandler : MonoBehaviour
             case 4:
                 guide.SwitchDialouge(guideRoundsDialogues[3].roundDialogue[0]);
                 break;
+            case 6:
+                guide.SwitchDialouge(guideRoundsDialogues[6].roundDialogue[0]);
+                break;
             default:
                 if (RoundManager.Instance.GetHighestViewersThisRound >= 1800)
                 {
@@ -189,7 +207,6 @@ public class DialogueRoundHandler : MonoBehaviour
                 break;
         }
     }
-
     public FullDialogue GetEndingDialogue(int endingIndex)
     {
         float corruption = RoundManager.Instance.GetPlayer.stats.corruption;

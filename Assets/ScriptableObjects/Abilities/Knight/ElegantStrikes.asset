@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0edb6a76c3a514db9791658afdbb2a, type: 3}
+  m_Name: ElegantStrikes
+  m_EditorClassIdentifier: 
+  abilityName: Elegant Strikes
+  staminaCost: 50
+  baseCooldown: 10
+  critRate: 0
+  critMultiplier: 2
+  variation: 0.2
+  hitboxTimeDelay: 0.2
+  attackLength: 2.2
+  knockback: 0
+  stunTime: 0.2
+  forward: 0
+  spin: 0
+  attackID: 4
+  audioHelpers: []
+  useOverflowStamina: 1
+  damageData:
+    baseDamage: 0
+    type: 0
+    source: {fileID: 0}
+  abilityBases:
+  - abilityBase: {fileID: 11400000, guid: bf2f0c9a2a89fa148bd622aa5e7330b4, type: 2}
+    delay: 0.3166667
+  - abilityBase: {fileID: 11400000, guid: 3ca9910e4367f2249a441d5ed8ca6710, type: 2}
+    delay: 0.4333333
+  - abilityBase: {fileID: 11400000, guid: bf2f0c9a2a89fa148bd622aa5e7330b4, type: 2}
+    delay: 0.4666667
+  - abilityBase: {fileID: 11400000, guid: 3ca9910e4367f2249a441d5ed8ca6710, type: 2}
+    delay: 0.4

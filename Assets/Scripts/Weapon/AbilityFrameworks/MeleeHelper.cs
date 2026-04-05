@@ -31,7 +31,7 @@ public class MeleeHitboxData
         } else
         {
             HitboxVisualizer.Instance.DrawCube(transform, center, boxRadius, 0.3f);
-            return Physics.OverlapBox(center, boxRadius);
+            return Physics.OverlapBox(center, boxRadius, transform.rotation);
         }
         
     }

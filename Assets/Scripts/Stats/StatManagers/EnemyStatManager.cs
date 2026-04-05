@@ -12,7 +12,7 @@ public class EnemyStatManager : StatManager
     {
         stats = statsSO.CreateRuntime();
         setEnemyStats(stats);
-
+        
     }
 
     public override void PostStart()

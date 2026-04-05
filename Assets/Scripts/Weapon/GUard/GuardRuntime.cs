@@ -42,9 +42,10 @@ public class GuardRuntime : AbilityRuntime
      }
     public override void BeginUse()
     {
+        // Debug.Log("Begins the guard");
         if (!CanUse()) return;
         lastUsedTime = Time.time;
-        AudioManager.Instance.PlayGuardSFX(owner.transform);
+        AudioManager.Instance.HandleAudioHelpers(audioHelpers, owner.transform);
         currentEntry = new ResistanceEntry(guardStats);
         stats.resistances.AddEntry(currentEntry);
         stats.isGuarding = true;
@@ -69,8 +70,10 @@ public class GuardRuntime : AbilityRuntime
         float thisGuardNum = guardNum;
         await Task.Delay((int)(guardStats.parryStart * 1000));
         if (thisGuardNum != guardNum) return;
+        
         stats.isParrying = true;
-        await Task.Delay((int)((guardStats.parryEnd - guardStats.parryStart) * 1000));
+        await Task.Delay((int)((guardStats.parryEnd + statManager.GetStats().parryAdder - guardStats.parryStart) * 1000));
         if (thisGuardNum == guardNum && stats.isParrying) stats.isParrying = false;
     }
+
 }

@@ -75,5 +75,5 @@ public class Objective
 [Serializable]
 public enum ObjectiveTypes
 {
-    Collect, Kill, Parry, Viewers, ViewersOneTime, Multikill, StyleLevel
+    Collect, Kill, Parry, Viewers, ViewersOneTime, Multikill, StyleLevel, KillBoss
 }

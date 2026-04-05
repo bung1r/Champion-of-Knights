@@ -14,36 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName: Ending
   dialogue:
-  - dialogueLine: So you have made you choice.
+  - dialogueLine: So you have made your choice.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: You will stay in the future.
+  - dialogueLine: You have decided to stay in the future.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Rejecting your past is not a very easy thing.
+  - dialogueLine: Abandoning your past was not a very easy decision to make...
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -57,6 +60,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -70,6 +74,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -83,6 +88,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -96,6 +102,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -108,6 +115,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -120,6 +128,7 @@ MonoBehaviour:
       hasEffects: 1
       endDialogue: 0
       nextDialogue: {fileID: 11400000, guid: 1cb0d2b22e6fd7349ada4a616a599ae4, type: 2}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

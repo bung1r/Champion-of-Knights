@@ -84,7 +84,7 @@ MonoBehaviour:
       corruption: 0
       givenItem: {fileID: 0}
   - dialogueLine: You were soon deemed unift to continue content creation. But you
-      found a peace, knowing your stress would end.
+      found peace, knowing your stress would soon end.
     choices: []
     effects:
       hasEffects: 0

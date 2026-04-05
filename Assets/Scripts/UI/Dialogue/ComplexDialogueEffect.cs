@@ -26,4 +26,6 @@ public enum DialogueEffectTypes
     TopTextEnable,
     Blackscreen,
     DialogueBlackScreen,
+    SendToShop,
+    StartRound,
 }
