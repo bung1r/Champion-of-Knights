@@ -54,6 +54,15 @@ public class SkillInfoHoverThingy : MonoBehaviour
                     } else if (statModifier.baseStatsEnum == BaseStatsEnum.maxStamina)
                     {
                         coolString = $"{statModifier.value} Max Stamina";
+                    } else if (statModifier.baseStatsEnum == BaseStatsEnum.popularityMultiplier)
+                    {
+                        coolString = $"a {statModifier.value * 100}% Viewer Multiplier";
+                    }else if (statModifier.baseStatsEnum == BaseStatsEnum.styleMultiplier)
+                    {
+                        coolString = $"a {statModifier.value * 100}% Style Mutiplier";
+                    }else if (statModifier.baseStatsEnum == BaseStatsEnum.repMultiplier)
+                    {
+                        coolString = $"a {statModifier.value * 100}% Reputation Multiplier";
                     }
 
 

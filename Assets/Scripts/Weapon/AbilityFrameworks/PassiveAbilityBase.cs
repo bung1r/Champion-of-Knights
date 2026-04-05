@@ -71,6 +71,9 @@ public class PassiveAbilityBase : ScriptableObject
          } else if (this is InverseCorruptionPassive)
         {
             return new InverseCorruptionRuntime((InverseCorruptionPassive)other, manager);
+        } else if (this is StandStillPassive)
+        {
+            return new StandStillRuntime((StandStillPassive)other, manager);
         }
         else
         {

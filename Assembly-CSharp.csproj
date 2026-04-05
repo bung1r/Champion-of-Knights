@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\AbilityFrameworks\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\MeleeRuntime.cs" />
+    <Compile Include="Assets\Scripts\Weapon\PassiveAbilities\StandStillPassive.cs" />
     <Compile Include="Assets\Scripts\Weapon\GUard\GuardRuntime.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeAbilities\ChargedMeleeRuntime.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\BobUpAndDown.cs" />

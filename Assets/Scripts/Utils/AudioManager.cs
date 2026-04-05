@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
     private Dictionary<AudioSource, float> sourceAndVolumeDict = new Dictionary<AudioSource, float>();
     private Dictionary<AudioSource, float> sourceAndCurrentVolumeDict = new Dictionary<AudioSource, float>();
 
-    private List<string> claps = new List<string>() { "Clap2", "Clap3", "Clap4", "Clap5" };
+    private List<string> claps = new List<string>() { "Clap2", "Clap3", "Clap4", "Clap5", "Clap6"};
 
 
     public float masterVolume = 100f;
@@ -96,6 +96,7 @@ public class AudioManager : MonoBehaviour
             else
             {
                 sourceAndTypeDict[source] = "sfx";
+                sourceAndCurrentVolumeDict[source] = source.volume;
             }
         }
 
@@ -109,14 +110,14 @@ public class AudioManager : MonoBehaviour
             float basePitch = sourceAndPitchDict[source];
             source.pitch = UnityEngine.Random.Range(basePitch - variation, basePitch + variation);
             float baseVolume = sourceAndVolumeDict[source];
-            if (sourceAndTypeDict[source] == "music")
-            {
-                source.volume = baseVolume * (musicVolume / 50f) * (masterVolume / 100f);
-            }
-            else
-            {
-                source.volume = baseVolume * (sfxVolume / 50f) * (masterVolume / 100f);
-            }
+            // if (sourceAndTypeDict[source] == "music")
+            // {
+            //     source.volume = baseVolume * (musicVolume / 50f) * (masterVolume / 100f);
+            // }
+            // else
+            // {
+            //     source.volume = baseVolume * (sfxVolume / 50f) * (masterVolume / 100f);
+            // }
             source.transform.position = position;
             source.PlayOneShot(source.clip);
         }
@@ -282,11 +283,24 @@ public class AudioManager : MonoBehaviour
         musicSource.Stop();
         musicSource.volume = startVolume;
     }
+    private float lastMasterVolume = 0f;
+    private float lastMusicVolume = 0f;
+    private float lastSFXVolume = 0f;
     void Update()
     {
+        if (lastMasterVolume == masterVolume && lastMusicVolume == musicVolume && lastSFXVolume == sfxVolume) return;
+        lastMasterVolume = masterVolume;
+        lastMusicVolume = musicVolume;
+        lastSFXVolume = sfxVolume;
         foreach (var kvp in sourceAndCurrentVolumeDict)
         {
-            kvp.Key.volume = kvp.Value * (masterVolume / 100f) * (musicVolume / 50f);
+            if (sourceAndTypeDict[kvp.Key] == "music")
+            {
+                kvp.Key.volume = kvp.Value * (masterVolume / 100f) * (musicVolume / 50f);
+            } else
+            {
+                kvp.Key.volume = kvp.Value * (masterVolume / 100f) * (sfxVolume / 50f);
+            }
         }
     }
 
@@ -303,25 +317,31 @@ public class AudioManager : MonoBehaviour
         int shoutAudios = 0;
         if (viewers < 1000)
         { // 0 - 999 viewers (Claps: Min 3, Max 5)
-            clapAudios = (int)Mathf.Max(3, Mathf.Pow(viewers, clapAudioScaling)+1); // cool formula, min 3 claps. 
+            clapAudios = (int)Mathf.Max(6, Mathf.Pow(viewers, clapAudioScaling)+4); // cool formula, min 6 claps. 
             shoutAudios = (int)Mathf.Max(1, Mathf.Pow(viewers, shoutAudioScaling)); // cool formula, min 1 shout
         }
         else if (viewers < 15000) // 1000 - 14999 viewers  (Claps: Min 3, Max 9)
         {
-            clapAudios = (int)Mathf.Max(3, Mathf.Pow(viewers, clapAudioScaling) + 1 + UnityEngine.Random.Range(-1f, 1f)); // introduce some variation
+            clapAudios = (int)Mathf.Max(6, Mathf.Pow(viewers, clapAudioScaling) + 4 + UnityEngine.Random.Range(-1f, 1f)); // introduce some variation
             shoutAudios = (int)Mathf.Max(1, Mathf.Pow(viewers, shoutAudioScaling) + UnityEngine.Random.Range(-0.5f, 1f)); // introduce some variation
         }
         else  // 15k viewers+ (Claps: Min 8, Max 12)
         {
-            clapAudios = (int)Mathf.Clamp(Mathf.Pow(viewers, clapAudioScaling) + 1 + UnityEngine.Random.Range(-1f, 1.5f), 2, 12); // introduce some variation
+            clapAudios = (int)Mathf.Clamp(Mathf.Pow(viewers, clapAudioScaling) + 4 + UnityEngine.Random.Range(-1f, 1.5f), 6, 16); // introduce some variation
             shoutAudios = (int)Mathf.Clamp(Mathf.Pow(viewers, shoutAudioScaling) + UnityEngine.Random.Range(-0.5f, 1f), 1, 10); // introduce some variation
         }
 
+        
+        List<int> potentialIndexes = new List<int>{0, 1, 2, 3, 4};
         for (int i = 0; i < clapAudios; i++)
         {
-            string clapName = claps[UnityEngine.Random.Range(0, claps.Count)];
+            if (potentialIndexes.Count == 0) potentialIndexes = new List<int>{0,1,2,3,4};
+            int potentialIndexIndex = UnityEngine.Random.Range(0, potentialIndexes.Count);
+            int index = potentialIndexes[potentialIndexIndex];
+            potentialIndexes.RemoveAt(potentialIndexIndex);
+            string clapName = claps[index];
             AudioSource clapSource = NameToAudio[clapName];
-            float delay = UnityEngine.Random.Range(0f,1f);
+            float delay = UnityEngine.Random.Range(0f,0.5f);
             StartCoroutine(HandleAudioSource(clapSource, delay, Vector3.zero, 0.15f, Time.fixedDeltaTime + cheerDuration)); // position can be adjusted as needed
         }
 
@@ -343,13 +363,13 @@ public class AudioManager : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             if (source == null) yield break; // source might have been destroyed if the clip finished playing
-            // if (endTime - Time.fixedDeltaTime < fadeOutTime)
-            // {
-            //     source.volume = Mathf.Lerp(sourceAndVolumeDict[originalSource], 0, 1 - (fadeOutTime / (fadeOutTime - Time.fixedDeltaTime)));
-            // } else
-            // {
-            //     source.volume = sourceAndVolumeDict[originalSource];
-            // }
+            if (endTime - Time.fixedDeltaTime < fadeOutTime)
+            {
+                source.volume = Mathf.Lerp(originalSource.volume, 0, 1 - (fadeOutTime / (fadeOutTime - Time.fixedDeltaTime)));
+            } else
+            {
+                source.volume = originalSource.volume;
+            }
 
             if (endTime - Time.fixedDeltaTime < 0f)
             {
