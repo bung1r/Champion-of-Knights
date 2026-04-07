@@ -276,7 +276,6 @@ public class StatManager : MonoBehaviour, IDamageable
     {
         _stats.passiveAbilities.Add(passive);
         PassiveAbilityRuntime runtime = passive.CreateRuntimeInstance(passive, this);
-        runtime.Init(gameObject);
         OnTakeDamage.AddListener(runtime.OnTakeDamage);
         OnHit.AddListener(runtime.OnHit);
         OnKill.AddListener(runtime.OnKill);
@@ -285,6 +284,7 @@ public class StatManager : MonoBehaviour, IDamageable
         OnUpdate.AddListener(runtime.OnUpdate);
         OnUseItem.AddListener(runtime.OnUseItem);
         passiveRuntimeAbilities.Add(runtime);
+        runtime.Init(gameObject);
     }
     public void RemovePassive(PassiveAbilityBase passive)
     {

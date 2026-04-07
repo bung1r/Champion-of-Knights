@@ -27,7 +27,63 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Keep your sword close, and your viewers closer.
+  - dialogueLine: We'll be sending you through a portal of ours shortly, and you'll
+      be sent to a random location on our map. It'll be instant, so no need to worry.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: By the way, you'll be sent to a different location on the same
+      map each round, so prepare for that.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Oh, and REMEMBER!!!! THIS IS VERY IMPORTANT!!!!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: You must complete ALL Objectives, or the PTS program will drop
+      you on the spot. ALL OBJECTIVES.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: '*ahem...* Sorry about that. Well then, keep your sword close,
+      and your viewers closer.'
     choices: []
     effects:
       hasEffects: 1

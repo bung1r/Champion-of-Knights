@@ -31,7 +31,7 @@ MonoBehaviour:
     delay: 0
   useOverflowStamina: 1
   damageData:
-    baseDamage: 1
+    baseDamage: 5
     type: 0
     source: {fileID: 0}
   hitboxData:

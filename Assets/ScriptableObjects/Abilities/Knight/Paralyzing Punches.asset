@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0edb6a76c3a514db9791658afdbb2a, type: 3}
   m_Name: Paralyzing Punches
   m_EditorClassIdentifier: 
-  abilityName: Elegant Strikes
+  abilityName: Paralyzing Punches
   staminaCost: 35
   baseCooldown: 8
   critRate: 0

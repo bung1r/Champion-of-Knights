@@ -31,7 +31,7 @@ MonoBehaviour:
     delay: 0
   useOverflowStamina: 0
   damageData:
-    baseDamage: 1
+    baseDamage: 55
     type: 0
     source: {fileID: 0}
   hitboxData:
@@ -40,4 +40,5 @@ MonoBehaviour:
     radius: 2.5
     boxRadius: {x: 1.2, y: 1, z: 3.5}
     hitboxOffset: {x: 0.2, y: 0.5, z: 1.75}
+  damageMultipliersOnUse: []
   owner: {fileID: 0}

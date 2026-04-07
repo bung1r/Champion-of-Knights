@@ -1,0 +1,327 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: RBM00A
+  m_EditorClassIdentifier: 
+  speakerName: Roboman
+  dialogue:
+  - dialogueLine: The name's Roboman, glad to meet you!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Oh don't be so wary, I won't knock you out like the guy you were
+      just talking to earlier.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I only serve as your... guide, throughout this journey.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I'll provide you with suggestions, and you can go from there. Easy,
+      right?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Just know, you are not the first Knight I have guided. Nor will
+      you be the last.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: I trust you will be an... entertaining figure.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Here's a Big Health Potion! Just a token of my goodwill.
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 11400000, guid: e69e68ebcf9c2b5438d95a9c35934e41, type: 2}
+  - dialogueLine: By the way, do you see the window over there?
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Those are where you will see a couple viewers of your stream.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: 5 lucky members of YOUR audience get a chance to speak to you!
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Talk to them like you would a friend or a colleague.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: But it doesn't matter all that much. I mean, you don't have any
+      viewers yet.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Just... stray away from insults, but don't act fake.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: That's how you get corrupted.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 1
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Oh, what's corruption? Well, you didn't ask, but it's very important.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Like I said before, don't act fake, and you should be fine. When
+      you're corrupted, you start to forget your past and accept this future.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Eventually, you'll never want to go home. That's corruption. You'll
+      also *lose more viewers* and see things less clear if you get corruption.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: That being said, you also have reputation to uphold! Reputation
+      is basically the opposite of corruption.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: You'll get more viewers the higher your reputation is, and you
+      can get it by talking to your viewers and saying certain things.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Finally, you'll also receive brown packages that fall from drones
+      while you're in battle. Those are gifts from your viewers.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Open them up and check what's inside! The more viewers you have,
+      the more likely the package will be a better item.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: You'll also see a skill tree... but we'll get there when we get
+      there.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 11400000, guid: 80c0507d441a96443b84e67063b1132e, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: When you're ready for your battle, just talk to me again. Ready
+      when you are, Mr. Knight.
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 1
+      nextDialogue: {fileID: 11400000, guid: bd8b4ff4a00b7ef41ba7120270456fbf, type: 2}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

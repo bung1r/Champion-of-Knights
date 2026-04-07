@@ -34,6 +34,10 @@ public class MeleeRuntime : AbilityRuntime
         // if (spin != 0f) statManager.Spin(spin);
         if (forward != 0f) statManager.Forward(forward);
         AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);
+        foreach (DamageMultiplierLite damageMultiplierLite in ((MeleeAbility)abilityBase).damageMultipliersOnUse)
+        {
+            statManager.AddMultiplier(new DamageMultiplier(damageMultiplierLite));
+        }
         List<DamageMultiplier> allDamageMultipliers = statManager.GetAllDamageMultipliers();
         float critAmt = 1f;
         if (UnityEngine.Random.Range(1,100) <= critRate) {

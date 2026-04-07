@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0edb6a76c3a514db9791658afdbb2a, type: 3}
   m_Name: EndlessBarrage
   m_EditorClassIdentifier: 
-  abilityName: Endless Barrage
+  abilityName: Pretentious Punches
   staminaCost: 50
   baseCooldown: 12
   critRate: 0
   critMultiplier: 2
   variation: 0.1
   hitboxTimeDelay: 0.2
-  attackLength: 5
+  attackLength: 4.5
   knockback: 0
   stunTime: 0.2
   forward: 0

@@ -16,7 +16,31 @@ MonoBehaviour:
   dialogue:
   - dialogueLine: Ah! Hello Mr. Knight! I trust you have an idea of what you're in
       for with this whole ordeal, yes?
-    choices: []
+    choices:
+    - choiceText: Yes (Skip Explanation)
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: bd8b4ff4a00b7ef41ba7120270456fbf, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
+    - choiceText: No
+      effects:
+        hasEffects: 1
+        endDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 35be8fdc5cf7d34408b6d20218684af0, type: 2}
+        complexEffects: []
+        reputation: 0
+        loyalviewers: 0
+        sponsers: 0
+        money: 0
+        corruption: 0
+        givenItem: {fileID: 0}
     effects:
       hasEffects: 0
       endDialogue: 1

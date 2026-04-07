@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections;
 
 // might be the worst code i've ever written
 public class Item : ScriptableObject
@@ -15,8 +16,9 @@ public class Item : ScriptableObject
     public float duration = 1f; // how look it takes for action to complete
     public float performDelay = 0.3f; // delay before perform is called after use
     public virtual bool Use(StatManager statManager = null) {
-        FullPerform(statManager); return true;
-        }
+        FullPerform(statManager); 
+        return true;
+    }
     public virtual bool CanUse() {return false;}
     public virtual float GetCooldownRemaining() {return 10f;}
     public virtual void BeginUse(StatManager statManager = null) {} // this is for a charge (hold down)
@@ -27,10 +29,18 @@ public class Item : ScriptableObject
     {
         if (RoundManager.Instance.currentRoundState == RoundStates.Shop || RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory) return;
         statManager.OnUseItem.Invoke();
+        IsUsingItemThingy(statManager);
         AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);
         await Task.Delay((int)(performDelay * 1000));
         Perform(statManager);
     } // DO NOT OVERRIDE THIS UNLESS NECESSARY, BRO!
+    async private void IsUsingItemThingy(StatManager statManager)
+    {
+        if (statManager == null) return;
+        statManager.GetStats().isUsingItem = true;
+        await Task.Delay((int)(duration * 1000));   
+        statManager.GetStats().isUsingItem = false;
+    }
     public virtual void Perform(StatManager statManager = null) {} // called after perform delay
 }
 
@@ -71,7 +81,6 @@ public class ItemRuntime
     public virtual void EndUse(StatManager statManager = null)
     {
         item.EndUse(statManager);
-        
     } 
    
 }

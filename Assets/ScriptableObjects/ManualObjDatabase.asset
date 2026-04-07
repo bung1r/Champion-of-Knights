@@ -24,3 +24,25 @@ MonoBehaviour:
     objectiveDescription: Slay the Boss. Earn your freedom.
     roundTo: 1
     oneTimeComplete: 1
+  - objectiveType: 1
+    baseAmount: 1
+    roundAddFactor: 0
+    roundMultFactor: 1
+    roundExpoFactor: 1
+    max: 5
+    min: 5
+    variation: 0
+    objectiveDescription: Kill {0} enemies
+    roundTo: 1
+    oneTimeComplete: 1
+  - objectiveType: 2
+    baseAmount: 1
+    roundAddFactor: 0
+    roundMultFactor: 1
+    roundExpoFactor: 1
+    max: 1
+    min: 1
+    variation: 0
+    objectiveDescription: Parry {0} times
+    roundTo: 1
+    oneTimeComplete: 1

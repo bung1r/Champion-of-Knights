@@ -94,8 +94,10 @@ public class InventoryManager : MonoBehaviour
                 return;
             }
         }
-    
+
+        items[selectedSlotIndex].UpdateItem(item);
         inventoryManagerGUI.UpdateSelectSlot(item);
+        inventoryManagerGUI.AssignItemInit(selectedSlotIndex, item);
     } 
     public void BeginInteract()
     {

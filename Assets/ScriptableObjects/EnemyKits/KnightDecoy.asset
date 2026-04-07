@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded79c87197e3574399aa1d0d3345050, type: 3}
+  m_Name: KnightDecoy
+  m_EditorClassIdentifier: 
+  baseStats:
+    maxHP: 500
+    turnSpeed: 0
+    walkSpeed: 0
+    canSprint: 1
+    sprintSpeed: 0
+    sprintStaminaCost: 0
+    maxStamina: 0
+    staminaRegen: 0
+    startStaminaRegen: 0
+    startStaminaRegenFromZero: 0
+    regenHP: 0
+    startRegenHP: 0
+    overflowStaminaThreshold: 0
+    baseEXP: 0
+    resistances:
+      entries: []
+    parryAdder: 0
+    parryDmgMultiplier: 1
+    popularityMultiplier: 1
+    knockbackMultiplier: 1
+    stunTimeMultiplier: 1
+    supplyCrateCooldownReduction: 0
+    styleMultiplier: 1
+    corruptionMultiplier: 1
+    repMultiplier: 1
+    staminaUsageMultiplier: 1
+    statModifiers: []
+    currentHP: 100
+    currentStamina: 100
+    isRunning: 0
+    isWalking: 0
+    inAttackAnim: 0
+    isGuarding: 0
+    isParrying: 0
+    isUsingItem: 0
+    attackID: -1
+    stunTime: 0
+    damageMultipliers: []
+    passiveAbilities: []
+    runAwayDist: 2
+    comfortDist: 3
+    runTowardsDist: 10
+    cautionRange: 30
+    aggroRange: 20
+    timeBetweenMoves: 0.5
+    isBoss: 0

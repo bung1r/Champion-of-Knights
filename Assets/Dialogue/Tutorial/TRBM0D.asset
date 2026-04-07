@@ -136,6 +136,11 @@ MonoBehaviour:
         floatValue: 10
         stringValue: LMB for base Attack, RMB for Parry.
         itemValue: {fileID: 0}
+      - effectType: 14
+        intValue: 0
+        floatValue: 0
+        stringValue: ahhheheaw
+        itemValue: {fileID: 0}
       reputation: 0
       loyalviewers: 0
       sponsers: 0

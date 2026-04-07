@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\AllStats.cs" />
     <Compile Include="Assets\Scripts\Enemy\BHBossEnemyAI.cs" />
     <Compile Include="Assets\Scripts\Weapon\ComplexAbility.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\BombConsumable.cs" />
     <Compile Include="Assets\Scripts\Weapon\BulletStuff\BulletHandler.cs" />
     <Compile Include="Assets\Scripts\Map\DronePackage.cs" />
     <Compile Include="Assets\Scripts\UI\Stats\StyleHelpers.cs" />
@@ -114,9 +115,11 @@
     <Compile Include="Assets\Scripts\Weapon\PassiveAbilities\InverseCorruptionPassive.cs" />
     <Compile Include="Assets\Scripts\UI\Other\Timer.cs" />
     <Compile Include="Assets\Scripts\GlobalHelpers.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\DecoyTotemItem.cs" />
     <Compile Include="Assets\Scripts\Stats\ScriptableObjects\StyleBonusDatabase.cs" />
     <Compile Include="Assets\Scripts\Weapon\PassiveAbilities\StaminaStealPassive.cs" />
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\IDamageable.cs" />
+    <Compile Include="Assets\Scripts\Stats\Inventory\Items\ResistanceConsumable.cs" />
     <Compile Include="Assets\Scripts\Map\Orb.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\UI\Round\ObjectiveUIManager.cs" />
@@ -163,6 +166,7 @@
     <Compile Include="Assets\Scripts\Weapon\Enemy\EnemyComplexRuntime.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\Items\StatConsumable.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedAbilities\RangedAbility.cs" />
+    <Compile Include="Assets\Scripts\Weapon\PassiveAbilities\AddViewerItemPassive.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\EnemyStatManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\PlayButton.cs" />
     <Compile Include="Assets\Scripts\UI\Round\GameOverUIManager.cs" />
@@ -173,6 +177,7 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\StatManager.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\Items\BombItem.cs" />
+    <Compile Include="Assets\Scripts\Utils\Letterbox.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\QuitButton.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUIManager.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\DialogueRoundHandler.cs" />

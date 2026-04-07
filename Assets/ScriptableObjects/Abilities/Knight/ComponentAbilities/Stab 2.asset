@@ -40,4 +40,5 @@ MonoBehaviour:
     radius: 10
     boxRadius: {x: 0.5, y: 1, z: 2}
     hitboxOffset: {x: 0, y: 0.5, z: 1}
+  damageMultipliersOnUse: []
   owner: {fileID: 0}

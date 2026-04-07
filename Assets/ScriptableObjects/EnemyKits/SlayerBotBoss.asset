@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlayerBotBoss
   m_EditorClassIdentifier: 
   baseStats:
-    maxHP: 1
+    maxHP: 4000
     turnSpeed: 300
     walkSpeed: 8
     canSprint: 1
@@ -47,6 +47,7 @@ MonoBehaviour:
     inAttackAnim: 0
     isGuarding: 0
     isParrying: 0
+    isUsingItem: 0
     attackID: -1
     stunTime: 0
     damageMultipliers: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0edb6a76c3a514db9791658afdbb2a, type: 3}
   m_Name: PullSlash
   m_EditorClassIdentifier: 
-  abilityName: Pulling Slash
+  abilityName: Pull-Slash
   staminaCost: 20
   baseCooldown: 10
   critRate: 0
@@ -22,7 +22,10 @@ MonoBehaviour:
   attackLength: 1
   knockback: 0
   stunTime: 0.2
+  forward: 0
+  spin: 0
   attackID: -1
+  audioHelpers: []
   useOverflowStamina: 1
   damageData:
     baseDamage: 0

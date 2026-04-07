@@ -18,6 +18,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private ObjectiveDatabase objectiveDatabase;
     [SerializeField] private ObjectiveDatabase manualObjectiveDatabase; // must trigger manually, such as the boss kill one.
     [SerializeField] private RoundDatabase roundDatabase;
+    [SerializeField] private RoundDatabase tutorialRoundDatabase; 
     [SerializeField] private ViewerItemDatabase viewerItemDatabase;
     [SerializeField] private GameObject packageDronePrefab;
     [SerializeField] private GameObject audiencePackagePrefab;
@@ -45,6 +46,7 @@ public class RoundManager : MonoBehaviour
     private List<GameObject> currentEnemies = new List<GameObject>();
     private List<GameObject> currentPackages = new List<GameObject>();
     private List<GameObject> currentOnGroundItems = new List<GameObject>();
+    [HideInInspector] public List<DatabaseItemData> databaseItemDatas = new List<DatabaseItemData>();
     private List<Orb> currentOrbs = new List<Orb>();
     public bool isRoundActive = false;
     public RoundStates currentRoundState = RoundStates.Nothing;
@@ -65,11 +67,13 @@ public class RoundManager : MonoBehaviour
     public bool START_WITH_NOTHING = false;
     private List<Objective> currentObjectives = new List<Objective>();
     private RoundData currentRoundData;
+    private bool didTutorialObjectivesFlag = false;
     public int ending = -1; // 1 = A, 2 = B, 3 = C...
     private int timesParried = 0;
     private int orbsCollected = 0;
     private int enemiesKilled = 0;
     private int objectivesCompleted = 0;
+
     // time related things
     private float roundTimer = 0f;
     private float timeRemaining = 0f;
@@ -110,6 +114,7 @@ public class RoundManager : MonoBehaviour
 
         if (DEBUGMODE == false)
         {
+            player.transform.position = new Vector3(0f, 0.5f, 300f);
             STARTING_SKILL_POINTS = 0;
             START_WITH_BEGIN = false;
             START_WITH_NOTHING = false;
@@ -148,7 +153,10 @@ public class RoundManager : MonoBehaviour
             StartCoroutine(StartTutorialSequence());
         }
 
-    
+        foreach (DatabaseItemData item in viewerItemDatabase.items)
+        {
+            databaseItemDatas.Add(item);
+        }
     }
     
     void Update()
@@ -336,13 +344,40 @@ public class RoundManager : MonoBehaviour
         {
             roundTimer += Time.deltaTime;
             // something or other, I'm not sure.
+            if (currentObjectives.Count > 0 && Time.time - lastUpdatedStat > updateStatInterval)
+            {
+                lastUpdatedStat = Time.time;
+                int completeObjectives = 0;
+                foreach (Objective obj in currentObjectives)
+                {
+                    if (obj.IsComplete()) { completeObjectives++; continue;}
+                    if (obj.objectiveType == ObjectiveTypes.Collect)
+                    {
+                        obj.currentAmount = orbsCollected;
+                    } else if (obj.objectiveType == ObjectiveTypes.Kill)
+                    {
+                        obj.currentAmount = enemiesKilled;
+                    } else if (obj.objectiveType == ObjectiveTypes.Parry)
+                    {
+                        obj.currentAmount = timesParried;
+                    }  
+                }
+                if (completeObjectives == currentObjectives.Count && didTutorialObjectivesFlag != true)
+                {
+                    // hey you did all the tutorial objectives
+                    didTutorialObjectivesFlag = true;
+                    DialogueRoundHandler.Instance.tutorialBot.SwitchDialouge(DialogueRoundHandler.Instance.tutorialBotDialogues[0].roundDialogue[1]);
+                }
+            }
+
+            
         }
     
 
     }
     public void AudienceGiftEvent() {
         // give the player a random item as a gift from the audience.
-        Item audienceItem = viewerItemDatabase.GetAudienceItem(player.stats.viewers, player.stats.sponsers);
+        Item audienceItem = viewerItemDatabase.GetAudienceItem(databaseItemDatas, player.stats.viewers, player.stats.sponsers);
         Debug.Log("The audience has sent you a gift: " + audienceItem.itemName);
         // create the drone that brings the package 
         GameObject packageDrone = Instantiate(packageDronePrefab, player.transform.position + Vector3.up * 5f + Vector3.forward * 6f, Quaternion.identity);
@@ -369,11 +404,33 @@ public class RoundManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         DialogueRoundHandler.Instance.TutorialBotSpeak();
     }
+    public void CreateTutorialObjectives()
+    {
+        ObjectiveScaling objScale1 = manualObjectiveDatabase.objectiveScalings[1]; // index 1 will be hard coded kill ojective
+        Objective newObj1 = objScale1.CalculateObjective();
+        currentObjectives.Add(newObj1);
+        ObjectiveScaling objScale2 = manualObjectiveDatabase.objectiveScalings[2]; // index 2 will be hard coded parry obejctive
+        Objective newObj2 = objScale2.CalculateObjective();
+        currentObjectives.Add(newObj2);
+
+        roundManagerUI.AddEntry(objScale1, newObj1);
+        roundManagerUI.AddEntry(objScale2, newObj2);
+
+        RoundData tRoundData = tutorialRoundDatabase.GetRoundData(1);
+        List<GameObject> tempList = new();
+        for (int i = 0; i < 4; i++) tempList.Add(tRoundData.enemyWeights[0].enemyPrefab);
+        SpawnPlatformManager.Instance.SpawnEnemies(tempList, player.transform.position, 10);
+        tempList.Clear();
+        tempList.Add(tRoundData.enemyWeights[0].enemyPrefab);
+        SpawnPlatformManager.Instance.SpawnEnemies(tempList, player.transform.position, 10);
+    }
     public void StartBeforeRoundIntermission()
     {
         BlackScreen.Instance.FadeFromBlack(1f);
         AudioManager.Instance.PlayBattleMusic(3f);
         KnightSpawnIn();
+        roundManagerUI.EnableTimer();
+        player.stats.totalStyle = 0f;
         currentRoundState = RoundStates.Begin;
         roundTimer = 0f;
         Debug.Log("Round will begin soon!");
@@ -604,7 +661,7 @@ public class RoundManager : MonoBehaviour
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.GameVictory;
         SENDTOPRISON();
-        victoryCanvas.EnableUI("You have completed 10 rounds, and may finally return home! Congratulations!");
+        victoryCanvas.EnableUI("You have beaten the game! Congratulations!");
     }
     public void EndRoundSequence()
     {

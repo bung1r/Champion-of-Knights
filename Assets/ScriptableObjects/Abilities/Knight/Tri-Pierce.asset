@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Tri-Pierce
   staminaCost: 20
-  baseCooldown: 10
+  baseCooldown: 8
   critRate: 0
   critMultiplier: 2
   variation: 0.2
   hitboxTimeDelay: 0.2
-  attackLength: 1
+  attackLength: 2
   knockback: 0
   stunTime: 0.2
-  attackID: -1
+  forward: 0
+  spin: 0
+  attackID: 11
+  audioHelpers: []
   useOverflowStamina: 1
   damageData:
     baseDamage: 0
@@ -30,8 +33,8 @@ MonoBehaviour:
     source: {fileID: 0}
   abilityBases:
   - abilityBase: {fileID: 11400000, guid: 623158fef2abd5f43bee6a89160da5d5, type: 2}
-    delay: 0.3
+    delay: 0.4166667
   - abilityBase: {fileID: 11400000, guid: 623158fef2abd5f43bee6a89160da5d5, type: 2}
-    delay: 0.3
-  - abilityBase: {fileID: 11400000, guid: ce71f67d6da635f4d9e5b68afb3bca5d, type: 2}
     delay: 0.5
+  - abilityBase: {fileID: 11400000, guid: ce71f67d6da635f4d9e5b68afb3bca5d, type: 2}
+    delay: 0.75

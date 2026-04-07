@@ -11,6 +11,7 @@ using UnityEngine.Rendering;
 public class MeleeAbility : AbilityBase
 {
     public MeleeHitboxData hitboxData = new MeleeHitboxData();
+    public List<DamageMultiplierLite> damageMultipliersOnUse = new List<DamageMultiplierLite>();
     public GameObject owner;
 
 }

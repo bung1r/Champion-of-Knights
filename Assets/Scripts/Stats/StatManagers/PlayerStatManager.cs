@@ -33,6 +33,7 @@ public class PlayerStatManager : StatManager
         setPlayerStats(stats);
         AdjustLevels();
         AwakeAdjustStyle();
+        OnHit.AddListener(OnHitFunc);
         OnParry.AddListener(OnParryFunc);
         OnKill.AddListener(OnKillFunc);
     }   
@@ -159,7 +160,7 @@ public class PlayerStatManager : StatManager
     }
     public void StyleUpdate()
     {
-        if (RoundManager.Instance.currentRoundState != RoundStates.Active && RoundManager.Instance.currentRoundState != RoundStates.Nothing) {
+        if (RoundManager.Instance.currentRoundState != RoundStates.Active && RoundManager.Instance.currentRoundState != RoundStates.Nothing && RoundManager.Instance.currentRoundState != RoundStates.Tutorial) {
             return;
         }
         // Basically, goes down more the higher the styleLevel. 
@@ -188,7 +189,7 @@ public class PlayerStatManager : StatManager
         if (RoundManager.Instance.currentRoundState != RoundStates.Active) return;
         float viewerGainFactor = 10f * (1.5f + ((stats.reputation - (stats.corruption/2f)) / 100f)); // reputation affects viewer gain
         float viewerLossFactor = 10f * (1.5f + stats.corruption / 100f); // corruption affects viewer loss
-        float idealStyle = Mathf.Sqrt(RoundManager.Instance.currentRound); // the 'stable' level, basically where you don't gain or lose viewers
+        float idealStyle = Mathf.Sqrt(RoundManager.Instance.currentRound)+1f; // the 'stable' level, basically where you don't gain or lose viewers
         float fullStyleLevel = stats.styleLevel + stats.currentStyle / stats.maxStyle; // stylelevel with the fraction added on
 
         // maxixium possible viewers at that level
@@ -254,6 +255,10 @@ public class PlayerStatManager : StatManager
     public PlayerCombat GetPlayerCombat() => playerCombat;
     public SkilltreeManager GetSkilltreeManager() => skilltreeManager;
     public PlayerMovement GetPlayerMovement() => playerMovement;  
+    public void OnHitFunc(float dmg)
+    {
+        AddStyle(5);
+    }
     public void OnParryFunc()
     {
         AudioManager.Instance.PlayParrySFX(transform);

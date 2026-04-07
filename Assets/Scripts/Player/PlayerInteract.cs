@@ -58,6 +58,7 @@ public class PlayerInteract : MonoBehaviour
             DialogueManager.Instance.ProgressToNextDialogue();
             return;
         }
+        if (statManager.GetStats().isUsingItem) return;
         if (nearbyInteractable != null)
         {
             nearbyInteractable.Interact(gameObject);

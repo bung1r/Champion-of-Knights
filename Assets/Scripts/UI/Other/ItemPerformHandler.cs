@@ -25,6 +25,9 @@ public class ItemPerformHandler : MonoBehaviour
                 bomb.GetComponent<Rigidbody>().AddForce(statManager.transform.forward * 5.0f + statManager.transform.up * 2.0f, ForceMode.Impulse);
                 bombBehavior.Initialize(bombItem.hitboxData, bombItem.damageData, statManager.gameObject);
             }
+        } else if (item is DecoyTotemItem decoyItem)
+        {
+            Instantiate(decoyItem.decoyTotemPrefab, statManager.transform.position + statManager.transform.up * 0.8f + statManager.transform.forward * 0.3f, Quaternion.identity);
         } else
         {
             

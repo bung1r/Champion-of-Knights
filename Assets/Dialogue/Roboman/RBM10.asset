@@ -20,6 +20,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -44,18 +46,20 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: But now it's time for you too make your final decision.
+  - dialogueLine: But now it's time for you to make your final decision.
     choices: []
     effects:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -69,6 +73,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -81,6 +86,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0
@@ -95,6 +101,7 @@ MonoBehaviour:
         hasEffects: 0
         endDialogue: 0
         nextDialogue: {fileID: 11400000, guid: a4c1b0a689f1e054ca83ece981509f00, type: 2}
+        complexEffects: []
         reputation: 0
         loyalviewers: 0
         sponsers: 0
@@ -106,6 +113,7 @@ MonoBehaviour:
         hasEffects: 0
         endDialogue: 0
         nextDialogue: {fileID: 11400000, guid: c75e64e7e311240409c15149aef2542b, type: 2}
+        complexEffects: []
         reputation: 0
         loyalviewers: 0
         sponsers: 0
@@ -116,6 +124,7 @@ MonoBehaviour:
       hasEffects: 0
       endDialogue: 0
       nextDialogue: {fileID: 0}
+      complexEffects: []
       reputation: 0
       loyalviewers: 0
       sponsers: 0

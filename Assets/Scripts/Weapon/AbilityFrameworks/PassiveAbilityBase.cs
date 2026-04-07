@@ -74,6 +74,9 @@ public class PassiveAbilityBase : ScriptableObject
         } else if (this is StandStillPassive)
         {
             return new StandStillRuntime((StandStillPassive)other, manager);
+        } else if (this is AddViewerItemPassive)
+        {
+            return new AddViewerItemRuntime((AddViewerItemPassive)other, manager);
         }
         else
         {

@@ -28,4 +28,5 @@ public enum DialogueEffectTypes
     DialogueBlackScreen,
     SendToShop,
     StartRound,
+    GiveTutorialObjectives,
 }

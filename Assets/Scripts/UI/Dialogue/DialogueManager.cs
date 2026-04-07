@@ -363,6 +363,9 @@ public class DialogueManager : MonoBehaviour
             case DialogueEffectTypes.StartRound:
                 RoundManager.Instance.EndShopSequence();
                 break;
+            case DialogueEffectTypes.GiveTutorialObjectives:
+                RoundManager.Instance.CreateTutorialObjectives();
+                break;
             default:
                 break;
         }

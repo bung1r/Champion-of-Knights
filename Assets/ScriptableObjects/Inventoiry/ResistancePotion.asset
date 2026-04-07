@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96c6d27044d5a446b9fa240ccb9286b, type: 3}
+  m_Name: ResistancePotion
+  m_EditorClassIdentifier: 
+  itemName: Shield Potion
+  prefab: {fileID: 1690093094600184346, guid: 381f2d7fc6b64f040b35f4962f6eddb5, type: 3}
+  icon: {fileID: 0}
+  uses: 1
+  audioHelpers: []
+  cooldown: 0
+  duration: 1
+  performDelay: 0.3
+  resistanceEntry:
+    type: 7
+    resistance: 10
+  resistanceLength: 5

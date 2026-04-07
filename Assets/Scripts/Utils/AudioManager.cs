@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
             sourceAndVolumeDict[source] = source.volume;
             NameToAudio[source.gameObject.name] = source;
 
-            if (source.clip.length > 30f)
+            if (source.clip.length > 20f)
             {
                 sourceAndTypeDict[source] = "music";
                 sourceAndCurrentVolumeDict[source] = source.volume;
@@ -102,6 +102,7 @@ public class AudioManager : MonoBehaviour
 
         nearDeathHeartbeatSFX.volume = 0f;
         nearDeathHeartbeatSFX.Play();
+
     }
     public void PlaySourceAtPointWithPitch(AudioSource source, Vector3 position, float variation = 0.05f)
     {
@@ -255,17 +256,20 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator FadeInMusic(AudioSource musicSource, float targetVolume, float duration)
     {
-        musicSource.volume = 0;
-        musicSource.Play();
-        float time = 0;
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            sourceAndCurrentVolumeDict[musicSource] = Mathf.Lerp(0, targetVolume, time / duration);
-            yield return null;
-        }
+        // musicSource.volume = 0;
+        
+        // float time = 0;
+        // while (time < duration)
+        // {
+        //     time += Time.deltaTime;
+        //     sourceAndCurrentVolumeDict[musicSource] = Mathf.Lerp(0, targetVolume, time / duration);
+        //     yield return null;
+        // }
 
-        sourceAndCurrentVolumeDict[musicSource] = targetVolume;
+        // sourceAndCurrentVolumeDict[musicSource] = targetVolume;
+
+        musicSource.Play();
+        yield return null;
     }
 
     IEnumerator FadeOutMusic(AudioSource musicSource, float duration)
@@ -283,9 +287,9 @@ public class AudioManager : MonoBehaviour
         musicSource.Stop();
         musicSource.volume = startVolume;
     }
-    private float lastMasterVolume = 0f;
-    private float lastMusicVolume = 0f;
-    private float lastSFXVolume = 0f;
+    private float lastMasterVolume = 100f;
+    private float lastMusicVolume = 50f;
+    private float lastSFXVolume = 50f;
     void Update()
     {
         if (lastMasterVolume == masterVolume && lastMusicVolume == musicVolume && lastSFXVolume == sfxVolume) return;
