@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1df04b71832ba3409c1ef250942a034, type: 3}
   m_Name: StyleStrength
   m_EditorClassIdentifier: 
-  styleStrengthPow: 0.1
-  styleStrengthMax: 2
+  styleStrengthPow: 0.13
+  styleStrengthMax: 2.5

@@ -13,7 +13,7 @@ public class StyleBonus
 [Serializable]
 public enum StyleGrades
 {
-    F, D, C, B, A, S, X, P
+    F, D, C, B, A, S, SS, SSS, X, SX, XX, P
 }
 
 public enum StyleBonusTypes

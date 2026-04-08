@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1100aff2999323940b9bec7ddaf65314, type: 3}
   m_Name: Health Threshold Strength Passive
   m_EditorClassIdentifier: 
-  maxDamageGain: 1
+  maxDamageGain: 1.5
   timeToReachMax: 30
   aboveThisHPRatio: 0.7

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054040e161a67814b82a0f46bee1c45b, type: 3}
   m_Name: SponsorStrength
   m_EditorClassIdentifier: 
-  sponsorStrengthPow: 0.3
-  sponsorStrengthMax: 2
+  sponsorStrengthPow: 0.33
+  sponsorStrengthMax: 2.5

@@ -52,6 +52,7 @@ public class AbilityEquipUI : MonoBehaviour
     }
     public void EquipAbility()
     {
+        if (equippedAbility) return; // don't allow them to override skills. 
         AbilityUISelect selectedUI = abilityUIManager.GetSelectedAbilityUI();
         
         if (selectedUI != null && selectedUI.ability != equippedAbility)

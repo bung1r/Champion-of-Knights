@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonuses:
   - type: 0
-    style: 15
+    style: 24
     name: PARRY
     canStack: 0
   - type: 2
-    style: 30
+    style: 35
     name: DUO-PARRY!
     canStack: 0
   - type: 4
-    style: 50
+    style: 55
     name: MEGA-PARRY!!
     canStack: 1
   - type: 6
@@ -42,7 +42,7 @@ MonoBehaviour:
     name: NATURAL CAUSES
     canStack: 0
   - type: 3
-    style: 40
+    style: 45
     name: TRI-PARRY
     canStack: 0
   - type: 8

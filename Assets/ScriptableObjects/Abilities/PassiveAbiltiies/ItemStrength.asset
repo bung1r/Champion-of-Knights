@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66faccf1ba97a54a8d8f996b561cb4e, type: 3}
   m_Name: ItemStrength
   m_EditorClassIdentifier: 
-  itemDamageMultiplier: 0.5
+  itemDamageMultiplier: 0.6

@@ -51,6 +51,14 @@ public class StyleHUDManager : MonoBehaviour
         else if (styleLevel == 4) gradeText.text = "A";
         else if (styleLevel == 5) gradeText.text = "S";
         else if (styleLevel == 6) gradeText.text = "X";
+        if(styleLevel >= Enum.GetNames(typeof(StyleGrades)).Length)
+        {
+            gradeText.text = $"EX{styleLevel - Enum.GetNames(typeof(StyleGrades)).Length}";
+        } else
+        {
+            gradeText.text = ((StyleGrades)((int)styleLevel)).ToString(); // hopefully this works. Acutaly, this better work
+        }
+        
         
         // styleText.text = $"Style: {Mathf.FloorToInt(currStyle)}";
         viewersText.text = $"Viewers: {Mathf.FloorToInt(viewers)}";

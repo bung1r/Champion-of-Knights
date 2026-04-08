@@ -19,12 +19,12 @@ MonoBehaviour:
   critMultiplier: 0
   variation: 0.2
   hitboxTimeDelay: 0.2
-  attackLength: 6
+  attackLength: 7
   knockback: 0
   stunTime: 0.2
   forward: 0
   spin: 0
-  attackID: -1
+  attackID: 6
   audioHelpers: []
   useOverflowStamina: 1
   damageData:
@@ -34,7 +34,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   guardStats:
     resistance: 7
-    resistAmount: 0.3
+    resistAmount: 0
     speedReduction: 999999
     parryStart: 0
     parryEnd: 0

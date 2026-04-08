@@ -18,6 +18,11 @@ public class RoundSummaryManagerUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loyalViewersGainedText;
     [SerializeField] private TextMeshProUGUI repGainedText;
     [SerializeField] private TextMeshProUGUI corruptionGainedText;
+    [SerializeField] private TextMeshProUGUI levelGainedText;
+    [SerializeField] private TextMeshProUGUI viewershipBonus;
+    [SerializeField] private TextMeshProUGUI skillPointsGain;
+    
+
     private List<string> positiveFlavorTexts = new List<string>()
     {
         "You feel one step closer to making it back home!",
@@ -128,7 +133,19 @@ public class RoundSummaryManagerUI : MonoBehaviour
             corruptionGainedText.color = Color.white;
         }
     }
-
+    
+    public void UpdateLevelsGained(int levelsGained)
+    {
+        levelGainedText.text = $"Levels Gained: {levelsGained}";
+    }
+    public void UpdateBonusPointsGained(int bonusPoints)
+    {
+        viewershipBonus.text = $"Viewership Bonus: {bonusPoints}";
+    }
+    public void UpdateSkillPointsGained(int totalPoints)
+    {
+        skillPointsGain.text = $"Skill Points Gain: {totalPoints}";
+    }
     async public void EnableAfterDelay(float delaySeconds)
     {
         await Task.Delay((int)(delaySeconds * 1000));

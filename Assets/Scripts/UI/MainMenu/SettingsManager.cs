@@ -15,6 +15,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sfxVolumeText; //assign in inspector
     private Slider sfxVolumeSlider; 
     private TextMeshProUGUI sfxVolumeNumber;
+    public bool epilepsyMode = false;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -55,6 +57,10 @@ public class SettingsManager : MonoBehaviour
             audioManager.sfxVolume = sfxVolumeSlider.value;
             sfxVolumeNumber.text = sfxVolumeSlider.value.ToString()+"/100";
         }
+    }
+    public void ChangeEpilepsy(bool enable)
+    {
+        epilepsyMode = enable;
     }
     TextMeshProUGUI GetTextInChildren(Transform parent)
     {

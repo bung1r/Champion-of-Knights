@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f442374af0cfd429adfb3aca451d83, type: 3}
   m_Name: No Hit Passive
   m_EditorClassIdentifier: 
-  maxDamageGain: 1.2
-  timeToReachMax: 30
+  maxDamageGain: 1.5
+  timeToReachMax: 20

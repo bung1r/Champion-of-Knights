@@ -73,6 +73,9 @@ public class RoundManager : MonoBehaviour
     private int orbsCollected = 0;
     private int enemiesKilled = 0;
     private int objectivesCompleted = 0;
+    private int initialLevel = 0;
+    private int afterRoundLevel = 0;
+    private int bonusPointGain = 0;
 
     // time related things
     private float roundTimer = 0f;
@@ -503,6 +506,8 @@ public class RoundManager : MonoBehaviour
         highestViewersThisRound = 0f;
         highestGradeThisRound = 0;
         objectivesCompleted = 0;
+        initialLevel = (int)player.stats.level;
+
 
         roundManagerUI.objectiveUIManager.BringToMiddleRegular();
     }
@@ -575,6 +580,10 @@ public class RoundManager : MonoBehaviour
         loyalViewersGained = CalcLoyalViewersGained();
         player.stats.loyalViewers += loyalViewersGained;
 
+        afterRoundLevel = (int)player.stats.level;
+        float rep = player.stats.reputation;
+        bonusPointGain = (int)(Mathf.Sqrt(highestViewersThisRound/900f) * (((rep + 100f)/500f)+1f));
+        player.stats.skillPoints += bonusPointGain;
         // round summary UI popup and update 
         UpdateRoundSummaryUI();
 
@@ -695,6 +704,9 @@ public class RoundManager : MonoBehaviour
         roundSummaryManagerUI.UpdateLoyalViewersGained(loyalViewersGained);
         roundSummaryManagerUI.UpdateRepGained(repGained);
         roundSummaryManagerUI.UpdateCorruptionGained(corruptionGained);
+        roundSummaryManagerUI.UpdateLevelsGained(afterRoundLevel - initialLevel);
+        roundSummaryManagerUI.UpdateBonusPointsGained(bonusPointGain);
+        roundSummaryManagerUI.UpdateSkillPointsGained(afterRoundLevel - initialLevel + bonusPointGain);
         roundSummaryManagerUI.EnableAfterDelay(0.2f);
     }
     public void AssignStatUIManager(StatsUIManager other)

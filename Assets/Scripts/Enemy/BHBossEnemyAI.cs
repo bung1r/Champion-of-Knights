@@ -351,8 +351,20 @@ public class BHBossEnemyAI : EnemyAI
             restStart = Time.fixedTime;
             prevState = currentState;
             if (currentAbility != null) currentAbility.Cancel();
-            TryAttack(restAbilityIndex);
+            stats.inAttackAnim = false;
+            if (TryAttack(restAbilityIndex))
+            {
+                Debug.Log("resting successful!");
+            }
+            else
+            {
+                Debug.Log("resting unsucessful");
+            }
+
+            // Play Sound here, type stuff. 
         }
+
+        
 
         if (Time.fixedTime - restStart > restDuration + 0.5)
         {

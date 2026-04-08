@@ -177,7 +177,6 @@
     <Compile Include="Assets\Scripts\Stats\BasicStatClasses\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\StatManagers\StatManager.cs" />
     <Compile Include="Assets\Scripts\Stats\Inventory\Items\BombItem.cs" />
-    <Compile Include="Assets\Scripts\Utils\Letterbox.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\QuitButton.cs" />
     <Compile Include="Assets\Scripts\UI\Ability\AbilityEquipUIManager.cs" />
     <Compile Include="Assets\Scripts\RoundStuff\DialogueRoundHandler.cs" />

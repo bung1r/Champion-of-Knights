@@ -12,13 +12,14 @@ public class GlitchEffectController : MonoBehaviour
 
     public void SetCorruptionLevel(float corruption01)
     {
+        // corruption 01 is corruption divided by 100
         if (corruption01 <= 0)
         {
             StopGlitch();
             return;
         }
 
-        if (glitchRoutine == null)
+        if (glitchRoutine == null) 
             glitchRoutine = StartCoroutine(GlitchFlicker(corruption01));
     }
 
@@ -40,7 +41,15 @@ public class GlitchEffectController : MonoBehaviour
 
             float scaled = Mathf.Pow(intensity, 1.5f);
 
-            float alpha = Random.Range(0, maxAlpha * scaled);
+            float alpha = 0;
+            if (SettingsManager.Instance.epilepsyMode)
+            {
+                alpha = maxAlpha * scaled;
+            } else
+            {
+                alpha = Random.Range(0, maxAlpha * scaled);
+            }
+
             SetAlpha(alpha);
 
             glitchImage.rectTransform.anchoredPosition = Random.insideUnitCircle * (5f * intensity);

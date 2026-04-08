@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: 
   staminaCost: 0
   baseCooldown: 1
-  critRate: 50
+  critRate: 0
   critMultiplier: 2
   variation: 0.1
   hitboxTimeDelay: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     delay: 0.05
   useOverflowStamina: 1
   damageData:
-    baseDamage: 50
+    baseDamage: 70
     type: 0
     source: {fileID: 0}
   hitboxData:

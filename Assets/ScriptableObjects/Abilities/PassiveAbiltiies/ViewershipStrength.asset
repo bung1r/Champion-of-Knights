@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63af049f088f894194e545a4cd7deaf, type: 3}
   m_Name: ViewershipStrength
   m_EditorClassIdentifier: 
-  viewershipStrengthPow: 0.05
-  viewershipStrengthMax: 2
+  viewershipStrengthPow: 0.07
+  viewershipStrengthMax: 2.5

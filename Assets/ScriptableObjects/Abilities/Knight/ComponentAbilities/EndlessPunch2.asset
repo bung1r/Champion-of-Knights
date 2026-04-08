@@ -20,7 +20,7 @@ MonoBehaviour:
   variation: 0.2
   hitboxTimeDelay: 0
   attackLength: 0.4
-  knockback: 3
+  knockback: 5
   stunTime: 0.5
   forward: 0
   spin: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     delay: 0.05
   useOverflowStamina: 1
   damageData:
-    baseDamage: 70
+    baseDamage: 130
     type: 0
     source: {fileID: 0}
   hitboxData:

@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: KnightM1
   staminaCost: 5
   baseCooldown: 1
-  critRate: 50
+  critRate: 0
   critMultiplier: 2
   variation: 0.2
   hitboxTimeDelay: 0.2
@@ -31,7 +31,7 @@ MonoBehaviour:
     delay: 0.05
   useOverflowStamina: 1
   damageData:
-    baseDamage: 15
+    baseDamage: 20
     type: 0
     source: {fileID: 0}
   hitboxData:
@@ -40,4 +40,5 @@ MonoBehaviour:
     radius: 0.3
     boxRadius: {x: 0.8, y: 1, z: 0.5}
     hitboxOffset: {x: 0, y: 0.5, z: 1}
+  damageMultipliersOnUse: []
   owner: {fileID: 0}

@@ -164,7 +164,7 @@ public class PlayerStatManager : StatManager
             return;
         }
         // Basically, goes down more the higher the styleLevel. 
-        AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.75f) * Time.deltaTime));
+        AddStyle(-1 * (Mathf.Pow((stats.styleLevel + 1) * 6, 0.85f) * Time.deltaTime));
         
         styleHistory.Add((Time.time, stats.totalStyle));
 
@@ -189,7 +189,7 @@ public class PlayerStatManager : StatManager
         if (RoundManager.Instance.currentRoundState != RoundStates.Active) return;
         float viewerGainFactor = 10f * (1.5f + ((stats.reputation - (stats.corruption/2f)) / 100f)); // reputation affects viewer gain
         float viewerLossFactor = 10f * (1.5f + stats.corruption / 100f); // corruption affects viewer loss
-        float idealStyle = Mathf.Sqrt(RoundManager.Instance.currentRound)+1f; // the 'stable' level, basically where you don't gain or lose viewers
+        float idealStyle = Mathf.Sqrt(RoundManager.Instance.currentRound); // the 'stable' level, basically where you don't gain or lose viewers
         float fullStyleLevel = stats.styleLevel + stats.currentStyle / stats.maxStyle; // stylelevel with the fraction added on
 
         // maxixium possible viewers at that level
@@ -197,13 +197,23 @@ public class PlayerStatManager : StatManager
         maxViewersPerLevel += stats.loyalViewers * 2f;
 
         float diff = fullStyleLevel - idealStyle;
+        // Debug.Log($"{fullStyleLevel}, {idealStyle}, {diff}");
         float viewerGain = Mathf.Sign(diff) * Mathf.Sqrt(Mathf.Abs(diff));
 
         // slow down viewer gain as you approach max viewers
-        if (viewerGain > 0 && stats.viewers + viewerGain > maxViewersPerLevel - 150f)
+        // if (viewerGain > 0 && stats.viewers + viewerGain > maxViewersPerLevel - 150f)
+        // {
+        //     viewerGain = Mathf.Max((maxViewersPerLevel - stats.viewers)/50f, 0f);
+        // } 
+
+        // slow down viewer gain as you approach max viewers (can surpass max, but gets much slower)
+        float threshold = maxViewersPerLevel - 150f;
+        if (stats.viewers > threshold)
         {
-            viewerGain = Mathf.Max((maxViewersPerLevel - stats.viewers)/50f, 0f);
-        } 
+            float t = (stats.viewers - threshold) / 150f; // tweak
+            float factor = 1f / (1f + t); // smooth diminishing
+            viewerGain *= factor;
+        }
 
         if (viewerGain>=0) viewerGain *= viewerGainFactor;
         else viewerGain *= viewerLossFactor;
