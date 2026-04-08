@@ -18,6 +18,10 @@ MonoBehaviour:
         type: 3}
       weight: 10
       enemyValue: 1
+    - enemyPrefab: {fileID: 2972839007449157214, guid: 2e8f91187f0eca84fb239ee85807303b,
+        type: 3}
+      weight: 10
+      enemyValue: 1
     roundBudget: 10
     spawnInterval: 30
     minObjectives: 2

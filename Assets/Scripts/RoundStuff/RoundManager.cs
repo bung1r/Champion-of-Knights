@@ -117,7 +117,7 @@ public class RoundManager : MonoBehaviour
 
         if (DEBUGMODE == false)
         {
-            player.transform.position = new Vector3(0f, 0.5f, 300f);
+            player.transform.position = new Vector3(230f, 0.5f, 74f);
             STARTING_SKILL_POINTS = 0;
             START_WITH_BEGIN = false;
             START_WITH_NOTHING = false;
@@ -424,14 +424,13 @@ public class RoundManager : MonoBehaviour
         for (int i = 0; i < 4; i++) tempList.Add(tRoundData.enemyWeights[0].enemyPrefab);
         SpawnPlatformManager.Instance.SpawnEnemies(tempList, player.transform.position, 10);
         tempList.Clear();
-        tempList.Add(tRoundData.enemyWeights[0].enemyPrefab);
-        SpawnPlatformManager.Instance.SpawnEnemies(tempList, player.transform.position, 10);
+        tempList.Add(tRoundData.enemyWeights[1].enemyPrefab);
+        SpawnPlatformManager.Instance.SpawnEnemies(tempList, player.transform.position, 11);
     }
     public void StartBeforeRoundIntermission()
     {
         BlackScreen.Instance.FadeFromBlack(1f);
         AudioManager.Instance.PlayBattleMusic(3f);
-        KnightSpawnIn();
         roundManagerUI.EnableTimer();
         player.stats.totalStyle = 0f;
         currentRoundState = RoundStates.Begin;
@@ -440,7 +439,15 @@ public class RoundManager : MonoBehaviour
 
         PreSetUpRound();
         //assign the objectives for the round. 
-        currentRound++;
+        currentRound++; 
+        if (currentRound == finalRound)
+        {
+          KnightSpawnInBoss();
+        } else
+        {
+          KnightSpawnIn();  
+        }
+        
         currentRoundData = roundDatabase.GetRoundData(currentRound);
         currentObjectives.Clear();
         roundManagerUI.ClearEntries();
@@ -464,7 +471,7 @@ public class RoundManager : MonoBehaviour
         {
             List<GameObject> enemyPool = currentRoundData.enemyWeights.Select(e => e.enemyPrefab).ToList();
             List<GameObject> enemiesToSpawn = new List<GameObject>{enemyPool[0]}; // the only one will be the boss. 
-            SpawnPlatformManager.Instance.SpawnEnemies(enemiesToSpawn, player.transform.position, 4); 
+            SpawnPlatformManager.Instance.SpawnEnemies(enemiesToSpawn, player.transform.position, 12); 
             // replace 4 with the actual spawn platform spawn index
         }
     }
@@ -850,6 +857,11 @@ public class RoundManager : MonoBehaviour
             return; 
         }
         player.transform.position = spawnLocationsParent.transform.GetChild(UnityEngine.Random.Range(0, spawnLocationsParent.transform.childCount)).position;
+    }
+
+    private void KnightSpawnInBoss()
+    {
+        player.transform.position = new Vector3(172f, 0.5f, 212f);
     }
 
     public float GetHighestViewersThisRound => highestViewersThisRound;

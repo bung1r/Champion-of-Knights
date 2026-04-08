@@ -78,7 +78,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: I have just granted you an ability, and four different items!
+  - dialogueLine: I have just granted four different items!
     choices: []
     effects:
       hasEffects: 0
@@ -91,8 +91,9 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Experiment with them, will you? There are test dummies in the room
-      to my right now, so if you want to, test there!
+  - dialogueLine: Experiment with them, will you? We don't have more budget for enemies...
+      so you've just gotta test here. Thank you for understanding PTS's current financial
+      circumstances.
     choices: []
     effects:
       hasEffects: 0

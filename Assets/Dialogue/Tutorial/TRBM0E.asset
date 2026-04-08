@@ -32,7 +32,7 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: Next. Room. NOW.
+  - dialogueLine: Complete the Objectives. NOW.
     choices: []
     effects:
       hasEffects: 1

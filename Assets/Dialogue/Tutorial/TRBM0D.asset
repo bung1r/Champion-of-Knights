@@ -104,8 +104,9 @@ MonoBehaviour:
       money: 0
       corruption: 0
       givenItem: {fileID: 0}
-  - dialogueLine: For your first task, go into the next room and defeat the enemies,
-      and come back into this room once you're done!
+  - dialogueLine: For your first task, go into you'll be given 2 objectives, and
+      enemies will spawn in this very room! They will all try to attack you, so be
+      prepared. Once you've completed ALL the objectives, talk to me again!
     choices: []
     effects:
       hasEffects: 0
