@@ -87,6 +87,8 @@ public class PlayerCombat : MonoBehaviour, BarrelHandler
     void HandlePrimaryDown()
     {
         if (ActionIsInvalid()) return;
+        if (DialogueManager.Instance.InDialogue()) return;
+        if (RoundManager.Instance.tutorialProgress == 0 && RoundManager.Instance.DEBUGMODE == false) return;
         // wow so neat and nice!!! i'm so cool :D
         primaryDown = true;
         RTPrimaryAbility.Use();

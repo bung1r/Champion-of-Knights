@@ -53,6 +53,8 @@ public class RoundManager : MonoBehaviour
     public float enemyScaling = 1f; // one is normal, increase by 0.2 every round 
     public string midGameChoice = "";
     public float introCutsceneLength = 2f;
+    public FullDialogue tutorialDialogue;
+    [HideInInspector] public int tutorialProgress;
     public const int finalRound = 7;
     // below are all the main stats tracked for rounds.
     [Space(10)]
@@ -389,7 +391,7 @@ public class RoundManager : MonoBehaviour
         dronePackage.packagePrefab = audiencePackagePrefab;
         dronePackage.targetPos = new Vector3(player.transform.position.x, player.transform.position.y + 3f, player.transform.position.z);
         packageDrone.GetComponent<Rigidbody>().velocity = (dronePackage.targetPos - packageDrone.transform.position).normalized * 5f;
-    
+
         // set the text
         packageDropText.EnableTextForSeconds(2f);
 
@@ -403,12 +405,19 @@ public class RoundManager : MonoBehaviour
         roundManagerUI.DisableTimer();
         currentRoundState = RoundStates.Tutorial;
         roundTimer = 0f;
+
+        yield return new WaitForSeconds(1f);
+
+        DialogueManager.Instance.StartFullDialogue(tutorialDialogue, null);
+        while (tutorialProgress == 0) yield return null;
+        
         // Spawn Knight in the tutorial region
         yield return new WaitForSeconds(2f);
         DialogueRoundHandler.Instance.TutorialBotSpeak();
     }
     public void CreateTutorialObjectives()
     {
+        tutorialProgress++;
         ObjectiveScaling objScale1 = manualObjectiveDatabase.objectiveScalings[1]; // index 1 will be hard coded kill ojective
         Objective newObj1 = objScale1.CalculateObjective();
         currentObjectives.Add(newObj1);

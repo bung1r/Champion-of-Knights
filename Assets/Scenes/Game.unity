@@ -7872,6 +7872,8 @@ MonoBehaviour:
   enemyScaling: 1
   midGameChoice: 
   introCutsceneLength: 2
+  tutorialDialogue: {fileID: 11400000, guid: a32cf5a0589093741a0c96431359b9c7, type: 2}
+  tutorialProgress: 0
   DEBUGMODE: 0
   RIGGED: 0
   INFINITERIGGED: 0

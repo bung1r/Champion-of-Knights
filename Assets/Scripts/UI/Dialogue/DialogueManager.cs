@@ -366,6 +366,9 @@ public class DialogueManager : MonoBehaviour
             case DialogueEffectTypes.GiveTutorialObjectives:
                 RoundManager.Instance.CreateTutorialObjectives();
                 break;
+            case DialogueEffectTypes.ProgressTutorial:
+                RoundManager.Instance.tutorialProgress++;
+                break;
             default:
                 break;
         }

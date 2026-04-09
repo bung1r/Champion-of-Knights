@@ -29,4 +29,5 @@ public enum DialogueEffectTypes
     SendToShop,
     StartRound,
     GiveTutorialObjectives,
+    ProgressTutorial,
 }

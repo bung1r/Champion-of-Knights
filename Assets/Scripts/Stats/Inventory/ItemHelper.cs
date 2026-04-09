@@ -27,7 +27,6 @@ public class Item : ScriptableObject
     
     async private void FullPerform(StatManager statManager = null)
     {
-        if (RoundManager.Instance.currentRoundState == RoundStates.Shop || RoundManager.Instance.currentRoundState == RoundStates.GameOver || RoundManager.Instance.currentRoundState == RoundStates.GameVictory) return;
         statManager.OnUseItem.Invoke();
         IsUsingItemThingy(statManager);
         AudioManager.Instance.HandleAudioHelpers(audioHelpers, statManager.transform);

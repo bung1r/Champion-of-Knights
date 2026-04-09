@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7516ebc1e3af4144fb29ba9363e3ceab, type: 3}
+  m_Name: BG0A
+  m_EditorClassIdentifier: 
+  speakerName: Story
+  dialogue:
+  - dialogueLine: You were Knight, working for a Lord you admire.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Although the work was tough, and your death has nearly came multiple
+      times due to countless battles, you've always managed to crawl your way back
+      to life.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: 'And throughout everything, you never betrayed the code that supported
+      you throughout it all: Chivalry, Honor, and Family.'
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Even so, after a fierce battle between another lord which chipped
+      your sword and wounded your comrades, you decided to do your best to tend to
+      them instead of going to battle.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: However, your Lord refused to quit. He decided that all livin 
+      Knights, along with several peasants to raid the neighboring Lord, and get
+      revenge for the ones your territory had lost.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: Before you go off to battle, you say goodbye to your wife and children.
+      Every battle may be your last, but this one was more reckless than ever. But
+      avenging your comrades who had lost their lives was just as important.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: And so you went to battle. The battle was brutal, yet you stood
+      firm, capturing and slaying elegantly with the techniques you had built up
+      for decades.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: On the night of the battle, you and your comrades decided to camp
+      just outside the opposing Lord's territory. You had already lost many, yet
+      the group stayed strong.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: But in the corner of your eye, you saw a red glint. Afraid it was
+      the torches of the enemy, you decided to explore the threat alone.
+    choices: []
+    effects:
+      hasEffects: 0
+      endDialogue: 0
+      nextDialogue: {fileID: 0}
+      complexEffects: []
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}
+  - dialogueLine: And then, before you knew what had had happened...
+    choices: []
+    effects:
+      hasEffects: 1
+      endDialogue: 1
+      nextDialogue: {fileID: 0}
+      complexEffects:
+      - effectType: 15
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        itemValue: {fileID: 0}
+      reputation: 0
+      loyalviewers: 0
+      sponsers: 0
+      money: 0
+      corruption: 0
+      givenItem: {fileID: 0}

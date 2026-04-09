@@ -102,6 +102,9 @@ public class InventoryManager : MonoBehaviour
     public void BeginInteract()
     {
         if (selectedItem == null || selectedItem.item == null || selectedItem.runtime == null) return;
+        if (RoundManager.Instance.currentRoundState == RoundStates.Shop || 
+        RoundManager.Instance.currentRoundState == RoundStates.GameOver || 
+        RoundManager.Instance.currentRoundState == RoundStates.GameVictory) return;
         selectedItem.runtime.Use(statManager);
         selectedItem.runtime.BeginUse(statManager);
         if (selectedItem.runtime.usesRemaining <= 0)
